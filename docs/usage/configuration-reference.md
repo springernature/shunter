@@ -66,19 +66,19 @@ structure: {
 }
 ```
 
-* `structure.templates` defines the location of the templates used to render the Shunter application's output. By default the value of this is 'view'
+* `structure.templates` defines the location of the templates used to render the Shunter application's output. By default the value of this is 'view'.
 
-* `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter
+* `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter.
 
-* `structure.resources` defines the name of the directory used to house front-end resources including css, javascript and images, the default value is 'resources'
+* `structure.resources` defines the name of the directory used to house front-end resources including CSS, JavaScript and images, the default value is 'resources'.
 
-* `structure.styles` defines the name of the directory used to hold css files used in your shunter application. The default value is 'css'
+* `structure.styles` defines the name of the directory used to hold CSS files used in your shunter application. The default value is 'css'.
 
-* `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'
+* `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
 
-* `structure.scripts` defines the directory used to hold JavaScript files
+* `structure.scripts` defines the directory used to hold JavaScript files.
 
-* `structure.fonts` defines the directory directory used to hold web fonts
+* `structure.fonts` defines the directory directory used to hold web fonts.
 
 * `structure.tests` defines the directory used to hold the files that define your JavaScript and template tests.
 
@@ -95,7 +95,7 @@ Log Configuration
 
 
 
-The log object defines the tool that Shunter should use for logging. By default Shunter uses [Winston](https://github.com/winstonjs/winston)
+The log object defines the tool that Shunter should use for logging. By default Shunter uses [Winston](https://github.com/winstonjs/winston).
 
 ```javascript
 log: new winston.Logger({
@@ -172,7 +172,7 @@ ar app = shunter({
 Configuring Modules
 -------------------
 
-Shunter allows you to make use of a module format that lets you to do things like share common presentational features between a set of dependent apps. TThis allows you do things like manage shared assets and components in one place. As your dependent module may also contain config items this needs to be managed in a particular way. If you wish to use a module then place a file named `local.json` in your config directory containing the name of your module in the following format:
+Shunter allows you to make use of a module format that lets you to do things like share common presentational features between a set of dependent apps. This allows you do things like manage shared assets and components in one place. As your dependent module may also contain config items this needs to be managed in a particular way. If you wish to use a module then place a file named `local.json` in your config directory containing the name of your module in the following format:
 
 ```json
 {
