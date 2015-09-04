@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Mocha Test Runner</title>
+	<link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAIAAACZeshMAAAACXBIWXMAAAsTAAALEwEAmpwYAAADWElEQVQYGV3BS2hcVRwH4N//nHPfmTuTyUzeJk0bSuwD0xQSqIptBbuoSlW6Eap1ISIU3AhFAgWX4sqF4KJii7qoID6KxUWwobbSllipiUlrzHOaZB5J72TuvO7zWOhKv4+uoCJBsY7ApKZFdYMaGlU1cjR6qJDLqSCEBwgRsUgKKTkgAZ8olkz8PqrUBW0r5AhyOFU4PCAiEKBCSibS6mpGW1nPjW3Z6qwCSCCCFmMEIeFFicckIPEfDMgDi7++/PxHbvab/pl413KpW3M6rEK7t9zqLtFvQxeYjCQIBMkQMeFzs8kNIkTrcvP0Xv0Ai/DXlP7U6J2pPdX7yY0/27/+igMhQI0ugAMERIAPknhEJsCXUXn31dxb5xJtHTKU00urt9arTww+mRHFeOLusXOn+dBuUd8YxP8RtjTCTH74dVdt84rbVouZUaK52fk4uy8IcS/bPdJ5uPfepNDGV6iVk8koo7A0ByBBiBJUQ6wUdMhUW8oy9T/u5H68OnF8+KVSOVqfW5gff2Zn36Qwx/vBJZggIrAICAEGKcDgT2/cvDX39HD31NT85xfPG3MTjcU3FUvdKFV6Tt1WxrKClH/wiAQkEDDEg0AQ0f1q88MbuRfeuzyJt4/hsTNfbNs9TnleyXQsCNuIe8T00geeNML0SiWyHGvJ0a+VaLvVP/tc4Y2/b19/Z8Dt//iT5dzanoG+loNHuxLJxZ9nexRxUs+C3eSd+09N55Sl/M6tuwNuMDKrHOFrR7SfamxuMz3zw34zebglaVedRjL9Wn4m83Dh+1++VVfzo0Ppjb4B0a6ohjCZz0I9TBVSQ06X5jVys+XvHtzYV2zevfLlA6dYA84Ce589VAi0T+2MdvXCSeP9g6Uz9NnF872JtFv3GyDdNCzLVDRLcN0tV69dn7h0+VK+uIVasLszuevo8RJMw61r4aat1dS4i48dOpArbftSciZMzdJU01BNzlUJxiTCsmMTi+rVlfU1HSxmZr7sdCYsW1O8sMR39O9o1J2aW3HLNT8ImnWvUimXisWtzYIM/bZsR2dvX6ot05qyU5aRMpX+Fhl7jsK1vu4eOvHKCTul+o3I95FuTZOUTHDDMIMg5IJrqh6HAYulYRpBHEV+Xahe06uDKwlb+xdE4YPi1RdAMgAAAABJRU5ErkJggg==" type="image/png" />
+	<link rel="stylesheet" type="text/css" href="/testslib/client/lib/mocha.css" />
+</head>
+<body>
+	<div id="mocha"></div>
+
+	{@scriptBlock src="main.js" theme=theme/}
+	
+	<script src="/testslib/client/lib/mocha.js"> </script>
+	<script src="/testslib/client/lib/{assertModule}.js"> </script>
+	<script src="/testslib/client/lib/sinon.js"> </script>
+	<script>
+		mocha.setup('bdd');
+		mocha.reporter('html');
+		mocha.globals(['jQuery*', 'script*']);
+		assert = {assertVar};
+	</script>
+
+	{@scriptSpecs theme=theme /}
+
+	<script>
+		var results = function(runner) {
+			var failed = [];
+
+			runner.on('fail', function(test, err) {
+				failed.push({
+					title: test.title,
+					fullTitle: test.fullTitle(),
+					error: {
+						message: err.message,
+						stack: err.stack
+					}
+				});
+			});
+
+			runner.on('end', function() {
+				runner.stats.failed = (failed.length) ? failed : false;
+				window.mochaResults = runner.stats;
+			});
+		};
+
+		var mochaObj = window.mochaPhantomJS || mocha;
+		results(mochaObj.run());
+	</script>
+</body>
+</html>

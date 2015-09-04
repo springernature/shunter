@@ -1,0 +1,33 @@
+
+# Run tests in Node.js 0.10 and 0.12
+language: node_js
+node_js:
+  - "0.10"
+  - "0.12"
+
+# Build only master and shunter-npm (plus pull-requests)
+branches:
+  only:
+    - master
+    - /^\d+\.\d+\.\d+$/
+
+# Environment variables for the build
+env:
+  global:
+    - secure: "Cy+/PooTuNIvZnZrmzz3zniKGE+PkRqv8rOv3e+YScnU9qTRXn1qB80CUHpQ03P1KP0IK/3LzL7oAui+RD7USPiIzidFWfXJGb0jun0WdjvmHp+R84RT/A1eViW5l0Qrl8Jkjet3bZosDtLSy4z0R5r9K0oIOee4YIitJhK6MBY="
+  matrix:
+    - "LINT=true"
+    - "TEST=true"
+
+# Build script
+script:
+  - 'if [ $LINT ]; then make lint; fi'
+  - 'if [ $TEST ]; then make lcov-levels; fi'
+
+# Publish package when tagged
+after_success:
+  - 'if [[ -n "$TRAVIS_TAG" && "$TRAVIS_NODE_VERSION" == "0.10" && -n "$TEST" ]]; then PUBLISH_PACKAGE=true; fi'
+  - 'echo "Tag: $TRAVIS_TAG" && echo "Node: $TRAVIS_NODE_VERSION" && echo "Publish? $PUBLISH_PACKAGE"'
+  - 'if [ $PUBLISH_PACKAGE ]; then npm pack; fi'
+  - 'if [ $PUBLISH_PACKAGE ]; then curl -F "package=@shunter-$TRAVIS_TAG.tgz" https://$GEMFURY_HASH@push.fury.io/nature/; fi'
+

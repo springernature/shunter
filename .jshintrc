@@ -1,0 +1,32 @@
+{
+	"browser": true,
+	"curly": true,
+	"eqeqeq": true,
+	"forin": true,
+	"globals": {
+		"after": true,
+		"afterEach": true,
+		"before": true,
+		"beforeEach": true,
+		"describe": true,
+		"it": true
+	},
+	"globalstrict": true,
+	"jquery": true,
+	"latedef": "nofunc",
+	"maxcomplexity": 6,
+	"maxdepth": 3,
+	"maxparams": 6,
+	"maxstatements": 30,
+	"noarg": true,
+	"node": true,
+	"nonew": true,
+	"nonstandard": true,
+	"quotmark": "single",
+	"regexp": true,
+	"shadow": true,
+	"sub": true,
+	"trailing": true,
+	"undef": true,
+	"unused": true
+}

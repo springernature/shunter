@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+<title>Namespace Testing</title>
+<style>
+dt {~lb}
+	font-weight: bold;
+	clear: left;
+	float: left;
+{~rb}
+dt:after {~lb}
+	margin: 0 0 0 0.5em;
+	content: '->';
+{~rb}
+dd {~lb}
+	margin: 0 0 0 0.5em;
+	clear: right;
+	float: left;
+{~rb}
+</style>
+</head>
+<body>
+
+<h1>Namespace: {layout.namespace}</h1>
+<dl data-test="templates">
+	<dt>loading</dt>
+	<dd>{>loading/}</dd>
+	<dt>a__loading</dt>
+	<dd>{>a__loading/}</dd>
+	<dt>b__loading</dt>
+	<dd>{>b__loading/}</dd>
+	<dt>a__b__loading</dt>
+	<dd>{>a__b__loading/}</dd>
+</dl>
+</body>
+</html>

@@ -1,0 +1,10 @@
+node_modules
+public/resources
+min.js
+*.log
+*.pid
+config/routes/*.json
+coverage/*
+timestamp.json
+.DS_Store
+shunter-*.tgz
