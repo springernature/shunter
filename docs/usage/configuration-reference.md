@@ -3,8 +3,7 @@ Configuration Reference
 =======================
 
 
-The config object passed to an instance of Shunter can append or overwrite Shunter's default configuration object. 
-The default configuration options are documented below with some information on how to define and organise the configuration of a Shunter app.
+The config object passed to an instance of Shunter can append or overwrite Shunter's default configuration object. The default configuration options are documented below with some information on how to define and organise the configuration of a Shunter app.
 
 
 Web Configuration
@@ -73,21 +72,21 @@ structure: {
 
 * `structure.resources` defines the name of the directory used to house front-end resources including css, javascript and images, the default value is 'resources'
 
-* `structure.styles` defines the name of the directory used to hold css files used in your shunter application. The default value is 'css'.
+* `structure.styles` defines the name of the directory used to hold css files used in your shunter application. The default value is 'css'
 
-* `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
+* `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'
 
 * `structure.scripts` defines the directory used to hold JavaScript files
 
 * `structure.fonts` defines the directory directory used to hold web fonts
 
-* `structure.tests` defines the directory used to hold the files that define your javascript and template tests.
+* `structure.tests` defines the directory used to hold the files that define your JavaScript and template tests.
 
-* `structure.filters` defines the directory used to hold the filter functions that can be used to process json before and after it is rendered into HTML.
+* `structure.filters` defines the directory used to hold the filter functions that can be used to process json before and after it is rendered into to its output format.
 
-* `structure.filtersInput` defines the directory used to hold the filter functions that can be used to process json before it is rendered into HTML.
+* `structure.filtersInput` defines the directory used to hold the filter functions that can be used to process json before it is rendered into its output format.
 
-* `structure.filtersOutput` defines the directory used to hold the filter functions that can be used to process HTML files once they has been rendered.
+* `structure.filtersOutput` defines the directory used to hold the filter functions that can be used to process output files once they has been rendered.
 
 
 
@@ -157,7 +156,7 @@ You may like to modify this config object to reflect the environments to which y
 Adding Custom Configuration to your app
 ---------------------------------------
 
-The items above are the default configurations which may be over-ridden. You will probably need to define some configuration that is unique to your own Shunter app. These can be neatly organized as json files in a config directory and required by your Shunter app at start-up to either append or overwrite existing configs. In the example below the routes.json usually required by Shunter has been palced in a route.json file in the config directory and required from that location:
+The items above are the default configurations which may be over-ridden. You will probably need to define some configuration that is unique to your own Shunter app. These can be neatly organized as json files in a config directory and required by your Shunter application at start-up to either append or overwrite existing configs. In the example below the routes.json usually required by Shunter has been palced in a route.json file in the config directory and required from that location:
 
 ```javascript
 ar app = shunter({
