@@ -67,25 +67,17 @@ structure: {
 }
 ```
 
-* `structure.templates` defines the location of the templates used to render the HTML returned by shunter. By default the value of this is 'view'
+* `structure.templates` defines the location of the templates used to render the Shunter application's output. By default the value of this is 'view'
 
 * `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter
 
-* `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter
-
-* `structure.resources` defines the name of the directory used to house front-end resources including css, javascript, font and images, the default here is resources
-
 * `structure.resources` defines the name of the directory used to house front-end resources including css, javascript and images, the default value is 'resources'
 
-* `structure.resources` defines the name of the directory used to house front-end resources including css, javascript and images, the default value is 'resources'
+* `structure.styles` defines the name of the directory used to hold css files used in your shunter application. The default value is 'css'.
 
-* `structure.styles` defines the name of the directory used to hold css files used in your shunter app. This default value is 'css'.
+* `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
 
-* `structure.styles` defines the name of the directory used to hold css files used in your shunter app. This default value is 'css'
-
-* `structure.images` defines the directory used to hold image files used for presentation. This default value is ''.
-
-* `structure.scripts` defines the directory used to hold javascript files
+* `structure.scripts` defines the directory used to hold JavaScript files
 
 * `structure.fonts` defines the directory directory used to hold web fonts
 
@@ -96,7 +88,6 @@ structure: {
 * `structure.filtersInput` defines the directory used to hold the filter functions that can be used to process json before it is rendered into HTML.
 
 * `structure.filtersOutput` defines the directory used to hold the filter functions that can be used to process HTML files once they has been rendered.
-
 
 
 
@@ -118,17 +109,6 @@ log: new winston.Logger({
 }),
 ```
 
-Log Configuration
------------------
-
-
-
-- What each one does
-- What the default is
-- Differences between development/production
-- How to organise your configuration nicely into files?
-
-
 Statsd Configuration
 --------------------
 
@@ -136,11 +116,6 @@ Statsd Configuration
 The `statsd` option defines the configuration used for the statsd network daemon used for collecting metrics for graphing. 
 
 
-Statsd Configuration
---------------------
-
-
-The `statsd` option defines the configuration used for the statsd network daemon used for collecting metrics for graphing. 
 
 Timer Configuration
 --------------------
@@ -196,9 +171,9 @@ ar app = shunter({
 ```
 
 Configuring Modules
----------------------------------------
+-------------------
 
-Shunter allows you to make use of a module format that lets you to do things like share common presentational features between a set of dependent apps. This allows you do things like the manange of shared assets and components in one place. As your dependent module may also contain config items this needs to be managed in a particular way. If you wish to use a module then place a file named `local.json` in your config directory containing the name of your module in the following format:
+Shunter allows you to make use of a module format that lets you to do things like share common presentational features between a set of dependent apps. TThis allows you do things like manage shared assets and components in one place. As your dependent module may also contain config items this needs to be managed in a particular way. If you wish to use a module then place a file named `local.json` in your config directory containing the name of your module in the following format:
 
 ```json
 {
