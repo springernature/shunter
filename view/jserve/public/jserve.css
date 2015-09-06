@@ -1,0 +1,182 @@
+@charset "UTF-8";
+
+
+/* Typography */
+
+body {
+	font-size: 16px;
+	color: #333;
+}
+
+h1,
+p,
+ul,
+pre {
+	margin: 0;
+}
+
+h1 {
+	font-weight: normal;
+	margin-bottom: 22px;
+	font-size: 22px;
+}
+h1:last-child {
+	margin-bottom: 0;
+}
+
+p {
+	margin-bottom: 22px;
+}
+.error-page p {
+	margin-bottom: 0;
+}
+
+a {
+	color: #647a34;
+}
+
+pre {
+	padding: 10px;
+	background-color: #eee;
+	border-left: solid 5px #e3e3e3;
+	font-family: monaco, Consolas, 'Lucida Console', monospace;
+	font-size: 14px;
+}
+
+
+/* Utilities */
+
+.hidden {
+	display: none;
+}
+
+
+/* Layout */
+
+body {
+	background-color: #f3f3f3;
+}
+
+.page {
+	margin: 22px auto;
+	padding: 22px;
+	padding-bottom: 30px;
+	max-width: 600px;
+	background-color: #fff;
+	box-shadow: 0px 2px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+@media only screen and (max-width: 680px) {
+	.page {
+		margin: 0 auto;
+		max-width: none;
+	}
+}
+
+
+/* Forms */
+
+form {
+	display: block;
+	margin-bottom: 22px;
+}
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+.description {
+	font-weight: normal;
+	font-size: 14px;
+	color: #999;
+}
+.text-input {
+	width: 100%;
+	display: block;
+	margin-bottom: 10px;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #e3e3e3;
+	font-family: monospace;
+}
+.text-input:focus {
+	outline: none;
+	border-color: #91ae53;
+}
+textarea {
+	min-height: 80px;
+}
+.button {
+	display: block;
+	margin-bottom: 0;
+	padding: 10px;
+	border: none;
+	background: #e3e3e3;
+}
+.button:hover,
+.button:focus {
+	outline: none;
+	background: #91ae53;
+	color: #000;
+}
+
+
+/* File Listing */
+
+.file-listing {
+	list-style: none;
+	padding-left: 0;
+}
+
+.file {
+	margin-bottom: 5px;
+	line-height: 22px;
+}
+.file:last-child {
+	margin-bottom: 0;
+}
+
+.file a {
+	display: block;
+	background-color: #eee;
+	text-decoration: none;
+	color: inherit;
+	border-left: solid 5px #e3e3e3;
+	transition: border .1s ease;
+}
+.file a:hover,
+.file a:focus {
+	outline: none;
+	border-color: #91ae53;
+}
+
+.file-name,
+.file-extension {
+	display: block;
+	padding: 10px;
+}
+
+.file-extension {
+	display: block;
+	float: right;
+	background-color: #e3e3e3;
+	text-transform: uppercase;
+	font-size: 12px;
+	color: #666;
+}
+
+.file-name-part {
+	border-bottom: solid 2px transparent;
+	transition: border .1s ease;
+}
+a:hover .file-name-part,
+a:focus .file-name-part {
+	border-color: #ccc;
+}
+.file-name-part:after {
+	content: " / ";
+	color: #ccc;
+}
+.file-name-part:last-child:after {
+	content: "";
+}
