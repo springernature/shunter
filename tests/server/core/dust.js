@@ -32,13 +32,13 @@ describe('Template loading', function() {
 		callback = sinon.stub();
 	});
 	afterEach(function() {
-		mockConfig.log.error.reset();
+		mockConfig.log.warn.reset();
 	});
 
 	it('Should log and gracefully handle missing templates', function() {
 		dust.onLoad('nonexistent', options, callback);
-		assert(mockConfig.log.error.calledOnce);
-		assert.match(mockConfig.log.error.lastCall.args[0], /nonexistent$/i);
+		assert(mockConfig.log.warn.calledOnce);
+		assert.match(mockConfig.log.warn.lastCall.args[0], /nonexistent$/i);
 		assert(callback.calledOnce);
 		assert.strictEqual(callback.lastCall.args[0], null);
 		assert.strictEqual(callback.lastCall.args[1], '');
