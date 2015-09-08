@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <title>Error {{statusCode}}: {{statusMessage}}</title>
+    <meta name="robots" content="noindex"/>
+
+    <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/normalize.css"/>
+        <link rel="stylesheet" href="/jserve.css"/>
+    <!--<![endif]-->
+    <link rel="icon" href="/favicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+
+</head>
+<body>
+
+    <div class="page error-page">
+
+        <div role="main">
+
+            <h1>Error {{statusCode}}: {{statusMessage}}</h1>
+
+            {{#is404}}
+                <p>
+                    The page you're looking for could not be found.
+                    Try going <a href="/">back to the index page</a>.
+                </p>
+            {{/is404}}
+
+            {{^is404}}
+                {{#stackTrace}}
+                    <pre class="error-stack">{{stackTrace}}</pre>
+                {{/stackTrace}}
+            {{/is404}}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

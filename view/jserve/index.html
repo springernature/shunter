@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8"/>
+	<title>Hello Shunter!</title>
+	<meta name="robots" content="noindex"/>
+
+	<!--[if gt IE 7]><!-->
+		<link rel="stylesheet" href="/normalize.css"/>
+		<link rel="stylesheet" href="/jserve.css"/>
+	<!--<![endif]-->
+	<link rel="icon" href="/favicon.png" type="image/png"/>
+	<link rel="shortcut icon" href="/favicon.ico"/>
+
+</head>
+<body>
+
+	<div class="page">
+
+		<h1>Hello Shunter!</h1>
+
+		<p>View pages generated from remote JSON:</p>
+
+		<form method="get" action="/remote">
+
+			<label for="remote-json-url">URL <span class="description">Remote URL which responds with JSON</span></label>
+			<input id="remote-json-url" name="url" type="text" placeholder="http://json.example.com/" class="text-input"/>
+
+			<label for="remote-json-headers">Headers <span class="description">Key/value pairs of HTTP headers to send</span></label>
+			<textarea id="remote-json-headers" name="headers" placeholder="Header-1: Value
+Header-2: Value" class="text-input"></textarea>
+
+			<input type="submit" value="Render Page" class="button"/>
+
+		</form>
+
+		<p>View pages generated from sample data files:</p>
+
+		<div role="main">
+			<ul class="file-listing">
+				{{#files}}
+					<li class="file file-type-{{extension}}">
+						<a href="{{url}}" title="Serve the {{extension}} file at {{fullPath}}">
+							<span class="file-extension">{{extension}}</span>
+							<span class="file-name">
+								{{#nameSplit}}
+									<span class="file-name-part">{{.}}</span>
+								{{/nameSplit}}
+							</span>
+						</a>
+					</li>
+				{{/files}}
+			</ul>
+		</div>
+
+	</div>
+
+</body>
+</html>
