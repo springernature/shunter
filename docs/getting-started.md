@@ -182,7 +182,7 @@ We'll also need to link to our stylesheet from `view/home.dust`:
 <link rel="stylesheet" href="{@assetPath src="main.css"/}"/>
 ```
 
-Notice the `assetPath` helper we used? This is required for Shunter to load the MD5-fingerprinted file. If you don't add this, assets will load in development mode but not in production. You can [read more about the `assetPath` helper here](usage/resources.md#built-in-ejs-extensions).
+Notice the `assetPath` helper we used? This is required for Shunter to load the MD5-fingerprinted file. If you don't add this, assets will load in development mode but not in production. You can [read more about the `assetPath` helper here](usage/templates.md#the-assetpath-helper).
 
 Now refresh your page in-browser. Your page should be a lovely shade of blue!
 
