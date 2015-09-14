@@ -283,64 +283,228 @@ TODO Should cover:
 Built-In Dust Extensions
 ------------------------
 
-TODO Should cover:
-- The difference between helpers and filters
-- That we include the [LinkedIn Dust Helpers](http://www.dustjs.com/guides/dust-helpers/)
-- That we have some built-in Dust extensions of our own
+For when basic logic isn't enough, you can use helpers and filters to extend Dust. Although templates should ideally contain as little logic as possible, sometimes you can't get away from it.
+
+Dust helpers can run on a block of HTML:
+
+```html
+{@helper}HTML to run the helper on{/helper}
+```
+
+Or by themselves to output content:
+
+```html
+{@helper/}
+```
+
+They are also configurable with parameters:
+
+```html
+{@helper param="value"/}
+```
+
+Filters are different – they operate on existing values:
+
+```html
+{myProperty|filter}
+```
+
+Filters are chainable:
+
+```html
+{myProperty|filter1|filter2}
+```
+
+Shunter includes the full set of [officially supported Dust helpers](http://www.dustjs.com/guides/dust-helpers/). These add a lot of power to the language.
+
+As well as including the official helpers and filters, Shunter comes bundled with some additional ones:
 
 ### The `assetPath` Helper
 
-TODO document the `assetPath` helper
+The `assetPath` helper is used to output the correct paths to MD5-fingerprinted assets. It's required for your application to run in production.
+
+`assetPath` accepts a `src` parameter which should be set to the non-fingerprinted path:
+
+```html
+<link rel="stylesheet" href="{@assetPath src="main.css"/}"/>
+```
 
 ### The `and` Helper
 
-TODO document the `and` helper
+The `and` helper is used to check whether several properties are all truthy. It accepts a `keys` parameter which should be a pipe-separated list of properties to check. If all of them are truthy, the helper block will be output:
+
+```html
+{@and keys="foo|bar"}
+    Output if `foo` and `bar` are both truthy
+{/and}
+```
+
+The `and` helper supports an `{:else}` block:
+
+```html
+{@and keys="foo|bar"}
+    Output if `foo` and `bar` are both truthy
+{:else}
+    Output if either `foo` or `bar` are falsy
+{/and}
+```
+
+Also if the `not` parameter is `true`, the behaviour of the helper is inverted:
+
+```html
+{@and keys="foo|bar" not=true}
+    Output if `foo` and `bar` are both falsy
+{/and}
+```
 
 ### The `or` Helper
 
-TODO document the `or` helper
+The `or` helper is used to check whether one of the given properties are truthy. It accepts a `keys` parameter which should be a pipe-separated list of properties to check. If at least one of them is truthy, the helper block will be output:
+
+```html
+{@or keys="foo|bar"}
+    Output if either `foo` or `bar` are truthy
+{/or}
+```
+
+The `or` helper supports an `{:else}` block:
+
+```html
+{@or keys="foo|bar"}
+    Output if either `foo` or `bar` are truthy
+{:else}
+    Output if `foo` and `bar` are both falsy
+{/or}
+```
+
+Also if the `not` parameter is `true`, the `or` helper will render the block if at least one of the properties is _falsy_:
+
+```html
+{@or keys="foo|bar" not=true}
+    Output if either `foo` or `bar` are falsy
+{/or}
+```
 
 ### The `dateFormat` Helper
 
-TODO document the `dateFormat` helper
+The `dateFormat` helper is used to format dates. It accepts two parameters: `date` and `format`. The `date` parameter expects a date string, and the `format` should be a formatting string supported by the [node-dateformat library](https://github.com/felixge/node-dateformat):
+
+```html
+{@dateFormat date="2015-09-14" format="dd mmmm yyyy"/}
+<!-- Outputs: "14 September 2015" -->
+```
 
 ### The `numberFormat` Helper
 
-TODO document the `numberFormat` helper
+The `numberFormat` helper is used to format numbers. It accepts a single parameter (`num`) and outputs the given number with thousands seperators:
+
+```html
+{@numberFormat num="1000000"/}
+<!-- Outputs: "1,000,000" -->
+```
 
 ### The `lower` Filter
 
-TODO document the `lower` filter
+The `lower` filter takes a property and lowercases the value. If `foo` is `Hello World`:
+
+```html
+{foo|lower}
+<!-- Outputs: "hello world" -->
+```
 
 ### The `upper` Filter
 
-TODO document the `upper` filter
+The `upper` filter takes a property and uppercases the value. If `foo` is `Hello World`:
+
+```html
+{foo|upper}
+<!-- Outputs: "HELLO WORLD" -->
+```
 
 ### The `title` Filter
 
-TODO document the `title` filter
+The `title` filter takes a property and titlecases the value. If `foo` is `hello world`:
+
+```html
+{foo|title}
+<!-- Outputs: "Hello World" -->
+```
 
 ### The `amp` Filter
 
-TODO document the `amp` filter
+The `amp` filter replaces ampersands in a property with HTML entities, but ignores ampersands that are the opening for an existing entity. If `foo` is `Hello World & Everyone&hellip;`:
 
-### The `strip-tags` Filter
+```html
+{foo|amp}
+<!-- Outputs: "Hello World &amp; Everyone&hellip;" -->
+```
 
-TODO document the `strip-tags` filter
+Note that the `&hellip;` has not been touched.
+
+### The `stripTags` Filter
+
+The `stripTags` filter strips HTML open/close tags from a string. If `foo` is `<p>Hello <i>World</i></p>`:
+
+```html
+{foo|stripTags}
+<!-- Outputs: "Hello World" -->
+```
 
 ### The `html` Filter
 
-TODO document the `html` filter
+The `html` filter encodes HTML special characters `<>&"'` as HTML entities. It will also ignore ampersands that are the opening for an existing entity, in the same way as the `amp` filter. If `foo` is `Hello <i>World</i> & "Everyone"`:
+
+```html
+{foo|html}
+<!-- Outputs: "Hello &#60;i&#62;World&#60;/i&#62; &amp; &#34;Everyone&#34;" -->
+```
 
 
 Writing Dust Extensions
 -----------------------
 
-TODO Should cover:
-- The anatomy of a Dust extension (in Shunter land)
-- An example helper
-- And example filter
-- Point at the LinkedIn [Helper API](http://www.dustjs.com/docs/helper-api/) and [Filter API](http://www.dustjs.com/docs/filter-api/)
+It's also possible to write your own Dust helpers and filters to use in your Shunter application. Dust extensions live in the `dust` directory of your application and must export a single function:
+
+```js
+module.exports = function(dust) {
+    // `dust.helpers` = an object to add helpers to
+    // `dust.filters` = an object to add filters to
+};
+```
+
+An example helper might look like the following, which outputs the current year:
+
+```js
+// <app>/dust/current-year.js
+module.exports = function(dust) {
+    dust.helpers.currentYear = function(chunk) {
+        var date = new Date();
+        return chunk.write(date.getFullYear());
+    };
+};
+```
+
+An example filter might look like the following, which reverses a string and outputs it:
+
+```js
+// <app>/dust/reverse.js
+module.exports = function(dust) {
+    dust.filters.reverse = function(value) {
+        return value.split('').reverse().join('');
+    };
+};
+```
+
+Dust helpers and filters can also access the Shunter renderer and config objects by accepting more arguments in the exported function:
+
+```js
+module.exports = function(dust, renderer, config) {
+    // `renderer` = the Shunter renderer object
+    // `config`   = the Shunter application configuration
+};
+```
+
+Dust has excellent documentation on how to write both [helpers](http://www.dustjs.com/docs/helper-api/) and [filters](http://www.dustjs.com/docs/filter-api/). You should follow these guides if you want to learn how to write helpers that leverage parameters and blocks.
 
 
 ---
