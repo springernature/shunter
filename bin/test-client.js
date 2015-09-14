@@ -18,6 +18,7 @@ Usage: node test-client
 	--resource-module
 		name of modules (e.g. shunter-mosaic) also required for resources to be complete
 		shunter is not required in this list, it is always loaded
+		any modules listed in your config file will automatically be loaded
 		Can provide more than one
 		e.g. node test-client --resource-module foo --resource-module bar
 

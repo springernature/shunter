@@ -59,6 +59,29 @@ You can test individual templates by running mocha directly with the command:
 Testing Client-Side JavaScript
 ------------------------------
 
+
+
+Shunter provides a command-line script that will:
+
+* build up a Mocha test runner page that loads in your JavaScript under test with Mincer, and any test specification files in the 'client' subfolder of the folder named in config.path.tests (by default, 'tests')
+* run your tests with output to the console
+* exit to the command line with an exit code of 0 for success and a positive integer for failure so that you can run on CI
+
+
+
+This means your code under test is loaded in the same way it would be when running the app in development mode
+
+Options
+-------
+-------
+
+* Test just one spec file
+  * `./node_modules/.bin/shunter-test-client --spec file-spec`
+* Test in browsers with Saucelabs
+  * `./node_modules/.bin/shunter-test-client --browsers`
+* Add a resource module to the JavaScript under test (modules in your config automatically added)
+  * `./node_modules/.bin/shunter-test-client --resource-module foo`
+
 TODO Should cover:
 - Using the test-client CLI (Reference `./node_modules/.bin/shunter-test-client`, not `test-client.js`)
 - The libraries used in test-client ([Mocha](https://mochajs.org/), [Proclaim](https://github.com/rowanmanning/proclaim))
