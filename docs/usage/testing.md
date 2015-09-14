@@ -51,7 +51,7 @@ helper.render('mysubfolder___templatename', {
 
 You can test individual templates by running mocha directly with the command:
 
-```
+```sh
 ./node_modules/mocha/bin/mocha -R spec -u bdd test/myfolders/mytemplate-spec.js
 ```
 
@@ -59,10 +59,52 @@ You can test individual templates by running mocha directly with the command:
 Testing Client-Side JavaScript
 ------------------------------
 
-TODO Should cover:
-- Using the test-client CLI (Reference `./node_modules/.bin/shunter-test-client`, not `test-client.js`)
-- The libraries used in test-client ([Mocha](https://mochajs.org/), [Proclaim](https://github.com/rowanmanning/proclaim))
-- Example tests (don't be specific about the directory, maybe just add this in `tests` for now and note that you can organise your tests in any way you like)
+
+Shunter provides a command-line script that will:
+
+* build up a test runner page for Mocha-PhantomJS that loads in your JavaScript under test with Mincer, and adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), and sets up the mocha libraries for client-side testing.
+* run your tests with console output detailing whether they passed or failed.
+* exit to the command line with an exit code of 0 for success and a positive integer for failure so that you can run on CI
+
+This means your code under test is compiled and loaded in the same way it would be when running the app in development mode.
+
+The script makes use of [Mocha-PhantomJS](http://metaskills.net/mocha-phantomjs/), and the test runner page loads in [Proclaim](https://github.com/rowanmanning/proclaim) as an assertion library.
+
+You can run your client-side tests with the command:
+
+```sh
+./node_modules/.bin/shunter-test-client
+```
+
+### Optional Arguments ###
+
+#### Test Just One Spec File ####
+
+```sh
+./node_modules/.bin/shunter-test-client --spec file-spec
+```
+
+#### Test In Browsers With Sauce Labs ####
+
+Requires Sauce Connect, see https://docs.saucelabs.com/reference/sauce-connect/
+Once Sauce Connect is installed, you need to run it with:
+
+```sh
+bin/sc -u YOUR_USERNAME -k YOUR_ACCESS_KEY
+```
+
+Then you can run the command:
+
+```sh
+./node_modules/.bin/shunter-test-client --browsers
+```
+
+#### Add A Resource Module ####
+Add a resource module to the JavaScript under test (modules in your config automatically added)
+
+```sh
+./node_modules/.bin/shunter-test-client --resource-module foo
+```
 
 
 ---
