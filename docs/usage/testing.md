@@ -9,14 +9,14 @@ TODO Should cover:
 
 Testing Templates
 -----------------
+
 As dust templates can contain logic, there will be scenarios where you want to test that your code behaves as expected.
 
 In your test spec, you need to load in the test helper from shunter, as you will need some of shunter's features to render the templates for testing.
 
-Other dependencies are up to you. We use [Mocha](https://www.npmjs.com/package/mocha), but you can use whatever you want.
+Other dependencies are up to you. We use [Mocha](https://mochajs.org/), but you can use whatever you want.
 
-```javascript
-'use strict';
+```js
 var assert = require('assert');
 var rootdir = __dirname.substring(0, __dirname.indexOf('/tests/'));
 var helper = require('shunter').testhelper();
@@ -29,26 +29,31 @@ describe('Foo bar', function() {
 
     it('Should do something', function(done) {
         helper.render('template', {
-            'foo': 'bar',
-            'lorem': 'ipsum'
-        }, function(err, dom, out) {
+            foo: 'bar',
+            lorem: 'ipsum'
+        }, function(error, dom, output) {
             var $ = dom.$;
             assert.strictEqual($('[data-test="fooitem"]').length, 1);
             done();
         });
     });
-
 ```
 
 When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you'd include a partial
 
-```javascript
+```js
 helper.render('mysubfolder___templatename', {
-  "foo": "bar"
-  }, function(err, dom, out) { etc etc });
+    foo: 'bar'
+}, function(error, dom, output) {
+    // etc etc
+});
 ```
 
-You can test individual templates by running mocha directly with this command: `./node_modules/mocha/bin/mocha -R spec -u bdd test/myfolders/mytemplate-spec.js`
+You can test individual templates by running mocha directly with the command:
+
+```
+./node_modules/mocha/bin/mocha -R spec -u bdd test/myfolders/mytemplate-spec.js
+```
 
 
 Testing Client-Side JavaScript
