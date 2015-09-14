@@ -21,7 +21,7 @@ Mincer takes a load path and handles every file it finds within that directory. 
 
 Note: if two assets are loaded that have the same logical path, the first one in 'wins'. This is important if you are using modules to load in extra resources and templates.
 
-For example if a module you were using were to have `resources/css/foo.css`, it would result in the logical path 'foo.css'. However, when the resources for your host app are loaded in and it also has `resources/css/foo.css`, this too will be given the logical path 'foo.css' and because the asset path for your host app is loaded first, it 'wins'. You would not get the CSS from `foo.css`. This can be useful for deliberately overriding, but if you wanted both files then your host apps file would need to be different, e.g. foo_ext.css. For more information on how inheritance works see the [Modules and Inheritance](modules.md) page.
+For example if a module you were using were to have `resources/css/foo.css`, it would result in the logical path 'foo.css'. However, when the resources for your host app are loaded in and it also has `resources/css/foo.css`, this too will be given the logical path 'foo.css' and because the asset path for your host app is loaded first, it 'wins'. This can be useful for deliberately overriding, but if you wanted both files then your host apps file would need to be different, e.g. foo_ext.css. For more information on how inheritance works see the [Modules and Inheritance](modules.md) page.
 
 
 Writing CSS
