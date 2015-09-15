@@ -2,9 +2,11 @@
 Testing
 =======
 
-TODO Should cover:
-- Basics of testing
-- Don't be preachy, just explain that we've included some helpers
+When writing unit tests for Shunter-based apps, there will be certain fixtures that require help from Shunter, such as rendering a HTML partial from a Dust template with dummy JSON input, or writing compiled JavaScript into a test runner.
+
+[Testing Templates](#testing-templates) explains how to use Shunter's exported function `testhelper` that helps you set up and tear down HTML partials.
+
+[Testing Client-Side JavaScript](testing-client-side-javascript) explains how to use the `shunter-test-client` script to run client-side unit tests from the command line.
 
 
 Testing Templates
