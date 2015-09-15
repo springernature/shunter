@@ -12,12 +12,13 @@ Usage: node test-client
 		run the tests in actual browsers, via saucelabs
 		requires sauceconnect, see https://docs.saucelabs.com/reference/sauce-connect/
 		once sauceconnect is installed, you need to run it with:
-		    bin/sc -u coin -k 86aed001-ddbe-4497-9497-10f948a51299
+		    bin/sc -u YOUR_USERNAME -k YOUR_ACCESS_KEY
 
 	resource-module defaults to null
 	--resource-module
 		name of modules (e.g. shunter-mosaic) also required for resources to be complete
 		shunter is not required in this list, it is always loaded
+		any modules listed in your config file will automatically be loaded
 		Can provide more than one
 		e.g. node test-client --resource-module foo --resource-module bar
 
@@ -171,11 +172,10 @@ This script starts up a server, so you don't have to already have one running.
 		Get the correct group of test files
 	*/
 	dust.helpers.scriptSpecs = function(chunk) {
-		var testfolder = '';
+		var testfolder = config.path.clientTests;
 		var jsfiles = [];
 		var scriptArr = [];
 
-		testfolder = path.join(config.path.tests, 'client');
 		if (argv.spec) { // if a spec file was specified, only use that. will throw non-fatal error if it doesn't exist
 			jsfiles = [argv.spec + '.js'];
 		} else if (fs.existsSync(testfolder)) {
@@ -204,9 +204,8 @@ This script starts up a server, so you don't have to already have one running.
 		app.use('/testslib', serveStatic(path.join(__dirname, '..', 'tests')));
 
 		app.use(function(req, res) {
-			var templateData = getTemplateData();
 			if (req.url === '/') {
-				dust.render('testrunner', templateData, function(err, out) {
+				dust.render('testrunner', {}, function(err, out) {
 					res.setHeader('Content-Type', 'text/html');
 					res.end(out);
 				});
@@ -223,13 +222,6 @@ This script starts up a server, so you don't have to already have one running.
 			}
 		});
 		return app;
-	}
-
-	function getTemplateData() {
-		return {
-			assertModule: 'proclaim',
-			assertVar: 'proclaim'
-		};
 	}
 
 	/*
