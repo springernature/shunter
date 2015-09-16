@@ -275,9 +275,41 @@ Dust will combine the templates and render:
 Using Template Inheritance
 --------------------------
 
-TODO Should cover:
-- How template inheritance works
-- Link to the [Modules and Inheritance](modules.md) page
+Dust enables template inheritance through the use of [blocks](#layouts-with-dust-blocks) and [partials](#using-partials) as outlined above. 
+
+Inheriting a base partial or template allows you to include the output from that template with the option of replacing defined blocks where you might want to do something different. 
+
+For example, we can define a block in our base template: 
+```html
+<!-- view/base.dust -->
+<h1>Title</h1>
+{+head}<p>This is the base template</p>{/head}
+```
+
+then define an alternate output for the block:
+```html
+<!-- view/override.dust -->
+{>"base"/}
+{<head}<p>This is the override template<p>{/head}
+```
+
+Dust will render: 
+```html
+<h1>Title</h1>
+<p>This is the override template<p>
+```
+
+
+Alternatively, if you don't want to override the block contents you can include it using a self-closing block:
+
+```html
+<!-- view/override.dust -->
+{>"base"/}
+{<head/}
+```
+  
+For more details, refer to the [Modules and Inheritance](modules.md) page and the official Dust [Template Inheritance](https://github.com/linkedin/dustjs/wiki/Dust-little-less-know-language-constructs#template-inheritance) documentation.
+  
 
 
 Built-In Dust Extensions
