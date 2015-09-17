@@ -54,7 +54,7 @@ If you're developing new features or refactoring, make sure that your code is co
 Static Analysis
 ---------------
 
-As well as unit testing, we also lint our JavaScript code with [JSHint](http://jshint.com/) and [JSCS](jscs.info/). This keeps everything consistent and readable.
+As well as unit testing, we also lint our JavaScript code with [JSHint](http://jshint.com/) and [JSCS](http://jscs.info/). This keeps everything consistent and readable.
 
 To run the linters, you can use:
 
