@@ -8,7 +8,6 @@ View templates in Shunter are written in [Dust](http://www.dustjs.com/) and live
 - [Dust Basics](#dust-basics)
 - [Using partials](#using-partials)
 - [Using layouts](#using-layouts)
-- [Using template inheritance](#using-template-inheritance)
 - [Built-In Dust Extensions](#built-in-dust-extensions)
 - [Writing Dust Extensions](#writing-dust-extensions)
 
@@ -270,14 +269,6 @@ Dust will combine the templates and render:
 </body>
 </html>
 ```
-
-
-Using Template Inheritance
---------------------------
-
-TODO Should cover:
-- How template inheritance works
-- Link to the [Modules and Inheritance](modules.md) page
 
 
 Built-In Dust Extensions
