@@ -14,8 +14,8 @@ function initHelper(dust) {
 	dust.helpers.and = function(chunk, context, bodies, params) {
 		params = params || {};
 		var alternate = bodies.else;
-		var keys = dust.helpers.tap(params.keys, chunk, context);
-		var not = dust.helpers.tap(params.not, chunk, context);
+		var keys = context.resolve(params.keys);
+		var not = context.resolve(params.not);
 
 		var checkContext = function(arr) {
 			// jshint maxcomplexity: 7
