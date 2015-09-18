@@ -1,6 +1,10 @@
 
 # History
 
+## 0.2.1 (2015-09-15)
+
+  * Replace `dust.helpers.tap` with `context.resolve` https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#tap
+
 ## 0.2.0 (2015-09-08)
 
   * Document configuration and template tests
