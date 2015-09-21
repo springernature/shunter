@@ -4,6 +4,9 @@
 ## 0.2.1 (2015-09-18)
 
   * Replace `dust.helpers.tap` with `context.resolve` https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#tap
+  * Document Dust helpers, testing, input filters, and output filters
+  * License under LGPL 3.0
+  * Update dependencies
 
 ## 0.2.0 (2015-09-08)
 
