@@ -6,17 +6,34 @@ This guide is here to help new developers get started with developing Shunter it
 
 If you're looking for information on how to _use_ Shunter, please see the [API Documentation](usage.md).
 
-- [Application Structure](#application-structure)
+- [Library Structure](#library-structure)
 - [Use of GitHub Issues](#issue-tracking)
 - [Writing Unit Tests](#testing)
 - [Static Analysis](#static-analysis)
 - [Versioning](#versioning)
 
 
-Application Structure
----------------------
+Library Structure
+-----------------
 
-TODO outline the files in the application and what each one's purpose is
+The main files that comprise Shunter live in the `lib` folder. Shunter has been broken up into several smaller modules which serve different purposes. We'll outline the basics here:
+
+- [`benchmark.js`](https://github.com/nature/shunter/blob/master/lib/benchmark.js) exports a middleware which is used to benchmark request times.
+- [`config.js`](https://github.com/nature/shunter/blob/master/lib/config.js) contains the default application configuration and code to merge defaults with the user config.
+- [`content-type.js`](https://github.com/nature/shunter/blob/master/lib/content-type.js) is a small utility used to infer the content-type of a URL based on its file extension.
+- [`dispatch.js`](https://github.com/nature/shunter/blob/master/lib/dispatch.js) applies output filters to the content and returns the response to the client.
+- [`dust.js`](https://github.com/nature/shunter/blob/master/lib/dust.js) handles the application's Dust instance and registers some default helpers.
+- [`input-filter.js`](https://github.com/nature/shunter/blob/master/lib/input-filter.js) handles the loading and application of input filters.
+- [`output-filter.js`](https://github.com/nature/shunter/blob/master/lib/output-filter.js) handles the loading and application of output filters.
+- [`processor.js`](https://github.com/nature/shunter/blob/master/lib/processor.js) exports the middlewares Shunter uses for interacting with the request/response cycle.
+- [`query.js`](https://github.com/nature/shunter/blob/master/lib/query.js) exports a middleware which attaches a parsed query string object to the request.
+- [`renderer.js`](https://github.com/nature/shunter/blob/master/lib/renderer.js) handles compilation and rendering of Dust templates.
+- [`router.js`](https://github.com/nature/shunter/blob/master/lib/router.js) parses the route configuration and routes requests to the correct back-end application.
+- [`server.js`](https://github.com/nature/shunter/blob/master/lib/server.js) manages the lifecycle of the worker processes Shunter uses to serve requests.
+- [`shunter.js`](https://github.com/nature/shunter/blob/master/lib/shunter.js) exports everything required for a Shunter application, and is the main entry-point.
+- [`statsd.js`](https://github.com/nature/shunter/blob/master/lib/statsd.js) wraps a StatsD instance which is used to record application metrics.
+- [`watcher.js`](https://github.com/nature/shunter/blob/master/lib/watcher.js) is a utility to watch a tree of files and reload them on change.
+- [`worker.js`](https://github.com/nature/shunter/blob/master/lib/worker.js) creates a Connect app to handle requests with the Shunter middlewares added to the stack. Instances of this app are run in each process managed by `server.js`.
 
 
 Issue Tracking
