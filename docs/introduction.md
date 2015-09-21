@@ -17,12 +17,6 @@ Benefits
 - Enforced decoupling of templates from backend applications, encouraging a clear separation of concerns
 
 
-Background
-----------
-
-TODO a little bit of flavor text about the development of Shunter and why we went in this direction?
-
-
 ---
 
 Next steps:
