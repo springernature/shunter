@@ -1,6 +1,10 @@
 
 # History
 
+## 0.3.0 (2015-09-21)
+
+ * Changed statsd client to fix an incompatibility with some versions of node 0.12
+
 ## 0.2.1 (2015-09-18)
 
   * Replace `dust.helpers.tap` with `context.resolve` https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#tap
