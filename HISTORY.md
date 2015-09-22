@@ -1,6 +1,12 @@
 
 # History
 
+## 1.0.0 (2015-09-22)
+
+ * Document modules
+ * Sprauncy logo
+ * Initial public release
+
 ## 0.3.0 (2015-09-21)
 
  * Changed statsd client to fix an incompatibility with some versions of node 0.12
