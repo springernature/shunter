@@ -13,8 +13,6 @@ branches:
 
 # Environment variables for the build
 env:
-  global:
-    - secure: "S2SJjC1kWFZT/TWpXP25DHvsVLjgkIL+I5eEXwmIyhXVSZKNS1Nrh4/+8a/1SaLS5NSN2kmP+3SoaeL8WOO4VNCtyiFipwLiebDV5p6wqzKMxmwBLhQ1nPr5A+4If384DJtx15x2qbNmn8MQRCPKrzzQhExfP3rkCL1xdMhPbz7wv0X/J0Tvs5682zWSA9z0CnWFR3Iaom5m2eTJsQUoqelF5YWw0+U3eI2oCnNLZUSAsY634aqlj3XyCAWLeRB3V4YmSMlPR3eU94dCOg3vpIjB6jaBQH18HiJhcWnJ+lzel8K1MVZ5DJGXaiS5T+u7gWxBly+WQhbMVnEYUPTRPGPcook6QcSUL1zcqFJo91nbfWxZ/KxTVrB7yNEIds6Tt/E2Tm7zBo7cAZ41NxnWeK29afn8BzRTo3b3K4jG49ymzzMA86iHu6n4Kxhawl+4aqFPUT0w317UREVDK5JpZC3vsSB+Y/Oh0l+E3dshsja9VqwHCqNYVjsiH1OOJrhqy1rhmz8nLySPKymqxgwvy8CngZCSbB8ujbEgNhF/UxoUK588TE4aGXRv88sRFEtcxa0qnqe3u7uOIpbnQDV2/1Yy46jLi3ifItr+vRFR6F4lN646OZYbFTCLqYpwRPNSAm6eKkgIeDYnPvX7EduNS1P0eHz8LztDKyUsHVHI/g0="
   matrix:
     - "LINT=true"
     - "TEST=true"
@@ -23,10 +21,3 @@ env:
 script:
   - 'if [ $LINT ]; then make lint; fi'
   - 'if [ $TEST ]; then make lcov-levels; fi'
-
-# Publish package when tagged
-after_success:
-  - 'if [[ -n "$TRAVIS_TAG" && "$TRAVIS_NODE_VERSION" == "0.10" && -n "$TEST" ]]; then PUBLISH_PACKAGE=true; fi'
-  - 'echo "Tag: $TRAVIS_TAG" && echo "Node: $TRAVIS_NODE_VERSION" && echo "Publish? $PUBLISH_PACKAGE"'
-  - 'if [ $PUBLISH_PACKAGE ]; then npm pack; fi'
-  - 'if [ $PUBLISH_PACKAGE ]; then curl -F "package=@shunter-$TRAVIS_TAG.tgz" https://$GEMFURY_HASH@push.fury.io/nature/; fi'
