@@ -14,7 +14,7 @@ Set-up Steps
 1. In your application's `package.json`, add your sharing module to dependencies, e.g.
 ```js
 "dependencies": {
-	"shunter": "~0.2",
+	"shunter": "^1",
 	"my-shared-module": "~1.0"
 },
 ```

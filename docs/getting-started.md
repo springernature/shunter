@@ -24,17 +24,9 @@ We'll start by creating a `package.json` file in a new directory. We're just inc
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "shunter": "~7.0"
+    "shunter": "^1"
   }
 }
-```
-
-**TODO: remove the `.npmrc` section when we open source**
-
-Because Shunter isn't open source yet, we can't load it from the public npm registry yet. Add the following to a new file named `.npmrc`:
-
-```
-registry=https://npm-proxy.fury.io/t8jhisVKz7-t4D9iNoGk/nature/
 ```
 
 Now we can run `npm install` to install dependencies. Once the dependencies have installed, we'll start to flesh out our application.
