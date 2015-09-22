@@ -66,6 +66,6 @@ Copyright &copy; 2015, Nature Publishing Group
 [info-build]: https://travis-ci.org/nature/shunter
 [shield-dependencies]: https://img.shields.io/gemnasium/nature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
-[shield-node]: https://img.shields.io/node/v/shunter.svg?label=node.js+support
+[shield-node]: https://img.shields.io/badge/node.js%20support-0.10–0.12-yellow.svg
 [shield-npm]: https://img.shields.io/npm/v/shunter.svg
 [shield-build]: https://img.shields.io/travis/nature/shunter/master.svg
