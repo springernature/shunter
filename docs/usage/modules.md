@@ -36,7 +36,7 @@ Config
 ------
 When Shunter sets up configuration, it looks in your app's folders for `config/local.json` and extends the default config options object with the object found in the `local.json` file.
 
-If there is a `modules` propery with an array with one or more item in it, this is used within Shunter to find the relevant directory under `node_modules` and from there to load in Dust templates and helpers, add the resources files to the asset handler load path, and apply filters.
+If there is a `modules` property with an array with one or more item in it, this is used within Shunter to find the relevant directory under `node_modules` and from there to load in Dust templates and helpers, add the resources files to the asset handler load path, and apply filters.
 
 Overriding shared code
 ------------------------------
