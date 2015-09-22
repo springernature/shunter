@@ -26,7 +26,7 @@ describe('Template overriding', function() {
 				namespace: 'tests'
 			}
 		};
-		helper.render('namespace', json, function(err, dom) {
+		helper.render('namespace', json, function(err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -48,7 +48,6 @@ describe('Template overriding', function() {
 				}
 			];
 
-			var $ = dom.$;
 			$('[data-test="templates"]').children('dd').each(function(i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
@@ -62,7 +61,7 @@ describe('Template overriding', function() {
 				namespace: 'tests__a'
 			}
 		};
-		helper.render('namespace', json, function(err, dom) {
+		helper.render('namespace', json, function(err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -84,7 +83,6 @@ describe('Template overriding', function() {
 				}
 			];
 
-			var $ = dom.$;
 			$('[data-test="templates"]').children('dd').each(function(i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
@@ -98,7 +96,7 @@ describe('Template overriding', function() {
 				namespace: 'tests__b'
 			}
 		};
-		helper.render('namespace', json, function(err, dom) {
+		helper.render('namespace', json, function(err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -120,7 +118,6 @@ describe('Template overriding', function() {
 				}
 			];
 
-			var $ = dom.$;
 			$('[data-test="templates"]').children('dd').each(function(i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
@@ -134,7 +131,7 @@ describe('Template overriding', function() {
 				namespace: 'tests__a__b'
 			}
 		};
-		helper.render('namespace', json, function(err, dom) {
+		helper.render('namespace', json, function(err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -156,7 +153,6 @@ describe('Template overriding', function() {
 				}
 			];
 
-			var $ = dom.$;
 			$('[data-test="templates"]').children('dd').each(function(i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});

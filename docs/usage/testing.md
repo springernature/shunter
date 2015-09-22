@@ -33,20 +33,21 @@ describe('Foo bar', function() {
         helper.render('template', {
             foo: 'bar',
             lorem: 'ipsum'
-        }, function(error, dom, output) {
-            var $ = dom.$;
+        }, function(error, $, output) {
             assert.strictEqual($('[data-test="fooitem"]').length, 1);
             done();
         });
     });
 ```
 
+In the `helper.render` callback, the `$` parameter is a [Cheerio](https://github.com/cheeriojs/cheerio) instance which allows you to use jQuery-like functions to access the render output. The `output` parameter contains the full output as a string.
+
 When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you'd include a partial
 
 ```js
 helper.render('mysubfolder___templatename', {
     foo: 'bar'
-}, function(error, dom, output) {
+}, function(error, $, output) {
     // etc etc
 });
 ```
