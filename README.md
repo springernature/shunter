@@ -18,6 +18,7 @@ Shunter works by proxying user requests through to a back-end which responds wit
 - [Getting Started](docs/getting-started.md)
 - [API Documentation](docs/usage/index.md)
 - [Developer Guide](docs/developer-guide.md)
+- [Migration Guide](docs/migration/index.md)
 
 
 Requirements
@@ -35,6 +36,12 @@ Getting Started
 ---------------
 
 If you're new to Shunter, we recommend our [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+
+
+Migration Guide
+---------------
+
+If you're migrating between major versions of Shunter, we maintain a [migration guide](migration/index.md) to help you.
 
 
 Contributing
