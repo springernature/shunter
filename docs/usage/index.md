@@ -40,4 +40,4 @@ API Documentation
 
 Next steps:
 
-- [Developer Guide](developer-guide.md)
+- [Developer Guide](../developer-guide.md)
