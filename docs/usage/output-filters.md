@@ -25,4 +25,4 @@ module.exports = function(content, contentType, request, config) {
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

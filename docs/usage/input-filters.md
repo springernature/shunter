@@ -59,4 +59,4 @@ module.exports = function(config, request, response, data, next) {
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

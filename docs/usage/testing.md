@@ -113,4 +113,4 @@ Add a resource module to the JavaScript under test (modules in your config autom
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

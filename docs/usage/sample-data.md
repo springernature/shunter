@@ -35,4 +35,4 @@ You may also set a number of milliseconds of latency for the response using the 
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

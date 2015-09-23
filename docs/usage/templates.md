@@ -502,4 +502,4 @@ Dust has excellent documentation on how to write both [helpers](http://www.dustj
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)
