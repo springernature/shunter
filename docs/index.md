@@ -1,4 +1,4 @@
-# ![Shunter](docs/shunter-logo.png)
+# ![Shunter](shunter-logo.png)
 
 Welcome to the Shunter documentation. Shunter is a Node.js application built to read JSON and translate it into HTML.
 
