@@ -60,4 +60,4 @@ The module's dev dependencies should include Shunter so that the rendering helpe
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

@@ -167,4 +167,4 @@ NODE_ENV=production node app.js
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)

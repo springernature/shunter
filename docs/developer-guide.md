@@ -4,7 +4,7 @@ Shunter Developer Guide
 
 This guide is here to help new developers get started with developing Shunter itself. It will outline the structure of the application and some of the development practices we uphold.
 
-If you're looking for information on how to _use_ Shunter, please see the [API Documentation](usage.md).
+If you're looking for information on how to _use_ Shunter, please see the [API Documentation](usage/index.md).
 
 - [Library Structure](#library-structure)
 - [Use of GitHub Issues](#issue-tracking)

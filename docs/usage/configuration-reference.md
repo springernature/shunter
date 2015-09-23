@@ -192,4 +192,4 @@ Shunter allows you to make use of a module format that lets you to do things lik
 
 Related:
 
-- [Full API Documentation](../usage.md)
+- [Full API Documentation](index.md)
