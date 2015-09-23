@@ -5,12 +5,11 @@ process.env.TZ = 'UTC';
 module.exports = function(env) {
 	var fs = require('fs');
 	var path = require('path');
-	var jsdom = require('jsdom');
+	var cheerio = require('cheerio');
 	var sinon = require('sinon');
 	var config = require('../../lib/config')(env || 'development', null, {});
 	var renderer = null;
 	var assetPath = null;
-	var $ = fs.readFileSync(path.join(__dirname, '..', 'client', 'lib', 'jquery-1.9.1.js')).toString();
 
 	return {
 		getDust: function() {
@@ -83,13 +82,9 @@ module.exports = function(env) {
 					}
 					_callback(err, null, null);
 				} else {
-					jsdom.env({
-						html: raw,
-						src: [$],
-						done: function(err, dom) {
-							_callback(err, dom, raw);
-						}
-					});
+					var $ = cheerio.load(raw);
+					$.$ = $; // Compatibility change. Will deprecate
+					_callback(null, $, raw);
 				}
 			});
 			// jscs:enable disallowDanglingUnderscores
