@@ -13,10 +13,10 @@ Shunter is a [Node.js][node] application built to read JSON and translate it int
 
 Shunter works by proxying user requests through to a back-end which responds with JSON; then it uses the JSON as a render context, generating output by passing it into your templates.
 
-- [**Read the Documentation**](docs/README.md)
+- [**Read the Documentation**](docs/index.md)
 - [Introduction](docs/introduction.md)
 - [Getting Started](docs/getting-started.md)
-- [API Documentation](docs/usage.md)
+- [API Documentation](docs/usage/index.md)
 - [Developer Guide](docs/developer-guide.md)
 
 
