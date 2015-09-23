@@ -23,7 +23,7 @@ Shunter works by proxying user requests through to a back-end which responds wit
 Requirements
 ------------
 
-Shunter requires [Node.js][node] 0.10 or later, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
+Shunter requires [Node.js][node] 0.10 - 0.12, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
 
 On Windows things are a bit more complicated due to the Shunter install process requiring a C compiler. Here are some useful links to help you:
 
