@@ -62,7 +62,6 @@ You can test individual templates by running mocha directly with the command:
 Testing Client-Side JavaScript
 ------------------------------
 
-
 Shunter provides a command-line script that will:
 
 * build up a test runner page for Mocha-PhantomJS that loads in your JavaScript under test with Mincer, and adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), and sets up the mocha libraries for client-side testing.
@@ -71,7 +70,9 @@ Shunter provides a command-line script that will:
 
 This means your code under test is compiled and loaded in the same way it would be when running the app in development mode.
 
-The script makes use of [Mocha-PhantomJS](http://metaskills.net/mocha-phantomjs/), and the test runner page loads in [Proclaim](https://github.com/rowanmanning/proclaim) as an assertion library.
+The script makes use of [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core), and the test runner page loads in [Proclaim](https://github.com/rowanmanning/proclaim) as an assertion library.
+
+Before you can use the test runner, you'll need to [install PhantomJS](http://phantomjs.org/) separately.
 
 You can run your client-side tests with the command:
 
