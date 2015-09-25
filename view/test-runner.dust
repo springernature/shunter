@@ -9,8 +9,6 @@
 <body>
 	<div id="mocha"></div>
 
-	{@scriptBlock src="main.js" theme=theme/}
-	
 	<script src="/testslib/client/lib/mocha.js"> </script>
 	<script src="/testslib/client/lib/proclaim.js"> </script>
 	<script src="/testslib/client/lib/sinon.js"> </script>
@@ -21,6 +19,7 @@
 		assert = proclaim;
 	</script>
 
+	{@scriptBlock src="main.js" theme=theme/}
 	{@scriptSpecs theme=theme /}
 
 	<script>
