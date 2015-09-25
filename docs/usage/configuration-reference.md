@@ -10,6 +10,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Log](#log-configuration)
 - [StatsD](#statsd-configuration)
 - [Timer](#timer-configuration)
+- [JSON View Parameter](#json-view-parameter)
 - [Environment](#environment-configuration)
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
@@ -133,6 +134,28 @@ timer: function() {
         return diff;
     };
 },
+```
+
+
+JSON View Parameter
+-------------------
+
+Sometimes it's helpful to view the raw JSON that's being returned by the server. Shunter supports viewing this by using a query parameter. If this parameter is present, then the raw JSON will be output when a page is requested.
+
+By default the query parameter is disabled so that nobody can look at your JSON if they know you use Shunter. You can enable it with the `jsonViewParameter` configuration.
+
+This config property sets the name of the query parameter that triggers raw JSON serving:
+
+```js
+shunter({
+    jsonViewParameter: 'show-me-the-json'
+});
+```
+
+With the above configuration, you'd just need to append a query parameter to your URL:
+
+```
+/path/to/your/page?show-me-the-json=true
 ```
 
 
