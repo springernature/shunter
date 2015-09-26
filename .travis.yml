@@ -1,23 +1,26 @@
 
-# Run tests in Node.js 0.10 and 0.12
+# Build matrix
 language: node_js
-node_js:
-  - "0.10"
-  - "0.12"
+matrix:
+  include:
 
-# Build only master and shunter-npm (plus pull-requests)
+    # Lint only in Node.js 0.10
+    - node_js: '0.10'
+      env: LINT=true
+
+    # Run tests in Node.js 0.10
+    - node_js: '0.10'
+
+    # Run tests in Node.js 0.12
+    - node_js: '0.12'
+
+# Restrict builds on branches
 branches:
   only:
     - master
     - /^\d+\.\d+\.\d+$/
 
-# Environment variables for the build
-env:
-  matrix:
-    - "LINT=true"
-    - "TEST=true"
-
 # Build script
 script:
   - 'if [ $LINT ]; then make lint; fi'
-  - 'if [ $TEST ]; then make lcov-levels; fi'
+  - 'if [ ! $LINT ]; then make lcov-levels; fi'
