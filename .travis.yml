@@ -14,11 +14,25 @@ matrix:
     # Run tests in Node.js 0.12
     - node_js: '0.12'
 
+    # Run tests in Node.js 4.x (dependencies require GCC 4.8)
+    - node_js: '4'
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-4.8
+            - g++-4.8
+
 # Restrict builds on branches
 branches:
   only:
     - master
     - /^\d+\.\d+\.\d+$/
+
+# Use GCC 4.8 if it's available
+before_install:
+  - 'if [ ! `which gcc-4.8` == "" ]; then export CXX=g++-4.8 && export CC=gcc-4.8; fi'
 
 # Build script
 script:
