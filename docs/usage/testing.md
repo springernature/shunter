@@ -33,20 +33,21 @@ describe('Foo bar', function() {
         helper.render('template', {
             foo: 'bar',
             lorem: 'ipsum'
-        }, function(error, dom, output) {
-            var $ = dom.$;
+        }, function(error, $, output) {
             assert.strictEqual($('[data-test="fooitem"]').length, 1);
             done();
         });
     });
 ```
 
+In the `helper.render` callback, the `$` parameter is a [Cheerio](https://github.com/cheeriojs/cheerio) instance which allows you to use jQuery-like functions to access the render output. The `output` parameter contains the full output as a string.
+
 When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you'd include a partial
 
 ```js
 helper.render('mysubfolder___templatename', {
     foo: 'bar'
-}, function(error, dom, output) {
+}, function(error, $, output) {
     // etc etc
 });
 ```
@@ -61,7 +62,6 @@ You can test individual templates by running mocha directly with the command:
 Testing Client-Side JavaScript
 ------------------------------
 
-
 Shunter provides a command-line script that will:
 
 * build up a test runner page for Mocha-PhantomJS that loads in your JavaScript under test with Mincer, and adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), and sets up the mocha libraries for client-side testing.
@@ -70,7 +70,9 @@ Shunter provides a command-line script that will:
 
 This means your code under test is compiled and loaded in the same way it would be when running the app in development mode.
 
-The script makes use of [Mocha-PhantomJS](http://metaskills.net/mocha-phantomjs/), and the test runner page loads in [Proclaim](https://github.com/rowanmanning/proclaim) as an assertion library.
+The script makes use of [mocha-phantomjs-core](https://github.com/nathanboktae/mocha-phantomjs-core), and the test runner page loads in [Proclaim](https://github.com/rowanmanning/proclaim) as an assertion library.
+
+Before you can use the test runner, you'll need to [install PhantomJS](http://phantomjs.org/) separately.
 
 You can run your client-side tests with the command:
 

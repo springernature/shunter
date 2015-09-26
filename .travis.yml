@@ -1,23 +1,40 @@
 
-# Run tests in Node.js 0.10 and 0.12
+# Build matrix
 language: node_js
-node_js:
-  - "0.10"
-  - "0.12"
+matrix:
+  include:
 
-# Build only master and shunter-npm (plus pull-requests)
+    # Lint only in Node.js 0.10
+    - node_js: '0.10'
+      env: LINT=true
+
+    # Run tests in Node.js 0.10
+    - node_js: '0.10'
+
+    # Run tests in Node.js 0.12
+    - node_js: '0.12'
+
+    # Run tests in Node.js 4.x (dependencies require GCC 4.8)
+    - node_js: '4'
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - gcc-4.8
+            - g++-4.8
+
+# Restrict builds on branches
 branches:
   only:
     - master
     - /^\d+\.\d+\.\d+$/
 
-# Environment variables for the build
-env:
-  matrix:
-    - "LINT=true"
-    - "TEST=true"
+# Use GCC 4.8 if it's available
+before_install:
+  - 'if [ ! `which gcc-4.8` == "" ]; then export CXX=g++-4.8 && export CC=gcc-4.8; fi'
 
 # Build script
 script:
   - 'if [ $LINT ]; then make lint; fi'
-  - 'if [ $TEST ]; then make lcov-levels; fi'
+  - 'if [ ! $LINT ]; then make lcov-levels; fi'

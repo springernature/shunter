@@ -18,12 +18,13 @@ Shunter works by proxying user requests through to a back-end which responds wit
 - [Getting Started](docs/getting-started.md)
 - [API Documentation](docs/usage/index.md)
 - [Developer Guide](docs/developer-guide.md)
+- [Migration Guide](docs/migration/index.md)
 
 
 Requirements
 ------------
 
-Shunter requires [Node.js][node] 0.10 - 0.12, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
+Shunter requires [Node.js][node] 0.10–4.x, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
 
 On Windows things are a bit more complicated due to the Shunter install process requiring a C compiler. Here are some useful links to help you:
 
@@ -35,6 +36,12 @@ Getting Started
 ---------------
 
 If you're new to Shunter, we recommend our [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+
+
+Migration Guide
+---------------
+
+If you're migrating between major versions of Shunter, we maintain a [migration guide](migration/index.md) to help you.
 
 
 Contributing
@@ -65,6 +72,6 @@ Copyright &copy; 2015, Nature Publishing Group
 [info-build]: https://travis-ci.org/nature/shunter
 [shield-dependencies]: https://img.shields.io/gemnasium/nature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
-[shield-node]: https://img.shields.io/badge/node.js%20support-0.10–0.12-yellow.svg
+[shield-node]: https://img.shields.io/badge/node.js%20support-0.10–4-brightgreen.svg
 [shield-npm]: https://img.shields.io/npm/v/shunter.svg
 [shield-build]: https://img.shields.io/travis/nature/shunter/master.svg

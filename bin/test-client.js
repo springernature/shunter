@@ -60,6 +60,7 @@ This script starts up a server, so you don't have to already have one running.
 	var Deferred = promise.Deferred;
 	var wd = require('wd');
 	var cluster = require('cluster');
+	var hasbin = require('hasbin');
 
 	var argv = yargs
 		.string('max-depth')
@@ -245,6 +246,10 @@ This script starts up a server, so you don't have to already have one running.
 
 				runBrowserTests(urls, marshallBrowser(process.env.browserName, process.env.browserVersion));
 			});
+		}
+
+		if (!hasbin.sync('phantomjs')) {
+			die('The `phantomjs` binary was not found in PATH.\nPlease install PhantomJS http://phantomjs.org/', 1);
 		}
 
 		var testPromises = urls.map(function(url) {
@@ -531,8 +536,9 @@ This script starts up a server, so you don't have to already have one running.
 	*/
 	function testPromise(url) {
 		var deferTest = new Deferred();
+		var mochaPhantomJsPath = require.resolve('mocha-phantomjs-core');
 		if (validUrl(url)) { // validate the string before we let it near the shell command
-			shell(__dirname + '/../node_modules/.bin/mocha-phantomjs ' + url, function(err, stdin, stderr) {
+			shell('phantomjs ' + mochaPhantomJsPath + ' ' + url, function(err, stdin, stderr) {
 				var exitCode = (err) ? err.code : 0;
 				console.log(stdin); // always output the test results
 				if (stderr) {

@@ -144,6 +144,38 @@ describe('Request processor', function() {
 			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
 		});
 
+		it('Should JSON if the `jsonViewParameter` parameter is present', function() {
+			var processor = require(moduleName)({
+				env: {
+					tier: sinon.stub()
+				},
+				argv: {},
+				timer: mockTimer,
+				jsonViewParameter: 'json'
+			}, renderer);
+			var dispatch = require('./dispatch')();
+			var callback = sinon.stub();
+
+			var req = {
+				query: {
+					json: true
+				},
+				url: '/test/url?json=true'
+			};
+
+			res.getHeader.withArgs('Content-type').returns('application/x-shunter+json');
+			processor.intercept(req, res, callback);
+
+			res.writeHead();
+			res.write('{"foo":"bar"}');
+			res.end();
+
+			assert.equal(renderer.render.callCount, 0);
+			assert.isTrue(dispatch.send.calledOnce);
+			assert.isNull(dispatch.send.firstCall.args[0]);
+			assert.equal(dispatch.send.firstCall.args[1], '{\n\t"foo": "bar"\n}');
+		});
+
 		it('Should send the rendered page', function() {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
