@@ -6,6 +6,7 @@ Shunter is a [Node.js][node] application built to read JSON and translate it int
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
+[![Code coverage][shield-coverage]][info-coverage]
 [![Dependencies][shield-dependencies]][info-dependencies]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
@@ -65,11 +66,13 @@ Copyright &copy; 2015, Nature Publishing Group
 [node-gyp-vs]: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
 [npm]: https://www.npmjs.com/
 
+[info-coverage]: https://coveralls.io/github/nature/shunter
 [info-dependencies]: https://gemnasium.com/nature/shunter
 [info-license]: LICENSE
 [info-node]: package.json
 [info-npm]: https://www.npmjs.com/package/shunter
 [info-build]: https://travis-ci.org/nature/shunter
+[shield-coverage]: https://img.shields.io/coveralls/nature/shunter.svg
 [shield-dependencies]: https://img.shields.io/gemnasium/nature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
 [shield-node]: https://img.shields.io/badge/node.js%20support-0.10–4-brightgreen.svg
