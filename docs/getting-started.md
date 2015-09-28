@@ -2,7 +2,9 @@
 Getting Started with Shunter
 ============================
 
-Before we begin, you'll need to have [Node.js](https://nodejs.org/) installed, Shunter requires Node.js 0.10 - 0.12. The getting started guide will teach you how to put together a basic application with Shunter. [API Documentation](usage/index.md) is also available if you need more detail.
+This guide will teach you how to put together a basic application with Shunter. [API Documentation](usage/index.md) is also available if you need more detail.
+
+Before we begin, you'll need to have [Node.js](https://nodejs.org/) installed; Shunter requires Node.js 0.10 - 0.12.
 
 This guide will not explain every feature of Shunter. Its aim is to get you up-and-running in as little time as possible.
 
