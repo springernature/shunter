@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-var MAX_DATA_URI_SIZE = 32000;
-
 var yargs = require('yargs');
 
 var argv = yargs
@@ -59,49 +57,16 @@ process.on('uncaughtException', function(err) {
 });
 
 var compile = function(data, callback) {
-	var maxDataUriSize = function(name) {
-		if (name.indexOf('ie7') !== -1 || name.indexOf('plain') !== -1) {
-			return 0;
-		}
-		if (name.indexOf('ie8') !== -1) {
-			return Math.min(MAX_DATA_URI_SIZE, 300000);
-		}
-		return MAX_DATA_URI_SIZE;
-	};
-
 	var findAssets = function() {
 		var pattern = new RegExp('\.(' + [].slice.call(arguments, 0).join('|') + ')$');
 		return Object.keys(data.assets).filter(function(key) {
 			return key.match(pattern);
 		});
 	};
-
-	var deleteAsset = function(name) {
-		delete manifest.assets[name];
-		return null;
-	};
-
-	var imagesBase64 = findAssets('png', 'gif', 'jpg', 'jpeg').map(function(name) {
-		var asset = environment.findAsset(name);
-		var buffer = (asset) ? asset.buffer || new Buffer(asset.toString()) : null;
-
-		if (!buffer) {
-			return deleteAsset(name);
-		}
-
-		return {
-			name: name,
-			path: config.web.publicResources + '/' + data.assets[name],
-			data: 'data:' + asset.contentType + ';base64,' + buffer.toString('base64')
-		};
-	}).filter(function(image) {
-		return image !== null;
-	});
-
+	
 	var stylesheets = findAssets('css').map(function(name) {
 		var asset = environment.findAsset(name);
 		var content = asset ? asset.toString() : null;
-		var maxSize = maxDataUriSize(name);
 
 		if (!content) {
 			return deleteAsset(name);
@@ -110,14 +75,6 @@ var compile = function(data, callback) {
 		// Handle fallback from rem to px
 		content = content.replace(/font(?:-size)?:[^;}]*?([0-9.]+)rem/g, function(all, val) {
 			return 'font-size:' + (parseFloat(val) * 10) + 'px;' + all;
-		});
-
-		imagesBase64.forEach(function(image) {
-			if (image.data.length < maxSize) {
-				while (content.indexOf(image.path) !== -1) {
-					content = content.replace(image.path, image.data);
-				}
-			}
 		});
 
 		return {
