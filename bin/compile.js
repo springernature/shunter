@@ -63,7 +63,12 @@ var compile = function(data, callback) {
 			return key.match(pattern);
 		});
 	};
-	
+
+	var deleteAsset = function(name) {
+		delete manifest.assets[name];
+		return null;
+	};
+
 	var stylesheets = findAssets('css').map(function(name) {
 		var asset = environment.findAsset(name);
 		var content = asset ? asset.toString() : null;
