@@ -122,13 +122,13 @@ Writing EJS Extensions
 
 You can write your own EJS helpers to assist with the processing of CSS and JavaScript. Custom EJS extensions should sit in a directory named `ejs` within your Shunter application.
 
-EJS helper files must export a single function which is called with the Mincer environment and Shunter config object.
+EJS helper files must export a single function which is called with the Mincer environment, manifest and Shunter config object.
 
 An example helper might look like the following, which outputs the current year:
 
 ```js
 // <app>/ejs/current-year.js
-module.exports = function(environment, config) {
+module.exports = function(environment, manifest, config) {
     environment.registerHelper('currentYear', function() {
         var date = new Date();
         return date.getFullYear();
@@ -143,7 +143,6 @@ Production Differences
 Shunter provides a build script that will do the following things for a production environemt:
 
 * Concatenate and minify CSS and JavaScript
-* Create Base64 data images for JPEG, PNG and GIF files under a certain size
 * Provide font size fallbacks for Internet Explorer 7 and 8 (convert `rem` units to `px`)
 * Write static files to `public/resources` with MD5-fingerprinted file names for cache invalidation
 * Create a `manifest.json` file that maps the logical names for resources to their actual fingerprinted file names
