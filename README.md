@@ -42,7 +42,7 @@ If you're new to Shunter, we recommend our [Getting Started Guide](docs/getting-
 Migration Guide
 ---------------
 
-If you're migrating between major versions of Shunter, we maintain a [migration guide](migration/index.md) to help you.
+If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
 
 
 Contributing
