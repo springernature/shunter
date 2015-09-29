@@ -1,19 +1,30 @@
 
 # History
 
+## 2.0.0 (2015-09-29)
+
+  * Add support for Node.js 4.x
+  * Add the ability to view raw JSON with a query param
+  * Change the ordering or EJS helper parameters
+  * Replace jsdom with Cheerio
+  * Remove the PhantomJS install from the dependencies
+  * Remove Base64-encoding of images in the CSS
+  * Remove automatic `rem` conversion in the CSS
+  * Update dependencies
+
 ## 1.0.1 (2015-09-23)
  
- * Updating the docs
+  * Updating the docs
 
 ## 1.0.0 (2015-09-22)
 
- * Document modules
- * Sprauncy logo
- * Initial public release
+  * Document modules
+  * Sprauncy logo
+  * Initial public release
 
 ## 0.3.0 (2015-09-21)
 
- * Changed statsd client to fix an incompatibility with some versions of node 0.12
+  * Changed statsd client to fix an incompatibility with some versions of node 0.12
 
 ## 0.2.1 (2015-09-18)
 
