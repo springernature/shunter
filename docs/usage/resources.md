@@ -143,7 +143,6 @@ Production Differences
 Shunter provides a build script that will do the following things for a production environemt:
 
 * Concatenate and minify CSS and JavaScript
-* Provide font size fallbacks for Internet Explorer 7 and 8 (convert `rem` units to `px`)
 * Write static files to `public/resources` with MD5-fingerprinted file names for cache invalidation
 * Create a `manifest.json` file that maps the logical names for resources to their actual fingerprinted file names
 
