@@ -77,11 +77,6 @@ var compile = function(data, callback) {
 			return deleteAsset(name);
 		}
 
-		// Handle fallback from rem to px
-		content = content.replace(/font(?:-size)?:[^;}]*?([0-9.]+)rem/g, function(all, val) {
-			return 'font-size:' + (parseFloat(val) * 10) + 'px;' + all;
-		});
-
 		return {
 			path: config.path.publicResources + '/' + data.assets[name],
 			content: content
