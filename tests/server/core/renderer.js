@@ -32,7 +32,8 @@ var mockConfig = {
 		templateExt: '.dust',
 		filters: 'filters',
 		filtersInput: 'input',
-		ejs: 'ejs'
+		ejs: 'ejs',
+		mincer: 'mincer'
 	},
 	log: require('../mocks/log'),
 	timer: sinon.stub().returns(sinon.stub()),
@@ -99,11 +100,79 @@ describe('Renderer', function() {
 			assert.isTrue(mincer.logger.use.calledOnce);
 		});
 
-		it('Should setup the ejs helpers', function() {
-			require('fs').readdirSync.returns([]);
+		it('Should setup mincer extensions', function() {
+			require('path').join.returnsArg(1);
+			var initMincerExtension = sinon.stub();
+			var eachModule = require('each-module');
+			var mincer = require('mincer');
+			eachModule.withArgs('mincer').yields('foo', initMincerExtension);
 
+			require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('mincer').callCount, 3);
+			assert.strictEqual(initMincerExtension.callCount, 3);
+			assert.isTrue(initMincerExtension.calledWith(mincer, mockConfig));
+		});
+
+		it('Should skip mincer extensions that do not expose a function', function() {
+			require('path').join.returnsArg(1);
+			var initMincerExtension = sinon.stub();
+			var eachModule = require('each-module');
+			eachModule.withArgs('mincer').yields('foo', initMincerExtension);
+			eachModule.withArgs('mincer').onCall(1).yields('foo', 'bar');
+
+			require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('mincer').callCount, 3);
+			assert.strictEqual(initMincerExtension.callCount, 2);
+		});
+
+		it('Should setup the `asset_path` ejs helper', function() {
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 			assert.strictEqual(renderer.environment.registerHelper.withArgs('asset_path').callCount, 1);
+		});
+
+		it('Should setup additional ejs helpers', function() {
+			require('path').join.returnsArg(1);
+			var helper = sinon.stub();
+			var eachModule = require('each-module');
+			eachModule.withArgs('ejs').yields('foo', helper);
+
+			var renderer = require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('ejs').callCount, 3);
+			assert.strictEqual(helper.callCount, 3);
+			assert.isTrue(helper.calledWith(renderer.environment, renderer.manifest, mockConfig));
+		});
+
+		it('Should skip ejs helpers that do not expose a function', function() {
+			require('path').join.returnsArg(1);
+			var helper = sinon.stub();
+			var eachModule = require('each-module');
+			eachModule.withArgs('ejs').yields('foo', helper);
+			eachModule.withArgs('ejs').onCall(1).yields('foo', 'bar');
+
+			require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('ejs').callCount, 3);
+			assert.strictEqual(helper.callCount, 2);
+		});
+
+		it('Should setup input filters', function() {
+			require('path').join.returnsArg(1);
+			var filter = sinon.stub();
+			var eachModule = require('each-module');
+			eachModule.withArgs('filters').yields('foo', filter);
+			require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('filters').callCount, 3);
+			assert.strictEqual(inputFilter().add.withArgs(filter).callCount, 3);
+		});
+
+		it('Should skip input filters that do not expose a function', function() {
+			require('path').join.returnsArg(1);
+			var filter = sinon.stub();
+			var eachModule = require('each-module');
+			eachModule.withArgs('filters').yields('foo', filter);
+			eachModule.withArgs('filters').onCall(1).yields('foo', 'bar');
+			require(RENDERER_MODULE)(mockConfig);
+			assert.strictEqual(eachModule.withArgs('filters').callCount, 3);
+			assert.strictEqual(inputFilter().add.withArgs(filter).callCount, 2);
 		});
 
 		// it('Should configure the asset paths in the correct order', function() {
