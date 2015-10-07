@@ -41,9 +41,9 @@ Issue Tracking
 
 We use [GitHub issues](https://github.com/nature/shunter/issues) to log bugs and feature requests. This is a great place to look if you're interested in working on Shunter.
 
-If you're going to pick up a piece of work, check the comments to make sure nobody else has started on it. If you're going to do it, say so in the issue comments.
+If you're going to pick up a piece of work, check the comments to make sure nobody else has started on it. If you're going to do it, say so in the issue comments. 
 
-We use labels extensively to categorise issues, so you should be able to find something that suits your mood.
+We use labels extensively to categorise issues, so you should be able to find something that suits your mood. We also label [issues that might be a good starting-point](https://github.com/nature/shunter/labels/good-starter-issue) for new developers to the project.
 
 If you're logging a new bug or feature request, please be as descriptive as possible. Include steps to reproduce and a reduced test case if applicable.
 
