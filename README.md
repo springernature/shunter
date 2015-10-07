@@ -50,7 +50,7 @@ Contributing
 
 We maintain a developer guide to help people get started with working on Shunter itself. It outlines the structure of the application and some of the development practices we uphold.
 
-We'd love for you to contribute to Shunter, read the [developer guide](docs/developer-guide.md) and get in touch!
+We'd love for you to contribute to Shunter, read the [developer guide](docs/developer-guide.md) and get in touch! We also label [issues that might be a good starting-point][starter-issues] for new developers to the project.
 
 
 License
@@ -65,6 +65,7 @@ Copyright &copy; 2015, Nature Publishing Group
 [node]: https://nodejs.org/
 [node-gyp-vs]: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
 [npm]: https://www.npmjs.com/
+[starter-issues]: https://github.com/nature/shunter/labels/good-starter-issue
 
 [info-coverage]: https://coveralls.io/github/nature/shunter
 [info-dependencies]: https://gemnasium.com/nature/shunter
