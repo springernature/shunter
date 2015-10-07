@@ -1,6 +1,11 @@
 
 # History
 
+## 2.1.0 (2015-10-07)
+
+  * Add support for apps to load mincer extensions
+  * Added documentation for the good-starter-issue label
+
 ## 2.0.0 (2015-09-29)
 
   * Add support for Node.js 4.x
