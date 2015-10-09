@@ -1,6 +1,10 @@
 
 # History
 
+## 2.1.1 (2015-10-09)
+
+  * Fixed loading mincer extensions
+
 ## 2.1.0 (2015-10-07)
 
   * Add support for apps to load mincer extensions
