@@ -1,6 +1,10 @@
 
 # History
 
+## 2.1.2 (2015-10-14)
+
+  * Fixed bug that was causing async dust helpers to fail
+
 ## 2.1.1 (2015-10-09)
 
   * Fixed loading mincer extensions
