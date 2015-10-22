@@ -121,7 +121,7 @@ We'll want to provide a sample JSON file that the Shunter application can proxy 
 }
 ```
 
-Notice the `layout.template` property in the JSON we just created? That indicates the [Dust](http://www.dustjs.com/) template that should be used to render the page. If we open up [http://localhost:5400/data/home](http://localhost:5400/data/home) now, then you'll see an error in your terminal indicating that the "home" template can't be found.
+Notice the `layout.template` property in the JSON we just created? That indicates the [Dust](http://www.dustjs.com/) template that should be used to render the page. If we open up [http://localhost:5400/home](http://localhost:5400/home) now, then you'll see an error in your terminal indicating that the "home" template can't be found.
 
 
 
@@ -145,7 +145,7 @@ Let's create that missing "home" template. Add the following to `view/home.dust`
 
 Note our use of `{title}`. This is a reference to the `title` property in our JSON file.
 
-Now restart your Shunter application again and open up [http://localhost:5400/data/home](http://localhost:5400/data/home) in your browser. You should see your rendered page.
+Now restart your Shunter application again and open up [http://localhost:5400/home](http://localhost:5400/home) in your browser. You should see your rendered page.
 
 [Dust](http://www.dustjs.com/) templating is very powerful, right now we're using the absolute basics. Once you've finished this guide, you can learn more about [layouts](usage/templates.md#using-layouts) and [partials](usage/templates.md#using-partials).
 
