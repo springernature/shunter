@@ -50,6 +50,7 @@ var app = jserve({
 		addLatency,
 		serveRemoteJson
 	],
+	name: 'Shunter Serve',
 	path: args.data,
 	port: args.port,
 	templatesPath: __dirname + '/../view/jserve'
