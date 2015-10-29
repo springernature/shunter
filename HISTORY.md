@@ -1,6 +1,10 @@
 
 # History
 
+## 2.1.3 (2015-10-29)
+
+  * Fixed JSHint errors in creation of worker processes
+
 ## 2.1.2 (2015-10-14)
 
   * Fixed bug that was causing async dust helpers to fail
