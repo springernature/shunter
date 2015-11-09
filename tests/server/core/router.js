@@ -10,15 +10,15 @@ describe('Proxy routing', function() {
 		config = {};
 		config.routes = {
 			localhost: {
-				'\/test\/.*': {
+				'/\\/test\\/.*/': {
 					host: 'test-www.nature.com',
 					port: 80
 				},
-				'\/test\/foo': {
+				'/\\/test\\/foo/': {
 					host: 'test-www.nature.com',
 					port: 81
 				},
-				'\/foo\/bar': {
+				'/\\/foo\\/bar/': {
 					host: 'staging-www.nature.com',
 					port: 82
 				},
@@ -45,7 +45,7 @@ describe('Proxy routing', function() {
 	it('Should create a routes object from config objects\'s contents', function() {
 		config.routes = {
 			localhost: {
-				foo: 'bar'
+				'/foo/': 'bar'
 			}
 		};
 		var router = require(moduleName)(config);
@@ -56,10 +56,10 @@ describe('Proxy routing', function() {
 	it('Should get the route from the given host if possible', function() {
 		config.routes = {
 			'www.nature.com': {
-				foo: 'success'
+				'/foo/': 'success'
 			},
 			localhost: {
-				foo: 'fail'
+				'/foo/': 'fail'
 			}
 		};
 		var router = require(moduleName)(config);
@@ -70,10 +70,10 @@ describe('Proxy routing', function() {
 	it('Should ignore the port 80', function() {
 		config.routes = {
 			'www.nature.com': {
-				foo: 'success'
+				'/foo/': 'success'
 			},
 			localhost: {
-				foo: 'fail'
+				'/foo/': 'fail'
 			}
 		};
 		var router = require(moduleName)(config);
@@ -84,10 +84,10 @@ describe('Proxy routing', function() {
 	it('Should fallback to localhost if the host doesn\'t match', function() {
 		config.routes = {
 			'www.nature.com': {
-				foo: 'fail'
+				'/foo/': 'fail'
 			},
 			localhost: {
-				foo: 'success'
+				'/foo/': 'success'
 			}
 		};
 		var router = require(moduleName)(config);
@@ -98,7 +98,7 @@ describe('Proxy routing', function() {
 	it('Should return null if the host doesn\'t match and no localhost routes are defined', function() {
 		config.routes = {
 			'www.nature.com': {
-				foo: 'fail'
+				'/foo/': 'fail'
 			}
 		};
 		var router = require(moduleName)(config);
@@ -140,5 +140,9 @@ describe('Proxy routing', function() {
 		assert.equal(route.port, 9000);
 	});
 
-
+	it('Should not match a named route against the url', function() {
+		var route = require(moduleName)(config).map('localhost', '/capybara');
+		assert.equal(route.host, '127.0.0.1');
+		assert.equal(route.port, 5410);
+	});
 });

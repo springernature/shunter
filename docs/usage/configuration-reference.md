@@ -185,7 +185,7 @@ You may like to modify this config object to reflect the environments to which y
 Adding Custom Configurations
 ----------------------------
 
-The items above are the default configurations which may be over-ridden. You will probably need to define some configuration that is unique to your own Shunter application. These can be neatly organized as JSON files in a config directory and required by your Shunter application at start-up to either append or overwrite existing configs. In the example below the `routes.json` usually required by Shunter has been palced in a `route.json` file in the config directory and required from that location:
+The items above are the default configurations which may be over-ridden. You will probably need to define some configuration that is unique to your own Shunter application. These can be neatly organized as JSON files in a config directory and required by your Shunter application at start-up to either append or overwrite existing configs. In the example below the `routes.json` usually required by Shunter has been placed in a `routes.json` file in the config directory and required from that location:
 
 ```js
 var app = shunter({
