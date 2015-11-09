@@ -1,6 +1,10 @@
 
 # History
 
+## 2.2.0 (2015-11-09)
+
+  * Add `trim` filter to trim leading and trailing whitespace from a dust reference
+
 ## 2.1.4 (2015-11-09)
 
   * Add support for Node.js 5.x
