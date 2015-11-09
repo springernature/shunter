@@ -38,7 +38,7 @@
 	"bugs": "https://github.com/nature/shunter/issues",
 
 	"engines": {
-		"node": ">=0.10 <=4"
+		"node": ">=0.10 <=5"
 	},
 	"dependencies": {
 		"async": "~1.4",
