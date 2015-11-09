@@ -1,6 +1,10 @@
 
 # History
 
+## 2.1.4 (2015-11-09)
+
+  * Add support for Node.js 5.x
+
 ## 2.1.3 (2015-10-29)
 
   * Fixed JSHint errors in creation of worker processes
