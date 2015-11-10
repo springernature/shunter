@@ -421,6 +421,15 @@ The `title` filter takes a property and titlecases the value. If `foo` is `hello
 <!-- Outputs: "Hello World" -->
 ```
 
+### The `trim` Filter
+
+The `trim` filter takes a property and strips leading and trailing whitespace from the value.  If `foo` is `\r\n \thello world\n`:
+
+```html
+{foo|trim}
+<!-- Outputs: "hello world" -->
+```
+
 ### The `amp` Filter
 
 The `amp` filter replaces ampersands in a property with HTML entities, but ignores ampersands that are the opening for an existing entity. If `foo` is `Hello World & Everyone&hellip;`:
