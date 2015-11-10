@@ -1,6 +1,10 @@
 
 # History
 
+## 3.0.0 (2015-11-10)
+
+  * Regex now have to be explicitly indentified in `routes.json` by delimiting them with `/` characters
+
 ## 2.2.0 (2015-11-09)
 
   * Add `trim` filter to trim leading and trailing whitespace from a dust reference
