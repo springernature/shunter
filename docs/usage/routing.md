@@ -88,7 +88,9 @@ By default if none of the regex patterns are matched Shunter will use the route 
 }
 ```
 
-And ran you shunter app with `--route-config=custom` requests would be routed to port 1337 instead of 5000.
+And ran your Shunter app with `--route-config=custom` requests would be routed to port 1337 instead of 5000.
+
+Routing can be overridden entirely by setting the `routeoveride` option. Running your Shunter app with `--routeoveride=www.example.com:1337` would route all requests to that destination.
 
 
 Change Origin

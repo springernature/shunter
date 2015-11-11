@@ -14,6 +14,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Environment](#environment-configuration)
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
+- [Command Line Options](#command-line-options)
 
 
 Web Configuration
@@ -209,6 +210,22 @@ Shunter allows you to make use of a module format that lets you to do things lik
     "modules": ["common-theme"]
 }
 ```
+
+
+Command Line Options
+--------------------
+
+Serveral aspects of Shunter behaviour can be configured via command line arguments when you start your application.
+
+ * `-p`, `--port` Sets the port number Shunter will listen on, defaults to 5400.
+ * `-m`, `--max-post-size` Sets the maximum size in bytes for the Shunter API, defaults to 204800.
+ * `-c`, `--max-child-processes` When Shunter runs it spawns child worker processes to handle requests, this option sets the maximum number of child processes it will create. It defaults to 10, but will never exceed the number of CPU cores you have available.
+ * `-r`, `--route-config` Sets the name of the default route, see [Routing](routing.md#route-config-options) for more details. Defaults to default.
+ * `-s`, `--syslog` Turns on logging to syslog. Boolean.
+ * `-d`, `--sourcedirectory` Sets the route directory for your app, defaults to the current working directory.
+ * `-o`, `--routeoveride` Sets the proxy destination for all requests see [Routing](routing.md#route-config-options) for more details.
+ * `-v`, `--version` Prints the Shunter version number.
+ * `-h`, `--help` Prints help about these options.
 
 
 ---
