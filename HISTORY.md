@@ -1,6 +1,10 @@
 
 # History
 
+## 3.0.1 (2015-11-11)
+
+  * Documentation updates
+
 ## 3.0.0 (2015-11-10)
 
   * Regex now have to be explicitly indentified in `routes.json` by delimiting them with `/` characters
