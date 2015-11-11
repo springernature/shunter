@@ -35,6 +35,7 @@ API Documentation
   - [Environment](configuration-reference.md#environment-configuration)
   - [Custom Configurations](configuration-reference.md#adding-custom-configurations)
   - [Configuring Modules](configuration-reference.md#configuring-modules)
+- [Routing](routing.md)
 
 ---
 
