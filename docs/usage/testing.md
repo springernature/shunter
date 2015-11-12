@@ -58,6 +58,8 @@ You can test individual templates by running mocha directly with the command:
 ./node_modules/mocha/bin/mocha -R spec -u bdd test/myfolders/mytemplate-spec.js
 ```
 
+In addition to these tests we recommend using [Dustmite](https://github.com/nature/dustmite) to lint your dust files and ensure that they are all syntactically valid.
+
 
 Testing Client-Side JavaScript
 ------------------------------
