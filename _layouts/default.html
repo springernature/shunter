@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ site.data.meta.language }}">
+<head>
+    
+    <!-- Page meta information -->
+    <meta charset="utf-8"/>
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}"/>
+
+    <!-- Site links -->
+    <link rel="canonical" href="{{ site.github.url }}{{ page.url | replace: 'index.html', '' }}"/>
+
+    <!-- Styles -->
+    <meta name="viewport" content="width=device-width"/>
+    <!--[if gt IE 8]><!--><link rel="stylesheet" href="/asset/style/main.css"/><!--<![endif]-->
+    <link rel="icon" href="/favicon.png" type="image/png"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+
+</head>
+<body>
+
+    <div class="page">
+
+        <div role="banner">
+            {% include site/header.html %}
+        </div>
+
+        <div role="main">
+            {{ content }}
+        </div>
+
+        <div role="contentinfo">
+            {% include site/footer.html %}
+        </div>
+
+    </div>
+
+</body>
+</html>

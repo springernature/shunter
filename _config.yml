@@ -1,0 +1,22 @@
+
+# Files and directories to exclude from compilation
+exclude:
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - Makefile
+  - README.md
+
+# Don't produce an index for related posts
+lsi: false
+
+# Markdown parser
+markdown: kramdown
+
+# Sass compilation
+sass:
+  sass_dir: asset/style
+  style: :compressed
+
+# Timezone setting
+timezone: Europe/London

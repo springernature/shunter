@@ -1,0 +1,17 @@
+---
+---
+
+// Vendor styles
+@import "vendor/normalize-3.0.2";
+
+// Layout
+
+body {
+    padding: 20px;
+    color: #333;
+}
+
+.page {
+    margin: 0 auto;
+    max-width: 600px;
+}
