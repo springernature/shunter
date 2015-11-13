@@ -1,6 +1,8 @@
 ---
 title: Input Filters - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/input-filters.html
+docversion: 3.0.1
 ---
 
 Input Filters

@@ -1,0 +1,22 @@
+---
+layout: default
+---
+
+<hr/>
+
+<p>
+    You are viewing the documentation for <b>Shunter {{ page.docversion }}</b>.
+    View this documentation for different versions of Shunter:
+</p>
+
+<ul>
+    {% for version in site.data.versions %}
+        <li>
+            <a href="/docs/{{ version }}{{ page.docpath }}">{{ version }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<hr/>
+
+{{ content }}

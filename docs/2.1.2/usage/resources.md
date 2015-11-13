@@ -1,6 +1,8 @@
 ---
 title: Resources - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/resources.html
+docversion: 2.1.2
 ---
 
 Resources

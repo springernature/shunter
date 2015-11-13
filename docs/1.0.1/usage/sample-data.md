@@ -1,6 +1,8 @@
 ---
 title: Sample Data - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/sample-data.html
+docversion: 1.0.1
 ---
 
 Sample Data

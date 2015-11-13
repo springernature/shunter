@@ -1,6 +1,8 @@
 ---
 title: Testing - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/testing.html
+docversion: 2.1.3
 ---
 
 Testing

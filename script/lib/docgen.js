@@ -63,6 +63,7 @@ function processMarkdownFiles (dir, options, isLatest) {
 
 function processMarkdownFile (options, filePath, done) {
     let baseurl = (options.isLatest ? options.latestbaseurl : options.baseurl);
+    let basedir = (options.isLatest ? options.latestdir : options.versiondir);
     async.waterfall([
 
         // Load the Markdown file
@@ -102,7 +103,15 @@ function processMarkdownFile (options, filePath, done) {
             let title = $('h1,h2,h3,h4,h5,h6').first().text().trim();
             title = (title ? title + ' - ' : '') + 'Shunter Documentation';
 
-            let frontMatter = `---\ntitle: ${title}\nlayout: default\n---\n`;
+            let path = filePath.replace(basedir, '').replace(/\.md$/, '.html');
+
+            let frontMatter = `---
+                title: ${title}
+                layout: docs
+                docpath: ${path}
+                docversion: ${options.version}
+                ---
+            `.replace(/([\r\n]+)\s+/g, '$1');
             next(null, frontMatter + fileContents);
         },
 

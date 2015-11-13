@@ -1,6 +1,8 @@
 ---
 title: Modules and Inheritance - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/modules.html
+docversion: 2.1.0
 ---
 
 Modules and Inheritance

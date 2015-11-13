@@ -1,6 +1,8 @@
 ---
 title: Routing - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/routing.html
+docversion: 3.0.1
 ---
 
 Routing

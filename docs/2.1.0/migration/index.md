@@ -1,6 +1,8 @@
 ---
 title: Migration Guide - Shunter Documentation
-layout: default
+layout: docs
+docpath: /migration/index.html
+docversion: 2.1.0
 ---
 
 Migration Guide

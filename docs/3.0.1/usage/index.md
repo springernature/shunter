@@ -1,6 +1,8 @@
 ---
 title: API Documentation - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/index.html
+docversion: 3.0.1
 ---
 
 API Documentation

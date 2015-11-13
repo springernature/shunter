@@ -1,6 +1,8 @@
 ---
 title: Output Filters - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/output-filters.html
+docversion: 2.1.0
 ---
 
 Output Filters

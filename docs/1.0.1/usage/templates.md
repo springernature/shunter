@@ -1,6 +1,8 @@
 ---
 title: Templates - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/templates.html
+docversion: 1.0.1
 ---
 
 Templates

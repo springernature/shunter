@@ -1,6 +1,8 @@
 ---
 title: Introduction to Shunter - Shunter Documentation
-layout: default
+layout: docs
+docpath: /introduction.html
+docversion: 2.1.0
 ---
 
 Introduction to Shunter

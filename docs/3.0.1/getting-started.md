@@ -1,6 +1,8 @@
 ---
 title: Getting Started with Shunter - Shunter Documentation
-layout: default
+layout: docs
+docpath: /getting-started.html
+docversion: 3.0.1
 ---
 
 Getting Started with Shunter

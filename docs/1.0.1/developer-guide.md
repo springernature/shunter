@@ -1,6 +1,8 @@
 ---
 title: Shunter Developer Guide - Shunter Documentation
-layout: default
+layout: docs
+docpath: /developer-guide.html
+docversion: 1.0.1
 ---
 
 Shunter Developer Guide

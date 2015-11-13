@@ -1,6 +1,8 @@
 ---
 title: Configuration Reference - Shunter Documentation
-layout: default
+layout: docs
+docpath: /usage/configuration-reference.html
+docversion: 1.0.1
 ---
 
 Configuration Reference

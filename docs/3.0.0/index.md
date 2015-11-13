@@ -1,6 +1,8 @@
 ---
 title: Shunter Documentation
-layout: default
+layout: docs
+docpath: /index.html
+docversion: 3.0.0
 ---
 
 # ![Shunter](/docs/3.0.0/shunter-logo.png)
