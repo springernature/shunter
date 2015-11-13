@@ -5,7 +5,10 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - Makefile
+  - node_modules
+  - package.json
   - README.md
+  - script
 
 # Don't produce an index for related posts
 lsi: false

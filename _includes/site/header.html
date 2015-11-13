@@ -4,5 +4,15 @@
         <li>
             <a href="/">Home</a>
         </li>
+        <li>
+            <a href="/docs/latest/">Documentation</a>
+            <ul>
+                {% for version in site.data.versions %}
+                    <li>
+                        <a href="/docs/{{ version }}/">{{ version }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
 </nav>

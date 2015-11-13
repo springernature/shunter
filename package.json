@@ -1,0 +1,22 @@
+{
+	"name": "shunter-website",
+	"version": "0.0.0",
+	"description": "The website for Shunter",
+	"private": true,
+
+	"author": "Nature Publishing Group",
+	"contributors": [
+		"Rowan Manning (http://rowanmanning.com/)"
+	],
+
+	"engines": {
+		"node": ">=4.2"
+	},
+	"dependencies": {
+		"async": "~1.4",
+		"cheerio": "~0.19",
+        "commander": "~2.8",
+        "glob": "~5.0",
+        "marked": "~0.3"
+	}
+}
