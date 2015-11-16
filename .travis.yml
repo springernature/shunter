@@ -4,8 +4,8 @@ language: node_js
 matrix:
   include:
 
-    # Lint only in Node.js 0.10
-    - node_js: '0.10'
+    # Run lint only in Node.js 0.12
+    - node_js: '0.12'
       env: LINT=true
 
     # Run tests in Node.js 0.10
