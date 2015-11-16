@@ -184,7 +184,7 @@ Now refresh your page in-browser. Your page should be a lovely shade of blue!
 JavaScript
 ----------
 
-Add the following to `resources/css/main.js.ejs`:
+Add the following to `resources/js/main.js.ejs`:
 
 ```js
 document.body.style.backgroundColor = randomValue([
