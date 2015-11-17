@@ -10,6 +10,10 @@ exclude:
   - README.md
   - script
 
+# Jekyll extensions
+gems:
+  - jekyll-redirect-from
+
 # Don't produce an index for related posts
 lsi: false
 
