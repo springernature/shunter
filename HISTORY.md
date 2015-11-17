@@ -1,6 +1,11 @@
 
 # History
 
+## 3.0.2 (2015-11-17)
+
+  * Get travis to run jshint under node 0.12
+  * Fixed incorrect path in getting started guide - thanks [Jorge Epuñan](https://github.com/juanbrujo)
+
 ## 3.0.1 (2015-11-11)
 
   * Documentation updates
