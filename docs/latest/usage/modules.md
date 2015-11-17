@@ -3,6 +3,7 @@ title: Modules and Inheritance - Shunter Documentation
 layout: docs
 docpath: /usage/modules.html
 docversion: 3.0.1
+docbaseurl: /docs/latest
 ---
 
 Modules and Inheritance

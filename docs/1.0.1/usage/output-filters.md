@@ -3,6 +3,7 @@ title: Output Filters - Shunter Documentation
 layout: docs
 docpath: /usage/output-filters.html
 docversion: 1.0.1
+docbaseurl: /docs/1.0.1
 ---
 
 Output Filters

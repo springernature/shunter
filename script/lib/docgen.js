@@ -115,13 +115,17 @@ function processMarkdownFile (options, filePath, done) {
                 title = `${title} - Shunter Documentation`;
             }
 
-            let path = filePath.replace(basedir, '').replace(/\.md$/, '.html');
+            let path = filePath
+                .replace(basedir, '')
+                .replace(/\.md$/, '.html')
+                .replace('index.html', '');
 
             let frontMatter = `---
                 title: ${title}
                 layout: docs
                 docpath: ${path}
                 docversion: ${options.version}
+                docbaseurl: ${baseurl}
                 ---
             `.replace(/([\r\n]+)\s+/g, '$1');
             next(null, frontMatter + fileContents);

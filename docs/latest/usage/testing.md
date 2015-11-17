@@ -3,6 +3,7 @@ title: Testing - Shunter Documentation
 layout: docs
 docpath: /usage/testing.html
 docversion: 3.0.1
+docbaseurl: /docs/latest
 ---
 
 Testing

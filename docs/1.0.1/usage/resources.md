@@ -3,6 +3,7 @@ title: Resources - Shunter Documentation
 layout: docs
 docpath: /usage/resources.html
 docversion: 1.0.1
+docbaseurl: /docs/1.0.1
 ---
 
 Resources

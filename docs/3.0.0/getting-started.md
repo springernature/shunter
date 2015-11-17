@@ -3,6 +3,7 @@ title: Getting Started with Shunter - Shunter Documentation
 layout: docs
 docpath: /getting-started.html
 docversion: 3.0.0
+docbaseurl: /docs/3.0.0
 ---
 
 Getting Started with Shunter

@@ -3,6 +3,7 @@ title: API - Shunter Documentation
 layout: docs
 docpath: /usage/api.html
 docversion: 3.0.1
+docbaseurl: /docs/latest
 ---
 
 API

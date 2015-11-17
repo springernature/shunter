@@ -3,6 +3,7 @@ title: Shunter Developer Guide - Shunter Documentation
 layout: docs
 docpath: /developer-guide.html
 docversion: 2.1.0
+docbaseurl: /docs/2.1.0
 ---
 
 Shunter Developer Guide

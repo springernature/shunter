@@ -3,6 +3,7 @@ title: Templates - Shunter Documentation
 layout: docs
 docpath: /usage/templates.html
 docversion: 1.0.1
+docbaseurl: /docs/1.0.1
 ---
 
 Templates

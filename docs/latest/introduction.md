@@ -3,6 +3,7 @@ title: Introduction to Shunter - Shunter Documentation
 layout: docs
 docpath: /introduction.html
 docversion: 3.0.1
+docbaseurl: /docs/latest
 ---
 
 Introduction to Shunter

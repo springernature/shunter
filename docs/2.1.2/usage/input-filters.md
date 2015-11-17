@@ -3,6 +3,7 @@ title: Input Filters - Shunter Documentation
 layout: docs
 docpath: /usage/input-filters.html
 docversion: 2.1.2
+docbaseurl: /docs/2.1.2
 ---
 
 Input Filters

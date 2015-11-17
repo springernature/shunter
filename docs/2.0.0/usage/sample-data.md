@@ -3,6 +3,7 @@ title: Sample Data - Shunter Documentation
 layout: docs
 docpath: /usage/sample-data.html
 docversion: 2.0.0
+docbaseurl: /docs/2.0.0
 ---
 
 Sample Data

@@ -1,8 +1,9 @@
 ---
 title: Shunter Documentation
 layout: docs
-docpath: /index.html
+docpath: /
 docversion: 3.0.0
+docbaseurl: /docs/3.0.0
 ---
 
 # Shunter Documentation

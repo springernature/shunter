@@ -19,4 +19,19 @@ layout: default
 
 <hr/>
 
+<p>Documentation navigation</p>
+
+<ul>
+    {% assign docs = site.pages | sort: 'docpath' %}
+    {% for doc in docs %}
+        {% if doc.docbaseurl == page.docbaseurl %}
+            <li>
+                <a href="{{ doc.docbaseurl }}{{ doc.docpath }}">{{ doc.title | replace: ' - Shunter Documentation', '' }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<hr/>
+
 {{ content }}
