@@ -5,7 +5,7 @@ docpath: /index.html
 docversion: 2.1.2
 ---
 
-# ![Shunter](/docs/2.1.2/shunter-logo.png)
+# Shunter Documentation
 
 Welcome to the Shunter documentation. Shunter is a Node.js application built to read JSON and translate it into HTML.
 

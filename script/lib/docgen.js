@@ -75,6 +75,11 @@ function processMarkdownFile (options, filePath, done) {
             next(null, fileContents);
         },
 
+        // Replace logo-only headings with text
+        (fileContents, next) => {
+            next(null, fileContents.replace(/\#\s*\!\[shunter\]\(shunter-logo\.png\)/gi, '# Shunter Documentation'));
+        },
+
         // Resolve links in the Markdown
         (fileContents, next) => {
             next(null, fileContents.replace(/\]\(([^\)]+)\)/gi, (match, link) => {
@@ -101,7 +106,14 @@ function processMarkdownFile (options, filePath, done) {
             let html = marked(fileContents);
             let $ = cheerio.load(html);
             let title = $('h1,h2,h3,h4,h5,h6').first().text().trim();
-            title = (title ? title + ' - ' : '') + 'Shunter Documentation';
+
+            // These two conditionals cater for the title actually being "Shunter Documentation"
+            if (!title) {
+                title = 'Shunter Documentation';
+            }
+            if (title && title !== 'Shunter Documentation') {
+                title = `${title} - Shunter Documentation`;
+            }
 
             let path = filePath.replace(basedir, '').replace(/\.md$/, '.html');
 
