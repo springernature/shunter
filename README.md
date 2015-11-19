@@ -1,8 +1,6 @@
 
 # ![Shunter](docs/shunter-logo.png)
 
-Shunter is a [Node.js][node] application built to read JSON and translate it into HTML.
-
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
@@ -10,9 +8,18 @@ Shunter is a [Node.js][node] application built to read JSON and translate it int
 [![Dependencies][shield-dependencies]][info-dependencies]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
-![Shunter as a proxy](docs/diagram.png)
+Shunter is a [Node.js][node] application built to read JSON and translate it into HTML.
 
-Shunter works by proxying user requests through to a back-end which responds with JSON; then it uses the JSON as a render context, generating output by passing it into your templates.
+It helps you create a decoupled front end which can serve traffic from one or more backend applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
+
+# Key Features
+- Enforces decoupling of templates from underlying applications
+- Enables multiple applications to use the same unified front end
+- Makes full site redesigns or swapping out back end applications a doddle
+- Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
+- Asset concatenation, minification, cache-busting, and other performance optimisations built-in
+- Outputs any type of content you like, e.g. HTML, RSS, RDF
+- Well-tested and supported, serving high-traffic sites across nature.com
 
 - [**Read the Documentation**](docs/index.md)
 - [Introduction](docs/introduction.md)
