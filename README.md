@@ -21,6 +21,7 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 - Outputs any type of content you like, e.g. HTML, RSS, RDF
 - Well-tested and supported, serving high-traffic sites across nature.com
 
+
 - [**Read the Documentation**](docs/index.md)
 - [Introduction](docs/introduction.md)
 - [Getting Started](docs/getting-started.md)

@@ -26,10 +26,12 @@ We'll start by creating a `package.json` file in a new directory. We're just inc
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "shunter": "^1"
+    "shunter": "*"
   }
 }
 ```
+
+(Please note: you should set a specific version of Shunter when preparing a real-world application.)
 
 Now we can run `npm install` to install dependencies. Once the dependencies have installed, we'll start to flesh out our application.
 
