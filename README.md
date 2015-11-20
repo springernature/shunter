@@ -22,12 +22,13 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 - Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
 
-- [**Read the Documentation**](docs/index.md)
-- [Introduction](docs/introduction.md)
-- [Getting Started](docs/getting-started.md)
-- [API Documentation](docs/usage/index.md)
-- [Developer Guide](docs/developer-guide.md)
-- [Migration Guide](docs/migration/index.md)
+Want to learn more?  For new users, we recommend reading the [Shunter Introduction](introduction.md) followed by the [Getting Started Guide](getting-started.md).
+
+You can also refer to the [API Documentation](usage/index.md) for a full breakdown about how to work with Shunter.
+
+If you're interested in contributing to Shunter, we also maintain a [developer guide](developer-guide.md).
+
+For details on how to migrate between major versions of Shunter please refer to the [migration guide](migration/index.md).
 
 
 Requirements
