@@ -21,16 +21,6 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 - Outputs any type of content you like, e.g. HTML, RSS, RDF
 - Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
-
-Want to learn more?  For new users, we recommend reading the [Shunter Introduction](introduction.md) followed by the [Getting Started Guide](getting-started.md).
-
-You can also refer to the [API Documentation](usage/index.md) for a full breakdown about how to work with Shunter.
-
-If you're interested in contributing to Shunter, we also maintain a [developer guide](developer-guide.md).
-
-For details on how to migrate between major versions of Shunter please refer to the [migration guide](migration/index.md).
-
-
 Requirements
 ------------
 
@@ -45,7 +35,9 @@ On Windows things are a bit more complicated due to the Shunter install process 
 Getting Started
 ---------------
 
-If you're new to Shunter, we recommend our [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+If you're new to Shunter, we recommend starting with our [Introduction](docs/introduction.md) then diving into the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+
+You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
 
 Migration Guide
