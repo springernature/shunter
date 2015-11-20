@@ -15,7 +15,7 @@ View templates in Shunter are written in [Dust](http://www.dustjs.com/) and live
 Specifying a Template
 ---------------------
 
-When JSON is received from the back-end, Shunter will look for a `layout.template` property and attempt to render the matching Dust file. So with the following JSON:
+When JSON is received from the back end, Shunter will look for a `layout.template` property and attempt to render the matching Dust file. So with the following JSON:
 
 ```json
 {
@@ -25,7 +25,7 @@ When JSON is received from the back-end, Shunter will look for a `layout.templat
 }
 ```
 
-Shunter will attempt to render the file `view/foo.dust`. This allows your back-end application to decide which template to render for a given page.
+Shunter will attempt to render the file `view/foo.dust`. This allows your back end application to decide which template to render for a given page.
 
 Templates cannot contain "/" characters in Shunter, instead if you need to reference a template in a subdirectory you should use double underscores. So with the following JSON:
 
@@ -47,7 +47,7 @@ Dust has all of the features you'd expect from a good templating language. We'll
 
 ### References
 
-You can output properties from the back-end JSON simply by surrounding the property name in curly braces. So with the following JSON and Dust template:
+You can output properties from the back end JSON simply by surrounding the property name in curly braces. So with the following JSON and Dust template:
 
 ```json
 {
@@ -147,7 +147,7 @@ When `view/foo.dust` is rendered, it will produce the following output:
 <p>Hello World!</p>
 ```
 
-Partials can also be referenced by using JSON properties. This is very powerful if you'd like your backend to have more control over the presentation. So with the following JSON and Dust template:
+Partials can also be referenced by using JSON properties. This is very powerful if you'd like your back end to have more control over the presentation. So with the following JSON and Dust template:
 
 ```json
 {

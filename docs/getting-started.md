@@ -26,10 +26,12 @@ We'll start by creating a `package.json` file in a new directory. We're just inc
   "version": "1.0.0",
   "main": "app.js",
   "dependencies": {
-    "shunter": "^1"
+    "shunter": "*"
   }
 }
 ```
+
+(Please note: you should set a specific version of Shunter when preparing a real-world application.)
 
 Now we can run `npm install` to install dependencies. Once the dependencies have installed, we'll start to flesh out our application.
 
@@ -66,7 +68,7 @@ var app = shunter({
     },
 
     // Configure the proxy route, this should point to
-    // where you backend application runs
+    // where you back end application runs
     routes: {
         localhost: {
             default: {
@@ -88,15 +90,15 @@ When we run this file using `node app.js`, you should see a bunch of logs ending
 All child processes listening
 ```
 
-If you open up [http://localhost:5400/](http://localhost:5400/) in your browser, you should see a blank page in your browser and get some error messages in your terminal window. That's because we haven't got a back-end running yet.
+If you open up [http://localhost:5400/](http://localhost:5400/) in your browser, you should see a blank page in your browser and get some error messages in your terminal window. That's because we haven't got a back end running yet.
 
 
 Sample Data
 -----------
 
-For the purposes of testing, Shunter comes bundled with a simple application for [serving static JSON files](usage/sample-data.md). This allows you to create a mock back-end application which your Shunter application can connect to.
+For the purposes of testing, Shunter comes bundled with a simple application for [serving static JSON files](usage/sample-data.md). This allows you to create a mock back end application which your Shunter application can connect to.
 
-In a new terminal window, run the following to start a sample back-end:
+In a new terminal window, run the following to start a sample back end:
 
 ```
 ./node_modules/.bin/shunter-serve

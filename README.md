@@ -3,6 +3,8 @@
 
 Shunter is a [Node.js][node] application built to read JSON and translate it into HTML.
 
+It helps you create a decoupled front end which can serve traffic from one or more back end applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
+
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
@@ -10,16 +12,22 @@ Shunter is a [Node.js][node] application built to read JSON and translate it int
 [![Dependencies][shield-dependencies]][info-dependencies]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
-![Shunter as a proxy](docs/diagram.png)
+## Key Features
+- Enforces decoupling of templates from underlying applications
+- Enables multiple applications to use the same unified front end
+- Makes full site redesigns or swapping out back end applications a doddle
+- Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
+- Asset concatenation, minification, cache-busting, and other performance optimisations built-in
+- Outputs any type of content you like, e.g. HTML, RSS, RDF
+- Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
-Shunter works by proxying user requests through to a back-end which responds with JSON; then it uses the JSON as a render context, generating output by passing it into your templates.
 
-- [**Read the Documentation**](docs/index.md)
-- [Introduction](docs/introduction.md)
-- [Getting Started](docs/getting-started.md)
-- [API Documentation](docs/usage/index.md)
-- [Developer Guide](docs/developer-guide.md)
-- [Migration Guide](docs/migration/index.md)
+Getting Started
+---------------
+
+If you're new to Shunter, we recommend starting with our [Introduction](docs/introduction.md) then diving into the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+
+You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
 
 Requirements
@@ -31,12 +39,6 @@ On Windows things are a bit more complicated due to the Shunter install process 
 
 - [node-gyp Visual Studio 2010 Setup][node-gyp-vs]
 - [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
-
-
-Getting Started
----------------
-
-If you're new to Shunter, we recommend our [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
 
 
 Migration Guide

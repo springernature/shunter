@@ -28,7 +28,7 @@ The main files that comprise Shunter live in the `lib` folder. Shunter has been 
 - [`processor.js`](https://github.com/nature/shunter/blob/master/lib/processor.js) exports the middlewares Shunter uses for interacting with the request/response cycle.
 - [`query.js`](https://github.com/nature/shunter/blob/master/lib/query.js) exports a middleware which attaches a parsed query string object to the request.
 - [`renderer.js`](https://github.com/nature/shunter/blob/master/lib/renderer.js) handles compilation and rendering of Dust templates.
-- [`router.js`](https://github.com/nature/shunter/blob/master/lib/router.js) parses the route configuration and routes requests to the correct back-end application.
+- [`router.js`](https://github.com/nature/shunter/blob/master/lib/router.js) parses the route configuration and routes requests to the correct back end application.
 - [`server.js`](https://github.com/nature/shunter/blob/master/lib/server.js) manages the lifecycle of the worker processes Shunter uses to serve requests.
 - [`shunter.js`](https://github.com/nature/shunter/blob/master/lib/shunter.js) exports everything required for a Shunter application, and is the main entry-point.
 - [`statsd.js`](https://github.com/nature/shunter/blob/master/lib/statsd.js) wraps a StatsD instance which is used to record application metrics.
