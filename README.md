@@ -21,6 +21,15 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 - Outputs any type of content you like, e.g. HTML, RSS, RDF
 - Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
+
+Getting Started
+---------------
+
+If you're new to Shunter, we recommend starting with our [Introduction](docs/introduction.md) then diving into the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+
+You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
+
+
 Requirements
 ------------
 
@@ -30,14 +39,6 @@ On Windows things are a bit more complicated due to the Shunter install process 
 
 - [node-gyp Visual Studio 2010 Setup][node-gyp-vs]
 - [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
-
-
-Getting Started
----------------
-
-If you're new to Shunter, we recommend starting with our [Introduction](docs/introduction.md) then diving into the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
-
-You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
 
 Migration Guide
