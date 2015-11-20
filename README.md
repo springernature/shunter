@@ -3,7 +3,7 @@
 
 Shunter is a [Node.js][node] application built to read JSON and translate it into HTML.
 
-It helps you create a decoupled front end which can serve traffic from one or more backend applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
+It helps you create a decoupled front end which can serve traffic from one or more back end applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
 
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
