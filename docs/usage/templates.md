@@ -15,7 +15,7 @@ View templates in Shunter are written in [Dust](http://www.dustjs.com/) and live
 Specifying a Template
 ---------------------
 
-When JSON is received from the back end, Shunter will look for a `layout.template` property and attempt to render the matching Dust file. So with the following JSON:
+When JSON is received from the back end with `Content-Type: application/x-shunter+json`, Shunter will look for a `layout.template` property and attempt to render the matching Dust file. So with the following JSON:
 
 ```json
 {
@@ -38,6 +38,8 @@ Templates cannot contain "/" characters in Shunter, instead if you need to refer
 ```
 
 Shunter will attempt to render the file `view/foo/bar.dust`.
+
+If JSON is received without specifying `application/x-shunter+json` as the `Content-Type` then Shunter will simply pass it through unmodified as it would any other resource.
 
 
 Dust Basics
