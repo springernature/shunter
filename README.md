@@ -12,14 +12,14 @@ Shunter is a [Node.js][node] application built to read JSON and translate it int
 
 It helps you create a decoupled front end which can serve traffic from one or more backend applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
 
-# Key Features
+## Key Features
 - Enforces decoupling of templates from underlying applications
 - Enables multiple applications to use the same unified front end
 - Makes full site redesigns or swapping out back end applications a doddle
 - Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
 - Asset concatenation, minification, cache-busting, and other performance optimisations built-in
 - Outputs any type of content you like, e.g. HTML, RSS, RDF
-- Well-tested and supported, serving high-traffic sites across nature.com
+- Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
 
 - [**Read the Documentation**](docs/index.md)
