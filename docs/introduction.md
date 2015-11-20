@@ -2,20 +2,19 @@
 Introduction to Shunter
 =======================
 
-Shunter is a Node.js application built to read JSON and translate it into HTML.
+Looking to create a smart, flexible, and robustly decoupled front end?
+
+Need a hand defining integration points between your front and back end applications?
+
+Want to use the same unified front end across both your rails(/PHP/ASP/other) application, and your Wordpress-driven blog?
+
+Shunter is for you.
+
+Technically speaking Shunter runs your decoupled front end as a node.js server, acting as a reverse proxy in front of your back end application(s).  This can be deployed on the same or a different server from your other applications as you see fit (it's super lightweight).
 
 ![Shunter as a proxy](diagram.png)
 
-It works by proxying user requests through to a back-end which responds with JSON; then Shunter uses the JSON as a render context, generating output by passing it into your templates.
-
-
-Benefits
---------
-
-- Can allow different applications and platforms to use the same front end code
-- Technology agnostic: if your application outputs JSON, it can work with Shunter
-- Enforced decoupling of templates from backend applications, encouraging a clear separation of concerns
-
+When a request comes in from a user, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the special `Content-Type` `application/x-shunter+json` will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the user.
 
 ---
 
