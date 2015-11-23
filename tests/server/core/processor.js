@@ -27,6 +27,9 @@ describe('Request processor', function() {
 		mockery.registerMock('../timestamp', {
 			value: 1234567890
 		});
+		mockery.registerMock('../package.json', {
+			version: '5.8.2'
+		});
 		mockery.registerMock('./statsd', require('../mocks/statsd'));
 		mockery.registerMock('./dispatch', require('../mocks/dispatch'));
 		mockery.registerMock('./router', require('../mocks/router'));
@@ -62,6 +65,16 @@ describe('Request processor', function() {
 			req.url = '/foo?bar=baz';
 			processor.timestamp(req, {}, next);
 			assert.equal(req.url, '/foo?bar=baz&shunter=1234567890');
+			assert.isTrue(next.calledOnce);
+		});
+
+		it('Should add a header X-Shunter with the Shunter version being used', function() {
+			var processor = require(moduleName)(mockConfig, {});
+			var next = sinon.stub();
+
+			req.url = '/foo';
+			processor.shunterVersion(req, {}, next);
+			assert.equal(req.headers['X-Shunter'], '5.8.2');
 			assert.isTrue(next.calledOnce);
 		});
 	});
