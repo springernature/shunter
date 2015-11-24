@@ -72,7 +72,7 @@
 		"wd": "~0.3",
 		"winston": "~1.0",
 		"winston-syslog": "~1.1",
-		"yargs": "~3.26"
+		"yargs": "~3.30"
 	},
 	"devDependencies": {
 		"istanbul": "~0.3",
