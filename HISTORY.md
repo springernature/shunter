@@ -1,6 +1,10 @@
 
 # History
 
+## 3.1.0 (2015-11-24)
+
+  * Add custom X-Shunter header to proxied requests https://github.com/nature/shunter/issues/86
+
 ## 3.0.2 (2015-11-17)
 
   * Get travis to run jshint under node 0.12
