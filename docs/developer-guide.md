@@ -41,7 +41,7 @@ Issue Tracking
 
 We use [GitHub issues](https://github.com/nature/shunter/issues) to log bugs and feature requests. This is a great place to look if you're interested in working on Shunter.
 
-If you're going to pick up a piece of work, check the comments to make sure nobody else has started on it. If you're going to do it, say so in the issue comments. 
+If you're going to pick up a piece of work, check the comments to make sure nobody else has started on it. If you're going to do it, say so in the issue comments.
 
 We use labels extensively to categorise issues, so you should be able to find something that suits your mood. We also label [issues that might be a good starting-point](https://github.com/nature/shunter/labels/good-starter-issue) for new developers to the project.
 
@@ -92,6 +92,7 @@ To publish a new version of Shunter:
 - Switch to the `master` branch, version commits are the only commits that shouldn't be in a pull-request
 - Increment either the major, minor, or patch version in [`package.json`](https://github.com/nature/shunter/blob/master/package.json). If you're unsure which, have a chat about it or re-read the semver docs
 - Add an entry to [`HISTORY.md`](https://github.com/nature/shunter/blob/master/HISTORY.md) outlining the changes in the new version. Take your time, this log should be useful to developers building with Shunter
+- If you're bumping the major version, update both the [migration guide](migration/index.md) and the [support guide](support.md)
 - Commit your changes with a message like "Version 1.2.3" – this helps people find version commits in the log
 - Tag your newly created commit with the version number. E.g. `git tag 1.2.3`
 - Push both the commit and the new tags to origin: `git push && git push --tags`. It's really important to push tags as well!

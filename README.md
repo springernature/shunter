@@ -41,8 +41,10 @@ On Windows things are a bit more complicated due to the Shunter install process 
 - [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
 
 
-Migration Guide
----------------
+Support and Migration
+---------------------
+
+Shunter major versions are supported for 6 months after their last release. This means that patch-level changes will be added and bugs will be fixed. We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
 
 If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
 
