@@ -7,8 +7,8 @@ Shunter major versions are supported for 6 months after their last release, star
 | Major Version | Last Feature Release | Support End Date |
 | :------------ | :------------------- | :--------------- |
 | 3             | N/A                  | N/A              |
-| 2             | 2.2                  | 2015-09-29\*     |
-| 1             | 1.0                  | 2015-11-10\*     |
+| 2             | 2.2                  | 2015-11-10\*     |
+| 1             | 1.0                  | 2015-09-29\*     |
 
 
 \* Versions 1 and 2 of Shunter never had public releases, and so the support end date was immediate.
