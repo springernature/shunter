@@ -95,3 +95,4 @@ To publish a new version of Shunter:
 - Commit your changes with a message like "Version 1.2.3" – this helps people find version commits in the log
 - Tag your newly created commit with the version number. E.g. `git tag 1.2.3`
 - Push both the commit and the new tags to origin: `git push && git push --tags`. It's really important to push tags as well!
+- Publish to npm with `npm publish`. If you don't have permission yet, request it from one of the [existing collaborators](https://www.npmjs.com/package/shunter/access)
