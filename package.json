@@ -56,7 +56,7 @@
 		"gaze": "~0.5",
 		"glob": "~5.0",
 		"hasbin": "~1.1",
-		"http-proxy": "~1.11",
+		"http-proxy": "~1.12",
 		"jserve": "~1.2",
 		"mincer": "~1.3",
 		"mkdirp": "~0.5",
@@ -64,15 +64,15 @@
 		"postcss": "~4.1",
 		"promised-io": "~0.3",
 		"qs": "~3.1",
-		"request": "~2.64",
+		"request": "~2.67",
 		"saucelabs": "~0.1",
 		"serve-static": "~1.10",
-		"statsd-client": "0.2.0",
-		"uglify-js": "~2.4",
+		"statsd-client": "~0.2",
+		"uglify-js": "~2.6",
 		"wd": "~0.3",
 		"winston": "~1.0",
 		"winston-syslog": "~1.1",
-		"yargs": "~3.26"
+		"yargs": "~3.30"
 	},
 	"devDependencies": {
 		"istanbul": "~0.3",
