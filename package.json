@@ -67,7 +67,7 @@
 		"request": "~2.64",
 		"saucelabs": "~0.1",
 		"serve-static": "~1.10",
-		"statsd-client": "0.2.0",
+		"statsd-client": "~0.2",
 		"uglify-js": "~2.6",
 		"wd": "~0.3",
 		"winston": "~1.0",
