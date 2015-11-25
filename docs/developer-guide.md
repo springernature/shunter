@@ -91,7 +91,7 @@ To publish a new version of Shunter:
 
 - Switch to the `master` branch, version commits are the only commits that shouldn't be in a pull-request
 - Increment either the major, minor, or patch version in [`package.json`](https://github.com/nature/shunter/blob/master/package.json). If you're unsure which, have a chat about it or re-read the semver docs
-- Add an entry to [`HISTORY.md`](https://github.com/nature/shunter/blob/master/HISTORY.md) outlining the changes in the new version. Take your time, this log should be useful to developers building with Shunter
+- Add an entry to [`HISTORY.md`](https://github.com/nature/shunter/blob/master/HISTORY.md) outlining the changes in the new version. Take your time, this log should be useful to developers building with Shunter. If there are additional commits on the master branch since the last version, be sure to include a description of what they do in your history update – talk to the developers who committed them
 - If you're bumping the major version, update both the [migration guide](migration/index.md) and the [support guide](support.md)
 - Commit your changes with a message like "Version 1.2.3" – this helps people find version commits in the log
 - Tag your newly created commit with the version number. E.g. `git tag 1.2.3`
