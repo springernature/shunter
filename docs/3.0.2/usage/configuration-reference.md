@@ -3,7 +3,7 @@ title: Configuration Reference - Shunter Documentation
 layout: docs
 docpath: /usage/configuration-reference.html
 docversion: 3.0.2
-docbaseurl: /docs/latest
+docbaseurl: /docs/3.0.2
 ---
 
 Configuration Reference

@@ -3,7 +3,7 @@ title: Introduction to Shunter - Shunter Documentation
 layout: docs
 docpath: /introduction.html
 docversion: 3.0.2
-docbaseurl: /docs/latest
+docbaseurl: /docs/3.0.2
 ---
 
 Introduction to Shunter
@@ -11,7 +11,7 @@ Introduction to Shunter
 
 Shunter is a Node.js application built to read JSON and translate it into HTML.
 
-![Shunter as a proxy](/docs/latest/diagram.png)
+![Shunter as a proxy](/docs/3.0.2/diagram.png)
 
 It works by proxying user requests through to a back-end which responds with JSON; then Shunter uses the JSON as a render context, generating output by passing it into your templates.
 

@@ -3,7 +3,7 @@ title: Migration Guide - Shunter Documentation
 layout: docs
 docpath: /migration/
 docversion: 3.0.2
-docbaseurl: /docs/latest
+docbaseurl: /docs/3.0.2
 ---
 
 Migration Guide

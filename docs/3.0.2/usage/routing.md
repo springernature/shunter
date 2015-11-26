@@ -3,7 +3,7 @@ title: Routing - Shunter Documentation
 layout: docs
 docpath: /usage/routing.html
 docversion: 3.0.2
-docbaseurl: /docs/latest
+docbaseurl: /docs/3.0.2
 ---
 
 Routing
