@@ -1,6 +1,16 @@
 
 # History
 
+## 3.1.1 (2015-11-27)
+
+  * Update dependencies
+    * http-proxy: `~1.11` to `~1.12`
+    * request: `~2.64` to `~2.67`
+    * uglify-js: `~2.4` to `~2.6`
+    * yargs: `~3.26` to `~3.30`
+  * Clarify the versioning documentation
+  * Codify our support plan for older versions of Shunter
+
 ## 3.1.0 (2015-11-24)
 
   * Add custom X-Shunter header to proxied requests https://github.com/nature/shunter/issues/86
