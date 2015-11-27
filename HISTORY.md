@@ -17,12 +17,12 @@
 
 ## 3.0.2 (2015-11-17)
 
-  * Get travis to run jshint under node 0.12
-  * Fixed incorrect path in getting started guide - thanks [Jorge Epuñan](https://github.com/juanbrujo)
+  * Run linters on CI under Node.js 0.12
+  * Fix incorrect path in the getting started guide - thanks [Jorge Epuñan](https://github.com/juanbrujo)
 
 ## 3.0.1 (2015-11-11)
 
-  * Documentation updates
+  * Update the documentation
 
 ## 3.0.0 (2015-11-10)
 
@@ -30,7 +30,7 @@
 
 ## 2.2.0 (2015-11-09)
 
-  * Add `trim` filter to trim leading and trailing whitespace from a dust reference
+  * Add a `trim` filter to trim leading and trailing whitespace from a Dust reference
 
 ## 2.1.4 (2015-11-09)
 
@@ -38,52 +38,60 @@
 
 ## 2.1.3 (2015-10-29)
 
-  * Fixed JSHint errors in creation of worker processes
+  * Fix JSHint errors in creation of worker processes
 
 ## 2.1.2 (2015-10-14)
 
-  * Fixed bug that was causing async dust helpers to fail
+  * Fix a bug that was causing async Dust helpers to fail
 
 ## 2.1.1 (2015-10-09)
 
-  * Fixed loading mincer extensions
+  * Fix loading of Mincer extensions
 
 ## 2.1.0 (2015-10-07)
 
-  * Add support for apps to load mincer extensions
-  * Added documentation for the good-starter-issue label
+  * Add support for apps to load Mincer extensions
+  * Add documentation for the [`good-starter-issue` label](https://github.com/nature/shunter/labels/good-starter-issue)
 
 ## 2.0.0 (2015-09-29)
 
   * Add support for Node.js 4.x
-  * Add the ability to view raw JSON with a query param
+  * Add the ability to view raw JSON with a query parameter
   * Change the ordering or EJS helper parameters
   * Replace jsdom with Cheerio
   * Remove the PhantomJS install from the dependencies
   * Remove Base64-encoding of images in the CSS
   * Remove automatic `rem` conversion in the CSS
   * Update dependencies
+    * body-parser: `~1.13` to `~1.14`
+    * cookie-parser: `~1.3` to `~1.4`
+    * jserve: `~1.1` to `~1.2`
+    * request: `~2.62` to `~2.64`
+    * yargs: `~3.25` to `~3.26`
 
 ## 1.0.1 (2015-09-23)
 
-  * Updating the docs
+  * Update the documentation
 
 ## 1.0.0 (2015-09-22)
 
   * Document modules
-  * Sprauncy logo
+  * Add a sprauncy logo
   * Initial public release
 
 ## 0.3.0 (2015-09-21)
 
-  * Changed statsd client to fix an incompatibility with some versions of node 0.12
+  * Changed StatsD client to fix an incompatibility with some versions of Node.js 0.12
 
 ## 0.2.1 (2015-09-18)
 
-  * Replace `dust.helpers.tap` with `context.resolve` https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#tap
+  * Replace `dust.helpers.tap` with `context.resolve` (see https://github.com/linkedin/dustjs-helpers/wiki/Deprecated-Features#tap)
   * Document Dust helpers, testing, input filters, and output filters
   * License under LGPL 3.0
   * Update dependencies
+    * mocha-phantomjs: `~3.5` to `~3.6`
+    * request: `~2.61` to `~2.62`
+    * yargs: `~3.15` to `~3.25`
 
 ## 0.2.0 (2015-09-08)
 
