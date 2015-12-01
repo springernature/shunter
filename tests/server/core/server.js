@@ -18,6 +18,7 @@ describe('Clustering', function() {
 				root: '/'
 			},
 			log: require('../mocks/log'),
+			middleware: [],
 			argv: {
 				'max-child-processes': 5
 			}
@@ -260,6 +261,25 @@ describe('Clustering', function() {
 			server.start();
 			assert.isTrue(worker.calledOnce);
 			assert.equal(worker.args[0][0].path.root, '/');
+		});
+	});
+
+	describe('Middleware', function() {
+		it('Should expose a `use` method', function() {
+			assert.isFunction(server.use);
+		});
+
+		it('Should add the arguments passed into `use` to the middleware config', function() {
+			var fn1 = function() {};
+			var fn2 = function() {};
+			server.use('foo', fn1);
+			server.use(fn2);
+			assert.lengthEquals(config.middleware, 2);
+			assert.isArray(config.middleware[0]);
+			assert.strictEqual(config.middleware[0][0], 'foo');
+			assert.strictEqual(config.middleware[0][1], fn1);
+			assert.isArray(config.middleware[1]);
+			assert.strictEqual(config.middleware[1][0], fn2);
 		});
 	});
 });

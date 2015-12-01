@@ -39,6 +39,10 @@ describe('Worker process running in production', function() {
 				port: PORT
 			},
 			log: require('../mocks/log'),
+			middleware: [
+				['foo', function() {}],
+				[function() {}]
+			],
 			env: {
 				name: 'production',
 				isProduction: isProduction,
@@ -129,6 +133,11 @@ describe('Worker process running in production', function() {
 
 	it('Should add a middleware to hook up the http proxy', function() {
 		assert.isTrue(connect().use.calledWith(processor().proxy));
+	});
+
+	it('Should mount all additional middleware found in the config', function() {
+		assert.isTrue(connect().use.calledWithExactly(config.middleware[0][0], config.middleware[0][1]));
+		assert.isTrue(connect().use.calledWithExactly(config.middleware[1][0]));
 	});
 
 	it('Should set up a ping end point', function() {
@@ -228,6 +237,7 @@ describe('Worker process running outside of production', function() {
 				'max-post-size': MAX_POST_SIZE,
 				port: PORT
 			},
+			middleware: [],
 			env: {
 				name: 'development',
 				isProduction: isProduction,
