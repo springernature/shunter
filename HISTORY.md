@@ -1,6 +1,11 @@
 
 # History
 
+## 3.2.0 (2015-12-01)
+
+  * Add the ability to mount additional middleware before proxying
+  * Standardise the history file
+
 ## 3.1.1 (2015-11-27)
 
   * Update dependencies
