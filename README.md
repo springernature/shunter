@@ -19,7 +19,7 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 - Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
 - Asset concatenation, minification, cache-busting, and other performance optimisations built-in
 - Outputs any type of content you like, e.g. HTML, RSS, RDF
-- Well-tested and supported, serving [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
+- Well-tested and supported, serving [Scientific American](http://www.scientificamerican.com) as well as [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
 
 Getting Started
