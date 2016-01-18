@@ -11,9 +11,7 @@
 		"describe": true,
 		"it": true
 	},
-	"globalstrict": true,
 	"jquery": true,
-	"latedef": "nofunc",
 	"maxcomplexity": 6,
 	"maxdepth": 3,
 	"maxparams": 6,
@@ -25,6 +23,7 @@
 	"quotmark": "single",
 	"regexp": true,
 	"shadow": true,
+	"strict": true,
 	"sub": true,
 	"trailing": true,
 	"undef": true,
