@@ -152,7 +152,7 @@ var generate = function(callback) {
 			var data = null;
 			try {
 				data = manifest.compile(files.map(function(file) {
-					return file.replace(/\.(ejs|scss)$/, '');
+					return file.replace(/\.(ejs)$/, '').replace(/\.(scss)$/, '');
 				}));
 			} catch (e) {
 				callback(e, null);
