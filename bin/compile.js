@@ -69,7 +69,7 @@ var compile = function(data, callback) {
 		return null;
 	};
 
-	var stylesheets = findAssets('css|scss').map(function(name) {
+	var stylesheets = findAssets('css|scss|sass').map(function(name) {
 		var asset = environment.findAsset(name);
 		var content = asset ? asset.toString() : null;
 
@@ -152,7 +152,7 @@ var generate = function(callback) {
 			var data = null;
 			try {
 				data = manifest.compile(files.map(function(file) {
-					return file.replace(/\.(ejs)$/, '').replace(/\.(scss)$/, '');
+					return file.replace(/\.(ejs)$/, '').replace(/\.(scss|sass)$/, '');
 				}));
 			} catch (e) {
 				callback(e, null);

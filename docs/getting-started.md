@@ -182,6 +182,8 @@ Notice the `assetPath` helper we used? This is required for Shunter to load the 
 
 Now refresh your page in-browser. Your page should be a lovely shade of blue!
 
+[Sass](http://sass-lang.com/) is also supported, just make sure your application has the `node-sass` module available and your stylesheets use the extension `.css.scss`. 
+
 
 JavaScript
 ----------
