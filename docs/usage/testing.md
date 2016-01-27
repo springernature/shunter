@@ -66,7 +66,7 @@ Testing Client-Side JavaScript
 
 Shunter provides a command-line script that will:
 
-* build up a test runner page for Mocha-PhantomJS that loads in your JavaScript under test with Mincer, and adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), and sets up the mocha libraries for client-side testing.
+* build a test runner page for Mocha-PhantomJS that loads the JavaScript you need to test with Mincer, adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), then sets up the mocha libraries for client-side testing.
 * run your tests with console output detailing whether they passed or failed.
 * exit to the command line with an exit code of 0 for success and a positive integer for failure so that you can run on CI
 
