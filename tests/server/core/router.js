@@ -140,6 +140,17 @@ describe('Proxy routing', function() {
 		assert.equal(route.port, 9000);
 	});
 
+	it('Should set the default route and changeOrigin state if specified in the config options', function() {
+		config.argv = {
+			routeoveride: '127.0.0.1:9000',
+			originoveride: true
+		};
+		var route = require(moduleName)(config).map('localhost', '/');
+		assert.equal(route.host, '127.0.0.1');
+		assert.equal(route.port, 9000);
+		assert.equal(route.changeOrigin, true);
+	});
+
 	it('Should not match a named route against the url', function() {
 		var route = require(moduleName)(config).map('localhost', '/capybara');
 		assert.equal(route.host, '127.0.0.1');
