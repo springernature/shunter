@@ -1,6 +1,10 @@
 
 # History
 
+## 3.3.1 (2016-02-03)
+
+  * re-release due to rogue files in npm publish
+
 ## 3.3.0 (2016-02-03)
 
   * add `--originoveride` option
