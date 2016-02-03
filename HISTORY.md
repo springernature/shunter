@@ -1,6 +1,14 @@
 
 # History
 
+## 3.3.0 (2016-02-03)
+
+  * add `--originoveride` option
+  * Simplify language on 'testing' page
+  * Fix jshint linting errors
+  * Better document the --sourcedirectory flag
+  * Add sciam to the list of shunter sites
+
 ## 3.2.0 (2015-12-01)
 
   * Add the ability to mount additional middleware before proxying
