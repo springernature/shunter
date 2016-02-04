@@ -67,7 +67,7 @@ describe('Worker process running in production', function() {
 		mockery.registerMock('body-parser', {json: sinon.stub().returns('JSON')});
 		mockery.registerMock('cookie-parser', sinon.stub().returns('COOKIE'));
 		mockery.registerMock('serve-static', sinon.stub());
-		mockery.registerMock('./query', sinon.stub().returns('QUERY'));
+		mockery.registerMock('qs-middleware', sinon.stub().returns('QUERY'));
 		mockery.registerMock('./renderer', renderer);
 		mockery.registerMock('./processor', processor);
 		mockery.registerMock('./benchmark', benchmark);
@@ -161,8 +161,8 @@ describe('Worker process running in production', function() {
 	});
 
 	it('Should parse query parameters', function() {
-		assert.isTrue(require('./query').calledOnce);
-		assert.strictEqual(require('./query').firstCall.args[0].allowDots, false);
+		assert.isTrue(require('qs-middleware').calledOnce);
+		assert.strictEqual(require('qs-middleware').firstCall.args[0].allowDots, false);
 		assert.isTrue(connect().use.calledWith('QUERY'));
 	});
 

@@ -64,6 +64,7 @@
 		"postcss": "~4.1",
 		"promised-io": "~0.3",
 		"qs": "~3.1",
+		"qs-middleware": "~1.0",
 		"request": "~2.67",
 		"saucelabs": "~0.1",
 		"serve-static": "~1.10",
