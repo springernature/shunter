@@ -3,7 +3,7 @@
 
 var jserve = require('jserve');
 var path = require('path');
-var query = require('../lib/query');
+var query = require('qs-middleware');
 var request = require('request');
 var yargs = require('yargs');
 
