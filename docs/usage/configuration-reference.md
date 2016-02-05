@@ -88,7 +88,7 @@ structure: {
 
 - `structure.scripts` defines the directory used to hold JavaScript files.
 
-- `structure.fonts` defines the directory directory used to hold web fonts.
+- `structure.fonts` defines the directory used to hold web fonts.
 
 - `structure.tests` defines the directory used to hold the files that define your JavaScript and template tests.
 
@@ -215,7 +215,7 @@ Shunter allows you to make use of a module format that lets you to do things lik
 Command Line Options
 --------------------
 
-Serveral aspects of Shunter behaviour can be configured via command line arguments when you start your application.
+Several aspects of Shunter behaviour can be configured via command line arguments when you start your application.
 
  * `-p`, `--port` Sets the port number Shunter will listen on, defaults to 5400.
  * `-m`, `--max-post-size` Sets the maximum size in bytes for the Shunter API, defaults to 204800.
