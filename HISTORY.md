@@ -1,13 +1,17 @@
 
 # History
 
+## 3.3.2 (2016-02-05)
+
+  * Refactor the query module into a new library
+
 ## 3.3.1 (2016-02-03)
 
-  * re-release due to rogue files in npm publish
+  * Re-release due to rogue files in npm publish
 
 ## 3.3.0 (2016-02-03)
 
-  * add `--originoveride` option
+  * Add `--originoveride` option
   * Simplify language on 'testing' page
   * Fix jshint linting errors
   * Better document the --sourcedirectory flag
