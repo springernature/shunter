@@ -1,6 +1,12 @@
 
 # History
 
+## 3.3.3 (2016-02-09)
+
+  * Update repository references to springernature
+  * Update the license
+  * Fix some typos in the documentation
+
 ## 3.3.2 (2016-02-05)
 
   * Refactor the query module into a new library

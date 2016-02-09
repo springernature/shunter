@@ -1,6 +1,6 @@
 {
 	"name": "shunter",
-	"version": "3.3.2",
+	"version": "3.3.3",
 	"license": "LGPL-3.0",
 
 	"description": "A Node.js application built to read JSON and translate it into HTML",
@@ -18,12 +18,15 @@
 		"Dawn Budge (http://www.dawnbudge.co.uk/)",
 		"Ettore Berardi (http://www.ettomatic.com)",
 		"Glynn Phillips (http://www.glynnphillips.co.uk/)",
+		"Hollie Kay (http://www.hollsk.co.uk/)",
 		"Jack Watkins (https://github.com/sky-jack)",
 		"John Ollier (https://github.com/johnollier)",
+		"Jorge Epuñan (http://www.csslab.cl/)",
 		"José Bolos (https://github.com/joseluisbolos)",
 		"Jude Robinson (https://github.com/dotcode)",
 		"Perry Harlock (http://www.phwebs.co.uk/)",
 		"Phil Booth (https://github.com/philbooth)",
+		"Prayag Verma (http://www.prayagverma.com/)",
 		"Rowan Manning (http://rowanmanning.com/)",
 		"Squil (https://github.com/squil)",
 		"Thomas Franquelin (https://github.com/ostapneko)",
