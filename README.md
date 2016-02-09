@@ -8,7 +8,6 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
-[![Code coverage][shield-coverage]][info-coverage]
 [![Dependencies][shield-dependencies]][info-dependencies]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 

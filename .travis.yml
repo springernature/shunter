@@ -45,10 +45,10 @@ before_install:
   # Use GCC 4.8 if it's available
   - 'if [ ! `which gcc-4.8` == "" ]; then export CXX=g++-4.8 && export CC=gcc-4.8; fi'
   # Install coveralls
-  - npm install coveralls
+  #- npm install coveralls
 
 # Build script
 script:
   - 'if [ $LINT ]; then make lint; fi'
   - 'if [ ! $LINT ]; then make lcov-levels; fi'
-  - 'if [ ! $LINT ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls; fi'
+  #- 'if [ ! $LINT ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls; fi'
