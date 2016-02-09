@@ -32,10 +32,10 @@
 
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/nature/shunter.git"
+		"url": "https://github.com/springernature/shunter.git"
 	},
-	"homepage": "https://github.com/nature/shunter",
-	"bugs": "https://github.com/nature/shunter/issues",
+	"homepage": "https://github.com/springernature/shunter",
+	"bugs": "https://github.com/springernature/shunter/issues",
 
 	"engines": {
 		"node": ">=0.10 <=5"

@@ -34,7 +34,7 @@
 
 ## 3.1.0 (2015-11-24)
 
-  * Add custom X-Shunter header to proxied requests https://github.com/nature/shunter/issues/86
+  * Add custom X-Shunter header to proxied requests https://github.com/springernature/shunter/issues/86
 
 ## 3.0.2 (2015-11-17)
 
@@ -72,7 +72,7 @@
 ## 2.1.0 (2015-10-07)
 
   * Add support for apps to load Mincer extensions
-  * Add documentation for the [`good-starter-issue` label](https://github.com/nature/shunter/labels/good-starter-issue)
+  * Add documentation for the [`good-starter-issue` label](https://github.com/springernature/shunter/labels/good-starter-issue)
 
 ## 2.0.0 (2015-09-29)
 
