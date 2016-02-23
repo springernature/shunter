@@ -1,6 +1,10 @@
 
 # History
 
+## 3.4.0 (2016-02-23)
+
+  * Don't explicitly proxy to port 80 if no port is specified in the route
+
 ## 3.3.3 (2016-02-09)
 
   * Update repository references to springernature
