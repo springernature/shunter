@@ -426,13 +426,30 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].target, 'http://www.nature.com:1337');
 		});
 
-		it('Should default to port 80', function() {
+		it('Should default to no port', function() {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
 
 			require('./router')().map.returns({
 				host: 'www.nature.com'
+			});
+			require('http-proxy').createProxyServer().web = stub;
+
+			processor.proxy(req, res);
+
+			assert.isTrue(stub.calledWith(req, res));
+			assert.strictEqual(stub.firstCall.args[2].target, 'http://www.nature.com');
+		});
+
+		it('Should pass a port if one is specified', function() {
+			var req = {};
+			var res = {};
+			var stub = sinon.stub();
+
+			require('./router')().map.returns({
+				host: 'www.nature.com',
+				port: '80'
 			});
 			require('http-proxy').createProxyServer().web = stub;
 
