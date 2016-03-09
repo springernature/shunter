@@ -90,9 +90,9 @@ By default if none of the regex patterns are matched Shunter will use the route 
 
 And ran your Shunter app with `--route-config=custom` requests would be routed to port 1337 instead of 5000.
 
-Routing can be overridden entirely by setting the `routeoveride` option. Running your Shunter app with `--routeoveride=www.example.com:1337` would route all requests to that destination.
+Routing can be overridden entirely by setting the `route-override` option. Running your Shunter app with `--route-override=www.example.com:1337` would route all requests to that destination.
 
-You can use the `--originoveride` (`-g`) option in conjunction with the `routeoveride` option to set `changeOrigin: true` for the overiding route. See [Change Origin](#change-origin) for more details.
+You can use the `--origin-override` (`-g`) option in conjunction with the `route-override` option to set `changeOrigin: true` for the overriding route. See [Change Origin](#change-origin) for more details.
 
 
 Change Origin
