@@ -222,9 +222,9 @@ Several aspects of Shunter behaviour can be configured via command line argument
  * `-c`, `--max-child-processes` When Shunter runs it spawns child worker processes to handle requests, this option sets the maximum number of child processes it will create. It defaults to 10, but will never exceed the number of CPU cores you have available.
  * `-r`, `--route-config` Sets the name of the default route, see [Routing](routing.md#route-config-options) for more details. Defaults to default.
  * `-s`, `--syslog` Turns on logging to syslog. Boolean.
- * `-d`, `--sourcedirectory` Sets the root directory for your app, paths will be resolved from here. This setting is useful if you don't want to start your Shunter app from it's own directory. Defaults to the current working directory.
- * `-o`, `--routeoveride` Sets the proxy destination for all requests see [Routing](routing.md#route-config-options) for more details.
- * `-g`, `--originoveride` Requires `--routeoveride`. Sets `changeOrigin: true` for the route set up via `--routeoveride`, see [Routing](routing.md#route-config-options) for more details.
+ * `-d`, `--source-directory` Sets the root directory for your app, paths will be resolved from here. This setting is useful if you don't want to start your Shunter app from it's own directory. Defaults to the current working directory.
+ * `-o`, `--route-override` Sets the proxy destination for all requests see [Routing](routing.md#route-config-options) for more details.
+ * `-g`, `--origin-override` Requires `--route-override`. Sets `changeOrigin: true` for the route set up via `--route-override`, see [Routing](routing.md#route-config-options) for more details.
  * `-v`, `--version` Prints the Shunter version number.
  * `-h`, `--help` Prints help about these options.
 

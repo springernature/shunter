@@ -27,7 +27,7 @@ For example if a module you were using were to have `resources/css/foo.css`, it 
 Writing CSS
 -----------
 
-By default CSS files should be placed in a directory named `css` within a resources directory in the root of your Shunter application. The location of the resources and CSS directory can be modified by overiding the defaults in the config object. 
+By default CSS files should be placed in a directory named `css` within a resources directory in the root of your Shunter application. The location of the resources and CSS directory can be modified by overriding the defaults in the config object.
 
 You might want to set up a `main.css.ejs` in `resources/css` to act as your manifest file. It will require your other internal stylesheets and set some defaults. If you are including modules with CSS files in them, you could refer to them here.
 
@@ -57,7 +57,7 @@ If you would like to recursively include an entire directory of CSS files you ma
 Writing Javascript
 ------------------
 
-You should set up `main.js.ejs` in `resources/js` within the root of your Shunter application JavaScript files should be placed here. The location of the resources and JavaScript directory can be modified by overiding the defaults in the config object.
+You should set up `main.js.ejs` in `resources/js` within the root of your Shunter application JavaScript files should be placed here. The location of the resources and JavaScript directory can be modified by overriding the defaults in the config object.
 
 Javascript files can be included in your layout template by using the Dust assetPath helper. This helper will determine the location of your file according to the type of file that it is and retrieve it from the location specified in your config files. By default this helper will look for JavaScript files in the `resources/js` directory so the following would create a path to `main.js` residing in the `resources/js` folder:
 
@@ -82,7 +82,7 @@ If you would like to recursively include an entire directory of JavaScript files
 Adding Images
 -------------
 
-Images can also be included using the assetPath helper. Image files should be placed in a directory named img within a `resources` directory in the root of your Shunter application. The location of the resources and img directory can be modified by overiding the defaults in the config object.
+Images can also be included using the assetPath helper. Image files should be placed in a directory named img within a `resources` directory in the root of your Shunter application. The location of the resources and img directory can be modified by overriding the defaults in the config object.
 
 ```css
 background-image: url(<%= asset_path('icons/png/icon-login-25x25-white.png') %>);

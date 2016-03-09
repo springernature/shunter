@@ -133,7 +133,7 @@ describe('Proxy routing', function() {
 
 	it('Should set the default route from that specified in the config options', function() {
 		config.argv = {
-			routeoveride: '127.0.0.1:9000'
+			'route-override': '127.0.0.1:9000'
 		};
 		var route = require(moduleName)(config).map('localhost', '/');
 		assert.equal(route.host, '127.0.0.1');
@@ -142,8 +142,8 @@ describe('Proxy routing', function() {
 
 	it('Should set the default route and changeOrigin state if specified in the config options', function() {
 		config.argv = {
-			routeoveride: '127.0.0.1:9000',
-			originoveride: true
+			'route-override': '127.0.0.1:9000',
+			'origin-override': true
 		};
 		var route = require(moduleName)(config).map('localhost', '/');
 		assert.equal(route.host, '127.0.0.1');
