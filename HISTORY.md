@@ -1,6 +1,14 @@
 
 # History
 
+## 3.5.0 (2016-03-10)
+
+  * The following command line options have been aliased, the original names are deprecated and will be removed in the next major version
+    * `--sourcedirectory` as `--source-directory`
+    * `--routeoveride` as `--route-override`
+    * `--originoveride` as `--origin-override`
+  * Exit on start up and display the `--help` message if an unknown option is provided
+
 ## 3.4.0 (2016-02-23)
 
   * Don't explicitly proxy to port 80 if no port is specified in the route
@@ -24,7 +32,7 @@
   * Add `--originoveride` option
   * Simplify language on 'testing' page
   * Fix jshint linting errors
-  * Better document the --sourcedirectory flag
+  * Better document the `--sourcedirectory` flag
   * Add sciam to the list of shunter sites
 
 ## 3.2.0 (2015-12-01)
