@@ -4,6 +4,7 @@ Routing
 
 - [Examples](#examples)
 - [Route Config Options](#route-config-options)
+- [Route Override](#route-override)
 - [Change Origin](#change-origin)
 
 When Shunter receives an incoming request it needs to know where the request should be proxied to. This is configured by setting a `routes` property when you create your shunter app, typically by requiring a config file:
@@ -90,9 +91,20 @@ By default if none of the regex patterns are matched Shunter will use the route 
 
 And ran your Shunter app with `--route-config=custom` requests would be routed to port 1337 instead of 5000.
 
-Routing can be overridden entirely by setting the `route-override` option. Running your Shunter app with `--route-override=www.example.com:1337` would route all requests to that destination.
+
+Route Override
+-------------
+
+Routing can be overridden entirely by setting the `route-override` option. Running your Shunter app with `--route-override=http://www.example.com:1337` would route all requests to that destination. You could also route to an IPv4: `--route-override=8.8.8.8:80`
+
+**n.b**: You MUST specify the protocol `http` or `https` when setting a hostname using `route-override`
 
 You can use the `--origin-override` (`-g`) option in conjunction with the `route-override` option to set `changeOrigin: true` for the overriding route. See [Change Origin](#change-origin) for more details.
+
+This would be useful when deploying your Shunter app to a platform that makes use of environment variables. For example you could start up a Shunter app with:
+```
+node app -p $PORT --route-override=$BACKEND_APP --origin-override
+```
 
 
 Change Origin

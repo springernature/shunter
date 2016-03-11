@@ -223,7 +223,7 @@ Several aspects of Shunter behaviour can be configured via command line argument
  * `-r`, `--route-config` Sets the name of the default route, see [Routing](routing.md#route-config-options) for more details. Defaults to default.
  * `-s`, `--syslog` Turns on logging to syslog. Boolean.
  * `-d`, `--source-directory` Sets the root directory for your app, paths will be resolved from here. This setting is useful if you don't want to start your Shunter app from it's own directory. Defaults to the current working directory.
- * `-o`, `--route-override` Sets the proxy destination for all requests see [Routing](routing.md#route-config-options) for more details.
+ * `-o`, `--route-override` Sets the proxy destination for all requests see [Routing](routing.md#route-override) for more details.
  * `-g`, `--origin-override` Requires `--route-override`. Sets `changeOrigin: true` for the route set up via `--route-override`, see [Routing](routing.md#route-config-options) for more details.
  * `-v`, `--version` Prints the Shunter version number.
  * `-h`, `--help` Prints help about these options.
