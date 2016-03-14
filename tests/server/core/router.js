@@ -131,13 +131,38 @@ describe('Proxy routing', function() {
 		assert.equal(route.port, 22789);
 	});
 
-	it('Should set the default route from that specified in the config options', function() {
-		config.argv = {
-			'route-override': '127.0.0.1:9000'
-		};
-		var route = require(moduleName)(config).map('localhost', '/');
-		assert.equal(route.host, '127.0.0.1');
-		assert.equal(route.port, 9000);
+	describe('Should set the default route from that specified in the config options', function() {
+
+		it('Should set a route with a protocol, hostname and port', function() {
+			config.argv = {
+				'route-override': 'https://foo.dev.bar-baz.com:80'
+			};
+			var route = require(moduleName)(config).map('localhost', '/');
+			assert.equal(route.protocol, 'https:');
+			assert.equal(route.host, 'foo.dev.bar-baz.com');
+			assert.equal(route.port, 80);
+		});
+
+		it('Should set a route with an IPv4 address and port, defaulting the protocol to http', function() {
+			config.argv = {
+				'route-override': '127.0.0.1:9000'
+			};
+			var route = require(moduleName)(config).map('localhost', '/');
+			assert.equal(route.protocol, 'http:');
+			assert.equal(route.host, '127.0.0.1');
+			assert.equal(route.port, 9000);
+		});
+
+		it('Should set a route with a hostname defaulting the protocol to http', function() {
+			config.argv = {
+				'route-override': 'localhost'
+			};
+			var route = require(moduleName)(config).map('localhost', '/');
+			assert.equal(route.protocol, 'http:');
+			assert.equal(route.host, 'localhost');
+			assert.equal(route.port, null);
+		});
+
 	});
 
 	it('Should set the default route and changeOrigin state if specified in the config options', function() {
