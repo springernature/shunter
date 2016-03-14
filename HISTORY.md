@@ -1,6 +1,13 @@
 
 # History
 
+## 3.6.0 (2016-03-14)
+
+  * More comprehensive route override mapping
+    * Fix bug where setting a hostname with a protocol would fallback to the default config
+    * Use url.parse() for more robust route mapping
+    * Surface the protocol for future use in shunter
+
 ## 3.5.0 (2016-03-10)
 
   * The following command line options have been aliased, the original names are deprecated and will be removed in the next major version
