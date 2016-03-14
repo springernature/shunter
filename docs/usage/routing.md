@@ -97,7 +97,21 @@ Route Override
 
 Routing can be overridden entirely by setting the `route-override` option. Running your Shunter app with `--route-override=http://www.example.com:1337` would route all requests to that destination. You could also route to an IPv4: `--route-override=8.8.8.8:80`
 
-**n.b**: You MUST specify the protocol `http` or `https` when setting a hostname using `route-override`
+**n.b**: If you do not specify a protocol (`http` or `https`) when setting a route via `route-override` then it will default to `http`. Please also note that `https` is currently unsupported by Shunter.
+```
+--route-override=$BACKEND_URL
+```
+| BACKEND_URL                   | Proxy Destination           |
+| :---------------------------- | :-------------------------- |
+| `http://www.example.com`      | `http://www.example.com`    |
+| `https://foo.example.com`     | `https://foo.example.com`   |
+| `www.example.com`             | `http://www.example.com`    |
+| `www.example.com:80`          | `http://www.example.com:80` |
+| `localhost`                   | `http://localhost`          |
+| `127.0.0.1:5000`              | `http://127.0.0.1:5000`     |
+| `8.8.8.8`                     | `http://8.8.8.8`            |
+| `https://8.8.8.8:80`          | `https://8.8.8.8:80`        |
+
 
 You can use the `--origin-override` (`-g`) option in conjunction with the `route-override` option to set `changeOrigin: true` for the overriding route. See [Change Origin](#change-origin) for more details.
 

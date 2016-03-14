@@ -133,58 +133,34 @@ describe('Proxy routing', function() {
 
 	describe('Should set the default route from that specified in the config options', function() {
 
-		it('Should set a route with a protocol, subdomain, hostname and port', function() {
+		it('Should set a route with a protocol, hostname and port', function() {
 			config.argv = {
-				'route-override': 'https://foo-www.somehost-name.bar.com:80'
+				'route-override': 'https://foo.dev.bar-baz.com:80'
 			};
 			var route = require(moduleName)(config).map('localhost', '/');
-			assert.equal(route.host, 'foo-www.somehost-name.bar.com');
+			assert.equal(route.protocol, 'https:');
+			assert.equal(route.host, 'foo.dev.bar-baz.com');
 			assert.equal(route.port, 80);
 		});
 
-		it('Should set a route with a protocol, hostname and no port', function() {
-			config.argv = {
-				'route-override': 'http://somehost-name.foo.com'
-			};
-			var route = require(moduleName)(config).map('localhost', '/');
-			assert.equal(route.host, 'somehost-name.foo.com');
-			assert.equal(route.port, null);
-		});
-
-		it('Should not set override if invalid route hostname', function() {
-			config.argv = {
-				'route-override': 'foobar'
-			};
-			var route = require(moduleName)(config).map('localhost', '/');
-			assert.equal(route.host, '127.0.0.1');
-			assert.equal(route.port, '5410');
-		});
-
-		it('Should set a route with an IPv4 address and port', function() {
+		it('Should set a route with an IPv4 address and port, defaulting the protocol to http', function() {
 			config.argv = {
 				'route-override': '127.0.0.1:9000'
 			};
 			var route = require(moduleName)(config).map('localhost', '/');
+			assert.equal(route.protocol, 'http:');
 			assert.equal(route.host, '127.0.0.1');
 			assert.equal(route.port, 9000);
 		});
 
-		it('Should set a route with an IPv4 address and no port', function() {
+		it('Should set a route with a hostname defaulting the protocol to http', function() {
 			config.argv = {
-				'route-override': '127.0.0.1'
+				'route-override': 'localhost'
 			};
 			var route = require(moduleName)(config).map('localhost', '/');
-			assert.equal(route.host, '127.0.0.1');
+			assert.equal(route.protocol, 'http:');
+			assert.equal(route.host, 'localhost');
 			assert.equal(route.port, null);
-		});
-
-		it('Should not set override if invalid route ip', function() {
-			config.argv = {
-				'route-override': '1234'
-			};
-			var route = require(moduleName)(config).map('localhost', '/');
-			assert.equal(route.host, '127.0.0.1');
-			assert.equal(route.port, '5410');
 		});
 
 	});
