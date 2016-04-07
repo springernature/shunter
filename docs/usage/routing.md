@@ -28,6 +28,9 @@ The config is used to match the incoming hostname and request url and match it t
 			"host": "blog.example.com",
 			"port": 80
 		},
+		"^\\/demo": {
+		    "host": "demo.example.com"
+		},
 		"/^\\/about/": {
 			"host": "about.example.com",
 			"port": 1337
@@ -61,6 +64,7 @@ The table shows how different requests would be mapped using this config:
 | Host Header            | Request Url           | Proxy Destination                              |
 | :--------------------- | :-------------------- | :--------------------------------------------- |
 | `www.example.com`      | `/blog/article123`    | `blog.example.com:80/blog/article123`          |
+| `www.example.com`      | `/demo/test`          | `demo.example.com/demo/test`                   |
 | `www.example.com`      | `/about/contact.html` | `about.example.com:1337/about/contact.html`    |
 | `www.example.com`      | `/foo`                | `cms.example.com:8080/foo`                     |
 | `test-www.example.com` | `/blog/article123`    | `test-blog.example.com:80/blog/article123`     |
