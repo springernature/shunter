@@ -1,6 +1,10 @@
 
 # History
 
+## 3.7.0 (2016-04-20)
+
+  * Added `--rewrite-redirect` and `--rewrite-protocol` configuration flags to allow the `autoRewrite` and `protocolRewrite` options to be set on node-http-proxy
+
 ## 3.6.0 (2016-03-14)
 
   * More comprehensive route override mapping
