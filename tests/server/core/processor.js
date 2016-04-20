@@ -12,7 +12,8 @@ var mockConfig = {
 	env: {
 		tier: sinon.stub(),
 		host: sinon.stub().returns('ci')
-	}
+	},
+	argv: {}
 };
 
 describe('Request processor', function() {

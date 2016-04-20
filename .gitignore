@@ -8,3 +8,5 @@ coverage/*
 timestamp.json
 .DS_Store
 shunter-*.tgz
+.idea
+*.iml
