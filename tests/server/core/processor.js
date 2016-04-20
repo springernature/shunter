@@ -42,6 +42,27 @@ describe('Request processor', function() {
 		mockery.disable();
 	});
 
+	describe('Configuring the proxy', function() {
+		it('Should not enable `autoRewrite` and `protocolRewrite` by default', function() {
+			var proxy = require('http-proxy');
+			require(moduleName)(mockConfig, {});
+			assert.isFalse(proxy.createProxyServer.firstCall.args[0].autoRewrite);
+			assert.isNull(proxy.createProxyServer.firstCall.args[0].protocolRewrite);
+		});
+
+		it('Should allow `autoRewrite` and `protocolRewrite` to be configured', function() {
+			mockConfig.argv['rewrite-redirect'] = true;
+			mockConfig.argv['rewrite-protocol'] = 'http';
+
+			var proxy = require('http-proxy');
+			require(moduleName)(mockConfig, {});
+			assert.isTrue(proxy.createProxyServer.firstCall.args[0].autoRewrite);
+			assert.strictEqual(proxy.createProxyServer.firstCall.args[0].protocolRewrite, 'http');
+
+			mockConfig.argv = {};
+		});
+	});
+
 	describe('Modifying the request', function() {
 		var req;
 
