@@ -1,6 +1,10 @@
 
 # History
 
+## 3.8.0 (2016-07-11)
+
+  * Added `--deploy-timestamp-header` configuration flag to proxy the last deploy timestamp to the backend in a header `X-Shunter-Deploy-Timestamp` instead of a `shunter` query parameter
+
 ## 3.7.0 (2016-04-20)
 
   * Added `--rewrite-redirect` and `--rewrite-protocol` configuration flags to allow the `autoRewrite` and `protocolRewrite` options to be set on node-http-proxy
