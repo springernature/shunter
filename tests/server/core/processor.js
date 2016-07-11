@@ -90,6 +90,20 @@ describe('Request processor', function() {
 			assert.isTrue(next.calledOnce);
 		});
 
+		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp if configured to do so', function() {
+			mockConfig.argv['deploy-timestamp-header'] = true;
+			var processor = require(moduleName)(mockConfig, {});
+			var next = sinon.stub();
+
+			req.url = '/foo';
+			processor.timestamp(req, {}, next);
+			assert.equal(req.headers['X-Shunter-Deploy-Timestamp'], '1234567890');
+			assert.equal(req.url, '/foo');
+			assert.isTrue(next.calledOnce);
+
+			mockConfig.argv = {};
+		});
+
 		it('Should add a header X-Shunter with the Shunter version being used', function() {
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();

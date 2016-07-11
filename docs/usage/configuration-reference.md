@@ -227,6 +227,7 @@ Several aspects of Shunter behaviour can be configured via command line argument
  * `-g`, `--origin-override` Requires `--route-override`. Sets `changeOrigin: true` for the route set up via `--route-override`, see [Routing](routing.md#route-config-options) for more details.
  * `--rewrite-redirect` Sets `autoRewrite` option on the proxy, see the [Node HTTP Proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for more details.
  * `--rewrite-protocol` Sets the `protocolRewrite` option on the proxy, see the [Node HTTP Proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for more details.
+ * `--deploy-timestamp-header` Proxy the timestamp of the last deploy of your Shunter application to the backend in an `X-Shunter-Deploy-Timestamp` header instead of a `shunter` query parameter.
  * `-v`, `--version` Prints the Shunter version number.
  * `-h`, `--help` Prints help about these options.
 
