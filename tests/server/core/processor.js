@@ -162,7 +162,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write('{"foo":"bar"}');
+			res.write(new Buffer('{"foo":"bar"}'));
 			res.end();
 
 			assert.isTrue(renderer.render.calledOnce);
@@ -186,7 +186,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write('{"foo":"bar"}');
+			res.write(new Buffer('{"foo":"bar"}'));
 			res.end();
 
 			assert.isTrue(renderer.render.calledOnce);
@@ -216,7 +216,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write('{"foo":"bar"}');
+			res.write(new Buffer('{"foo":"bar"}'));
 			res.end();
 
 			assert.equal(renderer.render.callCount, 0);
@@ -243,7 +243,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write('{"foo":"bar"}');
+			res.write(new Buffer('{"foo":"bar"}'));
 			res.end();
 
 			renderer.render.firstCall.yield(null, 'Content');
@@ -274,7 +274,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead(401);
-			res.write('{"foo":"bar"}');
+			res.write(new Buffer('{"foo":"bar"}'));
 			res.end();
 
 			renderer.render.firstCall.yield(null, 'Content');
@@ -311,7 +311,7 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write('{"foo":bar"}');
+			res.write(new Buffer('{"foo":bar"}'));
 			assert.doesNotThrow(function() {
 				res.end();
 			});
