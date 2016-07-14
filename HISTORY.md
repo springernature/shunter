@@ -1,6 +1,10 @@
 
 # History
 
+## 3.8.1 (2016-07-14)
+
+  * Fixed a bug where multibyte characters could get corrupted if they fell across multiple chunks of the backend response
+
 ## 3.8.0 (2016-07-11)
 
   * Added `--deploy-timestamp-header` configuration flag to proxy the last deploy timestamp to the backend in a header `X-Shunter-Deploy-Timestamp` instead of a `shunter` query parameter
