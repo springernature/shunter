@@ -225,6 +225,68 @@ describe('Request processor', function() {
 			assert.equal(dispatch.send.firstCall.args[1], '{\n\t"foo": "bar"\n}');
 		});
 
+		it('Should construct responses across multiple writes', function() {
+			var tier = sinon.stub();
+			var processor = require(moduleName)({
+				env: {
+					tier: tier
+				},
+				argv: {},
+				timer: mockTimer
+			}, renderer);
+			var callback = sinon.stub();
+
+			var req = {url: '/test/url'};
+
+			res.getHeader.withArgs('Content-type').returns('application/x-shunter+json');
+			processor.intercept(req, res, callback);
+
+			res.writeHead();
+			res.write(new Buffer('{"foo":'));
+			res.write(new Buffer('"bar"}'));
+			res.end();
+
+			assert.isTrue(renderer.render.calledOnce);
+			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
+		});
+
+		it('Should safely reconstruct multibyte characters that are split between writes', function() {
+			var value = 'abc⩽def';
+			var raw = '{"foo":"' + value + '"}';
+			var source = new Buffer(raw);
+			var length = Buffer.byteLength(raw);
+			var firstChunkLength = raw.indexOf('c') + 2; // split in the middle of the ⩽ character
+			var secondChunkLength = length - firstChunkLength;
+			var firstChunk = new Buffer(firstChunkLength);
+			var secondChunk = new Buffer(secondChunkLength);
+			source.copy(firstChunk, 0, 0, firstChunkLength);
+			source.copy(secondChunk, 0, firstChunkLength);
+
+			var tier = sinon.stub();
+			var processor = require(moduleName)({
+				env: {
+					tier: tier
+				},
+				argv: {},
+				timer: mockTimer
+			}, renderer);
+			var callback = sinon.stub();
+
+			var req = {url: '/test/url'};
+
+			res.getHeader.withArgs('Content-type').returns('application/x-shunter+json');
+			processor.intercept(req, res, callback);
+
+			res.writeHead();
+			res.write(firstChunk);
+			res.write(secondChunk);
+			res.end();
+
+			assert.isTrue(renderer.render.calledOnce);
+			assert.notEqual(firstChunk.toString() + secondChunk.toString(), raw);
+			assert.equal(renderer.render.firstCall.args[2].foo, value);
+		});
+
 		it('Should send the rendered page', function() {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
