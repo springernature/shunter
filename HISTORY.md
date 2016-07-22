@@ -1,6 +1,10 @@
 
 # History
 
+## 3.8.3 (2016-07-22)
+
+  * Fixed missing url parameter in `classifiedTiming` calls
+
 ## 3.8.2 (2016-07-22)
 
   * Allow the proxy timing metrics to be classified by page type
