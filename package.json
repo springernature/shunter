@@ -41,7 +41,7 @@
 	"bugs": "https://github.com/springernature/shunter/issues",
 
 	"engines": {
-		"node": ">=0.10 <=5"
+		"node": ">=4 <=5"
 	},
 	"dependencies": {
 		"async": "~1.4",
