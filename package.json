@@ -69,11 +69,11 @@
 		"qs": "~6.2",
 		"qs-middleware": "~1.0",
 		"request": "~2.74",
-		"saucelabs": "~0.1",
+		"saucelabs": "~1.2",
 		"serve-static": "~1.11",
 		"statsd-client": "~0.2",
 		"uglify-js": "~2.7",
-		"wd": "~0.3",
+		"wd": "~0.4",
 		"winston": "~2.2",
 		"winston-syslog": "~1.2",
 		"yargs": "~4.8"
