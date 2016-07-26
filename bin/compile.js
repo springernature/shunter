@@ -13,7 +13,7 @@ var argv = yargs
 		type: 'string'
 	})
 	.alias('h', 'help')
-	.help('help')
+	.help()
 	.describe({
 		x: 'Extra JS paths to minify',
 		r: 'Name of modules with resources to include in the build, can specify several of these flags'

@@ -28,7 +28,7 @@ var args = yargs
 		describe: 'Add milliseconds of latency to the request'
 	})
 	.alias('h', 'help')
-	.help('help')
+	.help()
 	.argv;
 
 // Resolve the data directory against CWD if it's relative
