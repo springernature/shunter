@@ -145,30 +145,6 @@ describe('Request processor', function() {
 			assert.isTrue(res.__originalWriteHead.calledOnce);
 		});
 
-		it('Should intercept responses with an x-shunter-json mime type', function() {
-			var tier = sinon.stub();
-			var processor = require(moduleName)({
-				env: {
-					tier: tier
-				},
-				argv: {},
-				timer: mockTimer
-			}, renderer);
-			var callback = sinon.stub();
-
-			var req = {url: '/test/url'};
-
-			res.getHeader.withArgs('Content-type').returns('application/x-shunter-json');
-			processor.intercept(req, res, callback);
-
-			res.writeHead();
-			res.write(new Buffer('{"foo":"bar"}'));
-			res.end();
-
-			assert.isTrue(renderer.render.calledOnce);
-			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
-		});
-
 		it('Should intercept responses with an x-shunter+json mime type', function() {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
