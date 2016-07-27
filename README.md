@@ -32,7 +32,7 @@ You can also refer to the [API Documentation](docs/usage/index.md) for a full br
 Requirements
 ------------
 
-Shunter requires [Node.js][node] 0.10–5.x, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
+Shunter requires [Node.js][node] 4.x–6.x, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
 
 On Windows things are a bit more complicated due to the Shunter install process requiring a C compiler. Here are some useful links to help you:
 
@@ -79,6 +79,6 @@ Copyright &copy; 2015, Springer Nature
 [shield-coverage]: https://img.shields.io/coveralls/springernature/shunter.svg
 [shield-dependencies]: https://img.shields.io/gemnasium/springernature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
-[shield-node]: https://img.shields.io/badge/node.js%20support-0.10–5-brightgreen.svg
+[shield-node]: https://img.shields.io/badge/node.js%20support-4–6-brightgreen.svg
 [shield-npm]: https://img.shields.io/npm/v/shunter.svg
 [shield-build]: https://img.shields.io/travis/springernature/shunter/master.svg
