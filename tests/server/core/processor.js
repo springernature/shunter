@@ -70,28 +70,7 @@ describe('Request processor', function() {
 			req = require('../mocks/request');
 		});
 
-		it('Should append the deployment timestamp to the request url', function() {
-			var processor = require(moduleName)(mockConfig, {});
-			var next = sinon.stub();
-
-			req.url = '/foo';
-			processor.timestamp(req, {}, next);
-			assert.equal(req.url, '/foo?shunter=1234567890');
-			assert.isTrue(next.calledOnce);
-		});
-
-		it('Should append the deployment timestamp to the request url when it has query parameters', function() {
-			var processor = require(moduleName)(mockConfig, {});
-			var next = sinon.stub();
-
-			req.url = '/foo?bar=baz';
-			processor.timestamp(req, {}, next);
-			assert.equal(req.url, '/foo?bar=baz&shunter=1234567890');
-			assert.isTrue(next.calledOnce);
-		});
-
-		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp if configured to do so', function() {
-			mockConfig.argv['deploy-timestamp-header'] = true;
+		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp', function() {
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();
 
