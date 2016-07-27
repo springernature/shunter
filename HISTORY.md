@@ -1,6 +1,37 @@
 
 # History
 
+## 4.0.0 (2016-07-27)
+
+  * Drop support for Node.js < 4.x
+  * Add support for Node.js 6
+  * Remove the command line option `--deploy-timestamp-header`, which is now the default behaviour
+  * Remove deprecated content-type `x-shunter-json`
+  * Remove the following deprecated command line option aliases
+    * `--sourcedirectory` for `--source-directory`
+    * `--routeoveride` for `--route-override`
+    * `--originoveride` for `--origin-override`
+  * Update dependencies
+    * async: `~1.4` to `~2.0`
+    * body-parser: `~1.14` to `~1.15`
+    * cheerio: `~0.19` to `~0.20`
+    * csswring: `~3.0` to `~5.1`
+    * ejs: `0.8.3` to `~2.5`
+    * gaze: `~0.5` to `~1.0`
+    * glob: `~5.0` to `~7.0`
+    * hasbin: `~1.1` to `~1.2`
+    * http-proxy: `~1.12` to `~1.14`
+    * jserve: `~1.2` to `~2.0`
+    * mincer: `~1.3` to `~1.4`
+    * mocha-phantomjs-core: `~1.1` to `~1.3`
+    * postcss: `~4.1` to `~5.1`
+    * qs: `~3.1` to `~6.2`
+    * request: `~2.67` to `~2.74`
+    * saucelabs: `~0.1` to `~1.2`
+    * serve-static: `~1.10` to `~1.11`
+    * uglify-js: `~2.6` to `~2.7`
+    * wd: `~0.3` to `~0.4`
+
 ## 3.8.3 (2016-07-22)
 
   * Fixed missing url parameter in `classifiedTiming` calls
