@@ -70,28 +70,7 @@ describe('Request processor', function() {
 			req = require('../mocks/request');
 		});
 
-		it('Should append the deployment timestamp to the request url', function() {
-			var processor = require(moduleName)(mockConfig, {});
-			var next = sinon.stub();
-
-			req.url = '/foo';
-			processor.timestamp(req, {}, next);
-			assert.equal(req.url, '/foo?shunter=1234567890');
-			assert.isTrue(next.calledOnce);
-		});
-
-		it('Should append the deployment timestamp to the request url when it has query parameters', function() {
-			var processor = require(moduleName)(mockConfig, {});
-			var next = sinon.stub();
-
-			req.url = '/foo?bar=baz';
-			processor.timestamp(req, {}, next);
-			assert.equal(req.url, '/foo?bar=baz&shunter=1234567890');
-			assert.isTrue(next.calledOnce);
-		});
-
-		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp if configured to do so', function() {
-			mockConfig.argv['deploy-timestamp-header'] = true;
+		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp', function() {
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();
 
@@ -143,30 +122,6 @@ describe('Request processor', function() {
 			processor.intercept(req, res, callback);
 			res.writeHead();
 			assert.isTrue(res.__originalWriteHead.calledOnce);
-		});
-
-		it('Should intercept responses with an x-shunter-json mime type', function() {
-			var tier = sinon.stub();
-			var processor = require(moduleName)({
-				env: {
-					tier: tier
-				},
-				argv: {},
-				timer: mockTimer
-			}, renderer);
-			var callback = sinon.stub();
-
-			var req = {url: '/test/url'};
-
-			res.getHeader.withArgs('Content-type').returns('application/x-shunter-json');
-			processor.intercept(req, res, callback);
-
-			res.writeHead();
-			res.write(new Buffer('{"foo":"bar"}'));
-			res.end();
-
-			assert.isTrue(renderer.render.calledOnce);
-			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
 		});
 
 		it('Should intercept responses with an x-shunter+json mime type', function() {
