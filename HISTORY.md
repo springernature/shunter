@@ -1,6 +1,13 @@
 
 # History
 
+## 4.0.1 (2016-07-28)
+
+  * Correct Node.js support documentation and CI config
+  * Update dependencies
+    * async: `~1.4` to `~2.0`
+    * gaze: `~0.5` to `~1.0`
+
 ## 4.0.0 (2016-07-27)
 
   * Drop support for Node.js < 4.x
@@ -12,12 +19,10 @@
     * `--routeoveride` for `--route-override`
     * `--originoveride` for `--origin-override`
   * Update dependencies
-    * async: `~1.4` to `~2.0`
     * body-parser: `~1.14` to `~1.15`
     * cheerio: `~0.19` to `~0.20`
     * csswring: `~3.0` to `~5.1`
     * ejs: `0.8.3` to `~2.5`
-    * gaze: `~0.5` to `~1.0`
     * glob: `~5.0` to `~7.0`
     * hasbin: `~1.1` to `~1.2`
     * http-proxy: `~1.12` to `~1.14`
