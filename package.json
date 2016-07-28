@@ -44,7 +44,7 @@
 		"node": ">=4 <=6"
 	},
 	"dependencies": {
-		"async": "~1.4",
+		"async": "~2.0",
 		"body-parser": "~1.15",
 		"cheerio": "~0.20",
 		"connect": "~3.4",
@@ -56,7 +56,7 @@
 		"each-module": "~1.2",
 		"ejs": "~2.5",
 		"extend": "~3.0",
-		"gaze": "~0.5",
+		"gaze": "~1.0",
 		"glob": "~7.0",
 		"hasbin": "~1.2",
 		"http-proxy": "~1.14",
