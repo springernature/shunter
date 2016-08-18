@@ -89,7 +89,7 @@ background-image: url(<%= asset_path('icons/png/icon-login-25x25-white.png') %>)
 ```
 
 ```html
-<img src="{@assetPath src="myimg.png"}" alt="" />
+<img src="{@assetPath src="myimg.png"/}" alt="" />
 ```
 
 
