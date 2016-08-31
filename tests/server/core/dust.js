@@ -8,10 +8,12 @@ var sinon = require('sinon');
 describe('Template loading', function() {
 	var dust = require('dustjs-helpers');
 	var mockConfig = {
+		argv: {},
 		log: require('../mocks/log')
 	};
 	var mockRenderer = {
-		TEMPLATE_CACHE_KEY_PREFIX: 'root'
+		TEMPLATE_CACHE_KEY_PREFIX: 'root',
+		compileOnDemand: sinon.stub()
 	};
 	var options;
 	var callback;
@@ -33,6 +35,7 @@ describe('Template loading', function() {
 	});
 	afterEach(function() {
 		mockConfig.log.warn.reset();
+		mockRenderer.compileOnDemand.reset();
 	});
 
 	it('Should log and gracefully handle missing templates', function() {
@@ -42,6 +45,13 @@ describe('Template loading', function() {
 		assert(callback.calledOnce);
 		assert.strictEqual(callback.lastCall.args[0], null);
 		assert.strictEqual(callback.lastCall.args[1], '');
+	});
+
+	it('Should attempt to compile unknown templates if `compile-on-demand` is enabled', function() {
+		mockConfig.argv['compile-on-demand'] = true;
+		dust.onLoad('notloaded', options, callback);
+		assert(mockRenderer.compileOnDemand.calledOnce);
+		assert(mockRenderer.compileOnDemand.calledWith('notloaded'));
 	});
 
 	it('Should load a given template from its keyname in the dust cache', function() {
