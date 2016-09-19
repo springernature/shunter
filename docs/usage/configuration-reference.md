@@ -228,7 +228,7 @@ Several aspects of Shunter behaviour can be configured via command line argument
  * `--rewrite-redirect` Sets `autoRewrite` option on the proxy, see the [Node HTTP Proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for more details.
  * `--rewrite-protocol` Sets the `protocolRewrite` option on the proxy, see the [Node HTTP Proxy documentation](https://github.com/nodejitsu/node-http-proxy#options) for more details.
  * `-v`, `--version` Prints the Shunter version number.
- * `-w`, `--whitespace` Preserves whitespace in HTML output.
+ * `-w`, `--preserve-whitespace` Preserves whitespace in HTML output.
  * `-h`, `--help` Prints help about these options.
 
 
