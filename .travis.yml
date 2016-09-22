@@ -8,14 +8,11 @@ matrix:
     - node_js: '6'
       env: LINT=true
 
-    # Run tests in Node.js 4.x
-    - node_js: '4'
-
-    # Run tests in Node.js 5.x
-    - node_js: '5'
-
     # Run tests in Node.js 6.x
     - node_js: '6'
+
+    # Run tests in Node.js 4.x
+    - node_js: '4'
 
 # Dependencies require GCC 4.8
 addons:
