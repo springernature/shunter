@@ -68,7 +68,7 @@ var app = shunter({
     },
 
     // Configure the proxy route, this should point to
-    // where you back end application runs
+    // where your back end application runs
     routes: {
         localhost: {
             default: {
