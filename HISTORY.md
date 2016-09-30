@@ -1,6 +1,14 @@
 
 # History
 
+## 4.0.2 (2016-09-30)
+
+  * Added `--preserve-whitespace` configuration flag to preserve whitespace in HTML output
+  * Update dependencies
+    * dustjs-linkedin: `~2.7` to `>=2.7.4`
+    * gaze: `~1.0` to `~1.1`
+
+
 ## 4.0.1 (2016-07-28)
 
   * Correct Node.js support documentation and CI config
