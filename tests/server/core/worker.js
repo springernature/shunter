@@ -100,6 +100,20 @@ describe('Worker process running in production', function() {
 		assert.isTrue(process.exit.notCalled);
 	});
 
+	it('Should handle unexpected exceptions', function() {
+		assert.isTrue(process.on.calledWith('uncaughtException'));
+	});
+
+	it('Should gracefully exit if there is an EADDRINUSE exception to prevent respawning the worker', function() {
+		process.on.withArgs('uncaughtException').yield({code: 'EADDRINUSE'});
+		assert(process.exit.calledWith(0));
+	});
+
+	it('Should exit with a non-zero status for other cases', function() {
+		process.on.withArgs('uncaughtException').yield({code: 'SOMEERROR'});
+		assert(process.exit.calledWith(1));
+	});
+
 	it('Should listen for the disconnect event', function() {
 		assert.isTrue(process.on.calledWith('disconnect'));
 		process.on.withArgs('disconnect').yield();
