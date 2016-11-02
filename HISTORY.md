@@ -1,6 +1,9 @@
 
 # History
 
+## 4.1.1 (2016-11-02)
+  * More gracefully handle errors if something is already running on the same port as shunter
+
 ## 4.1.0 (2016-10-24)
 
   * Add CSS content-type mapping for dust-generated CSS files
