@@ -1,6 +1,9 @@
 
 # History
 
+## 4.1.3 (2016-11-03)
+  * Re-release due to error in previous release
+
 ## 4.1.2 (2016-11-03)
   * Update dependency in module with reported security issues
     * wd: `~0.4` to `~1.0`
