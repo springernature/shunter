@@ -4,12 +4,8 @@ language: node_js
 matrix:
   include:
 
-    # Run lint also in Node.js 7.x
+    # Run lint only in Node.js 7.x
     - node_js: '7'
-      env: LINT=true
-
-    # Run lint in Node.js 6.x
-    - node_js: '6'
       env: LINT=true
 
     # Run tests in Node.js 4.x
