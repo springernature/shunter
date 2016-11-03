@@ -4,7 +4,7 @@ language: node_js
 matrix:
   include:
 
-    # Run lint in Node.js 7.x
+    # Run lint also in Node.js 7.x
     - node_js: '7'
       env: LINT=true
 
