@@ -1,6 +1,10 @@
 
 # History
 
+## 4.1.2 (2016-11-03)
+  * Update dependency in module with reported security issues
+    * wd: `~0.4` to `~1.0`
+
 ## 4.1.1 (2016-11-02)
   * More gracefully handle errors if something is already running on the same port as shunter
 
