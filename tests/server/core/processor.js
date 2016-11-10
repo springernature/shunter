@@ -530,6 +530,27 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].changeOrigin, true);
 		});
 
+		it('Should create an `X-Orig-Host` header if `changeOrigin` is set', function() {
+			var req = {
+				headers: {
+					host: 'hostname'
+				}
+			};
+			var res = {};
+			var stub = sinon.stub();
+
+			require('./router')().map.returns({
+				host: 'www.nature.com',
+				port: 80,
+				changeOrigin: true
+			});
+			require('http-proxy').createProxyServer().web = stub;
+			processor.proxy(req, res);
+
+			assert.isTrue(stub.calledWith(req, res));
+			assert.strictEqual(stub.firstCall.args[0].headers['X-Orig-Host'], 'hostname');
+		});
+
 		it('Should return a 404 error if the route isn\'t matched', function() {
 			var req = {};
 			var res = {};
