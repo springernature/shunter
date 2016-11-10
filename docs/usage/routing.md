@@ -142,7 +142,7 @@ In addition to setting the host and port for the proxy target there is an additi
 }
 ```
 
-The application on cms.example.com would receive requests with a host header of `cms.example.com` instead of `www.example.com`.
+The application on cms.example.com would receive requests with a host header of `cms.example.com` instead of `www.example.com`. The original host header will be passed through to the backend in an `X-Orig-Host` header.
 
 ---
 
