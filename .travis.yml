@@ -4,8 +4,8 @@ language: node_js
 matrix:
   include:
 
-    # Run lint only in Node.js 6.x
-    - node_js: '6'
+    # Run lint only in Node.js 7.x
+    - node_js: '7'
       env: LINT=true
 
     # Run tests in Node.js 4.x
@@ -16,6 +16,9 @@ matrix:
 
     # Run tests in Node.js 6.x
     - node_js: '6'
+
+    # Run tests in Node.js 7.x
+    - node_js: '7'
 
 # Dependencies require GCC 4.8
 addons:
