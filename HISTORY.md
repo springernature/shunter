@@ -1,6 +1,9 @@
 
 # History
 
+## 4.2.0 (2016-11-10)
+  * Pass the original host through to the backend in an `X-Orig-Host` header when using `changeOrigin`/`--origin-override`
+
 ## 4.1.3 (2016-11-03)
   * Re-release due to error in previous release
 
