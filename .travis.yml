@@ -1,4 +1,3 @@
-
 # Build matrix
 language: node_js
 matrix:
@@ -18,12 +17,13 @@ matrix:
     - node_js: '6'
 
 # Dependencies require GCC 4.8
+env:
+  - CXX=g++-4.8
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.8
       - g++-4.8
 
 # Restrict builds on branches
@@ -31,13 +31,6 @@ branches:
   only:
     - master
     - /^\d+\.\d+\.\d+$/
-
-# Before install
-before_install:
-  # Use GCC 4.8 if it's available
-  - 'if [ ! `which gcc-4.8` == "" ]; then export CXX=g++-4.8 && export CC=gcc-4.8; fi'
-  # Install coveralls
-  #- npm install coveralls
 
 # Build script
 script:
