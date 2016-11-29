@@ -54,7 +54,7 @@
 		"dustjs-helpers": "~1.7",
 		"dustjs-linkedin": ">=2.7.4",
 		"each-module": "~1.2",
-		"ejs": "~2.5",
+		"ejs": "^2.5.3",
 		"extend": "~3.0",
 		"gaze": "~1.1",
 		"glob": "~7.1",
