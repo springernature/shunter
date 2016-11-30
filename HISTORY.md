@@ -1,6 +1,10 @@
 
 # History
 
+## 4.2.1 (2016-11-30)
+  * Require `ejs` 2.5.3 or greater. Fixes a high severity remote code execution vuln.
+  * Upgrade other dependencies. Fixes several `npm install` warnings.
+
 ## 4.2.0 (2016-11-10)
   * Pass the original host through to the backend in an `X-Orig-Host` header when using `changeOrigin`/`--origin-override`
 
