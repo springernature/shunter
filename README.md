@@ -45,6 +45,8 @@ Support and Migration
 
 Shunter major versions are supported for 6 months after their last release. This means that patch-level changes will be added and bugs will be fixed. We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
 
+If you'd like to know more about how we support our open source projects, including the full release process, check out our [support practices document](support).
+
 If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
 
 
@@ -69,6 +71,7 @@ Copyright &copy; 2015, Springer Nature
 [node-gyp-vs]: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
 [npm]: https://www.npmjs.com/
 [starter-issues]: https://github.com/springernature/shunter/labels/good-starter-issue
+[support]: https://github.com/springernature/frontend/blob/master/practices/open-source-support.md
 
 [info-coverage]: https://coveralls.io/github/springernature/shunter
 [info-dependencies]: https://gemnasium.com/springernature/shunter
