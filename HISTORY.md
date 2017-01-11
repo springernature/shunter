@@ -1,6 +1,9 @@
 
 # History
 
+## 4.2.2 (2017-01-11)
+  * Remove nature specific code from error page
+
 ## 4.2.1 (2016-11-30)
   * Require `ejs` 2.5.3 or greater. Fixes a high severity remote code execution vuln.
   * Upgrade other dependencies. Fixes several `npm install` warnings.
