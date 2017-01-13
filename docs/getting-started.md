@@ -2,17 +2,42 @@
 Getting Started with Shunter
 ============================
 
-This guide will teach you how to put together a basic application with Shunter. [API Documentation](usage/index.md) is also available if you need more detail.
-
-Before we begin, you'll need to have [Node.js](https://nodejs.org/) installed, Shunter requires Node.js 4.x–6.x.
+This guide will introduce you to Shunter and teach you how to use it to put together a basic application. [API Documentation](usage/index.md) is also available if you need more detail.
 
 This guide will not explain every feature of Shunter. Its aim is to get you up-and-running in as little time as possible.
 
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
 - [Basics](#basics)
 - [Sample Data](#sample-data)
 - [Templates](#templates)
 - [Styling](#styling)
 - [JavaScript](#javascript)
+
+Introduction
+------------
+
+Looking to create a smart, flexible, and robustly decoupled front end?
+
+Need a hand defining integration points between your front and back end applications?
+
+Want to use the same unified front end across both your rails(/PHP/ASP/other) application, and your Wordpress-driven blog?
+
+Shunter is for you.
+
+Technically speaking Shunter runs your decoupled front end as a node.js server, acting as a reverse proxy in front of your back end application(s).  This can be deployed on the same or a different server from your other applications as you see fit (it's super lightweight).
+
+![Shunter as a proxy](diagram.png)
+
+When a request comes in from a user, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the special `Content-Type` `application/x-shunter+json` will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the user.
+
+
+Prerequisites
+-------------
+
+Before we begin, you'll need to have [Node.js](https://nodejs.org/) installed - Shunter requires Node.js 4.x–6.x.
+
+You'll need to be comfortable with the command line, and have some basic knowledge of HTML, CSS, JavaScript, and templating.
 
 
 Basics
@@ -119,7 +144,12 @@ We'll want to provide a sample JSON file that the Shunter application can proxy 
     "layout": {
         "template": "home"
     },
-    "title": "Hello World!"
+    "title": "Hello World!",
+    "list": [
+        "foo",
+        "bar",
+        "baz"
+    ]
 }
 ```
 
@@ -149,7 +179,27 @@ Note our use of `{title}`. This is a reference to the `title` property in our JS
 
 Now restart your Shunter application again and open up [http://localhost:5400/home](http://localhost:5400/home) in your browser. You should see your rendered page.
 
-[Dust](http://www.dustjs.com/) templating is very powerful, right now we're using the absolute basics. Once you've finished this guide, you can learn more about [layouts](usage/templates.md#using-layouts) and [partials](usage/templates.md#using-partials).
+[Dust](http://www.dustjs.com/) templating is very powerful, right now we're using the absolute basics. But we can add a basic Dust loop using the following:
+
+```html
+<ul>
+    {#list}
+        <li>{.}</li>
+    {/list}
+</ul>
+```
+
+Dust will render:
+
+```html
+<ul>
+    <li>foo</li>
+    <li>bar</li>
+    <li>baz</li>
+</ul>
+```
+
+Once you've finished this guide, you can learn more about [layouts](usage/templates.md#using-layouts) and [partials](usage/templates.md#using-partials).
 
 Next we'll add some styles.
 

@@ -3,7 +3,7 @@
 
 Welcome to the Shunter documentation. Shunter is a Node.js application built to read JSON and translate it into HTML.
 
-For new users, we recommend reading the [Shunter Introduction](introduction.md) followed by the [Getting Started Guide](getting-started.md).
+For new users, we recommend reading the [Getting Started Guide](getting-started.md), which will introduce Shunter and show you how to build a basic application.
 
 If you're looking for the full documentation, refer to the [API Documentation](usage/index.md).
 
