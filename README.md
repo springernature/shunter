@@ -24,7 +24,7 @@ It helps you create a decoupled front end which can serve traffic from one or mo
 Getting Started
 ---------------
 
-If you're new to Shunter, we recommend starting with our [Introduction](docs/introduction.md) then diving into the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
 
 You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
