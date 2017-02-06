@@ -80,20 +80,11 @@ make lint
 ```
 
 
-Versioning
-----------
+Versioning and releases
+-----------------------
 
 Most of the time, one of the core developers will decide when a release is ready to go out. You shouldn't take this upon yourself without discussing with the team.
 
-Shunter is versioned with [semver](http://semver.org/). You should read through the semver documentation if you're versioning Shunter.
+Shunter is versioned with [semver](http://semver.org/). You should read through the [semver documentation](http://semver.org) if you're versioning Shunter.
 
-To publish a new version of Shunter:
-
-- Switch to the `master` branch, version commits are the only commits that shouldn't be in a pull-request
-- Increment either the major, minor, or patch version in [`package.json`](https://github.com/springernature/shunter/blob/master/package.json). If you're unsure which, have a chat about it or re-read the semver docs
-- Add an entry to [`HISTORY.md`](https://github.com/springernature/shunter/blob/master/HISTORY.md) outlining the changes in the new version. Take your time, this log should be useful to developers building with Shunter. If there are additional commits on the master branch since the last version, be sure to include a description of what they do in your history update – talk to the developers who committed them
-- If you're bumping the major version, update both the [migration guide](migration/index.md) and the [support guide](support.md)
-- Commit your changes with a message like "Version 1.2.3" – this helps people find version commits in the log
-- Tag your newly created commit with the version number. E.g. `git tag 1.2.3`
-- Push both the commit and the new tags to origin: `git push && git push --tags`. It's really important to push tags as well!
-- Publish to npm with `npm publish`. If you don't have permission yet, request it from one of the [existing collaborators](https://www.npmjs.com/package/shunter/access)
+You can check the details of our release process in our [Open Source support guide](https://github.com/springernature/frontend-playbook/blob/master/practices/open-source-support.md#release-process) in the [Springer Nature frontend playbook](https://github.com/springernature/frontend-playbook).
