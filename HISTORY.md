@@ -1,6 +1,9 @@
 
 # History
 
+## 4.3.0 (2017-02-15)
+  * Add a `--compile-on-demand` option to enable lazy compilation of dust templates
+
 ## 4.2.3 (2017-02-15)
   * Set the charset as utf-8 in JSON view
   * Documentation updates
