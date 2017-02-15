@@ -1,6 +1,11 @@
 
 # History
 
+## 4.2.3 (2017-02-15)
+  * Set the charset as utf-8 in JSON view
+  * Documentation updates
+  * Tidy up Travis config
+
 ## 4.2.2 (2017-01-11)
   * Remove nature specific code from error page
 
