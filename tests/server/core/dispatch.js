@@ -56,6 +56,17 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.setHeader.calledWith('Content-type', 'text/html; charset=utf-8'));
 	});
 
+	it('Should set the correct content type if the json parameter is set', function() {
+		var dispatch = require(moduleName)(config);
+		req.isJson = true;
+
+		dispatch.send(null, '{"foo": "bar"}', req, res, 200);
+		assert.isTrue(res.setHeader.calledWith('Content-type', 'application/json; charset=utf-8'));
+		assert.isTrue(res.writeHead.calledOnce);
+		assert.isTrue(res.writeHead.calledWith(200));
+		assert.isTrue(res.end.calledOnce);
+	});
+
 	it('Should take multibyte characaters into account when setting the content length header', function() {
 		var dispatch = require(moduleName)(config);
 
