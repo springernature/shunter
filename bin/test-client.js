@@ -207,8 +207,13 @@ This script starts up a server, so you don't have to already have one running.
 		app.use(function(req, res) {
 			if (req.url === '/') {
 				dust.render('testrunner', {}, function(err, out) {
-					res.setHeader('Content-Type', 'text/html');
-					res.end(out);
+					if (err) {
+						console.error('Error rendering test runner', err);
+						process.exit(1);
+					} else {
+						res.setHeader('Content-Type', 'text/html');
+						res.end(out);
+					}
 				});
 			} else {
 				// may be obsolete, tbc with rest of team
