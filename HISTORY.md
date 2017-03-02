@@ -1,6 +1,10 @@
 
 # History
 
+## 4.4.0 (2017-03-02)
+  * Better error reporting if the client side test runner fails
+  * Build the script under test with the full mincer environment from your app
+
 ## 4.3.0 (2017-02-15)
   * Add a `--compile-on-demand` option to enable lazy compilation of dust templates
 
