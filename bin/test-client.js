@@ -53,8 +53,6 @@ This script starts up a server, so you don't have to already have one running.
 	var shell = require('child_process').exec; // used for triggering mocha-phantomjs. do not pass user input to this.
 	var connect = require('connect');
 	var serveStatic = require('serve-static');
-	var Mincer = require('mincer');
-	var dust = require('dustjs-linkedin');
 	var yargs = require('yargs');
 	var promise = require('promised-io/promise');
 	var Deferred = promise.Deferred;
@@ -85,9 +83,8 @@ This script starts up a server, so you don't have to already have one running.
 		.argv;
 
 	var config = require('../lib/config')(null, null, {});
-	var jsDir = path.join(config.structure.resources, config.structure.scripts);
+	var renderer = require('../lib/renderer')(config);
 
-	var environment = getMincerEnvironment();
 	var host = 'localhost';
 	var port = 55001; // https://docs.saucelabs.com/reference/sauce-connect/#can-i-access-applications-on-localhost-
 	var baseUri = 'http://' + host + ':' + port + '/';
@@ -119,49 +116,17 @@ This script starts up a server, so you don't have to already have one running.
 	}
 
 	// dust template setup
-	var testfile = fs.readFileSync(__dirname + '/../view/test-runner.dust', 'utf8');
-	dust.loadSource(dust.compile(testfile, 'testrunner'));
+	renderer.compileFile(path.join(__dirname, '..', 'view', 'test-runner.dust'));
 	// middleware
 	var app = startApp();
 	app.listen(port, runTests);
 
 	/*
-		set up the Mincer environment
-		@returns Object environment for the Mincer instance
-	*/
-	function getMincerEnvironment() {
-		// set up assets
-		var environment = new Mincer.Environment();
-		var resourceModules = getResourceModules();
-		resourceModules.forEach(function(modname) {
-			environment.appendPath(path.join('node_modules', modname, jsDir));
-		});
-		if (config.path.root !== config.path.shunterRoot) {
-			environment.appendPath(path.join(config.path.shunterRoot, jsDir)); // always load core, as it holds things like jquery
-		}
-		environment.prependPath(path.join(config.path.root, jsDir));
-		return environment;
-	}
-
-
-	function getResourceModules() {
-		var resourceModules = config.modules || [];
-		if (argv['resource-module']) {
-			resourceModules = (
-				Array.isArray(argv['resource-module']) ?
-				argv['resource-module'] :
-				[argv['resource-module']]
-			);
-		}
-		return resourceModules;
-	}
-
-	/*
 		Get script block for processed main.js file via Mincer
 	*/
-	dust.helpers.scriptBlock = function(chunk, context, bodies, params) {
+	renderer.dust.helpers.scriptBlock = function(chunk, context, bodies, params) {
 		var assetPath;
-		var asset = environment.findAsset(params.src);
+		var asset = renderer.environment.findAsset(params.src);
 		if (!asset) {
 			die('Fatal error: missing main script asset', 1);
 		}
@@ -172,7 +137,7 @@ This script starts up a server, so you don't have to already have one running.
 	/*
 		Get the correct group of test files
 	*/
-	dust.helpers.scriptSpecs = function(chunk) {
+	renderer.dust.helpers.scriptSpecs = function(chunk) {
 		var testfolder = config.path.clientTests;
 		var jsfiles = [];
 		var scriptArr = [];
@@ -189,7 +154,7 @@ This script starts up a server, so you don't have to already have one running.
 			return path.join(testfolder, value);
 		});
 		scriptArr = jsfiles.map(function(value) {
-			return '<script src="' + path.join(path.sep, path.relative(config.path.root, value)) + '"></script>';
+			return '<script src="' + path.join('/', path.relative(config.path.root, value)) + '"></script>';
 		});
 		return chunk.write(scriptArr.join('\n'));
 	};
@@ -200,15 +165,20 @@ This script starts up a server, so you don't have to already have one running.
 	*/
 	function startApp() {
 		var app = connect();
-		app.use('/resources', Mincer.createServer(environment));
+		app.use('/resources', renderer.assetServer());
 		app.use('/tests', serveStatic('tests'));
 		app.use('/testslib', serveStatic(path.join(__dirname, '..', 'tests')));
 
 		app.use(function(req, res) {
 			if (req.url === '/') {
-				dust.render('testrunner', {}, function(err, out) {
-					res.setHeader('Content-Type', 'text/html');
-					res.end(out);
+				renderer.renderPartial('root__test-runner', req, res, {}, function(err, out) {
+					if (err) {
+						console.error('Error rendering test runner', err);
+						process.exit(1);
+					} else {
+						res.setHeader('Content-Type', 'text/html');
+						res.end(out);
+					}
 				});
 			} else {
 				// may be obsolete, tbc with rest of team
