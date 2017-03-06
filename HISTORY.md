@@ -1,6 +1,12 @@
 
 # History
 
+## 4.4.1 (2017-03-06)
+  * Upgrade `qs` to `6.4.0`. Fixes https://snyk.io/vuln/npm:qs:20170213
+  * Updates several dependencies that include the vulnerable `qs` package.
+  * Replace all package version numbers in the package.json with the standard form as per our new dependency management guidelines in the playbook: https://github.com/springernature/frontend-playbook/blob/master/practices/dependency-management.md#specifying-versions-of-dependencies
+  * Package.json cleanup
+
 ## 4.4.0 (2017-03-02)
   * Better error reporting if the client side test runner fails
   * Build the script under test with the full mincer environment from your app
