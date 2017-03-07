@@ -32,6 +32,11 @@ describe('Dispatching response', function() {
 		req.url = '/hello';
 		mockery.registerMock('./content-type', contentType);
 		res = require('../mocks/response');
+
+		mockery.registerMock('path', require('../mocks/path'));
+		mockery.registerMock('mincer', require('../mocks/mincer'));
+		mockery.registerMock('each-module', require('../mocks/each-module'));
+
 		config = {
 			argv: {},
 			log: require('../mocks/log'),
@@ -41,6 +46,31 @@ describe('Dispatching response', function() {
 				isProduction: sinon.stub().returns(true),
 				tier: sinon.stub().returns('ci'),
 				host: sinon.stub().returns('ci')
+			},
+			path: {
+				root: '/',
+				resources: '/resources',
+				publicResources: '/public/resources',
+				themes: '/themes',
+				templates: '/view',
+				dust: '/dust'
+			},
+			modules: [
+				'shunter'
+			],
+			structure: {
+				resources: 'resources',
+				styles: 'css',
+				images: 'img',
+				scripts: 'js',
+				fonts: 'fonts',
+				templates: 'view',
+				dust: 'dust',
+				templateExt: '.dust',
+				filters: 'filters',
+				filtersInput: 'input',
+				ejs: 'ejs',
+				mincer: 'mincer'
 			}
 		};
 	});
