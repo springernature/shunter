@@ -71,7 +71,7 @@ describe('Clustering', function() {
 			require('os').cpus.returns([1, 1]);
 			server.start();
 			cluster.fork().on.yield();
-			assert.isTrue(config.log.info.calledWith('All child processes listening'));
+			assert.isTrue(config.log.info.calledWith('Shunter started with 2 child processes listening'));
 		});
 
 		it('Should save the a pid file on start up', function() {
@@ -80,7 +80,7 @@ describe('Clustering', function() {
 			server.start();
 			fs.writeFile.yield();
 			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid));
-			assert.isTrue(config.log.info.calledWith('Saved shunter.pid file for process ' + process.pid));
+			assert.isTrue(config.log.debug.calledWith('Saved shunter.pid file for process ' + process.pid));
 		});
 
 		it('Should log an error if it was unable to write the pid file', function() {
@@ -109,7 +109,7 @@ describe('Clustering', function() {
 			require('os').cpus.returns([1, 1, 1]);
 			server.start();
 			process.on.withArgs('SIGUSR2').firstCall.yield();
-			assert.isTrue(config.log.info.calledWith('SIGUSR2 received, reloading all workers'));
+			assert.isTrue(config.log.debug.calledWith('SIGUSR2 received, reloading all workers'));
 		});
 
 		it('Should save the timestamp when SIGUSR2 is captured', function() {
