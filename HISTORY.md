@@ -1,6 +1,10 @@
 
 # History
 
+## 4.5.0 (2017-03-13)
+  * Add a `--logging` option to allow for setting the logging level
+  * Move less critical log events from info level to debug
+
 ## 4.4.1 (2017-03-06)
   * Upgrade `qs` to `6.4.0`. Fixes https://snyk.io/vuln/npm:qs:20170213
   * Updates several dependencies that include the vulnerable `qs` package.
