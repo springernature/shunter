@@ -109,10 +109,10 @@ var app = shunter({
 app.start();
 ```
 
-When we run this file using `node app.js`, you should see a bunch of logs ending with a message like this:
+When we run this file using `node app.js`, you should see a short delay then a message like this:
 
 ```
-All child processes listening
+Shunter started with X child processes listening
 ```
 
 If you open up [http://localhost:5400/](http://localhost:5400/) in your browser, you should see a blank page in your browser and get some error messages in your terminal window. That's because we haven't got a back end running yet.

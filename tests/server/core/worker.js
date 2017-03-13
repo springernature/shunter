@@ -84,7 +84,7 @@ describe('Worker process running in production', function() {
 	});
 	afterEach(function() {
 		process.exit.reset();
-		config.log.info.reset();
+		config.log.debug.reset();
 	});
 
 	it('Should listen for exit messages', function() {
@@ -191,7 +191,7 @@ describe('Worker process running in production', function() {
 
 	it('Should log a message on start up', function() {
 		connect().listen.firstCall.yield();
-		assert.isTrue(config.log.info.calledOnce);
+		assert.isTrue(config.log.debug.calledOnce);
 	});
 });
 
