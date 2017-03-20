@@ -130,4 +130,6 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.writeHead.calledWith(500));
 		assert.isTrue(res.end.calledOnce);
 	});
+
+	/* TODO getErrorContent */
 });
