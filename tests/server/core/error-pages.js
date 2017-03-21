@@ -54,38 +54,11 @@ describe('Templating error pages', function() {
 			},
 			errorPages: {
 				errorLayouts: {
-					404: 'layout',
-					default: 'layout'
+					404: 'layout-404',
+					default: 'layout-default'
 				},
 				staticData: {
-					appData: {
-						siteName: 'Manuscript Transfers'
-					},
-					brand: 'springer',
-					page_meta: [ ],
-					page_links: [ ],
-					language: 'en',
-					containers: {
-						top: [
-							{
-								type: 'header',
-								id: 'header',
-								data: { }
-							}
-						],
-						middle: [
-							{
-								type: 'error'
-							}
-						],
-						bottom: [
-							{
-								type: 'footer',
-								id: 'footer',
-								data: { }
-							}
-						]
-					}
+					users: 'data'
 				}
 			},
 			path: {
@@ -123,15 +96,15 @@ describe('Templating error pages', function() {
 	error = new Error('Some kind of error');
 	error.status = 418;
 
-	it('Should call the callback with an undefined param if not configured to use templated pages', function() {
+	it('Should callback with undefined if not configured to use templated pages', function() {
 		var unconfiguredConfig = config;
 		unconfiguredConfig.errorPages = {};
-
 		var errorPages = require(moduleName)(unconfiguredConfig);
 		var retval = false;
 		errorPages.getPage(error, '', req, res, function(ret) {
 			retval = ret;
 		});
+
 		assert.isTrue(renderer.render.notCalled);
 		assert.strictEqual(undefined, retval);
 	});
@@ -149,7 +122,7 @@ describe('Templating error pages', function() {
 		assert.strictEqual('my error page', retval);
 	});
 
-	it('Should callback with an undefined if there is an error rendering the error page', function() {
+	it('Should callback with undefined if there is an error rendering the error page', function() {
 		var errorPages = require(moduleName)(config);
 		var retval = false;
 		errorPages.getPage(error, '', req, res, function(ret) {
@@ -162,10 +135,36 @@ describe('Templating error pages', function() {
 		assert.strictEqual(undefined, retval);
 	});
 
-	it('Should populate the template with the error context', function() {
+	it('Should render the template with the users specified default layout', function() {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
-		assert.strictEqual('layout', renderer.render.firstCall.args[2].layout.template);
+		assert.strictEqual(config.errorPages.errorLayouts.default, renderer.render.firstCall.args[2].layout.template);
+	});
+
+	it('Should render the template with the users specified layout by error code', function() {
+		var errorPages = require(moduleName)(config);
+		var thisError = new Error('err');
+		thisError.status = 404;
+		errorPages.getPage(thisError, '', req, res, function() { });
+		assert.strictEqual(config.errorPages.errorLayouts['' + thisError.status], renderer.render.firstCall.args[2].layout.template);
+	});
+
+	it('Should insert the error into the template context', function() {
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
 		assert.strictEqual(error, renderer.render.firstCall.args[2].errorContext.error);
 	});
+
+	it('Should insert populate the template context with the reqHost', function() {
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.strictEqual(req.headers.host, renderer.render.firstCall.args[2].errorContext.reqHost);
+	});
+
+	it('Should insert populate the template context with the users static data', function() {
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].users);
+	});
+
 });
