@@ -167,4 +167,5 @@ describe('Templating error pages', function() {
 		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].users);
 	});
 
+	/* TODO add layout and errorContext clobbering tests */
 });
