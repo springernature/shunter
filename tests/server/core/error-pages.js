@@ -14,6 +14,7 @@ describe('Templating error pages', function() {
 	var req;
 	var res;
 	var error;
+	var renderer;
 
 	beforeEach(function() {
 		mockery.enable({
@@ -26,7 +27,7 @@ describe('Templating error pages', function() {
 
 		filter = sinon.stub().returnsArg(0);
 		createFilter = sinon.stub().returns(filter);
-
+		var rendererLib = require('../mocks/renderer');
 
 		mockery.registerMock('./output-filter', createFilter);
 		req = require('../mocks/request');
@@ -37,6 +38,9 @@ describe('Templating error pages', function() {
 		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('mincer', require('../mocks/mincer'));
 		mockery.registerMock('each-module', require('../mocks/each-module'));
+		mockery.registerMock('./renderer', rendererLib);
+
+		renderer = rendererLib({});
 
 		config = {
 			argv: {},
@@ -128,8 +132,8 @@ describe('Templating error pages', function() {
 		errorPages.getPage(error, '', req, res, function(ret) {
 			retval = ret;
 		});
-
-		assert.isTrue(retval === undefined);
+		assert.isTrue(renderer.render.notCalled);
+		assert.strictEqual(undefined, retval);
 	});
 
 	it('Should try to render if configured to do so', function() {
@@ -139,12 +143,29 @@ describe('Templating error pages', function() {
 			retval = ret;
 		});
 
-console.log(!config.errorPages || !config.errorPages.errorLayouts || !config.errorPages.errorLayouts.default);
-console.log(retval);
+		renderer.render.firstCall.yield(null, 'my error page');
 
-		assert.isTrue(errorPages.getTemplateContext.calledOnce);
-		assert.isTrue(retval === undefined);
+		assert.strictEqual(renderer.render.callCount, 1);
+		assert.strictEqual('my error page', retval);
 	});
 
+	it('Should callback with an undefined if there is an error rendering the error page', function() {
+		var errorPages = require(moduleName)(config);
+		var retval = false;
+		errorPages.getPage(error, '', req, res, function(ret) {
+			retval = ret;
+		});
 
+		renderer.render.firstCall.yield(new Error('bad times'));
+
+		assert.strictEqual(renderer.render.callCount, 1);
+		assert.strictEqual(undefined, retval);
+	});
+
+	it('Should populate the template with the error context', function() {
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.strictEqual('layout', renderer.render.firstCall.args[2].layout.template);
+		assert.strictEqual(error, renderer.render.firstCall.args[2].errorContext.error);
+	});
 });
