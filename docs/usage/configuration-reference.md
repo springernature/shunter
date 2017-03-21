@@ -166,7 +166,7 @@ With the above configuration, you'd just need to append a query parameter to you
 Environment Configuration
 -------------------------
 
-the `env` object contains functions that return the name of the different environments which your Shunter application may be deployed. By default looks like this:
+The `env` object contains functions that return the name of the different environments which your Shunter application may be deployed. By default it looks like this:
 
 ```js
 env: {
@@ -184,6 +184,53 @@ env: {
 ```
 
 You may like to modify this config object to reflect the environments to which you will be deploying your Shunter application.
+
+
+Templated Error Page Configuration
+----------------------------------
+
+You may require Shunter to render error pages for 40x or 50x responses from the backend and recoverable Shunter errors.  To do so, provide a configuration object similar to this:
+
+```js
+errorPages: {
+    errorLayouts: {
+        default: 'layout',
+        404: 'layout-error-404'
+    },
+    staticData: {
+        yourData: 'goesHere'
+    }
+}
+```
+
+The value of `errorPages.errorLayouts.default` should be the name of your root template.  It is possible to override this by HTTP Status Code -- so in the example above `layout-error-404.dust` would eventually be used as the root template if a 404 error is passed to Shunter from the backend.
+
+Any data provided in `errorPages.errorLayouts.staticData` will be made available in the root of the context stack when the error page is rendered.
+
+Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context.  Here is an example of the context object passed to the renderer given the above configuration, in the event of a 404 error;
+
+```js
+layout: {
+    template: 'layout-error-404',
+    namespace: 'custom-errors'
+},
+errorContext: {
+    error: {
+        status: 404,
+        message: 'Not found'
+    },
+    hostname: 'localhost.localdomain',
+    isDevelopment: true,
+    isProduction: false,
+    reqHost: 'localhost:5400',
+    reqUrl: '/does-not-exist'
+},
+staticData-TODO:FIXME: {
+    yourData: 'goesHere'
+}
+```
+
+In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [#adding-custom-configurations][Custom Configuration].
 
 
 Adding Custom Configurations
