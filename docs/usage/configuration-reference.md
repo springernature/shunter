@@ -12,6 +12,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Timer](#timer-configuration)
 - [JSON View Parameter](#json-view-parameter)
 - [Environment](#environment-configuration)
+- [Templated Error Page](#templated-error-page-configuration)
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
 - [Command Line Options](#command-line-options)
@@ -230,7 +231,7 @@ staticData-TODO:FIXME: {
 }
 ```
 
-In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [#adding-custom-configurations][Custom Configuration].
+In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [#adding-custom-configurations](Custom Configuration).
 
 
 Adding Custom Configurations
