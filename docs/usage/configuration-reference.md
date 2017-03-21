@@ -231,7 +231,7 @@ staticData-TODO:FIXME: {
 }
 ```
 
-In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [#adding-custom-configurations](Custom Configuration).
+In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [Custom Configuration](#adding-custom-configurations).
 
 
 Adding Custom Configurations
