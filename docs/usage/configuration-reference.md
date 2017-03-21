@@ -12,7 +12,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Timer](#timer-configuration)
 - [JSON View Parameter](#json-view-parameter)
 - [Environment](#environment-configuration)
-- [Templated Error Page](#templated-error-page-configuration)
+- [Templated Error Pages](#templated-error-page-configuration)
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
 - [Command Line Options](#command-line-options)
@@ -208,7 +208,7 @@ The value of `errorPages.errorLayouts.default` should be the name of the root te
 
 Any data provided in `errorPages.errorLayouts.staticData` will be made available in the root of the context stack when the error page is rendered.
 
-Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context.  Here is an example of the context object passed to the renderer given the above configuration, in the event of a 404 error;
+Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context.  Here is an example of the context object passed to the renderer in the event of a 404 error, given the above configuration:
 
 ```js
 layout: {
