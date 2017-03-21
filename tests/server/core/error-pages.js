@@ -143,10 +143,10 @@ describe('Templating error pages', function() {
 
 	it('Should render the template with the users specified layout by error code', function() {
 		var errorPages = require(moduleName)(config);
-		var thisError = new Error('err');
-		thisError.status = 404;
-		errorPages.getPage(thisError, '', req, res, function() { });
-		assert.strictEqual(config.errorPages.errorLayouts['' + thisError.status], renderer.render.firstCall.args[2].layout.template);
+		var error = new Error('err');
+		error.status = 404;
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.strictEqual(config.errorPages.errorLayouts[error.status.toString()], renderer.render.firstCall.args[2].layout.template);
 	});
 
 	it('Should insert the error into the template context', function() {
