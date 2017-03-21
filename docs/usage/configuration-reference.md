@@ -190,7 +190,7 @@ You may like to modify this config object to reflect the environments to which y
 Templated Error Page Configuration
 ----------------------------------
 
-You may require Shunter to render error pages for 40x or 50x responses from the backend and recoverable Shunter errors.  To do so, provide a configuration object similar to this:
+You may require Shunter to render error pages for 400/500 responses from the backend, and also recoverable Shunter errors.  To do so, provide a configuration object similar to this:
 
 ```js
 errorPages: {
@@ -204,7 +204,7 @@ errorPages: {
 }
 ```
 
-The value of `errorPages.errorLayouts.default` should be the name of your root template.  It is possible to override this by HTTP Status Code -- so in the example above `layout-error-404.dust` would eventually be used as the root template if a 404 error is passed to Shunter from the backend.
+The value of `errorPages.errorLayouts.default` should be the name of the root template you would like to use to render any error pages.  It is possible to override this behaviour by HTTP Status Code — so in the example above `layout-error-404.dust` would eventually be used as the root template if a 404 error is passed to Shunter from the backend.
 
 Any data provided in `errorPages.errorLayouts.staticData` will be made available in the root of the context stack when the error page is rendered.
 
@@ -231,7 +231,7 @@ staticData-TODO:FIXME: {
 }
 ```
 
-In the event that you require a large set of `staticData` to be passed to the template renderer, maybe consider using a [Custom Configuration](#adding-custom-configurations).
+In the event that you require a large set of `staticData` to be passed to the template renderer, perhaps consider using a Custom Configuration.
 
 
 Adding Custom Configurations
