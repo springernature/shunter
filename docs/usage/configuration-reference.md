@@ -190,7 +190,7 @@ You may like to modify this config object to reflect the environments to which y
 Templated Error Page Configuration
 ----------------------------------
 
-Optionally, you may require Shunter to render error pages for recoverable Shunter errors, and also 400/500 responses from the backend.  To do so, provide a configuration object similar to this:
+Optionally, you can configure Shunter to render error pages for recoverable Shunter errors, and also 400/500 responses from the backend.  To do so, provide a configuration object similar to this:
 
 ```js
 errorPages: {
@@ -199,14 +199,16 @@ errorPages: {
         404: 'layout-error-404'
     },
     staticData: {
-        yourData: 'goesHere'
+        yourData: {
+            goes: 'here'
+        }
     }
 }
 ```
 
 The value of `errorPages.errorLayouts.default` should be the name of the root template you wish to use to render any error pages.  It is possible to override this default by HTTP Status Code — so in the example above `layout-error-404.dust` would be used as the root template if a 404 error is passed to Shunter from the backend.
 
-Any data in `errorPages.staticData` will be made available under `staticData` in the root of the context when the page is rendered.
+Any object defined in `errorPages.staticData` will be made available in the root of the context when the page is rendered. This object must not contain keys in the top level called `layout` or `errorContext` or Shunter will silently drop them.
 
 Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context for use in your templates.  Here is an example of the context object passed to the renderer in the event of a 404 error, given the above configuration:
 
@@ -226,10 +228,12 @@ errorContext: {
     reqHost: 'localhost:5400',
     reqUrl: '/does-not-exist'
 },
-staticData: {
-    yourData: 'goesHere'
+yourData: {
+    goes: 'here'
 }
 ```
+
+You may now realise why `staticData` must not contain keys in the top level called `layout` or `errorContext`. While we could encapsulate `staticData` under a new key and remove this restriction, doing so would impair the ability of the user to re-use existing templates when rendering errors, as it would require moving aroud the Dust context stack in the event we are rendering an error page.
 
 If you need a large set of `staticData`, maybe consider a Custom Configuration?
 

@@ -155,16 +155,34 @@ describe('Templating error pages', function() {
 		assert.strictEqual(error, renderer.render.firstCall.args[2].errorContext.error);
 	});
 
-	it('Should insert populate the template context with the reqHost', function() {
+	it('Should populate the template context with the reqHost', function() {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
 		assert.strictEqual(req.headers.host, renderer.render.firstCall.args[2].errorContext.reqHost);
 	});
 
-	it('Should insert populate the template context with the users static data', function() {
+	it('Should populate the template context with the users static data', function() {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
-		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].staticData.users);
+		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].users);
+	});
+
+	it('Should prevent the user from clobbering the required "layout" key', function() {
+		config.errorPages.staticData['layout'] = {};
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.strictEqual(config.errorPages.errorLayouts.default, renderer.render.firstCall.args[2].layout.template);
+	});
+
+	it('Should prevent the user from clobbering the required "errorContext" key', function() {
+		var badConfig = {
+			user: 'error'
+		};
+		config.errorPages.staticData['errorContext'] = badConfig;
+		var errorPages = require(moduleName)(config);
+		errorPages.getPage(error, '', req, res, function() { });
+		assert.notStrictEqual(badConfig, renderer.render.firstCall.args[2].errorContext);
+
 	});
 
 });
