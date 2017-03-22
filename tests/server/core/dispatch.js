@@ -131,5 +131,4 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.end.calledOnce);
 	});
 
-	/* TODO getErrorContent */
 });
