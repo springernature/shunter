@@ -168,7 +168,7 @@ describe('Templating error pages', function() {
 	});
 
 	it('Should prevent the user from clobbering the required "layout" key', function() {
-		config.errorPages.staticData['layout'] = {};
+		config.errorPages.staticData.layout = {};
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
 		assert.strictEqual(config.errorPages.errorLayouts.default, renderer.render.firstCall.args[2].layout.template);
@@ -178,11 +178,10 @@ describe('Templating error pages', function() {
 		var badConfig = {
 			user: 'error'
 		};
-		config.errorPages.staticData['errorContext'] = badConfig;
+		config.errorPages.staticData.errorContext = badConfig;
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
 		assert.notStrictEqual(badConfig, renderer.render.firstCall.args[2].errorContext);
 
 	});
-
 });
