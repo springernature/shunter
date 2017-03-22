@@ -204,9 +204,9 @@ errorPages: {
 }
 ```
 
-The value of `errorPages.errorLayouts.default` should be the name of the root template you would like to use to render any error pages.  It is possible to override this behaviour by HTTP Status Code — so in the example above `layout-error-404.dust` would be used as the root template if a 404 error is passed to Shunter from the backend.
+The value of `errorPages.errorLayouts.default` should be the name of the root template you wish to use to render any error pages.  It is possible to override this default by HTTP Status Code — so in the example above `layout-error-404.dust` would be used as the root template if a 404 error is passed to Shunter from the backend.
 
-Any data provided in `errorPages.errorLayouts.staticData` will be made available in the root of the context stack when the error page is rendered.
+Any data in `errorPages.staticData` will be made available under `staticData` in the root of the context when the page is rendered.
 
 Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context for use in your templates.  Here is an example of the context object passed to the renderer in the event of a 404 error, given the above configuration:
 
@@ -226,12 +226,12 @@ errorContext: {
     reqHost: 'localhost:5400',
     reqUrl: '/does-not-exist'
 },
-staticData-TODO:FIXME: {
+staticData: {
     yourData: 'goesHere'
 }
 ```
 
-In the event a large set of `staticData` needs to be passed to the template renderer, perhaps use a Custom Configuration?
+If you need a large set of `staticData`, maybe consider a Custom Configuration?
 
 
 Adding Custom Configurations
