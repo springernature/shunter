@@ -190,7 +190,7 @@ You may like to modify this config object to reflect the environments to which y
 Templated Error Page Configuration
 ----------------------------------
 
-You may require Shunter to render error pages for 400/500 responses from the backend, and also recoverable Shunter errors.  To do so, provide a configuration object similar to this:
+You may require Shunter to render error pages for recoverable Shunter errors, and also 400/500 responses from the backend.  To do so, provide a configuration object similar to this:
 
 ```js
 errorPages: {

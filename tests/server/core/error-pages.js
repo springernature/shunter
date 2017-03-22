@@ -164,8 +164,7 @@ describe('Templating error pages', function() {
 	it('Should insert populate the template context with the users static data', function() {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, '', req, res, function() { });
-		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].users);
+		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].staticData.users);
 	});
 
-	/* TODO add layout and errorContext clobbering tests */
 });
