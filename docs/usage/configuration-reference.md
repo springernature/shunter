@@ -233,9 +233,9 @@ yourData: {
 }
 ```
 
-You may now realise why `staticData` must not contain keys in the top level called `layout` or `errorContext`. While we could encapsulate `staticData` under a new key and remove this restriction, doing so would impair the ability of the user to re-use existing templates when rendering errors, as it would require moving aroud the Dust context stack in the event we are rendering an error page.
+You may now realise why `staticData` must not contain keys in the top level called `layout` or `errorContext`. While we could encapsulate `staticData` under a new key and remove this restriction, doing so would impair the ability of the user to re-use existing templates when rendering errors, as it would require manipulating the Dust context stack in the event we are rendering an error page.
 
-If you need a large set of `staticData`, maybe consider a Custom Configuration?
+Finally, if you do require a large set of `staticData`, maybe consider a Custom Configuration?
 
 
 Adding Custom Configurations
