@@ -1,6 +1,9 @@
 
 # History
 
+## 4.6.0 (2017-03-24)
+  * Adds option facilitating templated error pages
+
 ## 4.5.0 (2017-03-13)
   * Add a `--logging` option to allow for setting the logging level
   * Move less critical log events from info level to debug
