@@ -12,6 +12,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Timer](#timer-configuration)
 - [JSON View Parameter](#json-view-parameter)
 - [Environment](#environment-configuration)
+- [Templated Error Pages](#templated-error-page-configuration)
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
 - [Command Line Options](#command-line-options)
@@ -166,7 +167,7 @@ With the above configuration, you'd just need to append a query parameter to you
 Environment Configuration
 -------------------------
 
-the `env` object contains functions that return the name of the different environments which your Shunter application may be deployed. By default looks like this:
+The `env` object contains functions that return the name of the different environments which your Shunter application may be deployed. By default it looks like this:
 
 ```js
 env: {
@@ -184,6 +185,55 @@ env: {
 ```
 
 You may like to modify this config object to reflect the environments to which you will be deploying your Shunter application.
+
+
+Templated Error Page Configuration
+----------------------------------
+
+Optionally, you can configure Shunter to render error pages for recoverable Shunter errors, and also 400/500 responses from the backend.  To do so, provide a configuration object similar to this:
+
+```js
+errorPages: {
+    errorLayouts: {
+        default: 'layout',
+        404: 'layout-error-404'
+    },
+    staticData: {
+        yourData: {
+            goes: 'here'
+        }
+    }
+}
+```
+
+The value of `errorPages.errorLayouts.default` should be the name of the root template you wish to use to render any error pages.  It is possible to override this default by HTTP Status Code — so in the example above `layout-error-404.dust` would be used as the root template if a 404 error is passed to Shunter from the backend.
+
+Any object defined in `errorPages.staticData` will be made available in the root of the context when the page is rendered. This object must not contain keys in the top level called `layout` or `errorContext` or Shunter will silently drop them.
+
+Additionally, when using templated error pages, Shunter will automatically insert the error object and some other information into the context for use in your templates.  Here is an example of the context object passed to the renderer in the event of a 404 error, given the above configuration:
+
+```js
+layout: {
+    template: 'layout-error-404',
+    namespace: 'custom-errors'
+},
+errorContext: {
+    error: {
+        status: 404,
+        message: 'Not found'
+    },
+    hostname: 'localhost.localdomain',
+    isDevelopment: true,
+    isProduction: false,
+    reqHost: 'localhost:5400',
+    reqUrl: '/does-not-exist'
+},
+yourData: {
+    goes: 'here'
+}
+```
+
+If you require a large set of `staticData`, it may be more appropriate to include it as a Custom Configuration.
 
 
 Adding Custom Configurations
