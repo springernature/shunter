@@ -33,6 +33,7 @@ API Documentation
   - [StatsD](configuration-reference.md#statsd-configuration)
   - [Timer](configuration-reference.md#timer-configuration)
   - [Environment](configuration-reference.md#environment-configuration)
+  - [Templated Error Pages](configuration-reference.md#templated-error-page-configuration)
   - [Custom Configurations](configuration-reference.md#adding-custom-configurations)
   - [Configuring Modules](configuration-reference.md#configuring-modules)
   - [Command Line Options](configuration-reference.md#command-line-options)
