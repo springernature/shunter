@@ -122,7 +122,7 @@ describe('Shunter logging configuration', function() {
 			assert.isFalse(logger.transports.console.colorize);
 		});
 
-		it('Should not use broken user transport/filter files', function() {
+		it('Should not use broken user transport files', function() {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.path.root = './tests/server/mock-data'; // includes a broken syslog transport module
 
@@ -130,6 +130,14 @@ describe('Shunter logging configuration', function() {
 			assert.isNotObject(logger.transports.syslog);
 			// one dropped transport out of two should leave one valid transport
 			assert.strictEqual(Object.keys(logger.transports).length, 1);
+		});
+
+		it('Should use user filter files', function() {
+			var thisConfig = defaultShunterConfig;
+			thisConfig.path.root = './tests/server/mock-data'; // includes a broken syslog transport module
+
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
+			assert.strictEqual(logger.filters[0]('info', 'water'), 'filtered: water');
 		});
 
 	});
