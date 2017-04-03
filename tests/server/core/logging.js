@@ -11,7 +11,7 @@ describe('Shunter logging configuration', function() {
 			syslog: true
 		},
 		env: {
-			host: function(){
+			host: function() {
 				return 'some.host.name'
 			}
 		},
@@ -55,22 +55,68 @@ describe('Shunter logging configuration', function() {
 		});
 		*/
 
-		it('Should offer getDefaultConfig() in its API', function() {
+		it('Should offer getConfig() in its API', function() {
 			var loggingInstance = require('../../../lib/logging')(defaultShunterConfig);
-			assert.isFunction(loggingInstance.getDefaultConfig);
+			assert.isFunction(loggingInstance.getConfig);
 		});
 
 		it('Should load the winston console transport', function() {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getDefaultConfig();
-			assert.strictEqual(logger.transports.console.name, 'console');
+			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
+			assert.isObject(logger.transports.console);
 		});
 
 		it('Should load the winston syslog transport', function() {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getDefaultConfig();
+			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
+			assert.isObject(logger.transports.syslog);
+		});
+	});
+
+
+	describe('syslog not required', function() {
+
+		it('Should not load syslog if either argv.syslog is falsy', function() {
+			var thisConfig = defaultShunterConfig;
+			delete thisConfig.argv.syslog;
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
+			assert.isNotObject(logger.transports.syslog);
+		});
+
+		it('Should not load syslog if syslogAppName is falsy', function() {
+			var thisConfig = defaultShunterConfig;
+			delete thisConfig.syslogAppName;
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
+			assert.isNotObject(logger.transports.syslog);
+		});
+	});
+
+
+	describe('Userland logging config provided', function() {
+
+		var userTransport = function(defaultShunterConfig) {
+			return new (winston.transports.Console)({
+				colorize: false,
+				timestamp: true,
+				level: 'debug'
+			});
+		};
+
+		it('Confirm our colorize default config option is true by default', function() {
+			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
+			assert.isTrue(logger.transports.console.colorize);
+		});
+
+		it('Can override our colorize default config option', function() {
+			var thisConfig = defaultShunterConfig;
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
+			assert.isFalse(logger.transports.console.colorize);
+
 			console.log('==========================================')
 			console.log(JSON.stringify(logger.transports))
-			assert.strictEqual(logger.transports.syslog.name, 'syslog');
+			assert.isNotObject(logger.transports.syslog);
 		});
+
+
+
 	});
 
 /*
