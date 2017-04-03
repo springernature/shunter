@@ -15,6 +15,7 @@ describe('Shunter configuration', function () {
 
 	describe('Specifying an environment', function () {
 		var env;
+		var loggingLib;
 
 		beforeEach(function () {
 			env = process.env.NODE_ENV;
@@ -26,6 +27,8 @@ describe('Shunter configuration', function () {
 				warnOnReplace: false
 			});
 			mockery.registerMock('os', require('../mocks/os'));
+			loggingLib = require('../mocks/logging');
+			mockery.registerMock('../../../lib/logging', loggingLib);
 		});
 		afterEach(function () {
 			process.env.NODE_ENV = env;
@@ -46,6 +49,12 @@ describe('Shunter configuration', function () {
 			assert.equal(config.env.name, 'production');
 			assert.isTrue(config.env.isProduction());
 			assert.isFalse(config.env.isDevelopment());
+		});
+
+		it('Should call the logging module if no logger is configured', function() {
+			var config = require('../../../lib/config')('production', null, {});
+			var logging = loggingLib(config);
+			assert.isFalse(logging.getConfig.notCalled);
 		});
 	});
 });
