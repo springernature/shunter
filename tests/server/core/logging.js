@@ -1,7 +1,6 @@
 'use strict';
 
 var assert = require('proclaim');
-var mockery = require('mockery');
 var winston = require('winston');
 
 describe('Shunter logging configuration', function() {
@@ -12,13 +11,13 @@ describe('Shunter logging configuration', function() {
 		},
 		env: {
 			host: function() {
-				return 'some.host.name'
+				return 'some.host.name';
 			}
 		},
 		log: require('../mocks/log'),
 		path: {
-			root: './',
-			shunterRoot: '/app'
+			root: '/location-of-userland-files',
+			shunterRoot: './'
 		},
 		structure: {
 			logging: 'logging',
@@ -28,33 +27,7 @@ describe('Shunter logging configuration', function() {
 		syslogAppName: 'foo'
 	};
 
-//	var appjsConfig = {};
-//	var defaultShunterConfig = require('../../../lib/config')(process.env.NODE_ENV, appjsConfig);
-
 	describe('No logging config provided', function() {
-
-		/*
-		var env;
-
-		beforeEach(function() {
-			env = process.env.NODE_ENV;
-			process.env.NODE_ENV = 'ci';
-
-			mockery.enable({
-				useCleanCache: true,
-				warnOnUnregistered: false,
-				warnOnReplace: false
-			});
-			mockery.registerMock('os', require('../mocks/os'));
-		});
-		afterEach(function() {
-			process.env.NODE_ENV = env;
-
-			mockery.deregisterAll();
-			mockery.disable();
-		});
-		*/
-
 		it('Should offer getConfig() in its API', function() {
 			var loggingInstance = require('../../../lib/logging')(defaultShunterConfig);
 			assert.isFunction(loggingInstance.getConfig);
@@ -69,12 +42,16 @@ describe('Shunter logging configuration', function() {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
 			assert.isObject(logger.transports.syslog);
 		});
+
+		it('Should not load any filters by default', function() {
+			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
+			assert.isObject(logger.filters);
+			assert.strictEqual(logger.filters.length, 0);
+		});
 	});
 
-
 	describe('syslog not required', function() {
-
-		it('Should not load syslog if either argv.syslog is falsy', function() {
+		it('Should not load syslog if argv.syslog is falsy', function() {
 			var thisConfig = defaultShunterConfig;
 			delete thisConfig.argv.syslog;
 			var logger = require('../../../lib/logging')(thisConfig).getConfig();
@@ -89,72 +66,60 @@ describe('Shunter logging configuration', function() {
 		});
 	});
 
-
 	describe('Userland logging config provided', function() {
+		var appJSLogConfig = new winston.Logger({
+			transports: [
+				new (winston.transports.Console)({
+					colorize: false
+				})
+			],
+			filters: [
+				function(level, msg) {
+					return 'filtered: ' + msg;
+				}
+			]
+		});
 
-		var userTransport = function(defaultShunterConfig) {
-			return new (winston.transports.Console)({
-				colorize: false,
-				timestamp: true,
-				level: 'debug'
-			});
-		};
-
-		it('Confirm our colorize default config option is true by default', function() {
+		it('Confirm our colorize config option defaults to true', function() {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
 			assert.isTrue(logger.transports.console.colorize);
 		});
 
-		it('Can override our colorize default config option', function() {
+		it('Can override our default config via app.js/args to config.js', function() {
 			var thisConfig = defaultShunterConfig;
+			thisConfig.log = appJSLogConfig;
+
+			var parsedConfig = require('../../../lib/config')(defaultShunterConfig.env, thisConfig, {});
+			assert.isFalse(parsedConfig.log.transports.console.colorize);
+		});
+
+		it('Should respect filters passed via app.js/args to config.js', function() {
+			var thisConfig = defaultShunterConfig;
+			thisConfig.log = appJSLogConfig;
+
+			var parsedConfig = require('../../../lib/config')(defaultShunterConfig.env, thisConfig, {});
+			assert.isObject(parsedConfig.log.filters);
+			assert.strictEqual(parsedConfig.log.filters.length, 1);
+			assert.isTypeOf(parsedConfig.log.filters[0], 'function');
+		});
+
+		it('Can override our default config via provided files', function() {
+			var thisConfig = defaultShunterConfig;
+			thisConfig.path.root = './tests/server/mock-data';
+
 			var logger = require('../../../lib/logging')(thisConfig).getConfig();
 			assert.isFalse(logger.transports.console.colorize);
+		});
 
-			console.log('==========================================')
-			console.log(JSON.stringify(logger.transports))
+		it('Should not use broken user transport/filter files', function() {
+			var thisConfig = defaultShunterConfig;
+			thisConfig.path.root = './tests/server/mock-data'; // includes a broken syslog transport module
+
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
 			assert.isNotObject(logger.transports.syslog);
-		});
-
-
-
-	});
-
-/*
-	describe('Specifying an environment', function() {
-		var env;
-
-		beforeEach(function() {
-			env = process.env.NODE_ENV;
-			process.env.NODE_ENV = 'ci';
-
-			mockery.enable({
-				useCleanCache: true,
-				warnOnUnregistered: false,
-				warnOnReplace: false
-			});
-			mockery.registerMock('os', require('../mocks/os'));
-		});
-		afterEach(function() {
-			process.env.NODE_ENV = env;
-
-			mockery.deregisterAll();
-			mockery.disable();
-		});
-
-		it('Should be able to select the environment from an environment variable', function() {
-			var config = require('../../../lib/config')(null, null, {});
-			assert.equal(config.env.name, 'ci');
-			assert.isFalse(config.env.isDevelopment());
-			assert.isFalse(config.env.isProduction());
-		});
-
-		it('Should be able to override an environment variable', function() {
-			var config = require('../../../lib/config')('production', null, {});
-			assert.equal(config.env.name, 'production');
-			assert.isTrue(config.env.isProduction());
-			assert.isFalse(config.env.isDevelopment());
+			// one dropped transport out of two should leave one valid transport
+			assert.strictEqual(Object.keys(logger.transports).length, 1);
 		});
 
 	});
-*/
 });
