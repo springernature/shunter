@@ -7,7 +7,8 @@ describe('Shunter logging configuration', function() {
 
 	var defaultShunterConfig = {
 		argv: {
-			syslog: true
+			syslog: true,
+			logging: 'info'
 		},
 		env: {
 			host: function() {
@@ -50,6 +51,16 @@ describe('Shunter logging configuration', function() {
 		});
 	});
 
+	describe('Provide configurable log level for default Console transport', function() {
+		it('Should respect a log level argv', function() {
+			var thisConfig = defaultShunterConfig;
+			thisConfig.argv.logging = 'someValue';
+
+			var logger = require('../../../lib/logging')(thisConfig).getConfig();
+			assert.strictEqual(logger.transports.console.level, 'someValue');
+		});
+	});
+
 	describe('syslog not required', function() {
 		it('Should not load syslog if argv.syslog is falsy', function() {
 			var thisConfig = defaultShunterConfig;
@@ -80,7 +91,7 @@ describe('Shunter logging configuration', function() {
 			]
 		});
 
-		it('Confirm our colorize config option defaults to true', function() {
+		it('First confirms our colorize config option defaults to true', function() {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
 			assert.isTrue(logger.transports.console.colorize);
 		});
@@ -89,7 +100,7 @@ describe('Shunter logging configuration', function() {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.log = appJSLogConfig;
 
-			var parsedConfig = require('../../../lib/config')(defaultShunterConfig.env, thisConfig, {});
+			var parsedConfig = require('../../../lib/config')(thisConfig.env, thisConfig, {});
 			assert.isFalse(parsedConfig.log.transports.console.colorize);
 		});
 
@@ -97,7 +108,7 @@ describe('Shunter logging configuration', function() {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.log = appJSLogConfig;
 
-			var parsedConfig = require('../../../lib/config')(defaultShunterConfig.env, thisConfig, {});
+			var parsedConfig = require('../../../lib/config')(thisConfig.env, thisConfig, {});
 			assert.isObject(parsedConfig.log.filters);
 			assert.strictEqual(parsedConfig.log.filters.length, 1);
 			assert.isTypeOf(parsedConfig.log.filters[0], 'function');
