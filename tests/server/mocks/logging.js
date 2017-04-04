@@ -2,6 +2,6 @@
 
 var sinon = require('sinon');
 
-module.exports = {
+module.exports = sinon.stub().returns({
 	getConfig: sinon.stub()
-};
+});

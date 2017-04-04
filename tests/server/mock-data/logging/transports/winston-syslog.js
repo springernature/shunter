@@ -1,2 +1,2 @@
 'use strict';
-module.exports = 'a broken module';
+module.exports = 'Ceci n\'est pas une function';
