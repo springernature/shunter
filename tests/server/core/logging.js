@@ -117,7 +117,7 @@ describe('Shunter logging config,', function() {
 
 	describe('With Userland logging config provided via files,', function() {
 		var mockedLogger;
-		beforeEach(function(){
+		beforeEach(function() {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.path.root = './tests/server/mock-data';
 			mockedLogger = require('../../../lib/logging')(thisConfig).getConfig();

@@ -30,6 +30,7 @@ describe('Shunter configuration', function () {
 			loggingLib = require('../mocks/logging');
 			mockery.registerMock('../../../lib/logging', loggingLib);
 		});
+
 		afterEach(function () {
 			process.env.NODE_ENV = env;
 
