@@ -16,7 +16,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
 - [Command Line Options](#command-line-options)
-- [Accessing the Configuration at Run Time](#command-line-options)
+- [Accessing the Configuration at Run Time](#accessing-the-configuration-at-run-time)
 
 Web Configuration
 -----------------

@@ -37,6 +37,7 @@ API Documentation
   - [Custom Configurations](configuration-reference.md#adding-custom-configurations)
   - [Configuring Modules](configuration-reference.md#configuring-modules)
   - [Command Line Options](configuration-reference.md#command-line-options)
+  - [Accessing the Configuration at Run Time](configuration-reference.md#accessing-the-configuration-at-run-time)
 - [Middleware](middleware.md)
 - [Routing](routing.md)
   - [Examples](routing.md#examples)
