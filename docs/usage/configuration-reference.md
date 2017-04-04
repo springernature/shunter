@@ -16,7 +16,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Custom Configurations](#adding-custom-configurations)
 - [Configuring Modules](#configuring-modules)
 - [Command Line Options](#command-line-options)
-
+- [Accessing the Configuration at Run Time](#command-line-options)
 
 Web Configuration
 -----------------
@@ -40,16 +40,17 @@ The path object defines the paths to some of the key directories used by Shunter
 
 ```js
 path: {
-    root: appRoot,
-    shunterRoot: shunterRoot,
-    themes: path.join(shunterRoot, 'themes'),
-    templates: path.join(appRoot, 'view'),
+    clientTests: path.join(appRoot, 'tests', 'client'),
+    dust: path.join(appRoot, 'dust'),
     public: path.join(appRoot, 'public'),
     publicResources: path.join(appRoot, 'public', 'resources'),
     resources: path.join(appRoot, 'resources'),
+    root: appRoot,
     shunterResources: path.join(shunterRoot, 'resources'),
+    shunterRoot: shunterRoot,
+    templates: path.join(appRoot, 'view'),
     tests: path.join(appRoot, 'tests'),
-    dust: path.join(appRoot, 'dust')
+    themes: path.join(shunterRoot, 'themes')
 }
 ```
 
@@ -61,43 +62,40 @@ The structure object defines the directory structure where Shunter's resources w
 
 ```js
 structure: {
-    templates: 'view',
-    templateExt: '.dust',
-    resources: 'resources',
-    styles: 'css',
-    images: 'img',
-    scripts: 'js',
-    fonts: 'fonts',
-    tests: 'tests',
+    dust: 'dust',
+    ejs: 'ejs',
     filters: 'filters',
     filtersInput: 'input',
     filtersOutput: 'output',
-    dust: 'dust',
-    ejs: 'ejs'
+    fonts: 'fonts',
+    images: 'img',
+    logging: 'logging',
+    loggingTransports: 'transports',
+    loggingFilters: 'filters',
+    mincer: 'mincer',
+    resources: 'resources',
+    scripts: 'js',
+    styles: 'css',
+    templateExt: '.dust',
+    templates: 'view',
+    tests: 'tests'
 }
 ```
 
-- `structure.templates` defines the location of the templates used to render the Shunter application's output. By default the value of this is 'view'.
-
-- `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter.
-
-- `structure.resources` defines the name of the directory used to house front-end resources including CSS, JavaScript and images, the default value is 'resources'.
-
-- `structure.styles` defines the name of the directory used to hold CSS files used in your Shunter application. The default value is 'css'.
-
-- `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
-
-- `structure.scripts` defines the directory used to hold JavaScript files.
-
-- `structure.fonts` defines the directory used to hold web fonts.
-
-- `structure.tests` defines the directory used to hold the files that define your JavaScript and template tests.
-
 - `structure.filters` defines the directory used to hold the filter functions that can be used to process JSON before and after it is rendered into to its output format.
-
 - `structure.filtersInput` defines the directory used to hold the filter functions that can be used to process JSON before it is rendered into its output format.
-
 - `structure.filtersOutput` defines the directory used to hold the filter functions that can be used to process output files once they has been rendered.
+- `structure.fonts` defines the directory used to hold web fonts.
+- `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
+- `structure.logging` defines the directory used to hold any user transport or filter files.
+- `structure.loggingTransports` defines the directory used to hold any user transport files, inside the `structure.logging` dir.
+- `structure.loggingFilters` defines the directory used to hold any user filter files, inside the `structure.logging` dir.
+- `structure.resources` defines the name of the directory used to house front-end resources including CSS, JavaScript and images, the default value is 'resources'.
+- `structure.scripts` defines the directory used to hold JavaScript files.
+- `structure.styles` defines the name of the directory used to hold CSS files used in your Shunter application. The default value is 'css'.
+- `structure.templateExt` defines the file extension that Shunter should use for templating. By default this is .dust as Dust is the default templating in use within Shunter.
+- `structure.templates` defines the location of the templates used to render the Shunter application's output. By default the value of this is 'view'.
+- `structure.tests` defines the directory used to hold the files that define your JavaScript and template tests.
 
 
 Log Configuration
@@ -117,6 +115,17 @@ log: new winston.Logger({
         })
     ]
 }),
+```
+
+The log configuration can also be passed to shunter via transport and filter files in user-specified drectories (specified by `structure.logging`, `structure.loggingTransports` and  `structure.loggingFilters`, above).
+
+Shunter's default logging transports can be found in `logging/transports` in the Shunter source. Shunter uses no filters by default, but here's a trivial example you may find useful:
+
+```js
+'use strict';
+module.exports = function(level, msg, meta) {
+    return 'filtered message: ' + msg;
+}
 ```
 
 StatsD Configuration
@@ -286,6 +295,12 @@ Several aspects of Shunter behaviour can be configured via command line argument
  * `-w`, `--preserve-whitespace` Preserves whitespace in HTML output.
  * `-h`, `--help` Prints help about these options.
 
+
+
+Accessing the Configuration at Run Time
+---------------------------------------
+
+The final configuration actually used by Shunter at run time is available to your `app.js` via `app.getConfig()`. *Warning* modifying the returned data structure may result in unpredictable behaviour.
 
 ---
 
