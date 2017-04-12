@@ -1,6 +1,10 @@
 
 # History
 
+## 3.8.4 (2017-04-12)
+
+  * Update several dependencies that contained vulnerabilites.
+
 ## 3.8.3 (2016-07-22)
 
   * Fixed missing url parameter in `classifiedTiming` calls
