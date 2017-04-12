@@ -1,6 +1,11 @@
 
 # History
 
+## 4.6.1 (2017-04-12)
+
+* Update most dependencies and devDependencies to the latest major version.
+* Some minor refactoring and cleanup.
+
 ## 4.6.0 (2017-03-24)
 
 * Adds option facilitating templated error pages
