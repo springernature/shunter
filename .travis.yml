@@ -39,6 +39,7 @@ branches:
   only:
     - master
     - /^\d+\.\d+\.\d+$/
+    - /^\d+\.x$/
 
 # Before install
 before_install:
