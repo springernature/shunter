@@ -15,6 +15,9 @@ matrix:
     # Run tests in Node.js 6.x
     - node_js: '6'
 
+    # Run tests in the latest version of Node.js
+    - node_js: 'node'
+
 # Dependencies require GCC 4.8
 env:
   global:
@@ -36,4 +39,3 @@ branches:
 script:
   - 'if [ $LINT ]; then make lint; fi'
   - 'if [ ! $LINT ]; then make lcov-levels; fi'
-  #- 'if [ ! $LINT ]; then cat ./coverage/lcov.info | ./node_modules/.bin/coveralls; fi'
