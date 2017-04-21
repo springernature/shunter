@@ -42,4 +42,4 @@ script:
 
 # Updates the dashboard after a successful deployment
 after_success:
-  - snyk monitor
+  - snyk monitor --org=springer-nature
