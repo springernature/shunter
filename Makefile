@@ -26,7 +26,12 @@ jscs:
 	@./node_modules/.bin/jscs .
 
 # Run all tests
-test: test-server
+test: snyk-test test-server
+
+# Run snyk test
+snyk-test:
+	@echo "$(C_CYAN)> running 'snyk test'$(C_RESET)"
+	@./node_modules/.bin/snyk test
 
 # Run unit tests
 test-server:

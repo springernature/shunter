@@ -39,3 +39,7 @@ branches:
 script:
   - 'if [ $LINT ]; then make lint; fi'
   - 'if [ ! $LINT ]; then make lcov-levels; fi'
+
+# Updates the dashboard after a successful deployment
+after_success:
+  - snyk monitor --org=springer-nature
