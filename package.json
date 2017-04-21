@@ -85,7 +85,8 @@
     "mocha": "^3.0.0",
     "mockery": "^2.0.0",
     "proclaim": "^3.0.0",
-    "sinon": "^2.0.0"
+    "sinon": "^2.0.0",
+    "snyk": "^1.29.0"
   },
 
   "main": "./lib/shunter.js",
