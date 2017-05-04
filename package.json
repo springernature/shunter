@@ -2,10 +2,8 @@
   "name": "shunter",
   "version": "4.6.1",
   "license": "LGPL-3.0",
-
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [ "proxy", "front-end", "dust", "templates", "asset pipeline", "renderer" ],
-
   "author": "Nature Publishing Group",
   "contributors": [
     "Adam Tavener (http://www.tavvy.co.uk/)",
@@ -32,7 +30,6 @@
     "Thomas Franquelin (https://github.com/ostapneko)",
     "Yomi Colledge (http://baphled.wordpress.com)"
   ],
-
   "repository": {
     "type": "git",
     "url": "https://github.com/springernature/shunter.git"
@@ -80,15 +77,13 @@
   },
   "devDependencies": {
     "istanbul": "^0.4.0",
-    "jscs": "^3.0.0",
-    "jshint": "^2.0.0",
     "mocha": "^3.0.0",
     "mockery": "^2.0.0",
     "proclaim": "^3.0.0",
     "sinon": "^2.0.0",
-    "snyk": "^1.29.0"
+    "snyk": "^1.29.0",
+    "xo": "^0.18.2"
   },
-
   "main": "./lib/shunter.js",
   "bin": {
     "shunter-build": "./bin/compile.js",
@@ -98,5 +93,49 @@
   },
   "scripts": {
       "test": "make test"
+  },
+  "xo": {
+    "esnext": false,
+    "envs": [
+      "browser",
+      "jquery"
+    ],
+    "ignore": ["tests/client/lib/*.js"],
+    "rules": {
+      "block-scoped-var": "warn",
+      "no-lonely-if": "warn",
+      "no-multi-assign": "warn",
+      "no-path-concat": "warn",
+      "no-prototype-builtins": "warn",
+      "no-redeclare": "warn",
+      "no-undef": "warn",
+      "no-use-before-define": "warn",
+      "no-useless-escape": "warn",
+      "unicorn/explicit-length-check": "warn",
+      "unicorn/no-new-buffer": "warn"
+    },
+    "overrides": [
+      {
+        "files": "lib/processor.js",
+        "rules": {
+          "import/no-unresolved": "warn",
+          "unicorn/catch-error-name": "warn"
+        }
+      },
+      {
+        "files": "tests/server/core/input-filter.js",
+        "rules": {
+          "no-unused-vars": "warn"
+        }
+      },
+      {
+        "files": "tests/**/*.js",
+        "envs": [
+          "browser",
+          "jquery",
+          "mocha"
+        ]
+      }
+    ]
   }
 }

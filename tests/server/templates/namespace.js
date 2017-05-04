@@ -1,15 +1,15 @@
 
 'use strict';
 
-var assert = require('proclaim');
 var path = require('path');
+var assert = require('proclaim');
 var helper = require('../../helpers/template.js')();
 
 var rootDir = __dirname.substring(0, __dirname.indexOf('/tests/'));
 var templateDir = path.join(rootDir, 'view', 'tests');
 
-describe('Template overriding', function() {
-	before(function() {
+describe('Template overriding', function () {
+	before(function () {
 		helper.setup(
 			path.join(templateDir, 'namespace.dust'),
 			path.join(templateDir, 'a', 'b', 'loading.dust'),
@@ -20,13 +20,13 @@ describe('Template overriding', function() {
 	});
 	after(helper.teardown);
 
-	it('Should load templates relative to the namespace `tests`', function(done) {
+	it('Should load templates relative to the namespace `tests`', function (done) {
 		var json = {
 			layout: {
 				namespace: 'tests'
 			}
 		};
-		helper.render('namespace', json, function(err, $) {
+		helper.render('namespace', json, function (err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -48,20 +48,20 @@ describe('Template overriding', function() {
 				}
 			];
 
-			$('[data-test="templates"]').children('dd').each(function(i, item) {
+			$('[data-test="templates"]').children('dd').each(function (i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
 			done();
 		});
 	});
 
-	it('Should load templates relative to the namespace `tests__a`', function(done) {
+	it('Should load templates relative to the namespace `tests__a`', function (done) {
 		var json = {
 			layout: {
 				namespace: 'tests__a'
 			}
 		};
-		helper.render('namespace', json, function(err, $) {
+		helper.render('namespace', json, function (err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -83,20 +83,20 @@ describe('Template overriding', function() {
 				}
 			];
 
-			$('[data-test="templates"]').children('dd').each(function(i, item) {
+			$('[data-test="templates"]').children('dd').each(function (i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
 			done();
 		});
 	});
 
-	it('Should load templates relative to the namespace `tests__b`', function(done) {
+	it('Should load templates relative to the namespace `tests__b`', function (done) {
 		var json = {
 			layout: {
 				namespace: 'tests__b'
 			}
 		};
-		helper.render('namespace', json, function(err, $) {
+		helper.render('namespace', json, function (err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -118,20 +118,20 @@ describe('Template overriding', function() {
 				}
 			];
 
-			$('[data-test="templates"]').children('dd').each(function(i, item) {
+			$('[data-test="templates"]').children('dd').each(function (i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
 			done();
 		});
 	});
 
-	it('Should load templates relative to the namespace `tests__a__b`', function(done) {
+	it('Should load templates relative to the namespace `tests__a__b`', function (done) {
 		var json = {
 			layout: {
 				namespace: 'tests__a__b'
 			}
 		};
-		helper.render('namespace', json, function(err, $) {
+		helper.render('namespace', json, function (err, $) {
 			assert.isNull(err);
 
 			var expected = [
@@ -153,7 +153,7 @@ describe('Template overriding', function() {
 				}
 			];
 
-			$('[data-test="templates"]').children('dd').each(function(i, item) {
+			$('[data-test="templates"]').children('dd').each(function (i, item) {
 				assert.strictEqual(expected[i].path, $(item).text(), 'Loading template ' + expected[i].template);
 			});
 			done();

@@ -13,17 +13,12 @@ deps:
 	@npm install
 
 # Run all linters
-lint: jshint jscs
+lint: xo
 
 # Lint JavaScript
-jshint:
+xo:
 	@echo "$(C_CYAN)> linting javascript$(C_RESET)"
-	@./node_modules/.bin/jshint .
-
-# Run JavaScript Code Style
-jscs:
-	@echo "$(C_CYAN)> checking javascript code style$(C_RESET)"
-	@./node_modules/.bin/jscs .
+	@./node_modules/.bin/xo
 
 # Run all tests
 test: snyk-test test-server

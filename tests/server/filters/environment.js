@@ -5,22 +5,21 @@ var sinon = require('sinon');
 
 var filter = require('../../../filters/input/environment.js');
 
-describe('Populate data with environment info', function() {
-	// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+describe('Populate data with environment info', function () {
 	var callback;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		callback = sinon.stub();
 	});
 
-	it('Should add the request url', function() {
+	it('Should add the request url', function () {
 		filter({}, {
 			url: '/hello'
 		}, {}, {}, callback);
 		assert.strictEqual(callback.firstCall.args[0].request_url, '/hello');
 	});
 
-	it('Should handle query parameters', function() {
+	it('Should handle query parameters', function () {
 		var params = {
 			test: 'Something'
 		};
@@ -33,11 +32,13 @@ describe('Populate data with environment info', function() {
 		assert.strictEqual(callback.firstCall.args[0].query_data.test, 'Something');
 	});
 
-	it('Should convert a query parameter containing true or false to a truthy value', function() {
+	it('Should convert a query parameter containing true or false to a truthy value', function () {
+		/* eslint-disable camelcase */
 		var params = {
 			show_ads: 'false',
 			disable_third_party_scripts: 'true'
 		};
+		/* eslint-enable camelcase */
 
 		filter({}, {
 			url: '/hello/world?show_ads=false&disable_third_party_scripts=true',
@@ -48,7 +49,7 @@ describe('Populate data with environment info', function() {
 		assert.strictEqual(callback.firstCall.args[0].query_data.disable_third_party_scripts, true);
 	});
 
-	it('Should convert a query parameter containing an integer to a numeric value', function() {
+	it('Should convert a query parameter containing an integer to a numeric value', function () {
 		var params = {
 			page: '2'
 		};
@@ -61,7 +62,7 @@ describe('Populate data with environment info', function() {
 		assert.strictEqual(callback.firstCall.args[0].query_data.page, 2);
 	});
 
-	it('Should support passing through arrays from the query data', function() {
+	it('Should support passing through arrays from the query data', function () {
 		var params = {
 			journals: ['hortres', 'mtm', 'true', '7']
 		};

@@ -44,13 +44,10 @@ This script starts up a server, so you don't have to already have one running.
 
 'use strict';
 
-(function() {
-	// jshint maxstatements: false
-	// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-
+(function () {
 	var fs = require('fs');
 	var path = require('path');
-	var shell = require('child_process').exec; // used for triggering mocha-phantomjs. do not pass user input to this.
+	var shell = require('child_process').exec; // Used for triggering mocha-phantomjs. do not pass user input to this.
 	var connect = require('connect');
 	var serveStatic = require('serve-static');
 	var yargs = require('yargs');
@@ -104,7 +101,7 @@ This script starts up a server, so you don't have to already have one running.
 		firefox: 2,
 		'internet explorer': 8, // IE7 times out without managing to invoke any tests
 		safari: 4.1
-		// opera: 10, // Fails with java.lang.UnsupportedOperationException
+		// Opera: 10, // Fails with java.lang.UnsupportedOperationException
 		// iphone: 4.3, // Tests hang part-way through and eventually time out
 		// android: 2.3 // Fails with java.lang.UnsupportedOperationException
 	};
@@ -115,16 +112,16 @@ This script starts up a server, so you don't have to already have one running.
 		return runTests();
 	}
 
-	// dust template setup
+	// Dust template setup
 	renderer.compileFile(path.join(__dirname, '..', 'view', 'test-runner.dust'));
-	// middleware
+	// Middleware
 	var app = startApp();
 	app.listen(port, runTests);
 
 	/*
 		Get script block for processed main.js file via Mincer
 	*/
-	renderer.dust.helpers.scriptBlock = function(chunk, context, bodies, params) {
+	renderer.dust.helpers.scriptBlock = function (chunk, context, bodies, params) {
 		var assetPath;
 		var asset = renderer.environment.findAsset(params.src);
 		if (!asset) {
@@ -137,23 +134,23 @@ This script starts up a server, so you don't have to already have one running.
 	/*
 		Get the correct group of test files
 	*/
-	renderer.dust.helpers.scriptSpecs = function(chunk) {
+	renderer.dust.helpers.scriptSpecs = function (chunk) {
 		var testfolder = config.path.clientTests;
 		var jsfiles = [];
 		var scriptArr = [];
 
-		if (argv.spec) { // if a spec file was specified, only use that. will throw non-fatal error if it doesn't exist
+		if (argv.spec) { // If a spec file was specified, only use that. will throw non-fatal error if it doesn't exist
 			jsfiles = [argv.spec + '.js'];
 		} else if (fs.existsSync(testfolder)) {
-			// get all the spec files, ensure folder exists before trying to read from it, otherwise we get a noent that fails the process
-			jsfiles = fs.readdirSync(testfolder).filter(function(value) { // get only .js files
+			// Get all the spec files, ensure folder exists before trying to read from it, otherwise we get a noent that fails the process
+			jsfiles = fs.readdirSync(testfolder).filter(function (value) { // Get only .js files
 				return (path.extname(path.basename(value)) === '.js');
 			});
 		}
-		jsfiles = jsfiles.map(function(value) { // get path for asset
+		jsfiles = jsfiles.map(function (value) { // Get path for asset
 			return path.join(testfolder, value);
 		});
-		scriptArr = jsfiles.map(function(value) {
+		scriptArr = jsfiles.map(function (value) {
 			return '<script src="' + path.join('/', path.relative(config.path.root, value)) + '"></script>';
 		});
 		return chunk.write(scriptArr.join('\n'));
@@ -169,9 +166,9 @@ This script starts up a server, so you don't have to already have one running.
 		app.use('/tests', serveStatic('tests'));
 		app.use('/testslib', serveStatic(path.join(__dirname, '..', 'tests')));
 
-		app.use(function(req, res) {
+		app.use(function (req, res) {
 			if (req.url === '/') {
-				renderer.renderPartial('root__test-runner', req, res, {}, function(err, out) {
+				renderer.renderPartial('root__test-runner', req, res, {}, function (err, out) {
 					if (err) {
 						console.error('Error rendering test runner', err);
 						process.exit(1);
@@ -181,7 +178,7 @@ This script starts up a server, so you don't have to already have one running.
 					}
 				});
 			} else {
-				// may be obsolete, tbc with rest of team
+				// May be obsolete, tbc with rest of team
 				if (fs.exists(__dirname + req.url)) {
 					fs.createReadStream(__dirname + req.url).pipe(res);
 					console.log('stream');
@@ -202,7 +199,7 @@ This script starts up a server, so you don't have to already have one running.
 		var urls = [baseUri];
 
 		if (argv.browsers) {
-			return saucelabs.getActiveTunnels(function(error, tunnels) {
+			return saucelabs.getActiveTunnels(function (error, tunnels) {
 				checkError(error);
 
 				if (tunnels.length === 0) {
@@ -222,18 +219,18 @@ This script starts up a server, so you don't have to already have one running.
 			die('The `phantomjs` binary was not found in PATH.\nPlease install PhantomJS http://phantomjs.org/', 1);
 		}
 
-		var testPromises = urls.map(function(url) {
+		var testPromises = urls.map(function (url) {
 			return testPromise(url);
 		});
 		var testResults = promise.all(testPromises);
-		testResults.then(function(results) {
-			var failures = results.filter(function(value) {
+		testResults.then(function (results) {
+			var failures = results.filter(function (value) {
 				return value > 0;
 			});
 			var exitCode = 0;
 			var message = 'Finished';
 			if (failures.length) {
-				exitCode = failures[0]; // return first failure or 0
+				exitCode = failures[0]; // Return first failure or 0
 				message += ' ' + failures.length + ' failures';
 			}
 			die(message, exitCode);
@@ -292,8 +289,6 @@ This script starts up a server, so you don't have to already have one running.
 	}
 
 	function selectBrowsers(selected, candidate) {
-		// jshint maxcomplexity: 8
-
 		var name;
 		var version;
 		var competitors;
@@ -345,7 +340,7 @@ This script starts up a server, so you don't have to already have one running.
 	function concatReducedBrowsers(reducedBrowsers) {
 		var result = [];
 
-		Object.keys(reducedBrowsers).forEach(function(browser) {
+		Object.keys(reducedBrowsers).forEach(function (browser) {
 			result = result.concat(reducedBrowsers[browser]);
 		});
 
@@ -394,7 +389,7 @@ This script starts up a server, so you don't have to already have one running.
 		driver = wd.promiseRemote('ondemand.saucelabs.com', 80, saucelabsUser, saucelabsKey);
 		driver.init(browser)
 			.then(iterateTests)
-			.fail(function() {
+			.fail(function () {
 				console.log('Browser ' + sessionName + ' was not available');
 
 				// SauceLabs' shitty API returns browsers that it doesn't support.
@@ -415,7 +410,7 @@ This script starts up a server, so you don't have to already have one running.
 				next = urls.shift();
 				driver.get(next)
 					.then(runTest.bind(null, next))
-					.fail(function(error) {
+					.fail(function (error) {
 						finishTest(next, createErrorResult(error));
 					});
 			}
@@ -437,7 +432,7 @@ This script starts up a server, so you don't have to already have one running.
 			driver.waitForConditionInBrowser('!!window.mochaResults', 30000)
 				.then(driver.execute.bind(driver, 'return window.mochaResults', null))
 				.then(finishTest.bind(null, url))
-				.fail(function(error) {
+				.fail(function (error) {
 					finishTest(url, createErrorResult(error));
 				});
 		}
@@ -456,7 +451,7 @@ This script starts up a server, so you don't have to already have one running.
 				driver.quit()
 					.then(driver.sauceJobStatus.bind(driver, errors === 0))
 					.then(localDie)
-					.fail(function(error) {
+					.fail(function (error) {
 						console.error('Error: ' + error.message);
 						localDie();
 					});
@@ -467,7 +462,7 @@ This script starts up a server, so you don't have to already have one running.
 
 		function reportErrors(url, failures) {
 			if (failures) {
-				failures.forEach(function(failure) {
+				failures.forEach(function (failure) {
 					console.error('Test failed in ' + sessionName);
 					console.error('    URL: ' + url);
 					console.error('    Test: ' + failure.fullTitle);
@@ -507,10 +502,10 @@ This script starts up a server, so you don't have to already have one running.
 	function testPromise(url) {
 		var deferTest = new Deferred();
 		var mochaPhantomJsPath = require.resolve('mocha-phantomjs-core');
-		if (validUrl(url)) { // validate the string before we let it near the shell command
-			shell('phantomjs ' + mochaPhantomJsPath + ' ' + url, function(err, stdin, stderr) {
+		if (validUrl(url)) { // Validate the string before we let it near the shell command
+			shell('phantomjs ' + mochaPhantomJsPath + ' ' + url, function (err, stdin, stderr) {
 				var exitCode = (err) ? err.code : 0;
-				console.log(stdin); // always output the test results
+				console.log(stdin); // Always output the test results
 				if (stderr) {
 					console.error(stderr);
 				}
@@ -518,9 +513,8 @@ This script starts up a server, so you don't have to already have one running.
 				return deferTest.promise;
 			});
 			return deferTest;
-		} else {
-			die('Fatal error: invalid URL passed to mocha-phantomjs', 1);
 		}
+		die('Fatal error: invalid URL passed to mocha-phantomjs', 1);
 	}
 
 	/*
@@ -542,4 +536,4 @@ This script starts up a server, so you don't have to already have one running.
 		console[method](message);
 		process.exit(exitCode);
 	}
-}());
+})();

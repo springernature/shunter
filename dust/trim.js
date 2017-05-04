@@ -3,7 +3,7 @@
 module.exports = initFilter;
 
 function initFilter(dust) {
-	dust.filters.trim = function(value) {
+	dust.filters.trim = function (value) {
 		return value.toString().trim();
 	};
 }

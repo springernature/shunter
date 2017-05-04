@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-var jserve = require('jserve');
 var path = require('path');
+var jserve = require('jserve');
 var query = require('qs-middleware');
 var request = require('request');
 var yargs = require('yargs');
@@ -91,7 +91,7 @@ function serveRemoteJson(request, response, next) {
 
 	options.headers = parseHeaders(options.headers);
 
-	loadRemoteJson(options, function(error, json) {
+	loadRemoteJson(options, function (error, json) {
 		if (error) {
 			return next(error);
 		}
@@ -108,8 +108,8 @@ function loadRemoteJson(options, done) {
 		url: options.url,
 		headers: options.headers
 	};
-	request(requestOptions, function(error, response, body) {
-		if (error) {
+	request(requestOptions, function (err, response, body) {
+		if (err) {
 			return done(error);
 		}
 		if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -119,8 +119,8 @@ function loadRemoteJson(options, done) {
 		}
 		try {
 			body = JSON.parse(body);
-		} catch (error) {
-			return done(error);
+		} catch (err) {
+			return done(err);
 		}
 		done(null, body);
 	});
@@ -130,7 +130,7 @@ function loadRemoteJson(options, done) {
 function parseHeaders(headerString) {
 	var headers = {};
 	var headersArray = headerString.split(/[\r\n]+/);
-	headersArray.forEach(function(headerString) {
+	headersArray.forEach(function (headerString) {
 		var headerChunks = headerString.split(':');
 		headers[headerChunks.shift().trim()] = headerChunks.join(':').trim();
 	});

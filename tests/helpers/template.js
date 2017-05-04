@@ -2,21 +2,22 @@
 
 process.env.TZ = 'UTC';
 
-module.exports = function(env) {
+module.exports = function (env) {
 	var fs = require('fs');
 	var path = require('path');
 	var cheerio = require('cheerio');
 	var sinon = require('sinon');
 	var config = require('../../lib/config')(env || 'development', null, {});
+
 	var renderer = null;
 	var assetPath = null;
 
 	return {
-		getDust: function() {
+		getDust: function () {
 			return renderer.dust;
 		},
 
-		setup: function() {
+		setup: function () {
 			var args = [].slice.call(arguments, 0);
 
 			config.timer = sinon.stub().returns(sinon.stub());
@@ -32,20 +33,19 @@ module.exports = function(env) {
 				}
 			}
 		},
-		teardown: function() {
+		teardown: function () {
 			renderer.dust.cache = {};
 			renderer = null;
 			assetPath.restore();
 		},
-		data: function(file) {
+		data: function (file) {
 			if (/\.json$/.test(file)) {
 				var json = fs.readFileSync(path.join(config.path.root, file), 'utf8');
 				return JSON.parse(json);
 			}
 			return require(path.join(config.path.root, file));
 		},
-		render: function(template, req, res, data, callback) {
-			// jscs:disable disallowDanglingUnderscores
+		render: function (template, req, res, data, callback) {
 			var _req;
 			var _res;
 			var _data;
@@ -73,21 +73,20 @@ module.exports = function(env) {
 				template = 'test-template';
 			}
 
-			renderer.renderPartial(template, _req, _res, _data, function(err, raw) {
-				if (!raw) {
+			renderer.renderPartial(template, _req, _res, _data, function (err, raw) {
+				if (raw) {
+					var $ = cheerio.load(raw);
+					$.$ = $; // Compatibility change. Will deprecate
+					_callback(null, $, raw);
+				} else {
 					if (!_data) {
 						console.error('No test data to render');
 					} else if (!_data.layout || !_data.layout.namespace) {
 						console.error('Namespace was not specified in test data');
 					}
 					_callback(err, null, null);
-				} else {
-					var $ = cheerio.load(raw);
-					$.$ = $; // Compatibility change. Will deprecate
-					_callback(null, $, raw);
 				}
 			});
-			// jscs:enable disallowDanglingUnderscores
 		}
 	};
 };

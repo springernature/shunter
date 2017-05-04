@@ -52,12 +52,12 @@ var mockResponse = {};
 
 var RENDERER_MODULE = '../../../lib/renderer';
 
-describe('Renderer', function() {
+describe('Renderer', function () {
 	var watcher;
 	var inputFilter;
 	var config;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		mockery.enable({
 			useCleanCache: true,
 			warnOnUnregistered: false,
@@ -65,8 +65,8 @@ describe('Renderer', function() {
 		});
 
 		config = require('../../../lib/config')('development', null, {});
-		config.timer = function() {
-			return function() {};
+		config.timer = function () {
+			return function () {};
 		};
 
 		watcher = require('../mocks/watcher');
@@ -82,15 +82,15 @@ describe('Renderer', function() {
 		mockery.registerMock('./input-filter', inputFilter);
 	});
 
-	afterEach(function() {
+	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 		mockConfig.env.isProduction.returns(true);
 		mockConfig.log.error.reset();
 	});
 
-	describe('Asset handling', function() {
-		it('Should setup the logger for mincer', function() {
+	describe('Asset handling', function () {
+		it('Should setup the logger for mincer', function () {
 			require('fs').readdirSync.returns([]);
 
 			var mincer = require('mincer');
@@ -100,7 +100,7 @@ describe('Renderer', function() {
 			assert.isTrue(mincer.logger.use.calledOnce);
 		});
 
-		it('Should setup mincer extensions', function() {
+		it('Should setup mincer extensions', function () {
 			require('path').join.returnsArg(1);
 			var initMincerExtension = sinon.stub();
 			var eachModule = require('each-module');
@@ -113,7 +113,7 @@ describe('Renderer', function() {
 			assert.isTrue(initMincerExtension.calledWith(mincer, mockConfig));
 		});
 
-		it('Should skip mincer extensions that do not expose a function', function() {
+		it('Should skip mincer extensions that do not expose a function', function () {
 			require('path').join.returnsArg(1);
 			var initMincerExtension = sinon.stub();
 			var eachModule = require('each-module');
@@ -125,12 +125,12 @@ describe('Renderer', function() {
 			assert.strictEqual(initMincerExtension.callCount, 2);
 		});
 
-		it('Should setup the `asset_path` ejs helper', function() {
+		it('Should setup the `asset_path` ejs helper', function () {
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 			assert.strictEqual(renderer.environment.registerHelper.withArgs('asset_path').callCount, 1);
 		});
 
-		it('Should setup additional ejs helpers', function() {
+		it('Should setup additional ejs helpers', function () {
 			require('path').join.returnsArg(1);
 			var helper = sinon.stub();
 			var eachModule = require('each-module');
@@ -142,7 +142,7 @@ describe('Renderer', function() {
 			assert.isTrue(helper.calledWith(renderer.environment, renderer.manifest, mockConfig));
 		});
 
-		it('Should skip ejs helpers that do not expose a function', function() {
+		it('Should skip ejs helpers that do not expose a function', function () {
 			require('path').join.returnsArg(1);
 			var helper = sinon.stub();
 			var eachModule = require('each-module');
@@ -154,7 +154,7 @@ describe('Renderer', function() {
 			assert.strictEqual(helper.callCount, 2);
 		});
 
-		it('Should setup input filters', function() {
+		it('Should setup input filters', function () {
 			require('path').join.returnsArg(1);
 			var filter = sinon.stub();
 			var eachModule = require('each-module');
@@ -164,7 +164,7 @@ describe('Renderer', function() {
 			assert.strictEqual(inputFilter().add.withArgs(filter).callCount, 3);
 		});
 
-		it('Should skip input filters that do not expose a function', function() {
+		it('Should skip input filters that do not expose a function', function () {
 			require('path').join.returnsArg(1);
 			var filter = sinon.stub();
 			var eachModule = require('each-module');
@@ -175,7 +175,7 @@ describe('Renderer', function() {
 			assert.strictEqual(inputFilter().add.withArgs(filter).callCount, 2);
 		});
 
-		// it('Should configure the asset paths in the correct order', function() {
+		// It('Should configure the asset paths in the correct order', function() {
 		// 	require('fs').readdirSync.returns([]);
 		// 	require('fs').existsSync.returns(true);
 		// 	require('path').join.returnsArg(1);
@@ -192,7 +192,7 @@ describe('Renderer', function() {
 		// similar tests when we rewrite the asset loading logic for the new application structure
 		//
 
-		it('Should append the asset paths for the host app, in the correct order (i.e. on odd iterations)', function() {
+		it('Should append the asset paths for the host app, in the correct order (i.e. on odd iterations)', function () {
 			require('fs').existsSync.returns(true);
 			require('fs').mockStatReturn.isDirectory.returns(true);
 			require('path').join.returnsArg(1);
@@ -205,7 +205,7 @@ describe('Renderer', function() {
 			assert.isTrue(renderer.environment.appendPath.getCall(6).calledWith('js'));
 		});
 
-		it('Should configure the asset paths for the modules after the host app ones, in the correct order (i.e. on even iterations)', function() {
+		it('Should configure the asset paths for the modules after the host app ones, in the correct order (i.e. on even iterations)', function () {
 			require('fs').existsSync.returns(true);
 			require('fs').mockStatReturn.isDirectory.returns(true);
 			require('path').join.returnsArg(2);
@@ -218,7 +218,7 @@ describe('Renderer', function() {
 			assert.isTrue(renderer.environment.appendPath.getCall(7).calledWith('js'));
 		});
 
-		it('Should not configure asset paths for files in a module that is not explicitly included', function() {
+		it('Should not configure asset paths for files in a module that is not explicitly included', function () {
 			var tempConfigModules = mockConfig.modules;
 			mockConfig.modules = [];
 			require('fs').existsSync.returns(true);
@@ -230,7 +230,7 @@ describe('Renderer', function() {
 			mockConfig.modules = tempConfigModules;
 		});
 
-		it('Should create an asset server for the environment', function() {
+		it('Should create an asset server for the environment', function () {
 			require('fs').readdirSync.returns([]);
 
 			var mincer = require('mincer');
@@ -242,7 +242,7 @@ describe('Renderer', function() {
 			assert.isTrue(mincer.createServer.calledWith(renderer.environment));
 		});
 
-		it('Should return an asset from the environment in dev mode', function() {
+		it('Should return an asset from the environment in dev mode', function () {
 			require('fs').readdirSync.returns([]);
 			mockConfig.env.isProduction.returns(false);
 
@@ -257,7 +257,7 @@ describe('Renderer', function() {
 			assert.strictEqual(asset, 'test-env-md5.css');
 		});
 
-		it('Should return an asset from the manifest in production mode', function() {
+		it('Should return an asset from the manifest in production mode', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -268,7 +268,7 @@ describe('Renderer', function() {
 			assert.strictEqual(asset, 'test-prod-md5.css');
 		});
 
-		it('Should return an empty string if the asset isn\'t found', function() {
+		it('Should return an empty string if the asset isn\'t found', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -280,8 +280,8 @@ describe('Renderer', function() {
 		});
 	});
 
-	describe('Template compilation', function() {
-		it('Should watch the templates directories', function() {
+	describe('Template compilation', function () {
+		it('Should watch the templates directories', function () {
 			require('fs').readdirSync.returns([]);
 			require('path').join.returns('/module/view');
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -293,7 +293,7 @@ describe('Renderer', function() {
 			assert.isTrue(watcher().watchTree().on.calledWith('fileCreated'));
 		});
 
-		it('Should create cached compiled templates with namespaced key ids', function() {
+		it('Should create cached compiled templates with namespaced key ids', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -314,7 +314,7 @@ describe('Renderer', function() {
 			assert.strictEqual(renderer.dust.loadSource.firstCall.args[0], 'compiled');
 		});
 
-		it('Should gracefully handle dust compilation errors', function() {
+		it('Should gracefully handle dust compilation errors', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -325,7 +325,7 @@ describe('Renderer', function() {
 			require('path').relative.returns('foo/bar/foo.dust');
 			renderer.dust.compile.withArgs('invalid content').throws({message: 'FAILED'});
 
-			assert.doesNotThrow(function() {
+			assert.doesNotThrow(function () {
 				renderer.compileFile('foo/bar/foo.dust');
 			});
 			assert.isTrue(mockConfig.log.error.calledOnce);
@@ -333,7 +333,7 @@ describe('Renderer', function() {
 			assert.include(mockConfig.log.error.firstCall.args[0], 'foo/bar/foo.dust');
 		});
 
-		it('Removes the \'/view/\' part of the path and anything before', function() {
+		it('Removes the \'/view/\' part of the path and anything before', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -349,7 +349,7 @@ describe('Renderer', function() {
 		});
 
 		// DEPRECATED: handling '..'from relative as /view still exists while transferring to themes
-		it('Removes the \'/view/\' part of the path (DEPRECATED)', function() {
+		it('Removes the \'/view/\' part of the path (DEPRECATED)', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -364,7 +364,7 @@ describe('Renderer', function() {
 			assert.equal(renderer.dust.compile.firstCall.args[1], 'root__foo');
 		});
 
-		it('Should recompile templates when a file changes', function() {
+		it('Should recompile templates when a file changes', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -382,7 +382,7 @@ describe('Renderer', function() {
 			renderer.compileFile.restore();
 		});
 
-		it('Should compile an array of file paths', function() {
+		it('Should compile an array of file paths', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -403,7 +403,7 @@ describe('Renderer', function() {
 			assert.isTrue(renderer.dust.loadSource.calledWith('compiled'));
 		});
 
-		it('Should compile file paths as an argument list', function() {
+		it('Should compile file paths as an argument list', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -424,7 +424,7 @@ describe('Renderer', function() {
 			assert.isTrue(renderer.dust.loadSource.calledWith('compiled'));
 		});
 
-		it('Should not compile anything without a .dust extension', function() {
+		it('Should not compile anything without a .dust extension', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -440,7 +440,7 @@ describe('Renderer', function() {
 			assert.strictEqual(renderer.dust.loadSource.callCount, 0);
 		});
 
-		it('Should select all dust files from a configured theme directory\'s subfolders', function() {
+		it('Should select all dust files from a configured theme directory\'s subfolders', function () {
 			require('fs').readdirSync.returns([]);
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 			var gsync = require('glob').sync.returns(['filepath']);
@@ -452,7 +452,7 @@ describe('Renderer', function() {
 			assert.isTrue(renderer.compileFileList.calledWith(['filepath', 'filepath']));
 		});
 
-		it('Should compile each file from a list of files', function() {
+		it('Should compile each file from a list of files', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -468,8 +468,8 @@ describe('Renderer', function() {
 		});
 	});
 
-	describe('Dust extension loading', function() {
-		it('Should watch the dust directories', function() {
+	describe('Dust extension loading', function () {
+		it('Should watch the dust directories', function () {
 			require('fs').readdirSync.returns([]);
 			require('path').join.returns('/module/dust');
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -482,8 +482,8 @@ describe('Renderer', function() {
 		});
 	});
 
-	describe('Rendering', function() {
-		it('Should default to rendering the layout template unless one is specified', function() {
+	describe('Rendering', function () {
+		it('Should default to rendering the layout template unless one is specified', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -491,14 +491,14 @@ describe('Renderer', function() {
 			sinon.stub(renderer, 'renderPartial');
 			renderer.render(mockRequest, mockResponse, {
 				foo: 'bar'
-			}, function() { });
+			}, function () { });
 
 			assert.isTrue(renderer.renderPartial.calledWith('layout'));
 
 			renderer.renderPartial.restore();
 		});
 
-		it('Should select a layout template from the data', function() {
+		it('Should select a layout template from the data', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
@@ -508,14 +508,14 @@ describe('Renderer', function() {
 				layout: {
 					template: 'test-layout'
 				}
-			}, function() { });
+			}, function () { });
 
 			assert.isTrue(renderer.renderPartial.calledWith('test-layout'));
 
 			renderer.renderPartial.restore();
 		});
 
-		it('Should render a dust template after applying filters', function() {
+		it('Should render a dust template after applying filters', function () {
 			require('fs').readdirSync.returns([]);
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);

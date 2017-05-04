@@ -6,7 +6,7 @@ var mockery = require('mockery');
 
 var moduleName = '../../../lib/dispatch';
 
-describe('Dispatching response', function() {
+describe('Dispatching response', function () {
 	var config;
 	var contentType;
 	var createFilter;
@@ -14,7 +14,7 @@ describe('Dispatching response', function() {
 	var req;
 	var res;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		mockery.enable({
 			useCleanCache: true,
 			warnOnUnregistered: false,
@@ -25,7 +25,6 @@ describe('Dispatching response', function() {
 
 		filter = sinon.stub().returnsArg(0);
 		createFilter = sinon.stub().returns(filter);
-
 
 		mockery.registerMock('./output-filter', createFilter);
 		req = require('../mocks/request');
@@ -74,19 +73,19 @@ describe('Dispatching response', function() {
 			}
 		};
 	});
-	afterEach(function() {
+	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
-	it('Should set the content type header', function() {
+	it('Should set the content type header', function () {
 		var dispatch = require(moduleName)(config);
 
 		dispatch.send(null, 'hello', req, res);
 		assert.isTrue(res.setHeader.calledWith('Content-type', 'text/html; charset=utf-8'));
 	});
 
-	it('Should set the correct content type if the json parameter is set', function() {
+	it('Should set the correct content type if the json parameter is set', function () {
 		var dispatch = require(moduleName)(config);
 		req.isJson = true;
 
@@ -97,14 +96,14 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.end.calledOnce);
 	});
 
-	it('Should take multibyte characaters into account when setting the content length header', function() {
+	it('Should take multibyte characaters into account when setting the content length header', function () {
 		var dispatch = require(moduleName)(config);
 
 		dispatch.send(null, 'hello¡', req, res);
 		assert.isTrue(res.setHeader.calledWith('Content-length', 7));
 	});
 
-	it('Should default to a 200 status if there was no error', function() {
+	it('Should default to a 200 status if there was no error', function () {
 		var dispatch = require(moduleName)(config);
 
 		dispatch.send(null, 'hello', req, res);
@@ -113,7 +112,7 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.end.calledOnce);
 	});
 
-	it('Should allow the status code to be passed to it', function() {
+	it('Should allow the status code to be passed to it', function () {
 		var dispatch = require(moduleName)(config);
 
 		dispatch.send(null, 'not allowed', req, res, 401);
@@ -122,7 +121,7 @@ describe('Dispatching response', function() {
 		assert.isTrue(res.end.calledOnce);
 	});
 
-	it('Should set a 500 status if there was an error', function() {
+	it('Should set a 500 status if there was an error', function () {
 		var dispatch = require(moduleName)(config);
 
 		dispatch.send({message: 'fail'}, 'hello', req, res, 200);
