@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
+var async = require('async');
+var glob = require('glob');
+var mkdirp = require('mkdirp');
+var uglify = require('uglify-js');
 var yargs = require('yargs');
 
 var argv = yargs
@@ -21,14 +27,8 @@ var argv = yargs
 	.argv;
 
 var config = require('../lib/config')('production', null, {});
-var async = require('async');
-var fs = require('fs');
-var path = require('path');
-var glob = require('glob');
-var mkdirp = require('mkdirp');
-var uglify = require('uglify-js');
 
-// All files named main.js will be minfied, extra files to minify can be specified here
+// All files named main.js will be minified, extra files to minify can be specified here
 var EXTRA_MINIFY_PATHS = [];
 if (argv['extra-js']) {
 	EXTRA_MINIFY_PATHS = Array.isArray(argv['extra-js']) ? argv['extra-js'] : [argv['extra-js']];
@@ -43,33 +43,34 @@ if (argv['resource-module']) {
 	);
 	config.modules = resourceModules;
 }
+
 var renderer = require('../lib/renderer')(config);
+
 var environment = renderer.environment;
 var manifest = renderer.manifest;
 
 environment.cssCompressor = 'csswring';
 
-
-// crude listener for errors, replace with domain once that is stable
-process.on('uncaughtException', function(err) {
+// Crude listener for errors, replace with domain once that is stable
+process.on('uncaughtException', function (err) {
 	console.error('Caught exception: ' + err);
 	process.exit(128);
 });
 
-var compile = function(data, callback) {
-	var findAssets = function() {
+var compile = function (data, callback) {
+	var findAssets = function () {
 		var pattern = new RegExp('\.(' + [].slice.call(arguments, 0).join('|') + ')$');
-		return Object.keys(data.assets).filter(function(key) {
+		return Object.keys(data.assets).filter(function (key) {
 			return key.match(pattern);
 		});
 	};
 
-	var deleteAsset = function(name) {
+	var deleteAsset = function (name) {
 		delete manifest.assets[name];
 		return null;
 	};
 
-	var stylesheets = findAssets('css').map(function(name) {
+	var stylesheets = findAssets('css').map(function (name) {
 		var asset = environment.findAsset(name);
 		var content = asset ? asset.toString() : null;
 
@@ -81,20 +82,20 @@ var compile = function(data, callback) {
 			path: config.path.publicResources + '/' + data.assets[name],
 			content: content
 		};
-	}).filter(function(stylesheet) {
+	}).filter(function (stylesheet) {
 		return stylesheet !== null;
 	});
 
 	var jsToMinify = ['main'].concat(EXTRA_MINIFY_PATHS);
 
-	var javascripts = findAssets('js').filter(function(name) {
+	var javascripts = findAssets('js').filter(function (name) {
 		for (var i = 0; jsToMinify[i]; ++i) {
 			if (name.indexOf(jsToMinify[i]) !== -1) {
 				return true;
 			}
 		}
 		return false;
-	}).map(function(name) {
+	}).map(function (name) {
 		var asset = environment.findAsset(name);
 		var content = asset ? asset.toString() : null;
 		var start;
@@ -115,47 +116,47 @@ var compile = function(data, callback) {
 			path: config.path.publicResources + '/' + data.assets[name],
 			content: content
 		};
-	}).filter(function(script) {
+	}).filter(function (script) {
 		return script !== null;
 	});
 	// Save the updated stylesheets and javascripts, then save the manifest
-	async.map(stylesheets.concat(javascripts), function(resource, fn) {
+	async.map(stylesheets.concat(javascripts), function (resource, fn) {
 		console.log('Writing resource to ' + resource.path);
 		fs.writeFile(resource.path, resource.content, 'utf8', fn);
-	}, function() {
+	}, function () {
 		manifest.save(callback);
 	});
 };
 
-var generate = function(callback) {
+var generate = function (callback) {
 	async.waterfall([
-		function(fn) {
+		function (fn) {
 			mkdirp(config.path.publicResources, fn);
 		},
-		function(dir, fn) {
-			// glob returns absolute path and we need to strip that out
-			var readGlobDir = function(p, cb) {
-				var pth = p.replace(/\\\?/g, '\/'); // glob must use / as path seperator even on windows
-				glob(pth + '/**/*.*', function(er, files) {
+		function (dir, fn) {
+			// Glob returns absolute path and we need to strip that out
+			var readGlobDir = function (p, cb) {
+				var pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path seperator even on windows
+				glob(pth + '/**/*.*', function (er, files) {
 					if (er) {
 						return cb(er);
 					}
-					return cb(null, files.map(function(f) {
+					return cb(null, files.map(function (f) {
 						return path.relative(p, f);
 					}));
 				});
 			};
-			// returns a flat array of files with relative paths
+			// Returns a flat array of files with relative paths
 			async.concat(environment.paths, readGlobDir, fn);
 		},
-		function(files) {
+		function (files) {
 			var data = null;
 			try {
-				data = manifest.compile(files.map(function(file) {
+				data = manifest.compile(files.map(function (file) {
 					return file.replace(/\.ejs$/, '');
 				}));
-			} catch (e) {
-				callback(e, null);
+			} catch (err) {
+				callback(err, null);
 			}
 			if (data) {
 				compile(data, callback);
@@ -164,7 +165,7 @@ var generate = function(callback) {
 	]);
 };
 
-generate(function(err) {
+generate(function (err) {
 	if (err) {
 		console.error('Failed to generate manifest: ' + (err.message || err.toString()));
 		process.exit(128);

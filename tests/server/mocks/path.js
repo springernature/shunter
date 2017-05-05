@@ -4,7 +4,7 @@ var sinon = require('sinon');
 
 module.exports = {
 	join: sinon.stub(),
-	basename: function(str) {
+	basename: function (str) {
 		var lastSlash = str.lastIndexOf('/');
 		var val = str.substring(lastSlash + 1);
 		val = val.replace('.dust', '');

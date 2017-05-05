@@ -11,22 +11,20 @@ function initHelper(dust) {
 	 * if not is set to true
 	 * evaluates to true if none of the keys are set in the data
 	 */
-	dust.helpers.and = function(chunk, context, bodies, params) {
+	dust.helpers.and = function (chunk, context, bodies, params) {
 		params = params || {};
 		var alternate = bodies.else;
 		var keys = context.resolve(params.keys);
 		var not = context.resolve(params.not);
 
-		var checkContext = function(arr) {
-			// jshint maxcomplexity: 7
-
+		var checkContext = function (arr) {
 			var count = 0;
 			var item;
 			var nestedKeys;
 			for (var i = 0; arr[i]; ++i) {
 				nestedKeys = arr[i].split('.');
 				item = context.get(nestedKeys.shift());
-				// handle finding nested properties like foo.bar
+				// Handle finding nested properties like foo.bar
 				while (nestedKeys.length > 0 && item) {
 					item = item[nestedKeys.shift()];
 				}

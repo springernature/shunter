@@ -4,7 +4,7 @@ var assert = require('proclaim');
 var mockery = require('mockery');
 var sinon = require('sinon');
 
-describe('Output filtering', function() {
+describe('Output filtering', function () {
 	var config;
 	var filter;
 	var eachModule;
@@ -14,26 +14,26 @@ describe('Output filtering', function() {
 	var filter4;
 	var filter5;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		mockery.enable({
 			useCleanCache: true,
 			warnOnUnregistered: false,
 			warnOnReplace: false
 		});
 
-		filter1 = sinon.spy(function(content) {
+		filter1 = sinon.spy(function (content) {
 			return content + ':content';
 		});
-		filter2 = sinon.spy(function(content, contentType) {
+		filter2 = sinon.spy(function (content, contentType) {
 			return content + ':contentType=' + contentType;
 		});
-		filter3 = sinon.spy(function(content, contentType, req) {
+		filter3 = sinon.spy(function (content, contentType, req) {
 			return content + ':req.url=' + req.url;
 		});
-		filter4 = sinon.spy(function(content, contentType, req, config) {
+		filter4 = sinon.spy(function (content, contentType, req, config) {
 			return content + ':config.foo=' + config.foo;
 		});
-		filter5 = sinon.spy(function() { });
+		filter5 = sinon.spy(function () { });
 
 		eachModule = require('../mocks/each-module');
 		mockery.registerMock('each-module', eachModule);
@@ -59,16 +59,16 @@ describe('Output filtering', function() {
 		filter = require('../../../lib/output-filter')(config);
 	});
 
-	afterEach(function() {
+	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
-	it('Should load filters from each of the expected locations', function() {
+	it('Should load filters from each of the expected locations', function () {
 		assert.strictEqual(eachModule.callCount, 5);
 	});
 
-	it('Should load filters in the expected order', function() {
+	it('Should load filters in the expected order', function () {
 		sinon.assert.callOrder(
 			eachModule.withArgs('/app/node_modules/shunter/filters/output'),
 			eachModule.withArgs('/app/node_modules/foo/filters/output'),
@@ -78,7 +78,7 @@ describe('Output filtering', function() {
 		);
 	});
 
-	it('Should call each filter with the correct args', function() {
+	it('Should call each filter with the correct args', function () {
 		var result = filter('text', 'text/html', {url: '/foo'});
 		assert.strictEqual(result, 'text:content:contentType=text/html:req.url=/foo:config.foo=foo');
 	});

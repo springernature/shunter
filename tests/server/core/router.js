@@ -5,8 +5,8 @@ var assert = require('proclaim');
 var moduleName = '../../../lib/router';
 var config;
 
-describe('Proxy routing', function() {
-	beforeEach(function() {
+describe('Proxy routing', function () {
+	beforeEach(function () {
 		config = {};
 		config.routes = {
 			localhost: {
@@ -38,11 +38,11 @@ describe('Proxy routing', function() {
 		config.log = require('../mocks/log');
 	});
 
-	afterEach(function() {
+	afterEach(function () {
 		config = {};
 	});
 
-	it('Should create a routes object from config objects\'s contents', function() {
+	it('Should create a routes object from config objects\'s contents', function () {
 		config.routes = {
 			localhost: {
 				'/foo/': 'bar'
@@ -53,7 +53,7 @@ describe('Proxy routing', function() {
 		assert.equal(route1, 'bar');
 	});
 
-	it('Should get the route from the given host if possible', function() {
+	it('Should get the route from the given host if possible', function () {
 		config.routes = {
 			'www.nature.com': {
 				'/foo/': 'success'
@@ -67,7 +67,7 @@ describe('Proxy routing', function() {
 		assert.equal(route1, 'success');
 	});
 
-	it('Should ignore the port 80', function() {
+	it('Should ignore the port 80', function () {
 		config.routes = {
 			'www.nature.com': {
 				'/foo/': 'success'
@@ -81,7 +81,7 @@ describe('Proxy routing', function() {
 		assert.equal(route1, 'success');
 	});
 
-	it('Should fallback to localhost if the host doesn\'t match', function() {
+	it('Should fallback to localhost if the host doesn\'t match', function () {
 		config.routes = {
 			'www.nature.com': {
 				'/foo/': 'fail'
@@ -95,7 +95,7 @@ describe('Proxy routing', function() {
 		assert.equal(route1, 'success');
 	});
 
-	it('Should return null if the host doesn\'t match and no localhost routes are defined', function() {
+	it('Should return null if the host doesn\'t match and no localhost routes are defined', function () {
 		config.routes = {
 			'www.nature.com': {
 				'/foo/': 'fail'
@@ -106,7 +106,7 @@ describe('Proxy routing', function() {
 		assert.isNull(route);
 	});
 
-	it('Should map a url to the first matched rule', function() {
+	it('Should map a url to the first matched rule', function () {
 		var router = require(moduleName)(config);
 		var route1 = router.map('localhost', '/test/foo');
 		assert.equal(route1.host, 'test-www.nature.com');
@@ -116,13 +116,13 @@ describe('Proxy routing', function() {
 		assert.equal(route2.port, 82);
 	});
 
-	it('Should map a url that doesn\'t match any of the rules to the default', function() {
+	it('Should map a url that doesn\'t match any of the rules to the default', function () {
 		var route = require(moduleName)(config).map('localhost', '/');
 		assert.equal(route.host, '127.0.0.1');
 		assert.equal(route.port, 5410);
 	});
 
-	it('Should allow the default route to be configured', function() {
+	it('Should allow the default route to be configured', function () {
 		config.argv = {
 			'route-config': 'capybara'
 		};
@@ -131,9 +131,8 @@ describe('Proxy routing', function() {
 		assert.equal(route.port, 22789);
 	});
 
-	describe('Should set the default route from that specified in the config options', function() {
-
-		it('Should set a route with a protocol, hostname and port', function() {
+	describe('Should set the default route from that specified in the config options', function () {
+		it('Should set a route with a protocol, hostname and port', function () {
 			config.argv = {
 				'route-override': 'https://foo.dev.bar-baz.com:80'
 			};
@@ -143,7 +142,7 @@ describe('Proxy routing', function() {
 			assert.equal(route.port, 80);
 		});
 
-		it('Should set a route with an IPv4 address and port, defaulting the protocol to http', function() {
+		it('Should set a route with an IPv4 address and port, defaulting the protocol to http', function () {
 			config.argv = {
 				'route-override': '127.0.0.1:9000'
 			};
@@ -153,7 +152,7 @@ describe('Proxy routing', function() {
 			assert.equal(route.port, 9000);
 		});
 
-		it('Should set a route with a hostname defaulting the protocol to http', function() {
+		it('Should set a route with a hostname defaulting the protocol to http', function () {
 			config.argv = {
 				'route-override': 'localhost'
 			};
@@ -162,10 +161,9 @@ describe('Proxy routing', function() {
 			assert.equal(route.host, 'localhost');
 			assert.equal(route.port, null);
 		});
-
 	});
 
-	it('Should set the default route and changeOrigin state if specified in the config options', function() {
+	it('Should set the default route and changeOrigin state if specified in the config options', function () {
 		config.argv = {
 			'route-override': '127.0.0.1:9000',
 			'origin-override': true
@@ -176,7 +174,7 @@ describe('Proxy routing', function() {
 		assert.equal(route.changeOrigin, true);
 	});
 
-	it('Should not match a named route against the url', function() {
+	it('Should not match a named route against the url', function () {
 		var route = require(moduleName)(config).map('localhost', '/capybara');
 		assert.equal(route.host, '127.0.0.1');
 		assert.equal(route.port, 5410);

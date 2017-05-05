@@ -6,10 +6,10 @@ var assert = require('proclaim');
 
 var moduleName = '../../../lib/benchmark';
 
-describe('Benchmarking requests', function() {
+describe('Benchmarking requests', function () {
 	var statsd;
 
-	before(function() {
+	before(function () {
 		mockery.enable({
 			useCleanCache: true,
 			warnOnUnregistered: false,
@@ -20,12 +20,12 @@ describe('Benchmarking requests', function() {
 
 		mockery.registerMock('./statsd', statsd);
 	});
-	after(function() {
+	after(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
-	it('Should record the time taken for the request when res.end is called', function() {
+	it('Should record the time taken for the request when res.end is called', function () {
 		var req = {
 			url: '/test'
 		};

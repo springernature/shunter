@@ -16,10 +16,8 @@ var mockConfig = {
 	argv: {}
 };
 
-describe('Request processor', function() {
-	// jscs:disable disallowDanglingUnderscores
-
-	beforeEach(function() {
+describe('Request processor', function () {
+	beforeEach(function () {
 		mockery.enable({
 			useCleanCache: true,
 			warnOnUnregistered: false,
@@ -37,20 +35,20 @@ describe('Request processor', function() {
 		mockery.registerMock('http-proxy', require('../mocks/http-proxy'));
 		mockery.registerMock('url', require('../mocks/url'));
 	});
-	afterEach(function() {
+	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
-	describe('Configuring the proxy', function() {
-		it('Should not enable `autoRewrite` and `protocolRewrite` by default', function() {
+	describe('Configuring the proxy', function () {
+		it('Should not enable `autoRewrite` and `protocolRewrite` by default', function () {
 			var proxy = require('http-proxy');
 			require(moduleName)(mockConfig, {});
 			assert.isFalse(proxy.createProxyServer.firstCall.args[0].autoRewrite);
 			assert.isNull(proxy.createProxyServer.firstCall.args[0].protocolRewrite);
 		});
 
-		it('Should allow `autoRewrite` and `protocolRewrite` to be configured', function() {
+		it('Should allow `autoRewrite` and `protocolRewrite` to be configured', function () {
 			mockConfig.argv['rewrite-redirect'] = true;
 			mockConfig.argv['rewrite-protocol'] = 'http';
 
@@ -63,14 +61,14 @@ describe('Request processor', function() {
 		});
 	});
 
-	describe('Modifying the request', function() {
+	describe('Modifying the request', function () {
 		var req;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			req = require('../mocks/request');
 		});
 
-		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp', function() {
+		it('Should add a header X-Shunter-Deploy-Timestamp with the deployment timestamp', function () {
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();
 
@@ -83,7 +81,7 @@ describe('Request processor', function() {
 			mockConfig.argv = {};
 		});
 
-		it('Should add a header X-Shunter with the Shunter version being used', function() {
+		it('Should add a header X-Shunter with the Shunter version being used', function () {
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();
 
@@ -94,21 +92,21 @@ describe('Request processor', function() {
 		});
 	});
 
-	describe('Intercepting response', function() {
+	describe('Intercepting response', function () {
 		var res;
 		var renderer;
 		var mockTimer;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			renderer = require('../mocks/renderer')();
 			res = require('../mocks/response');
 			mockTimer = sinon.stub().returns(sinon.stub());
 		});
-		afterEach(function() {
+		afterEach(function () {
 			renderer.render.reset();
 		});
 
-		it('Should pass through responses that don\'t have the x-shunter+json mime type', function() {
+		it('Should pass through responses that don\'t have the x-shunter+json mime type', function () {
 			var processor = require(moduleName)({
 				argv: {},
 				timer: mockTimer
@@ -124,7 +122,7 @@ describe('Request processor', function() {
 			assert.isTrue(res.__originalWriteHead.calledOnce);
 		});
 
-		it('Should intercept responses with an x-shunter+json mime type', function() {
+		it('Should intercept responses with an x-shunter+json mime type', function () {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
 				env: {
@@ -148,7 +146,7 @@ describe('Request processor', function() {
 			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
 		});
 
-		it('Should JSON if the `jsonViewParameter` parameter is present', function() {
+		it('Should JSON if the `jsonViewParameter` parameter is present', function () {
 			var processor = require(moduleName)({
 				env: {
 					tier: sinon.stub()
@@ -180,7 +178,7 @@ describe('Request processor', function() {
 			assert.equal(dispatch.send.firstCall.args[1], '{\n\t"foo": "bar"\n}');
 		});
 
-		it('Should construct responses across multiple writes', function() {
+		it('Should construct responses across multiple writes', function () {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
 				env: {
@@ -205,12 +203,12 @@ describe('Request processor', function() {
 			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
 		});
 
-		it('Should safely reconstruct multibyte characters that are split between writes', function() {
+		it('Should safely reconstruct multibyte characters that are split between writes', function () {
 			var value = 'abc⩽def';
 			var raw = '{"foo":"' + value + '"}';
 			var source = new Buffer(raw);
 			var length = Buffer.byteLength(raw);
-			var firstChunkLength = raw.indexOf('c') + 2; // split in the middle of the ⩽ character
+			var firstChunkLength = raw.indexOf('c') + 2; // Split in the middle of the ⩽ character
 			var secondChunkLength = length - firstChunkLength;
 			var firstChunk = new Buffer(firstChunkLength);
 			var secondChunk = new Buffer(secondChunkLength);
@@ -242,7 +240,7 @@ describe('Request processor', function() {
 			assert.equal(renderer.render.firstCall.args[2].foo, value);
 		});
 
-		it('Should send the rendered page', function() {
+		it('Should send the rendered page', function () {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
 				env: {
@@ -271,7 +269,7 @@ describe('Request processor', function() {
 			assert.equal(dispatch.send.firstCall.args[1], 'Content');
 		});
 
-		it('Should proxy the status code of the response', function() {
+		it('Should proxy the status code of the response', function () {
 			var tier = sinon.stub();
 			var processor = require(moduleName)({
 				env: {
@@ -301,7 +299,7 @@ describe('Request processor', function() {
 			assert.equal(dispatch.send.firstCall.args[4], 401);
 		});
 
-		it('Should pass through HEAD requests', function() {
+		it('Should pass through HEAD requests', function () {
 			var processor = require(moduleName)({
 				argv: {},
 				timer: mockTimer
@@ -317,7 +315,7 @@ describe('Request processor', function() {
 			assert.isTrue(res.__originalWriteHead.calledOnce);
 		});
 
-		it('Should handle JSON errors', function() {
+		it('Should handle JSON errors', function () {
 			var processor = require(moduleName)(mockConfig, renderer);
 			var dispatch = require('./dispatch')();
 			var callback = sinon.stub();
@@ -329,7 +327,7 @@ describe('Request processor', function() {
 
 			res.writeHead();
 			res.write(new Buffer('{"foo":bar"}'));
-			assert.doesNotThrow(function() {
+			assert.doesNotThrow(function () {
 				res.end();
 			});
 			assert.equal(renderer.render.callCount, 0);
@@ -337,7 +335,7 @@ describe('Request processor', function() {
 			assert.instanceOf(dispatch.send.firstCall.args[0], Error);
 		});
 
-		it('Should reset the response methods once we\'re done buffering the response', function() {
+		it('Should reset the response methods once we\'re done buffering the response', function () {
 			var processor = require(moduleName)(mockConfig, {});
 			var callback = sinon.stub();
 
@@ -357,8 +355,8 @@ describe('Request processor', function() {
 		});
 	});
 
-	describe('Ping', function() {
-		it('Should send a 200 OK response', function() {
+	describe('Ping', function () {
+		it('Should send a 200 OK response', function () {
 			var req = require('../mocks/request');
 			var res = require('../mocks/response');
 			var processor = require(moduleName)(mockConfig, {});
@@ -369,22 +367,22 @@ describe('Request processor', function() {
 		});
 	});
 
-	describe('API', function() {
+	describe('API', function () {
 		var processor;
 		var renderer;
 		var dispatch;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			renderer = require('../mocks/renderer')();
 			dispatch = require('./dispatch')();
 			processor = processor = require(moduleName)(mockConfig, renderer);
 		});
 
-		afterEach(function() {
+		afterEach(function () {
 			renderer.renderPartial.reset();
 		});
 
-		it('Should allow the template to be specified in the url', function() {
+		it('Should allow the template to be specified in the url', function () {
 			var req = {
 				url: '/hello',
 				body: {world: true}
@@ -395,7 +393,7 @@ describe('Request processor', function() {
 			assert.isTrue(renderer.renderPartial.calledWith('hello', req, res, req.body));
 		});
 
-		it('Should allow the template to be specified in the request body', function() {
+		it('Should allow the template to be specified in the request body', function () {
 			var req = {
 				url: '/',
 				body: {
@@ -411,7 +409,7 @@ describe('Request processor', function() {
 			assert.isTrue(renderer.renderPartial.calledWith('layout', req, res, req.body));
 		});
 
-		it('Should convert the path to a template name', function() {
+		it('Should convert the path to a template name', function () {
 			var req = {
 				url: '/hello/world/test',
 				body: {world: true}
@@ -422,7 +420,7 @@ describe('Request processor', function() {
 			assert.isTrue(renderer.renderPartial.calledWith('hello__world__test', req, res, req.body));
 		});
 
-		it('Should return a 404 error if none of the required information is available', function() {
+		it('Should return a 404 error if none of the required information is available', function () {
 			var req = {
 				url: '/',
 				body: {}
@@ -435,7 +433,7 @@ describe('Request processor', function() {
 			assert.strictEqual(dispatch.send.firstCall.args[0].status, 404);
 		});
 
-		it('Should return a 404 error if some of required information is missing', function() {
+		it('Should return a 404 error if some of required information is missing', function () {
 			var req = {
 				url: '/',
 				body: {
@@ -453,16 +451,16 @@ describe('Request processor', function() {
 		});
 	});
 
-	describe('Proxy', function() {
+	describe('Proxy', function () {
 		var processor;
 		var dispatch;
 
-		beforeEach(function() {
+		beforeEach(function () {
 			processor = require(moduleName)(mockConfig, {});
 			dispatch = require('./dispatch')();
 		});
 
-		it('Should proxy requests to the matching route', function() {
+		it('Should proxy requests to the matching route', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -479,7 +477,7 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].target, 'http://www.nature.com:1337');
 		});
 
-		it('Should default to no port', function() {
+		it('Should default to no port', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -495,7 +493,7 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].target, 'http://www.nature.com');
 		});
 
-		it('Should pass a port if one is specified', function() {
+		it('Should pass a port if one is specified', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -512,7 +510,7 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].target, 'http://www.nature.com:80');
 		});
 
-		it('Should pass the `changeOrigin` flag to the proxy if supplied by the router', function() {
+		it('Should pass the `changeOrigin` flag to the proxy if supplied by the router', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -530,7 +528,7 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[2].changeOrigin, true);
 		});
 
-		it('Should create an `X-Orig-Host` header if `changeOrigin` is set', function() {
+		it('Should create an `X-Orig-Host` header if `changeOrigin` is set', function () {
 			var req = {
 				headers: {
 					host: 'hostname'
@@ -551,7 +549,7 @@ describe('Request processor', function() {
 			assert.strictEqual(stub.firstCall.args[0].headers['X-Orig-Host'], 'hostname');
 		});
 
-		it('Should return a 404 error if the route isn\'t matched', function() {
+		it('Should return a 404 error if the route isn\'t matched', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -566,7 +564,7 @@ describe('Request processor', function() {
 			assert.strictEqual(dispatch.send.firstCall.args[0].status, 404);
 		});
 
-		it('Should return a 500 error if the route doesn\'t have a host property', function() {
+		it('Should return a 500 error if the route doesn\'t have a host property', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -584,7 +582,7 @@ describe('Request processor', function() {
 			assert.strictEqual(dispatch.send.firstCall.args[0].status, 500);
 		});
 
-		it('Should return a 502 error if the proxy connection fails', function() {
+		it('Should return a 502 error if the proxy connection fails', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -602,7 +600,7 @@ describe('Request processor', function() {
 			assert.strictEqual(dispatch.send.firstCall.args[0].status, 502);
 		});
 
-		it('Should return a 500 error if the proxy fails for any other reason', function() {
+		it('Should return a 500 error if the proxy fails for any other reason', function () {
 			var req = {};
 			var res = {};
 			var stub = sinon.stub();
@@ -618,5 +616,4 @@ describe('Request processor', function() {
 			assert.strictEqual(dispatch.send.firstCall.args[0].status, 500);
 		});
 	});
-	// jscs:enable disallowDanglingUnderscores
 });

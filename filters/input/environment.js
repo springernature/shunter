@@ -2,15 +2,13 @@
 
 var qs = require('qs');
 
-module.exports = function(config, req, res, data, next) {
-	// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-
-	var cast = function(params) {
+module.exports = function (config, req, res, data, next) {
+	var cast = function (params) {
 		var output = {};
 
 		params = params || {};
 
-		var transform = function(value) {
+		var transform = function (value) {
 			var val = (typeof value === 'string') ? value.toLowerCase() : value;
 			if (val === 'true' || val === 'false') {
 				return val === 'true';
@@ -21,7 +19,7 @@ module.exports = function(config, req, res, data, next) {
 			return value;
 		};
 
-		Object.keys(params).forEach(function(key) {
+		Object.keys(params).forEach(function (key) {
 			if (Array.isArray(params[key])) {
 				output[key] = params[key].map(transform);
 			} else {
@@ -31,8 +29,11 @@ module.exports = function(config, req, res, data, next) {
 		return output;
 	};
 
+	/* eslint-disable camelcase */
 	data.query_data = cast(req.query);
 	data.query_string = qs.stringify(data.query_data);
 	data.request_url = (req.url) ? req.url.replace(/\?.*$/, '') : '';
+	/* eslint-enable camelcase */
+
 	next(data);
 };

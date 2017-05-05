@@ -3,11 +3,11 @@
 var assert = require('proclaim');
 var sinon = require('sinon');
 
-describe('Input filtering', function() {
+describe('Input filtering', function () {
 	var filter;
 	var config;
 
-	beforeEach(function() {
+	beforeEach(function () {
 		config = {
 			test: 'fake config',
 			log: require('../mocks/log')
@@ -15,8 +15,8 @@ describe('Input filtering', function() {
 		filter = require('../../../lib/input-filter')(config);
 	});
 
-	describe('Filter helpers', function() {
-		it('Should find a whether a key exists in the article context', function() {
+	describe('Filter helpers', function () {
+		it('Should find a whether a key exists in the article context', function () {
 			var data = {
 				article: {
 					test: 'pass'
@@ -26,7 +26,7 @@ describe('Input filtering', function() {
 			assert.strictEqual(filter.getBase(data, 'test').test, 'pass');
 		});
 
-		it('Should find whether a key exists in the global context', function() {
+		it('Should find whether a key exists in the global context', function () {
 			var data = {
 				article: {
 					test2: 'fail'
@@ -36,7 +36,7 @@ describe('Input filtering', function() {
 			assert.strictEqual(filter.getBase(data, 'test').test, 'pass');
 		});
 
-		it('Should return null if the key is not found', function() {
+		it('Should return null if the key is not found', function () {
 			var data = {
 				article: {
 					test2: 'fail'
@@ -47,28 +47,26 @@ describe('Input filtering', function() {
 		});
 	});
 
-	describe('Creating filters', function() {
-		it('Should create an empty list of filters', function() {
+	describe('Creating filters', function () {
+		it('Should create an empty list of filters', function () {
 			assert.isArray(filter.filters);
 			assert.strictEqual(filter.filters.length, 0);
 		});
 
-		it('Should allow filters to be added', function() {
+		it('Should allow filters to be added', function () {
 			filter.add(sinon.stub());
 			assert.strictEqual(filter.filters.length, 1);
 		});
 	});
 
-	describe('Running filters', function() {
-		it('Should apply all filters in the list in order', function() {
+	describe('Running filters', function () {
+		it('Should apply all filters in the list in order', function () {
 			var callback = sinon.stub();
 
-			var spy1 = sinon.spy(function(data) {
-				// jshint unused: false
+			var spy1 = sinon.spy(function (data) {
 				return 'filter 1';
 			});
-			var spy2 = sinon.spy(function(data) {
-				// jshint unused: false
+			var spy2 = sinon.spy(function (data) {
 				return 'filter 2';
 			});
 
@@ -85,10 +83,10 @@ describe('Input filtering', function() {
 			assert.isTrue(callback.calledWith('filter 2'));
 		});
 
-		it('Should pass a callback if the filter specifies a second argument', function() {
+		it('Should pass a callback if the filter specifies a second argument', function () {
 			var callback = sinon.stub();
 
-			var spy = sinon.spy(function(data, fn) {
+			var spy = sinon.spy(function (data, fn) {
 				fn('filter 1');
 			});
 
@@ -103,10 +101,10 @@ describe('Input filtering', function() {
 			assert.isTrue(callback.calledWith('filter 1'));
 		});
 
-		it('Should additionally provide config if the filter specifies three arguments', function() {
+		it('Should additionally provide config if the filter specifies three arguments', function () {
 			var callback = sinon.stub();
 
-			var spy = sinon.spy(function(config, data, fn) {
+			var spy = sinon.spy(function (config, data, fn) {
 				fn('filter 1');
 			});
 
@@ -121,10 +119,10 @@ describe('Input filtering', function() {
 			assert.isTrue(callback.calledWith('filter 1'));
 		});
 
-		it('Should additionally provide the request and response if the filter specifies five arguments', function() {
+		it('Should additionally provide the request and response if the filter specifies five arguments', function () {
 			var callback = sinon.stub();
 
-			var spy = sinon.spy(function(config, req, res, data, fn) {
+			var spy = sinon.spy(function (config, req, res, data, fn) {
 				fn('filter 1');
 			});
 
@@ -139,18 +137,16 @@ describe('Input filtering', function() {
 			assert.isTrue(callback.calledWith('filter 1'));
 		});
 
-		it('Should skip a filter that defines an unsupported number of arguments', function() {
+		it('Should skip a filter that defines an unsupported number of arguments', function () {
 			var callback = sinon.stub();
 
-			var spy1 = sinon.spy(function() {
+			var spy1 = sinon.spy(function () {
 				return 'filter 1';
 			});
-			var spy2 = sinon.spy(function(arg1, arg2, arg3, arg4) {
-				// jshint unused: false
+			var spy2 = sinon.spy(function (arg1, arg2, arg3, arg4) {
 				return 'filter 2';
 			});
-			var spy3 = sinon.spy(function(arg1, arg2, arg3, arg4, arg5, arg6) {
-				// jshint unused: false
+			var spy3 = sinon.spy(function (arg1, arg2, arg3, arg4, arg5, arg6) {
 				return 'filter 3';
 			});
 
@@ -167,20 +163,19 @@ describe('Input filtering', function() {
 			assert.isTrue(callback.calledWith('init'));
 		});
 
-		it('Should run each filter with the input-filter as the caller object', function() {
+		it('Should run each filter with the input-filter as the caller object', function () {
 			var callback = sinon.stub();
 
-			var spy1 = sinon.spy(function(data) {
-				// jshint unused: false
+			var spy1 = sinon.spy(function (data) {
 				return 'filter 1';
 			});
-			var spy2 = sinon.spy(function(data, fn) {
+			var spy2 = sinon.spy(function (data, fn) {
 				fn('filter 2');
 			});
-			var spy3 = sinon.spy(function(config, data, fn) {
+			var spy3 = sinon.spy(function (config, data, fn) {
 				fn('filter 3');
 			});
-			var spy4 = sinon.spy(function(config, req, res, data, fn) {
+			var spy4 = sinon.spy(function (config, req, res, data, fn) {
 				fn('filter 4');
 			});
 
