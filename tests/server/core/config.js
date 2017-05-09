@@ -52,7 +52,7 @@ describe('Shunter configuration', function () {
 			assert.isFalse(config.env.isDevelopment());
 		});
 
-		it('Should call the logging module if no logger is configured', function() {
+		it('Should call the logging module if no logger is configured', function () {
 			var config = require('../../../lib/config')('production', null, {});
 			var logging = loggingLib(config);
 			assert.isFalse(logging.getConfig.notCalled);

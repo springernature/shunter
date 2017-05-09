@@ -254,7 +254,7 @@ describe('Clustering', function () {
 			assert.equal(cluster.fork.callCount, 1);
 		});
 
-		it('Should expose a getConfig() fn which returns the config', function() {
+		it('Should expose a getConfig() fn which returns the config', function () {
 			server.start();
 			assert.strictEqual(server.getConfig().path.root, '/');
 		});

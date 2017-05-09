@@ -1,15 +1,13 @@
 'use strict';
-var winston = require('winston');
 
-module.exports = function(config) {
+module.exports = function (config) {
 	if (!config.argv.syslog || !config.syslogAppName) {
 		return null;
 	}
-	// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-	require('winston-syslog');
-	return new (winston.transports.Syslog)({
+
+	return new (require('winston-syslog').Syslog)({
 		localhost: config.env.host(),
-		app_name: config.syslogAppName,
+		app_name: config.syslogAppName, // eslint-disable-line camelcase
 		level: 'debug'
 	});
 };
