@@ -28,7 +28,7 @@ describe('Shunter logging config,', function() {
 		syslogAppName: 'foo'
 	};
 
-	describe('With No logging config provided,', function() {
+	describe('With no logging config provided,', function() {
 		it('Should offer getConfig() in its API', function() {
 			var loggingInstance = require('../../../lib/logging')(defaultShunterConfig);
 			assert.isFunction(loggingInstance.getConfig);
@@ -51,7 +51,7 @@ describe('Shunter logging config,', function() {
 		});
 	});
 
-	describe('With Provide configurable log level for default Console transport,', function() {
+	describe('With an argv log level for console transport provided,', function() {
 		it('Should respect a log level argv', function() {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.argv.logging = 'someValue';
@@ -77,7 +77,7 @@ describe('Shunter logging config,', function() {
 		});
 	});
 
-	describe('With Userland logging config provided via args,', function() {
+	describe('With user-provided logging config provided via args,', function() {
 		var appJSLogConfig = new winston.Logger({
 			transports: [
 				new (winston.transports.Console)({
@@ -91,7 +91,7 @@ describe('Shunter logging config,', function() {
 			]
 		});
 
-		it('First confirms our colorize config option defaults to true', function() {
+		it('First confirms the test colorize config option defaults to true', function() {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getConfig();
 			assert.isTrue(logger.transports.console.colorize);
 		});
@@ -115,7 +115,7 @@ describe('Shunter logging config,', function() {
 		});
 	});
 
-	describe('With Userland logging config provided via files,', function() {
+	describe('With user-provided logging config provided via files,', function() {
 		var mockedLogger;
 		beforeEach(function() {
 			var thisConfig = defaultShunterConfig;
