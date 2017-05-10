@@ -15,7 +15,7 @@ describe('Shunter configuration', function () {
 
 	describe('Specifying an environment', function () {
 		var env;
-		var loggingLib;
+		var mockedLoggingLib;
 
 		beforeEach(function () {
 			env = process.env.NODE_ENV;
@@ -27,8 +27,8 @@ describe('Shunter configuration', function () {
 				warnOnReplace: false
 			});
 			mockery.registerMock('os', require('../mocks/os'));
-			loggingLib = require('../mocks/logging');
-			mockery.registerMock('../../../lib/logging', loggingLib);
+			mockedLoggingLib = require('../mocks/logging');
+			mockery.registerMock('./logging', mockedLoggingLib);
 		});
 
 		afterEach(function () {
@@ -54,8 +54,8 @@ describe('Shunter configuration', function () {
 
 		it('Should call the logging module if no logger is configured', function () {
 			var config = require('../../../lib/config')('production', null, {});
-			var logging = loggingLib(config);
-			assert.isFalse(logging.getLogger.notCalled);
+			var logging = mockedLoggingLib(config);
+			assert.isTrue(logging.getLogger.callCount === 1);
 		});
 	});
 });
