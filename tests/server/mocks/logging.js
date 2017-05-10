@@ -3,5 +3,5 @@
 var sinon = require('sinon');
 
 module.exports = sinon.stub().returns({
-	getConfig: sinon.stub()
+	getLogger: sinon.stub()
 });
