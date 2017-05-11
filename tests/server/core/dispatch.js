@@ -129,4 +129,31 @@ describe('Dispatching response', function () {
 		assert.isTrue(res.writeHead.calledWith(500));
 		assert.isTrue(res.end.calledOnce);
 	});
+
+	it('Should log.error something if using the default config and there was an error', function () {
+		var dispatch = require(moduleName)(config);
+
+		dispatch.send({message: 'fail'}, 'hello', req, res);
+		assert.isTrue(config.log.error.calledOnce);
+	});
+
+	it('Should not log.error something if using the default config and there was no error', function () {
+		var dispatch = require(moduleName)(config);
+
+		dispatch.send(null, 'hello', req, res, 200);
+		assert.isFalse(config.log.error.called);
+	});
+
+	it('Should log.error something if using custom error pages and there was an error', function () {
+		mockery.registerMock('./error-pages', require('../mocks/error-pages'));
+		config.errorPages = {
+			errorLayouts: {
+				default: 'layout'
+			}
+		};
+		var dispatch = require(moduleName)(config);
+
+		dispatch.send({message: 'fail'}, 'hello', req, res, 200);
+		assert.isTrue(config.log.error.calledOnce);
+	});
 });
