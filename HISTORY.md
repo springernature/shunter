@@ -1,6 +1,10 @@
 
 # History
 
+## 4.6.2 (2017-05-11)
+
+* Ensures Shunter logs errors if using recent templated error pages option
+
 ## 4.6.1 (2017-04-12)
 
 * Update most dependencies and devDependencies to the latest major version.
