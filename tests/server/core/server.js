@@ -253,6 +253,11 @@ describe('Clustering', function () {
 			cluster.on.firstCall.args[1]({process: {pid: 1}}, 0, 1);
 			assert.equal(cluster.fork.callCount, 1);
 		});
+
+		it('Should expose a getConfig() fn which returns the config', function () {
+			server.start();
+			assert.strictEqual(server.getConfig().path.root, '/');
+		});
 	});
 
 	describe('Worker', function () {
