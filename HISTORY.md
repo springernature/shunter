@@ -1,6 +1,12 @@
 
 # History
 
+## 4.7.0 (2017-05-16)
+
+* Makes the syslog transport user-configurable for the first time
+* Makes other winston logging transports & filters user-configurable
+* Adds getConfig() API method enabling users to read the runtime config
+
 ## 4.6.2 (2017-05-11)
 
 * Ensures Shunter logs errors if using recent templated error pages option
