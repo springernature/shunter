@@ -76,15 +76,16 @@ function serveRemoteJson(request, response, next) {
 		url: request.query.url,
 		headers: request.query.headers
 	};
+	var error;
 
 	if (!options.url || typeof options.url !== 'string') {
-		var error = new Error('Invalid query parameter: url');
+		error = new Error('Invalid query parameter: url');
 		error.status = 400;
 		return next(error);
 	}
 
 	if (options.headers && typeof options.headers !== 'string') {
-		var error = new Error('Invalid query parameter: headers');
+		error = new Error('Invalid query parameter: headers');
 		error.status = 400;
 		return next(error);
 	}
@@ -108,6 +109,8 @@ function loadRemoteJson(options, done) {
 		url: options.url,
 		headers: options.headers
 	};
+	var error;
+
 	request(requestOptions, function (err, response, body) {
 		if (err) {
 			return done(error);
