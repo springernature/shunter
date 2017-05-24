@@ -24,7 +24,7 @@ module.exports = function (env) {
 			renderer = require('../../lib/renderer')(config);
 			assetPath = sinon.stub(renderer, 'assetPath').returnsArg(0);
 			renderer.initDustExtensions();
-			if (args.length) {
+			if (args.length > 0) {
 				if (args[0] === 'all') {
 					// We need to pretend to the renderer it is being called from a host app, not the Mocka process
 					renderer.compileTemplates('.');

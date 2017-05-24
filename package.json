@@ -104,14 +104,11 @@
     "rules": {
       "block-scoped-var": "warn",
       "no-lonely-if": "warn",
-      "no-multi-assign": "warn",
       "no-path-concat": "warn",
       "no-prototype-builtins": "warn",
       "no-redeclare": "warn",
       "no-undef": "warn",
-      "no-use-before-define": "warn",
       "no-useless-escape": "warn",
-      "unicorn/explicit-length-check": "warn",
       "unicorn/no-new-buffer": "warn"
     },
     "overrides": [

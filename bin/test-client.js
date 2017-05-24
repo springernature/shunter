@@ -229,7 +229,7 @@ This script starts up a server, so you don't have to already have one running.
 			});
 			var exitCode = 0;
 			var message = 'Finished';
-			if (failures.length) {
+			if (failures.length > 0) {
 				exitCode = failures[0]; // Return first failure or 0
 				message += ' ' + failures.length + ' failures';
 			}
@@ -380,11 +380,13 @@ This script starts up a server, so you don't have to already have one running.
 		var sessionName;
 		var driver;
 
-		count = errors = 0;
+		count = 0;
+		errors = 0;
 		length = urls.length;
 		browserName = browser.browserName;
 		browserVersion = browser.version;
-		browser.name = sessionName = browserName + ' ' + browserVersion;
+		sessionName = browserName + ' ' + browserVersion;
+		browser.name = sessionName;
 
 		driver = wd.promiseRemote('ondemand.saucelabs.com', 80, saucelabsUser, saucelabsKey);
 		driver.init(browser)

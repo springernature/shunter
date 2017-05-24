@@ -375,7 +375,7 @@ describe('Request processor', function () {
 		beforeEach(function () {
 			renderer = require('../mocks/renderer')();
 			dispatch = require('./dispatch')();
-			processor = processor = require(moduleName)(mockConfig, renderer);
+			processor = require(moduleName)(mockConfig, renderer);
 		});
 
 		afterEach(function () {
