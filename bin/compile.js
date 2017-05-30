@@ -152,6 +152,19 @@ var generate = function (callback) {
 		function (files) {
 			var data = null;
 			try {
+				data = manifest.compile(files.filter(function (file) {
+					return /(?:\.([^.]+))?$/.exec(file) === 'scss';
+				}));
+			} catch (err) {
+				callback(err, null);
+			}
+			if (data) {
+				compile(data, callback);
+			}
+		},
+		function (files) {
+			var data = null;
+			try {
 				data = manifest.compile(files.map(function (file) {
 					return file.replace(/\.ejs$/, '');
 				}));

@@ -3,7 +3,14 @@
   "version": "4.7.0",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
-  "keywords": [ "proxy", "front-end", "dust", "templates", "asset pipeline", "renderer" ],
+  "keywords": [
+    "proxy",
+    "front-end",
+    "dust",
+    "templates",
+    "asset pipeline",
+    "renderer"
+  ],
   "author": "Springer Nature",
   "contributors": [
     "Adam Tavener (http://www.tavvy.co.uk/)",
@@ -36,7 +43,6 @@
   },
   "homepage": "https://github.com/springernature/shunter",
   "bugs": "https://github.com/springernature/shunter/issues",
-
   "engines": {
     "node": ">=4 <=6"
   },
@@ -79,6 +85,7 @@
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
     "mockery": "^2.0.0",
+    "node-sass": "^4.5.3",
     "proclaim": "^3.0.0",
     "sinon": "^2.0.0",
     "snyk": "^1.29.0",
@@ -92,7 +99,7 @@
     "shunter-test-client": "./bin/test-client.js"
   },
   "scripts": {
-      "test": "make test"
+    "test": "make test"
   },
   "xo": {
     "esnext": false,
@@ -100,7 +107,9 @@
       "browser",
       "jquery"
     ],
-    "ignore": ["tests/client/lib/*.js"],
+    "ignore": [
+      "tests/client/lib/*.js"
+    ],
     "rules": {
       "block-scoped-var": "warn",
       "no-lonely-if": "warn",
