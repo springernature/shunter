@@ -3,7 +3,14 @@
   "version": "4.7.0",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
-  "keywords": [ "proxy", "front-end", "dust", "templates", "asset pipeline", "renderer" ],
+  "keywords": [
+    "proxy",
+    "front-end",
+    "dust",
+    "templates",
+    "asset pipeline",
+    "renderer"
+  ],
   "author": "Springer Nature",
   "contributors": [
     "Adam Tavener (http://www.tavvy.co.uk/)",
@@ -36,7 +43,6 @@
   },
   "homepage": "https://github.com/springernature/shunter",
   "bugs": "https://github.com/springernature/shunter/issues",
-
   "engines": {
     "node": ">=4 <=6"
   },
@@ -73,7 +79,8 @@
     "wd": "~1.2.0",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
-    "yargs": "~7.0.2"
+    "yargs": "~7.0.2",
+    "snyk": "^1.32.0"
   },
   "devDependencies": {
     "istanbul": "^0.4.0",
@@ -81,7 +88,6 @@
     "mockery": "^2.0.0",
     "proclaim": "^3.0.0",
     "sinon": "^2.0.0",
-    "snyk": "^1.29.0",
     "xo": "^0.18.2"
   },
   "main": "./lib/shunter.js",
@@ -92,7 +98,9 @@
     "shunter-test-client": "./bin/test-client.js"
   },
   "scripts": {
-      "test": "make test"
+    "test": "make test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "xo": {
     "esnext": false,
@@ -100,7 +108,9 @@
       "browser",
       "jquery"
     ],
-    "ignore": ["tests/client/lib/*.js"],
+    "ignore": [
+      "tests/client/lib/*.js"
+    ],
     "rules": {
       "block-scoped-var": "warn",
       "no-lonely-if": "warn",
@@ -134,5 +144,6 @@
         ]
       }
     ]
-  }
+  },
+  "snyk": true
 }
