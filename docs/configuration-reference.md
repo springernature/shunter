@@ -42,7 +42,6 @@ path: {
 	publicResources: path.join(appRoot, 'public', 'resources'),
 	resources: path.join(appRoot, 'resources'),
 	root: appRoot,
-	shunterResources: path.join(shunterRoot, 'resources'),
 	shunterRoot: shunterRoot,
 	templates: path.join(appRoot, 'view'),
 	tests: path.join(appRoot, 'tests'),
