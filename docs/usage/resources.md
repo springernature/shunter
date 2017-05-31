@@ -100,7 +100,7 @@ Static assets are possible, but you should only use these when you are unable to
 
 By default, assets in the `public` subdirectory are served on the path `public`.
 
-If it isn't convenient to have one or both of these as 'public' you can override them by setting the config option in your `local.json` file using `config.path.public` for where the assets are saved and `config.web.public` for the path that you would like to serve them on.
+If it isn't convenient to have one or both of these as 'public' you can override them by setting the config option using `config.path.public` for where the assets are saved and `config.web.public` for the path that you would like to serve them on.
 
 
 Built In EJS Extensions
