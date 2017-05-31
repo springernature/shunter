@@ -43,7 +43,6 @@ path: {
 	resources: path.join(appRoot, 'resources'),
 	root: appRoot,
 	shunterRoot: shunterRoot,
-	templates: path.join(appRoot, 'view'),
 	tests: path.join(appRoot, 'tests')
 }
 ```
