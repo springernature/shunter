@@ -12,7 +12,6 @@ var mockConfig = {
 		root: '/',
 		resources: '/resources',
 		publicResources: '/public/resources',
-		themes: '/themes',
 		templates: '/view',
 		dust: '/dust'
 	},
