@@ -1,6 +1,10 @@
 
 # History
 
+## 4.7.1 (2017-05-31)
+
+* Fixes #160 - ensure text/html Content Type is set if returning an HTML templated error page
+
 ## 4.7.0 (2017-05-16)
 
 * Makes the syslog transport user-configurable for the first time
