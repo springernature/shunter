@@ -64,7 +64,6 @@ describe('Templating error pages', function () {
 				root: '/',
 				resources: '/resources',
 				publicResources: '/public/resources',
-				themes: '/themes',
 				templates: '/view',
 				dust: '/dust'
 			},

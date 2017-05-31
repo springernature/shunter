@@ -9,6 +9,5 @@ module.exports = sinon.stub().returns({
 	watchDustExtensions: sinon.stub(),
 	assetServer: sinon.stub(),
 	render: sinon.stub(),
-	renderPartial: sinon.stub(),
-	themes: []
+	renderPartial: sinon.stub()
 });
