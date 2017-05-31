@@ -8,7 +8,6 @@ var moduleName = '../../../lib/dispatch';
 
 describe('Dispatching response', function () {
 	var config;
-	var contentType;
 	var createFilter;
 	var filter;
 	var req;
@@ -21,15 +20,12 @@ describe('Dispatching response', function () {
 			warnOnReplace: false
 		});
 
-		contentType = sinon.stub().returns('text/html; charset=utf-8');
-
 		filter = sinon.stub().returnsArg(0);
 		createFilter = sinon.stub().returns(filter);
 
 		mockery.registerMock('./output-filter', createFilter);
 		req = require('../mocks/request');
 		req.url = '/hello';
-		mockery.registerMock('./content-type', contentType);
 		res = require('../mocks/response');
 
 		mockery.registerMock('path', require('../mocks/path'));
@@ -81,7 +77,7 @@ describe('Dispatching response', function () {
 	it('Should set the content type header', function () {
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send(null, 'hello', req, res);
+		dispatch.send(null, 'output to send', req, res);
 		assert.isTrue(res.setHeader.calledWith('Content-type', 'text/html; charset=utf-8'));
 	});
 
@@ -106,7 +102,7 @@ describe('Dispatching response', function () {
 	it('Should default to a 200 status if there was no error', function () {
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send(null, 'hello', req, res);
+		dispatch.send(null, 'output to send', req, res);
 		assert.isTrue(res.writeHead.calledOnce);
 		assert.isTrue(res.writeHead.calledWith(200));
 		assert.isTrue(res.end.calledOnce);
@@ -124,7 +120,7 @@ describe('Dispatching response', function () {
 	it('Should set a 500 status if there was an error', function () {
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send({message: 'fail'}, 'hello', req, res, 200);
+		dispatch.send({message: 'fail'}, 'output to send', req, res, 200);
 		assert.isTrue(res.writeHead.calledOnce);
 		assert.isTrue(res.writeHead.calledWith(500));
 		assert.isTrue(res.end.calledOnce);
@@ -133,14 +129,22 @@ describe('Dispatching response', function () {
 	it('Should log.error something if using the default config and there was an error', function () {
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send({message: 'fail'}, 'hello', req, res);
+		dispatch.send({message: 'fail'}, 'output to send', req, res);
 		assert.isTrue(config.log.error.calledOnce);
+	});
+
+	it('Should set "text/html" Content-type if returning an HTML error page regardless of req file extension', function () {
+		var dispatch = require(moduleName)(config);
+		req.url = '404s.txt';
+		dispatch.send({message: 'fail'}, 'output to send', req, res);
+
+		assert.isTrue(res.setHeader.calledWith('Content-type', 'text/html; charset=utf-8'));
 	});
 
 	it('Should not log.error something if using the default config and there was no error', function () {
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send(null, 'hello', req, res, 200);
+		dispatch.send(null, 'output to send', req, res, 200);
 		assert.isFalse(config.log.error.called);
 	});
 
@@ -153,7 +157,7 @@ describe('Dispatching response', function () {
 		};
 		var dispatch = require(moduleName)(config);
 
-		dispatch.send({message: 'fail'}, 'hello', req, res, 200);
+		dispatch.send({message: 'fail'}, 'output to send', req, res, 200);
 		assert.isTrue(config.log.error.calledOnce);
 	});
 });
