@@ -1,7 +1,0 @@
-node_modules
-public
-resources/js/plugins
-resources/js/jquery-*
-tests/client/lib
-themes
-./coverage
