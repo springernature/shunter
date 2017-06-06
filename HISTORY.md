@@ -1,6 +1,12 @@
 
 # History
 
+## 4.8.0 (2017-06-06)
+
+* updates compile step to handle .scss Sass files.
+* Removes some unused config files.
+* Updates Snyk and fixes the organisation name.
+
 ## 4.7.1 (2017-05-31)
 
 * Fixes #160 - ensure text/html Content Type is set if returning an HTML templated error page
