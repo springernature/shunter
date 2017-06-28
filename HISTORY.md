@@ -1,6 +1,10 @@
 
 # History
 
+## 4.9.0 (2017-06-28)
+
+* Support a `--no-exit` flag so end-users of the test-client can view test output in the Mocha Test Runner
+
 ## 4.8.0 (2017-06-06)
 
 * updates compile step to handle .scss Sass files.
