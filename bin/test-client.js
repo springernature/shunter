@@ -63,6 +63,7 @@ This script starts up a server, so you don't have to already have one running.
 		.string('spec')
 		.boolean('browsers')
 		.string('resource-module')
+		.boolean('no-exit')
 		.alias('h', 'help')
 		.help('help')
 		.default({
@@ -70,12 +71,14 @@ This script starts up a server, so you don't have to already have one running.
 			parents: true,
 			spec: null,
 			browsers: false,
-			'resource-module': null
+			'resource-module': null,
+			'no-exit': false
 		})
 		.describe({
 			spec: 'Test a specific spec file',
 			browsers: 'Test in actual browsers, requires SauceConnect',
-			'resource-module': 'Additional resources module'
+			'resource-module': 'Additional resources module',
+			'no-exit': 'Keeps the test runner alive so you can view and debug tests in a browser'
 		})
 		.argv;
 
@@ -233,7 +236,13 @@ This script starts up a server, so you don't have to already have one running.
 				exitCode = failures[0]; // Return first failure or 0
 				message += ' ' + failures.length + ' failures';
 			}
-			die(message, exitCode);
+
+			if (argv['no-exit']) {
+				console.log(message);
+				console.log('\nView the Mocha Test Runner in a browser: ' + baseUri);
+			} else {
+				die(message, exitCode);
+			}
 		});
 	}
 
