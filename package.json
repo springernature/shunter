@@ -1,6 +1,6 @@
 {
   "name": "shunter",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [
