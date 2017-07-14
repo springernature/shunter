@@ -193,7 +193,7 @@ This script starts up a server, so you don't have to already have one running.
 			var targetDustFile = path.join(targetJsFile.dir, targetJsFile.name + '.dust');
 
 			if (fs.existsSync(targetDustFile)) {
-				var dustTemplateName = path.join(path.parse(req.url).dir.substring(1), targetJsFile.name).split(path.sep).join('.');
+				var dustTemplateName = path.join(path.parse(req.url).dir.substring(1), targetJsFile.name).split(path.sep).join('__');
 				var script = renderer.dust.compile(fs.readFileSync(targetDustFile, 'utf8'), dustTemplateName);
 				res.writeHead(200, {'Content-Type': 'application/javascript'});
 				res.write(script);
