@@ -1,6 +1,9 @@
 
 # History
 
+## 4.10.0 (2017-07-17)
+* Support template rendering in client side tests
+
 ## 4.9.0 (2017-06-28)
 
 * Support a `--no-exit` flag so end-users of the test-client can view test output in the Mocha Test Runner
