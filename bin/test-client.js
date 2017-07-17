@@ -56,6 +56,7 @@ This script starts up a server, so you don't have to already have one running.
 	var wd = require('wd');
 	var cluster = require('cluster');
 	var hasbin = require('hasbin');
+	var walk = require('fs-walk');
 
 	var argv = yargs
 		.string('max-depth')
@@ -135,6 +136,24 @@ This script starts up a server, so you don't have to already have one running.
 	};
 
 	/*
+		Exposes all views to the test runner
+	 */
+	renderer.dust.helpers.viewTemplates = function (chunk) {
+		var viewTemplates = [];
+
+		walk.walkSync(config.path.templates, function (basedir, filename, stat) {
+			if (!stat.isDirectory() && filename.endsWith('.dust')) {
+				var absoluteTemplatePath = path.parse(path.join(basedir, filename));
+				var relativeTemplatePath = path.relative(config.path.templates, path.resolve(absoluteTemplatePath.dir, absoluteTemplatePath.name + '.js'));
+
+				viewTemplates.push('<script src="/testviews/' + relativeTemplatePath + '"></script>');
+			}
+		});
+
+		return chunk.write(viewTemplates.join('\n'));
+	};
+
+	/*
 		Get the correct group of test files
 	*/
 	renderer.dust.helpers.scriptSpecs = function (chunk) {
@@ -168,6 +187,23 @@ This script starts up a server, so you don't have to already have one running.
 		app.use('/resources', renderer.assetServer());
 		app.use('/tests', serveStatic('tests'));
 		app.use('/testslib', serveStatic(path.join(__dirname, '..', 'tests')));
+
+		app.use('/testviews', function (req, res) {
+			var targetJsFile = path.parse(path.join(config.path.templates, req.url));
+			var targetDustFile = path.join(targetJsFile.dir, targetJsFile.name + '.dust');
+
+			if (fs.existsSync(targetDustFile)) {
+				var dustTemplateName = path.join(path.parse(req.url).dir.substring(1), targetJsFile.name).split(path.sep).join('__');
+				var script = renderer.dust.compile(fs.readFileSync(targetDustFile, 'utf8'), dustTemplateName);
+				res.writeHead(200, {'Content-Type': 'application/javascript'});
+				res.write(script);
+				res.end();
+			} else {
+				res.writeHead(404, {'Content-Type': 'text/plain'});
+				res.write('404 Not found');
+				res.end();
+			}
+		});
 
 		app.use(function (req, res) {
 			if (req.url === '/') {

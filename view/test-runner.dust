@@ -12,6 +12,8 @@
 	<script src="/testslib/client/lib/mocha.js"> </script>
 	<script src="/testslib/client/lib/proclaim.js"> </script>
 	<script src="/testslib/client/lib/sinon.js"> </script>
+	<script src="/testslib/client/lib/dust-full.js"> </script>
+
 	<script>
 		mocha.setup('bdd');
 		mocha.reporter('html');
@@ -20,6 +22,7 @@
 	</script>
 
 	{@scriptBlock src="main.js" theme=theme/}
+	{@viewTemplates theme=theme /}
 	{@scriptSpecs theme=theme /}
 
 	<script>
