@@ -80,7 +80,8 @@
     "wd": "~1.2.0",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
-    "yargs": "~7.0.2"
+    "yargs": "~7.0.2",
+    "snyk": "^1.36.2"
   },
   "devDependencies": {
     "istanbul": "^0.4.0",
@@ -89,7 +90,6 @@
     "node-sass": "^4.5.3",
     "proclaim": "^3.0.0",
     "sinon": "^2.0.0",
-    "snyk": "^1.33.0",
     "xo": "^0.18.2"
   },
   "main": "./lib/shunter.js",
@@ -100,7 +100,9 @@
     "shunter-test-client": "./bin/test-client.js"
   },
   "scripts": {
-    "test": "make test"
+    "test": "make test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "xo": {
     "esnext": false,
@@ -144,5 +146,6 @@
         ]
       }
     ]
-  }
+  },
+  "snyk": true
 }
