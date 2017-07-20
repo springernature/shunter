@@ -2,7 +2,7 @@
 
 var qs = require('qs');
 
-module.exports = function (config, req, res, data, next) {
+module.exports = function (data, req, res, config ) {
 	var cast = function (params) {
 		var output = {};
 
@@ -35,5 +35,5 @@ module.exports = function (config, req, res, data, next) {
 	data.request_url = (req.url) ? req.url.replace(/\?.*$/, '') : '';
 	/* eslint-enable camelcase */
 
-	next(data);
+	return data;
 };
