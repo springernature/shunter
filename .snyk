@@ -1,0 +1,9 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'npm:tunnel-agent:20170305':
+    - wd > request > tunnel-agent:
+        reason: No fixes available
+        expires: '2017-09-02T12:42:54.426Z'
+patch: {}
