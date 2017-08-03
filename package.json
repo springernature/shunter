@@ -100,7 +100,8 @@
     "shunter-test-client": "./bin/test-client.js"
   },
   "scripts": {
-    "test": "make test"
+    "lint": "make lint",
+    "test": "snyk test && make test"
   },
   "xo": {
     "esnext": false,

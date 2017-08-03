@@ -37,8 +37,8 @@ branches:
 
 # Build script
 script:
-  - 'if [ $LINT ]; then make lint; fi'
-  - 'if [ ! $LINT ]; then make lcov-levels; fi'
+  - 'if [ $LINT ]; then npm run lint; fi'
+  - 'if [ ! $LINT ]; then npm run test; fi'
 
 # Updates the dashboard after a successful deployment
 after_success:

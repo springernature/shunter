@@ -21,12 +21,7 @@ xo:
 	@./node_modules/.bin/xo
 
 # Run all tests
-test: snyk-test test-server
-
-# Run snyk test
-snyk-test:
-	@echo "$(C_CYAN)> running 'snyk test'$(C_RESET)"
-	@./node_modules/.bin/snyk test
+test: lcov-levels
 
 # Run unit tests
 test-server:
