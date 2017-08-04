@@ -1,7 +1,14 @@
 
 # History
 
+## 4.10.1 (2017-08-04)
+
+* Upgrade jserve to 2.0.3. Fixes a vulnerability in the ms library: https://snyk.io/test/npm/jserve/2.0.2
+* Change the travis config and npm scripts in order to make `npm test` consistent between environments.
+* Add Snyk policy file and full integration of Snyk with the build process.
+
 ## 4.10.0 (2017-07-17)
+
 * Support template rendering in client side tests
 
 ## 4.9.0 (2017-06-28)
