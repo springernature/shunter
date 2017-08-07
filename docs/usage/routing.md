@@ -28,7 +28,7 @@ The config is used to match the incoming hostname and request url and match it t
 			"host": "blog.example.com",
 			"port": 80
 		},
-		"^\\/demo": {
+		"/^\\/demo/": {
 		    "host": "demo.example.com"
 		},
 		"/^\\/about/": {
