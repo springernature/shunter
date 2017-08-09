@@ -1,6 +1,6 @@
 {
   "name": "shunter",
-  "version": "4.10.1",
+  "version": "4.10.2",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [
@@ -35,7 +35,8 @@
     "Rowan Manning (http://rowanmanning.com/)",
     "Squil (https://github.com/squil)",
     "Thomas Franquelin (https://github.com/ostapneko)",
-    "Yomi Colledge (http://baphled.wordpress.com)"
+    "Yomi Colledge (http://baphled.wordpress.com)",
+    "Jon Whitlock (https://github.com/jpw)"
   ],
   "repository": {
     "type": "git",
