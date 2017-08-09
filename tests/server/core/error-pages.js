@@ -100,64 +100,64 @@ describe('Templating error pages', function () {
 		var unconfiguredConfig = config;
 		unconfiguredConfig.errorPages = {};
 		var errorPages = require(moduleName)(unconfiguredConfig);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		assert.isTrue(renderer.render.notCalled);
-		assert.strictEqual(null, retval);
+		assert.strictEqual(null, result);
 	});
 
 	it('Should try to render if configured to do so', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		renderer.render.firstCall.yield(null, 'my error page');
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual('my error page', retval);
+		assert.strictEqual('my error page', result);
 	});
 
 	it('Should callback with null if there is an error rendering the error page', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		renderer.render.firstCall.yield(new Error('renderer.render threw some error'));
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual(null, retval);
+		assert.strictEqual(null, result);
 	});
 
 	it('Should callback with null if error falsy', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
+		var result = false;
 		var error;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
-		assert.strictEqual(null, retval);
+		assert.strictEqual(null, result);
 	});
 
 	it('Should render if provided err.status falsy', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
+		var result = false;
 		error.status = undefined;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		renderer.render.firstCall.yield(null, 'my error page');
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual('my error page', retval);
+		assert.strictEqual('my error page', result);
 	});
 
 	it('Should render the template with the users specified default layout', function () {
