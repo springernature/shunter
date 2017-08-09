@@ -87,58 +87,83 @@ describe('Templating error pages', function () {
 				mincer: 'mincer'
 			}
 		};
+
+		error = new Error('Some kind of error');
+		error.status = 418;
 	});
 	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
 
-	error = new Error('Some kind of error');
-	error.status = 418;
-
 	it('Should callback with null if not configured to use templated pages', function () {
 		var unconfiguredConfig = config;
 		unconfiguredConfig.errorPages = {};
 		var errorPages = require(moduleName)(unconfiguredConfig);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		assert.isTrue(renderer.render.notCalled);
-		assert.strictEqual(null, retval);
+		assert.strictEqual(result, null);
 	});
 
 	it('Should try to render if configured to do so', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
 		renderer.render.firstCall.yield(null, 'my error page');
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual('my error page', retval);
+		assert.strictEqual(result, 'my error page');
 	});
 
 	it('Should callback with null if there is an error rendering the error page', function () {
 		var errorPages = require(moduleName)(config);
-		var retval = false;
-		errorPages.getPage(error, req, res, function (ret) {
-			retval = ret;
+		var result = false;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
 		});
 
-		renderer.render.firstCall.yield(new Error('bad times'));
+		renderer.render.firstCall.yield(new Error('renderer.render threw some error'));
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual(null, retval);
+		assert.strictEqual(result, null);
+	});
+
+	it('Should callback with null if error falsy', function () {
+		var errorPages = require(moduleName)(config);
+		var result = false;
+		var error;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
+		});
+
+		assert.strictEqual(result, null);
+	});
+
+	it('Should render if provided err.status falsy', function () {
+		var errorPages = require(moduleName)(config);
+		var result = false;
+		error.status = undefined;
+		errorPages.getPage(error, req, res, function (arg) {
+			result = arg;
+		});
+
+		renderer.render.firstCall.yield(null, 'my error page');
+
+		assert.strictEqual(renderer.render.callCount, 1);
+		assert.strictEqual(result, 'my error page');
 	});
 
 	it('Should render the template with the users specified default layout', function () {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(config.errorPages.errorLayouts.default, renderer.render.firstCall.args[2].layout.template);
+		assert.strictEqual(renderer.render.firstCall.args[2].layout.template, config.errorPages.errorLayouts.default);
 	});
 
 	it('Should render the template with the users specified layout by error code', function () {
@@ -146,32 +171,32 @@ describe('Templating error pages', function () {
 		var error = new Error('err');
 		error.status = 404;
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(config.errorPages.errorLayouts[error.status.toString()], renderer.render.firstCall.args[2].layout.template);
+		assert.strictEqual(renderer.render.firstCall.args[2].layout.template, config.errorPages.errorLayouts[error.status.toString()]);
 	});
 
 	it('Should insert the error into the template context', function () {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(error, renderer.render.firstCall.args[2].errorContext.error);
+		assert.strictEqual(renderer.render.firstCall.args[2].errorContext.error, error);
 	});
 
 	it('Should populate the template context with the reqHost', function () {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(req.headers.host, renderer.render.firstCall.args[2].errorContext.reqHost);
+		assert.strictEqual(renderer.render.firstCall.args[2].errorContext.reqHost, req.headers.host);
 	});
 
 	it('Should populate the template context with the users static data', function () {
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(config.errorPages.staticData.users, renderer.render.firstCall.args[2].users);
+		assert.strictEqual(renderer.render.firstCall.args[2].users, config.errorPages.staticData.users);
 	});
 
 	it('Should prevent the user from clobbering the required "layout" key', function () {
 		config.errorPages.staticData.layout = {};
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.strictEqual(config.errorPages.errorLayouts.default, renderer.render.firstCall.args[2].layout.template);
+		assert.strictEqual(renderer.render.firstCall.args[2].layout.template, config.errorPages.errorLayouts.default);
 	});
 
 	it('Should prevent the user from clobbering the required "errorContext" key', function () {
@@ -181,6 +206,6 @@ describe('Templating error pages', function () {
 		config.errorPages.staticData.errorContext = badConfig;
 		var errorPages = require(moduleName)(config);
 		errorPages.getPage(error, req, res, function () { });
-		assert.notStrictEqual(badConfig, renderer.render.firstCall.args[2].errorContext);
+		assert.notStrictEqual(renderer.render.firstCall.args[2].errorContext, badConfig);
 	});
 });
