@@ -1,6 +1,10 @@
 
 # History
 
+## 4.10.2 (2017-08-09)
+
+* Fixes #210 - if using templated error pages internal errors with no status are masked
+
 ## 4.10.1 (2017-08-04)
 
 * Upgrade jserve to 2.0.3. Fixes a vulnerability in the ms library: https://snyk.io/test/npm/jserve/2.0.2
