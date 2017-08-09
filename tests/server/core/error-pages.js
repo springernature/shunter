@@ -157,7 +157,7 @@ describe('Templating error pages', function () {
 		renderer.render.firstCall.yield(null, 'my error page');
 
 		assert.strictEqual(renderer.render.callCount, 1);
-		assert.strictEqual('my error page', retval);//
+		assert.strictEqual('my error page', retval);
 	});
 
 	it('Should render the template with the users specified default layout', function () {
