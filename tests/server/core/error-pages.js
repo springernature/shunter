@@ -87,14 +87,14 @@ describe('Templating error pages', function () {
 				mincer: 'mincer'
 			}
 		};
+
+		error = new Error('Some kind of error');
+		error.status = 418;
 	});
 	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
 	});
-
-	error = new Error('Some kind of error');
-	error.status = 418;
 
 	it('Should callback with null if not configured to use templated pages', function () {
 		var unconfiguredConfig = config;
@@ -129,10 +129,35 @@ describe('Templating error pages', function () {
 			retval = ret;
 		});
 
-		renderer.render.firstCall.yield(new Error('bad times'));
+		renderer.render.firstCall.yield(new Error('renderer.render threw some error'));
 
 		assert.strictEqual(renderer.render.callCount, 1);
 		assert.strictEqual(null, retval);
+	});
+
+	it('Should callback with null if error falsy', function () {
+		var errorPages = require(moduleName)(config);
+		var retval = false;
+		var error;
+		errorPages.getPage(error, req, res, function (ret) {
+			retval = ret;
+		});
+
+		assert.strictEqual(null, retval);
+	});
+
+	it('Should render if provided err.status falsy', function () {
+		var errorPages = require(moduleName)(config);
+		var retval = false;
+		error.status = undefined;
+		errorPages.getPage(error, req, res, function (ret) {
+			retval = ret;
+		});
+
+		renderer.render.firstCall.yield(null, 'my error page');
+
+		assert.strictEqual(renderer.render.callCount, 1);
+		assert.strictEqual('my error page', retval);//
 	});
 
 	it('Should render the template with the users specified default layout', function () {
