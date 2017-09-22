@@ -4,6 +4,16 @@ version: v1.7.1
 ignore:
   'npm:tunnel-agent:20170305':
     - wd > request > tunnel-agent:
-        reason: No fixes available
-        expires: '2017-10-20T13:46:35.044Z'
+        reason: No fix available
+        expires: '2017-10-21T16:40:57.584Z'
+  'npm:tough-cookie:20170905':
+    - request > tough-cookie:
+        reason: No fix available
+        expires: '2017-10-21T16:40:57.584Z'
+    - wd > request > tough-cookie:
+        reason: No fix available
+        expires: '2017-10-21T16:40:57.584Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No fix available
+        expires: '2017-10-21T16:40:57.584Z'
 patch: {}

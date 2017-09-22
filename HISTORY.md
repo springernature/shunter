@@ -1,6 +1,10 @@
 
 # History
 
+## 4.10.4 (2017-09-21)
+
+* Updates Snyk security policy
+
 ## 4.10.3 (2017-09-20)
 
 * Updates Snyk security policy
