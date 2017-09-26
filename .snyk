@@ -16,4 +16,8 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
         reason: No fix available
         expires: '2017-10-21T16:40:57.584Z'
+  'npm:debug:20170905':
+    - saucelabs > https-proxy-agent > debug:
+        reason: No fix available
+        expires: '2017-10-26T14:23:54.207Z'
 patch: {}
