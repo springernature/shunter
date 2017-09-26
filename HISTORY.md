@@ -1,6 +1,11 @@
 
 # History
 
+## 4.10.5 (2017-09-26)
+
+* Upgrade body-parser to 1.18.2
+* Update Snyk security policy
+
 ## 4.10.4 (2017-09-21)
 
 * Updates Snyk security policy
