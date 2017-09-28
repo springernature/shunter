@@ -48,7 +48,7 @@
     "node": ">=4 <=6"
   },
   "dependencies": {
-    "async": "~2.3.0",
+    "async": "~2.5.0",
     "body-parser": "~1.18.2",
     "cheerio": "~0.22.0",
     "connect": "~3.6.0",
@@ -56,7 +56,7 @@
     "csswring": "~4.2.3",
     "dateformat": "~2.0.0",
     "dustjs-helpers": "~1.7.0",
-    "dustjs-linkedin": "~2.7.4",
+    "dustjs-linkedin": "~2.7.5",
     "each-module": "~1.2.0",
     "ejs": "~2.5.3",
     "extend": "~3.0.0",
@@ -71,17 +71,17 @@
     "mocha-phantomjs-core": "~2.1.0",
     "postcss": "~5.2.0",
     "promised-io": "~0.3.0",
-    "qs": "~6.4.0",
+    "qs": "~6.5.1",
     "qs-middleware": "~1.0.3",
-    "request": "~2.81.0",
+    "request": "~2.83.0",
     "saucelabs": "~1.4.0",
-    "serve-static": "~1.12.0",
+    "serve-static": "~1.13.0",
     "statsd-client": "~0.2.0",
     "uglify-js": "~2.8.0",
     "wd": "~1.2.0",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
-    "yargs": "~7.0.2"
+    "yargs": "~7.1.0"
   },
   "devDependencies": {
     "istanbul": "^0.4.0",

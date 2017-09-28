@@ -20,4 +20,7 @@ ignore:
     - saucelabs > https-proxy-agent > debug:
         reason: No fix available
         expires: '2017-10-26T14:23:54.207Z'
+      dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No fixes available
+        expires: '2017-10-28T11:44:06.229Z'
 patch: {}
