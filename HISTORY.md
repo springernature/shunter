@@ -1,6 +1,11 @@
 
 # History
 
+## 4.10.6 (2017-09-28)
+
+* Upgrade several dependencies
+* Disable creation of package-lock.json when using npm@5
+
 ## 4.10.5 (2017-09-26)
 
 * Upgrade body-parser to 1.18.2
