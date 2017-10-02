@@ -1,6 +1,9 @@
 
 # History
 
+## 4.10.7 (2017-10-02)
+* Temporarily rollback the patch update to dustjs - it breaks projects using the template test helper
+
 ## 4.10.6 (2017-09-28)
 
 * Upgrade several dependencies
