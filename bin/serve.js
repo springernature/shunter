@@ -11,18 +11,21 @@ var yargs = require('yargs');
 var args = yargs
 	.options('p', {
 		alias: 'port',
+		nargs: 1,
 		default: 5401,
 		type: 'number',
 		describe: 'Port number'
 	})
 	.options('d', {
 		alias: 'data',
+		nargs: 1,
 		default: './data',
 		type: 'string',
 		describe: 'The path to look for sample data in'
 	})
 	.options('l', {
 		alias: 'latency',
+		nargs: 1,
 		default: 0,
 		type: 'number',
 		describe: 'Add milliseconds of latency to the request'
