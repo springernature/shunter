@@ -2,7 +2,7 @@
 Introduction to Shunter
 =======================
 
-Looking to create a smart, flexible, and robustly decoupled front end?
+Looking to create a smart, flexible, robust, loosely-decoupled front end?
 
 Need a hand defining integration points between your front and back end applications?
 
@@ -10,7 +10,7 @@ Want to use the same unified front end across both your rails(/PHP/ASP/other) ap
 
 Shunter is for you.
 
-Technically speaking Shunter runs your decoupled front end as a node.js server, acting as a reverse proxy in front of your back end application(s).  This can be deployed on the same or a different server from your other applications as you see fit (it's super lightweight).
+Technically speaking Shunter runs your loosely-coupled front end as a node.js server, acting as a reverse proxy in front of your back end application(s).  This can be deployed on the same or a different server from your other applications as you see fit (it's super lightweight).
 
 ![Shunter as a proxy](diagram.png)
 
