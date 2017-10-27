@@ -2,7 +2,7 @@
 Introduction to Shunter
 =======================
 
-Looking to create a smart, flexible, robust, loosely-decoupled front end?
+Looking to create a smart, flexible, robust, loosely-coupled front end?
 
 Need a hand defining integration points between your front and back end applications?
 
