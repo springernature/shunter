@@ -7,7 +7,7 @@ It helps you create a loosely-coupled front end which can serve traffic from one
 
 Shunter does not contain an API client, or any Controller logic (in the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) sense). Instead, Shunter simply proxies requests to a back end server, then:
 
-1. If the back end wants Shunter to render the response, it returns the application state in a JSON response with a certain HTTP header, which initiates the templating process in Shunter.
+1. If the back end wants Shunter to render the response, it returns the application state as JSON, served with a certain HTTP header. This initiates the templating process in Shunter.
 2. If the back end wishes to serve the response, it omits the header and Shunter proxies the request back to the client.
 
 [![NPM version][shield-npm]][info-npm]
