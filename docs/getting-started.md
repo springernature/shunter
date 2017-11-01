@@ -142,7 +142,8 @@ We'll want to provide a sample JSON file that the Shunter application can proxy 
 ```json
 {
     "layout": {
-        "template": "home"
+        "template": "home",
+        "namespace": "hello-world"
     },
     "title": "Hello World!",
     "list": [
@@ -153,7 +154,13 @@ We'll want to provide a sample JSON file that the Shunter application can proxy 
 }
 ```
 
-Notice the `layout.template` property in the JSON we just created? That indicates the [Dust](http://www.dustjs.com/) template that should be used to render the page. If we open up [http://localhost:5400/home](http://localhost:5400/home) now, then you'll see an error in your terminal indicating that the "home" template can't be found.
+Notice the `layout.template` property in the JSON we just created? That indicates the [Dust](http://www.dustjs.com/) template that should be used to render the page.
+
+The `layout.namespace` property is required by Dust and the value can be any string.
+
+Also worthy of note is that the `layout` object in the root, with those two properties, is the only thing Shunter _requires_ in the JSON response.
+
+Anyway, if we open up [http://localhost:5400/home](http://localhost:5400/home) now, then you'll see an error in your terminal indicating that the "home" template can't be found…
 
 
 
