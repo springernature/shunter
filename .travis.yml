@@ -15,19 +15,12 @@ matrix:
     # Run tests in Node.js 6.x
     - node_js: '6'
 
+    # Run tests in Node.js 8.x
+    - node_js: '8'
+
+  allow_failures:
     # Run tests in the latest version of Node.js
     - node_js: 'node'
-
-# Dependencies require GCC 4.8
-env:
-  global:
-    CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 
 # Restrict builds on branches
 branches:
