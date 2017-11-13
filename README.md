@@ -21,16 +21,14 @@ It helps you create a loosely-coupled front end which can serve traffic from one
 - Well-tested and supported, serving [Scientific American](http://www.scientificamerican.com) as well as [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
 
-Getting Started
----------------
+## Getting Started
 
 If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
 
 You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
 
-Requirements
-------------
+## Requirements
 
 Shunter requires [Node.js][node] 4.x–6.x, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
 
@@ -40,8 +38,7 @@ On Windows things are a bit more complicated due to the Shunter install process 
 - [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
 
 
-Support and Migration
----------------------
+## Support and Migration
 
 Shunter major versions are supported for 6 months after their last release. This means that patch-level changes will be added and bugs will be fixed. We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
 
@@ -50,16 +47,14 @@ If you'd like to know more about how we support our open source projects, includ
 If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
 
 
-Contributing
-------------
+## Contributing
 
 We'd love for you to contribute to Shunter. We maintain a [developer guide](docs/developer-guide.md) to help people get started with working on Shunter itself. It outlines the structure of the application and some of the development practices we uphold.
 
 We also label [issues that might be a good starting-point][starter-issues] for new developers to the project.
 
 
-License
--------
+## License
 
 Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].  
 Copyright &copy; 2015, Springer Nature
