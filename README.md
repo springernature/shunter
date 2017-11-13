@@ -40,7 +40,7 @@ On Windows things are a bit more complicated due to the Shunter install process 
 
 ## Support and Migration
 
-Shunter major versions are supported for 6 months after their last release. This means that patch-level changes will be added and bugs will be fixed. We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
+The last major version of Shunter is version 4. Old major versions are supported for 6 months after a new major version is released. This means that patch-level changes will be added and bugs will be fixed. We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
 
 If you'd like to know more about how we support our open source projects, including the full release process, check out our [support practices document][support].
 
