@@ -23,19 +23,23 @@ It helps you create a loosely-coupled front end which can serve traffic from one
 
 ## Getting Started
 
-If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter application.
+If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter-based application.
 
-You can also refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
+Once you're familiar with Shunter's basics you can refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
 
 
 ## Requirements
 
-Shunter requires [Node.js][node] 4.x–6.x, which should come with [npm][npm]. This should be easy to get running on Mac and Linux.
+Shunter requires [Node.js][node] 4.x–6.x. This should be easy to get running on Mac and Linux.
 
-On Windows things are a bit more complicated due to the Shunter install process requiring a C compiler. Here are some useful links to help you:
+One of Shunter's dependencies is a native addon module so it requires a working C compiler. Windows doesn't come with one by default so you may find the following links helpful:
 
+- [node-gyp on Windows][node-gyp-on-windows]
 - [node-gyp Visual Studio 2010 Setup][node-gyp-vs]
 - [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
+
+See the [Getting started documentation](docs/getting-started.md#prerequisites)
+ for more information on Shunter's requirements.
 
 
 ## Support and Migration
@@ -63,6 +67,7 @@ Copyright &copy; 2015, Springer Nature
 
 [contextify]: http://zxtech.wordpress.com/2013/02/20/contextify-specified-platform-toolset-v110-is-not-installed-or-invalid/
 [node]: https://nodejs.org/
+[node-gyp-on-windows]: https://github.com/nodejs/node-gyp#on-windows
 [node-gyp-vs]: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
 [npm]: https://www.npmjs.com/
 [starter-issues]: https://github.com/springernature/shunter/labels/good-starter-issue
