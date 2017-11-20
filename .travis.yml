@@ -6,6 +6,10 @@ matrix:
     - node_js: '6'
       env: LINT=true
 
+    # Run snyk only in Node.js 6.x
+    - node_js: '6'
+      env: SNYK=true
+
     # Run tests in Node.js 4.x
     - node_js: '4'
 
@@ -29,9 +33,7 @@ branches:
     - /^\d+\.\d+\.\d+$/
 
 # Build script
-script:
-  - 'if [ $LINT ]; then npm run lint; fi'
-  - 'if [ ! $LINT ]; then npm run test; fi'
+script: ./build-script
 
 # Updates the dashboard after a successful deployment
 after_success:

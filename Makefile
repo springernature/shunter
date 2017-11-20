@@ -20,6 +20,9 @@ xo:
 	@echo "$(C_CYAN)> linting javascript$(C_RESET)"
 	@./node_modules/.bin/xo
 
+snyk:
+	@./node_modules/.bin/snyk test --org=springernature
+
 # Run all tests
 test: lcov-levels
 
