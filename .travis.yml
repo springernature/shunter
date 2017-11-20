@@ -37,7 +37,7 @@ script: ./build-script
 
 # Updates the dashboard after a successful deployment
 after_success:
-  - snyk monitor --org=springernature
+  - if [ $SNYK ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then snyk monitor --org=springernature; fi
 
 # Build notifications
 notifications:
