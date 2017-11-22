@@ -135,7 +135,7 @@ You should see a message like this:
 JSON server listening on port 5401
 ```
 
-Leave this running. Now if you re-run `node app.js` in your original terminal window and visit [http://localhost:5400/](http://localhost:5400/) you should see a nice blue page with some form fields!
+Leave this running. Now if you re-run `node app.js` in your original terminal window and visit [http://localhost:5400/](http://localhost:5400/) you should see a nice page with some form fields!
 
 We'll want to provide a sample JSON file that the Shunter application can proxy to. We create sample JSON files in the `data` folder. Add the following to `data/home.json`:
 
