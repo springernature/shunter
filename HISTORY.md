@@ -1,6 +1,21 @@
 
 # History
 
+## 4.11.0 (2017-11-20)
+* Make the response header that triggers shunter rendering configurable (thanks https://github.com/j1mr10rd4n)
+* Update dust js to latest version
+* Documentation updates
+* Allow travis to fail on unsupported node versions
+* Snyk policy updates
+
+## 4.10.7 (2017-10-02)
+* Temporarily rollback the patch update to dustjs - it breaks projects using the template test helper
+
+## 4.10.6 (2017-09-28)
+
+* Upgrade several dependencies
+* Disable creation of package-lock.json when using npm@5
+
 ## 4.10.5 (2017-09-26)
 
 * Upgrade body-parser to 1.18.2

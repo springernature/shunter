@@ -10,6 +10,7 @@ The config object passed to an instance of Shunter can append or overwrite Shunt
 - [Log](#log-configuration)
 - [StatsD](#statsd-configuration)
 - [Timer](#timer-configuration)
+- [Trigger Parameter](#trigger-parameter)
 - [JSON View Parameter](#json-view-parameter)
 - [Environment](#environment-configuration)
 - [Templated Error Pages](#templated-error-page-configuration)
@@ -150,6 +151,23 @@ timer: function() {
 },
 ```
 
+Trigger Parameter
+-----------------
+
+The trigger object defines the name of the response header that will be inspected in order to decide whether to transform the response or pass it through to the client.
+
+This setting allows you to transform responses without munging the Content-type in the upstream service - useful if your service uses HATEOAS mime-type versioning for example.
+
+The default value is:
+
+```js
+trigger {
+    header: 'Content-type',
+    matchExpression: 'application/x-shunter\\+json' 
+}
+```
+
+Any proxied responses with a Content-type of `application/x-shunter+json` will be transformed. The matchExpression is a case-insensitive regular expression that is applied to the value of the named header.
 
 JSON View Parameter
 -------------------

@@ -106,44 +106,93 @@ describe('Request processor', function () {
 			renderer.render.reset();
 		});
 
-		it('Should pass through responses that don\'t have the x-shunter+json mime type', function () {
-			var processor = require(moduleName)({
-				argv: {},
-				timer: mockTimer
-			}, {});
-			var callback = sinon.stub();
+		describe('with default configuration', function () {
+			it('Should pass through responses that don\'t have the x-shunter+json mime type', function () {
+				var processor = require(moduleName)({
+					argv: {},
+					timer: mockTimer
+				}, {});
+				var callback = sinon.stub();
 
-			var req = {};
+				var req = {};
 
-			res.getHeader.withArgs('Content-type').returns('text/html');
+				res.getHeader.withArgs('Content-type').returns('text/html');
 
-			processor.intercept(req, res, callback);
-			res.writeHead();
-			assert.isTrue(res.__originalWriteHead.calledOnce);
+				processor.intercept(req, res, callback);
+				res.writeHead();
+				assert.isTrue(res.__originalWriteHead.calledOnce);
+			});
+
+			it('Should intercept responses with an x-shunter+json mime type', function () {
+				var tier = sinon.stub();
+				var processor = require(moduleName)({
+					env: {
+						tier: tier
+					},
+					argv: {},
+					timer: mockTimer
+				}, renderer);
+				var callback = sinon.stub();
+
+				var req = {url: '/test/url'};
+
+				res.getHeader.withArgs('Content-type').returns('application/x-shunter+json');
+				processor.intercept(req, res, callback);
+
+				res.writeHead();
+				res.write(new Buffer('{"foo":"bar"}'));
+				res.end();
+
+				assert.isTrue(renderer.render.calledOnce);
+				assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
+			});
 		});
-
-		it('Should intercept responses with an x-shunter+json mime type', function () {
-			var tier = sinon.stub();
-			var processor = require(moduleName)({
-				env: {
-					tier: tier
-				},
-				argv: {},
-				timer: mockTimer
-			}, renderer);
-			var callback = sinon.stub();
-
+		describe('with configured trigger header', function () {
+			var trigger = {
+				header: 'render-with',
+				matchExpression: 'shunter'
+			};
 			var req = {url: '/test/url'};
+			var buildProcessor = function (moduleName, renderer) {
+				var processor = require(moduleName)({
+					argv: {},
+					timer: mockTimer,
+					trigger: trigger
+				}, renderer);
+				return processor;
+			};
 
-			res.getHeader.withArgs('Content-type').returns('application/x-shunter+json');
-			processor.intercept(req, res, callback);
+			it('Should intercept responses with the configured header and matching value', function () {
+				var processor = buildProcessor(moduleName, renderer);
 
-			res.writeHead();
-			res.write(new Buffer('{"foo":"bar"}'));
-			res.end();
+				res.getHeader.withArgs('render-with').returns('shunter');
+				processor.intercept(req, res, sinon.stub());
+				res.writeHead();
+				res.write(new Buffer('{"foo":"bar"}'));
+				res.end();
 
-			assert.isTrue(renderer.render.calledOnce);
-			assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
+				assert.isTrue(renderer.render.calledOnce);
+				assert.equal(renderer.render.firstCall.args[2].foo, 'bar');
+			});
+
+			it('Should pass through responses with the configured header but non-matching value', function () {
+				var processor = buildProcessor(moduleName, {});
+
+				res.getHeader.withArgs('render-with').returns('wont-match');
+				processor.intercept(req, res, sinon.stub());
+				res.writeHead();
+
+				assert.isTrue(res.__originalWriteHead.calledOnce);
+			});
+
+			it('Should pass through responses without the configured header', function () {
+				var processor = buildProcessor(moduleName, {});
+
+				processor.intercept(req, res, sinon.stub());
+				res.writeHead();
+
+				assert.isTrue(res.__originalWriteHead.calledOnce);
+			});
 		});
 
 		it('Should JSON if the `jsonViewParameter` parameter is present', function () {

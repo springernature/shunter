@@ -6,6 +6,10 @@ matrix:
     - node_js: '6'
       env: LINT=true
 
+    # Run snyk only in Node.js 6.x
+    - node_js: '6'
+      env: SNYK=true
+
     # Run tests in Node.js 4.x
     - node_js: '4'
 
@@ -15,19 +19,12 @@ matrix:
     # Run tests in Node.js 6.x
     - node_js: '6'
 
+    # Run tests in Node.js 8.x
+    - node_js: '8'
+
+  allow_failures:
     # Run tests in the latest version of Node.js
     - node_js: 'node'
-
-# Dependencies require GCC 4.8
-env:
-  global:
-    CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
 
 # Restrict builds on branches
 branches:
@@ -36,13 +33,11 @@ branches:
     - /^\d+\.\d+\.\d+$/
 
 # Build script
-script:
-  - 'if [ $LINT ]; then npm run lint; fi'
-  - 'if [ ! $LINT ]; then npm run test; fi'
+script: ./build-script
 
 # Updates the dashboard after a successful deployment
 after_success:
-  - snyk monitor --org=springernature
+  - if [ $SNYK ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then snyk monitor --org=springernature; fi
 
 # Build notifications
 notifications:

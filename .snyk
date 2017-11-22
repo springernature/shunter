@@ -4,20 +4,35 @@ version: v1.7.1
 ignore:
   'npm:tunnel-agent:20170305':
     - wd > request > tunnel-agent:
-        reason: No fix available
-        expires: '2017-10-21T16:40:57.584Z'
+        reason: No fixes available
+        expires: '2017-12-20T10:55:16.979Z'
   'npm:tough-cookie:20170905':
     - request > tough-cookie:
-        reason: No fix available
-        expires: '2017-10-21T16:40:57.584Z'
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
+      dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No upgrades available
+        expires: '2017-12-20T10:55:16.979Z'
     - wd > request > tough-cookie:
-        reason: No fix available
-        expires: '2017-10-21T16:40:57.584Z'
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
-        reason: No fix available
-        expires: '2017-10-21T16:40:57.584Z'
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
   'npm:debug:20170905':
     - saucelabs > https-proxy-agent > debug:
-        reason: No fix available
-        expires: '2017-10-26T14:23:54.207Z'
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
+      dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No upgrades available
+        expires: '2017-12-20T10:55:16.979Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No fixes available
+        expires: '2017-11-17T15:40:57.474Z'
 patch: {}
