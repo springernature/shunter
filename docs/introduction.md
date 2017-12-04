@@ -14,7 +14,7 @@ Technically speaking Shunter runs your loosely-coupled front end as a node.js se
 
 ![Shunter as a proxy](diagram.png)
 
-When a request comes in from a user, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the special `Content-Type` `application/x-shunter+json` will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the user.
+When a request comes in from a user, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the [special  response header](usage/configuration-reference.md#trigger-parameter) (by default `Content-Type` `application/x-shunter+json`) will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the user.
 
 ---
 

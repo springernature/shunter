@@ -29,7 +29,7 @@ Technically speaking Shunter runs your loosely-coupled front end as a node.js se
 
 ![Shunter as a proxy](diagram.png)
 
-When a request comes in from a client, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the special `Content-Type` `application/x-shunter+json` response header will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the client.
+When a request comes in from a client, it's proxied through to your back end application (or can use multiple back ends using some simple [routing logic](usage/routing.md)).  Any JSON response which is sent back with the [special response header](usage/configuration-reference.md#trigger-parameter) (by default `Content-Type` `application/x-shunter+json`) will be taken by Shunter and [transformed using Dust.js](usage/templates.md), while any other resource is transparently passed back through to the client.
 
 
 Prerequisites
@@ -135,7 +135,7 @@ You should see a message like this:
 JSON server listening on port 5401
 ```
 
-Leave this running. Now if you re-run `node app.js` in your original terminal window and visit [http://localhost:5400/](http://localhost:5400/) you should see a nice blue page with some form fields!
+Leave this running. Now if you re-run `node app.js` in your original terminal window and visit [http://localhost:5400/](http://localhost:5400/) you should see a nice page with some form fields!
 
 We'll want to provide a sample JSON file that the Shunter application can proxy to. We create sample JSON files in the `data` folder. Add the following to `data/home.json`:
 

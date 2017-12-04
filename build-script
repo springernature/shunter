@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eo pipefail
+
+if [ $LINT ]; then
+	npm run lint
+fi
+
+# Disabled for PRs as encrypted variables (which are required for snyk to run) are not propagated to forks
+if [ $SNYK ]; then
+	if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
+		npm run snyk
+	else
+		echo "snyk test is disabled on pull requests"
+	fi
+fi
+
+if [ ! $LINT ] && [ ! $SNYK ]; then
+	npm run test
+fi
+
+exit 0;
