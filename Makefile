@@ -24,11 +24,11 @@ test: lcov-levels
 # Run unit tests
 test-server:
 	@echo "> Running server-side unit tests"
-	@./node_modules/.bin/mocha --recursive --reporter spec --ui bdd ./tests/server
+	@./node_modules/.bin/mocha --opts ./tests/mocha.opts ./tests/server
 
 test-cov:
 	@echo "> Checking test coverage"
-	@./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --recursive --reporter spec --ui bdd ./tests/server
+	@./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- --opts ./tests/mocha.opts ./tests/server
 
 lcov-levels: test-cov
 	@echo "> Checking coverage levels"
