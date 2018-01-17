@@ -322,6 +322,17 @@ The `assetPath` helper is used to output the correct paths to MD5-fingerprinted 
 <link rel="stylesheet" href="{@assetPath src="main.css"/}"/>
 ```
 
+### The `linkPath` Helper
+
+The `linkPath` helper is used to create a url considering the mount-path
+
+example:
+
+```html
+<form action="{@linkPath src="/search" /}" method="post">
+```
+
+
 ### The `and` Helper
 
 The `and` helper is used to check whether several properties are all truthy. It accepts a `keys` parameter which should be a pipe-separated list of properties to check. If all of them are truthy, the helper block will be output:
