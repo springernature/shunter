@@ -142,11 +142,11 @@ describe('Worker process running in production', function () {
 	});
 
 	it('Should add a middleware to intercept responses from the backend', function () {
-		assert.isTrue(connect().use.calledWith(processor().intercept));
+		assert.isTrue(connect().use.calledWith('/', processor().intercept));
 	});
 
 	it('Should add a middleware to hook up the http proxy', function () {
-		assert.isTrue(connect().use.calledWith(processor().proxy));
+		assert.isTrue(connect().use.calledWith('/', processor().proxy));
 	});
 
 	it('Should mount all additional middleware found in the config', function () {
