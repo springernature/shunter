@@ -1,7 +1,15 @@
 
 # History
 
+## 4.11.1 (2017-02-05)
+
+* Add higher default timeout to mocha tests
+* Makefile fixes
+* Documentation improvements
+* Security policy updates
+
 ## 4.11.0 (2017-11-20)
+
 * Make the response header that triggers shunter rendering configurable (thanks https://github.com/j1mr10rd4n)
 * Update dust js to latest version
 * Documentation updates
@@ -9,6 +17,7 @@
 * Snyk policy updates
 
 ## 4.10.7 (2017-10-02)
+
 * Temporarily rollback the patch update to dustjs - it breaks projects using the template test helper
 
 ## 4.10.6 (2017-09-28)
