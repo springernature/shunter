@@ -1,7 +1,7 @@
 
 # History
 
-## 4.11.1 (2017-02-05)
+## 4.11.1 (2018-02-05)
 
 * Add higher default timeout to mocha tests
 * Makefile fixes
