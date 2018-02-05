@@ -4,15 +4,15 @@ version: v1.10.1
 ignore:
   'npm:tunnel-agent:20170305':
     - wd > request > tunnel-agent:
-        reason: No fixes available
-        expires: '2018-02-03T14:34:06.966Z'
+        reason: No upgrade available
+        expires: '2018-03-07T14:13:51.318Z'
   'npm:tough-cookie:20170905':
     - request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
       dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
-        reason: No upgrades available
-        expires: '2018-02-03T14:34:06.966Z'
+        reason: No upgrade available
+        expires: '2018-03-07T14:13:51.318Z'
     - wd > request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -25,13 +25,16 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
         reason: No upgrades available
         expires: '2017-12-20T10:55:16.979Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No upgrades available
+        expires: '2018-02-03T14:34:06.966Z'
   'npm:debug:20170905':
     - saucelabs > https-proxy-agent > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
       dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
-        reason: No upgrades available
-        expires: '2018-02-03T14:34:06.966Z'
+        reason: No upgrade available
+        expires: '2018-03-07T14:13:51.318Z'
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -41,4 +44,7 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No upgrades available
         expires: '2017-12-20T10:55:16.979Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No upgrades available
+        expires: '2018-02-03T14:34:06.966Z'
 patch: {}
