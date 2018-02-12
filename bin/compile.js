@@ -80,13 +80,17 @@ var compile = function (data, callback) {
 
 		return {
 			path: config.path.publicResources + '/' + data.assets[name],
-			content: content
+			content: {
+				code: content
+			}
 		};
 	}).filter(function (stylesheet) {
 		return stylesheet !== null;
 	});
 
 	var jsToMinify = ['main'].concat(EXTRA_MINIFY_PATHS);
+
+	var sourcemaps;
 
 	var javascripts = findAssets('js').filter(function (name) {
 		for (var i = 0; jsToMinify[i]; ++i) {
@@ -106,9 +110,13 @@ var compile = function (data, callback) {
 		}
 		start = new Date();
 		content = uglify.minify(content, {
-			fromString: true
-		}).code;
+			fromString: true,
+			outSourceMap: name +'.map',
+			file: data.assets[name],
+			sourceRoot: '/public/resources/'
+		});
 		end = new Date();
+		sourcemaps = content.map;
 		// Note: suspect this part of the process is timing out on build, extra logging to test
 		console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
 
@@ -119,10 +127,14 @@ var compile = function (data, callback) {
 	}).filter(function (script) {
 		return script !== null;
 	});
+
 	// Save the updated stylesheets and javascripts, then save the manifest
 	async.map(stylesheets.concat(javascripts), function (resource, fn) {
 		console.log('Writing resource to ' + resource.path);
-		fs.writeFile(resource.path, resource.content, 'utf8', fn);
+		fs.writeFile(resource.path, resource.content.code, 'utf8', fn);
+		fs.writeFile(config.path.publicResources + '/main.js.map', sourcemaps, 'utf8', function (err) {
+			if (err) throw err;
+		});
 	}, function () {
 		manifest.save(callback);
 	});
