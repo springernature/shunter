@@ -111,18 +111,20 @@ var compile = function (data, callback) {
 		start = new Date();
 		content = uglify.minify(content, {
 			fromString: true,
-			outSourceMap: name +'.map',
-			file: data.assets[name],
-			sourceRoot: '/public/resources/'
+			outSourceMap: data.assets[name] + '.map',
+			sources: jsToMinify
 		});
 		end = new Date();
 		sourcemaps = content.map;
 		// Note: suspect this part of the process is timing out on build, extra logging to test
 		console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
 
+		console.log(findAssets('js'));
+
 		return {
 			path: config.path.publicResources + '/' + data.assets[name],
-			content: content
+			content: content,
+			sourceMapName: name
 		};
 	}).filter(function (script) {
 		return script !== null;
@@ -132,7 +134,7 @@ var compile = function (data, callback) {
 	async.map(stylesheets.concat(javascripts), function (resource, fn) {
 		console.log('Writing resource to ' + resource.path);
 		fs.writeFile(resource.path, resource.content.code, 'utf8', fn);
-		fs.writeFile(config.path.publicResources + '/main.js.map', sourcemaps, 'utf8', function (err) {
+		fs.writeFile(config.path.publicResources +'/'+ data.assets[resource.sourceMapName] +'.map', sourcemaps, 'utf8', function (err) {
 			if (err) throw err;
 		});
 	}, function () {
