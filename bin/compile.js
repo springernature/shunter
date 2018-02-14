@@ -8,6 +8,7 @@ var glob = require('glob');
 var mkdirp = require('mkdirp');
 var uglify = require('uglify-js');
 var yargs = require('yargs');
+var ncp = require('ncp');
 
 var argv = yargs
 	.options('x', {
@@ -104,6 +105,8 @@ var compile = function (data, callback) {
 		var content = asset ? asset.toString() : null;
 		var start;
 		var end;
+		var sourceMapResourcesSource = config.path.resources +'/js';
+		var sourceMapResourcesDestination = config.path.publicResources;
 
 		if (!content) {
 			return deleteAsset(name);
@@ -111,19 +114,30 @@ var compile = function (data, callback) {
 		start = new Date();
 		content = uglify.minify(content, {
 			fromString: true,
-			outSourceMap: data.assets[name] + '.map',
-			sources: jsToMinify
+			outSourceMap: config.sourceMap ? data.assets[name] + '.map' : null
 		});
 		end = new Date();
-		sourcemaps = content.map;
 		// Note: suspect this part of the process is timing out on build, extra logging to test
 		console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
+		if (config.sourceMap) {
+			sourcemaps = content.map;
+			var sourceMapObj = JSON.parse(sourcemaps);
+			sourceMapObj.sources = findAssets('js');
+			sourcemaps = JSON.stringify(sourceMapObj);
 
-		console.log(findAssets('js'));
+			ncp(sourceMapResourcesSource, sourceMapResourcesDestination, {
+				stopOnErr: true,
+				clobber: true
+			}, function (err) {
+				if (err) throw err;
+				console.log('Resources copied from '+ sourceMapResourcesSource +' to '+ sourceMapResourcesDestination +' for sourcemaps');
+			});
+		}
 
 		return {
 			path: config.path.publicResources + '/' + data.assets[name],
 			content: content,
+			name: name,
 			sourceMapName: name
 		};
 	}).filter(function (script) {
@@ -134,12 +148,14 @@ var compile = function (data, callback) {
 	async.map(stylesheets.concat(javascripts), function (resource, fn) {
 		console.log('Writing resource to ' + resource.path);
 		fs.writeFile(resource.path, resource.content.code, 'utf8', fn);
-		fs.writeFile(config.path.publicResources +'/'+ data.assets[resource.sourceMapName] +'.map', sourcemaps, 'utf8', function (err) {
-			if (err) throw err;
-		});
+		if (config.sourceMap) {
+			fs.writeFile(config.path.publicResources +'/'+ data.assets[resource.sourceMapName] +'.map', sourcemaps, 'utf8', function (err) {			
+				if (err) throw err;			
+			});
+		}
 	}, function () {
 		manifest.save(callback);
-	});
+	});	
 };
 
 var generate = function (callback) {
