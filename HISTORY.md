@@ -1,6 +1,10 @@
 
 # History
 
+## 4.11.2 (2018-02-15)
+
+* Security policy updates
+
 ## 4.11.1 (2018-02-05)
 
 * Add higher default timeout to mocha tests
