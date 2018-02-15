@@ -5,14 +5,14 @@ ignore:
   'npm:tunnel-agent:20170305':
     - wd > request > tunnel-agent:
         reason: No upgrade available
-        expires: '2018-03-07T14:13:51.318Z'
+        expires: '2018-03-17T16:57:12.996Z'
   'npm:tough-cookie:20170905':
     - request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
       dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
         reason: No upgrade available
-        expires: '2018-03-07T14:13:51.318Z'
+        expires: '2018-03-17T16:57:12.995Z'
     - wd > request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -28,13 +28,16 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
         reason: No upgrades available
         expires: '2018-02-03T14:34:06.966Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No upgrade available
+        expires: '2018-03-07T14:13:51.318Z'
   'npm:debug:20170905':
     - saucelabs > https-proxy-agent > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
       dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No upgrade available
-        expires: '2018-03-07T14:13:51.318Z'
+        expires: '2018-03-17T16:57:12.995Z'
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -47,4 +50,66 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No upgrades available
         expires: '2018-02-03T14:34:06.966Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No upgrade available
+        expires: '2018-03-07T14:13:51.318Z'
+  'npm:lodash:20180130':
+    - wd > async > lodash:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - mincer > lodash:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
+    - wd > lodash:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
+  'npm:hoek:20180212':
+    - request > hawk > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - request > hawk > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - request > hawk > sntp > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - request > hawk > cryptiles > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - wd > request > hawk > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - wd > request > hawk > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - wd > request > hawk > sntp > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - wd > request > hawk > cryptiles > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > hawk > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > hawk > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > hawk > sntp > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > hawk > cryptiles > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > hawk > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > hawk > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > hawk > sntp > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.996Z'
 patch: {}
