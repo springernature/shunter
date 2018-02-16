@@ -1,6 +1,10 @@
 
 # History
 
+## 4.11.3 (2018-02-16)
+
+* Security policy updates
+
 ## 4.11.2 (2018-02-15)
 
 * Security policy updates
