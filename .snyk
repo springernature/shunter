@@ -10,9 +10,6 @@ ignore:
     - request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
-      dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
-        reason: No upgrade available
-        expires: '2018-03-17T16:57:12.995Z'
     - wd > request > tough-cookie:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -31,13 +28,13 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
         reason: No upgrade available
         expires: '2018-03-07T14:13:51.318Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > tough-cookie:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
   'npm:debug:20170905':
     - saucelabs > https-proxy-agent > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
-      dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
-        reason: No upgrade available
-        expires: '2018-03-17T16:57:12.995Z'
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No fixes available
         expires: '2017-11-17T15:40:57.474Z'
@@ -53,6 +50,9 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
         reason: No upgrade available
         expires: '2018-03-07T14:13:51.318Z'
+    - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > tar-pack > debug:
+        reason: No upgrade available
+        expires: '2018-03-17T16:57:12.995Z'
   'npm:lodash:20180130':
     - wd > async > lodash:
         reason: No upgrade available
@@ -112,4 +112,8 @@ ignore:
     - dustjs-linkedin > chokidar > fsevents > node-pre-gyp > request > hawk > cryptiles > boom > hoek:
         reason: No upgrade available
         expires: '2018-03-17T16:57:12.996Z'
+  'npm:is-my-json-valid:20180214':
+    - wd > request > har-validator > is-my-json-valid:
+        reason: No upgrade available
+        expires: '2018-03-18T09:52:59.015Z'
 patch: {}
