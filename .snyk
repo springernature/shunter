@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.10.1
+version: v1.10.2
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   'npm:tunnel-agent:20170305':
@@ -116,4 +116,8 @@ ignore:
     - wd > request > har-validator > is-my-json-valid:
         reason: No upgrade available
         expires: '2018-03-18T09:54:31.187Z'
+  'npm:braces:20180219':
+    - dustjs-linkedin > chokidar > anymatch > micromatch > braces:
+        reason: No upgrade available
+        expires: '2018-03-28T14:44:34.257Z'
 patch: {}
