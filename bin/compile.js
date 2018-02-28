@@ -86,6 +86,8 @@ var compile = function (data, callback) {
 		return stylesheet !== null;
 	});
 
+	var isDev = process.argv.includes('-dev');
+
 	var jsToMinify = ['main'].concat(EXTRA_MINIFY_PATHS);
 
 	var javascripts = findAssets('js').filter(function (name) {
@@ -104,13 +106,16 @@ var compile = function (data, callback) {
 		if (!content) {
 			return deleteAsset(name);
 		}
-		start = new Date();
-		content = uglify.minify(content, {
-			fromString: true
-		}).code;
-		end = new Date();
-		// Note: suspect this part of the process is timing out on build, extra logging to test
-		console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
+
+		if (!isDev) {
+			start = new Date();
+			content = uglify.minify(content, {
+				fromString: true
+			}).code;
+			end = new Date();
+			// Note: suspect this part of the process is timing out on build, extra logging to test
+			console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
+		}
 
 		return {
 			path: config.path.publicResources + '/' + data.assets[name],
