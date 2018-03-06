@@ -8,12 +8,9 @@ deps:
 	@npm install
 
 # Run all linters
-lint: xo
-
-# Lint JavaScript
-xo:
+lint:
 	@echo "> Linting javascript"
-	@./node_modules/.bin/xo
+	@./node_modules/.bin/eslint **/*.js
 
 snyk:
 	@./node_modules/.bin/snyk test --org=springernature

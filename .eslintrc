@@ -1,0 +1,41 @@
+{
+	"extends": "@springernature/eslint-config",
+
+	"rules": {
+		"block-scoped-var": "warn",
+		"indent": "warn",
+		"no-lonely-if": "warn",
+		"no-path-concat": "warn",
+		"no-prototype-builtins": "warn",
+		"no-redeclare": "warn",
+		"no-undef": "warn",
+		"no-useless-escape": "warn",
+		"node/no-deprecated-api": "warn",
+		"unicorn/no-new-buffer": "warn",
+		"unicorn/regex-shorthand": "warn"
+	},
+
+	"overrides": [
+		{
+			"files": "lib/processor.js",
+			"rules": {
+				"import/no-unresolved": "warn",
+				"unicorn/catch-error-name": "warn"
+			}
+		},
+		{
+			"files": "tests/server/core/input-filter.js",
+			"rules": {
+				"no-unused-vars": "warn"
+			}
+		},
+		{
+			"files": "tests/**/*.js",
+			"env": {
+				"browser": true,
+				"jquery": true,
+				"mocha": true
+			}
+		}
+	]
+}

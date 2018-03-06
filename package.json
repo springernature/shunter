@@ -83,6 +83,13 @@
     "yargs": "~7.1.0"
   },
   "devDependencies": {
+    "@springernature/eslint-config": "^0.1.0",
+    "eslint": "^4.18.2",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-no-use-extend-native": "^0.3.12",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-unicorn": "^4.0.2",
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
     "mocha-phantomjs-core": "~2.1.0",
@@ -90,8 +97,7 @@
     "node-sass": "^4.5.3",
     "proclaim": "^3.0.0",
     "sinon": "^2.0.0",
-    "snyk": "^1.43.0",
-    "xo": "^0.18.2"
+    "snyk": "^1.43.0"
   },
   "main": "./lib/shunter.js",
   "bin": {
@@ -104,48 +110,5 @@
     "lint": "make lint",
     "snyk": "make snyk",
     "test": "make test"
-  },
-  "xo": {
-    "esnext": false,
-    "envs": [
-      "browser",
-      "jquery"
-    ],
-    "ignore": [
-      "tests/client/lib/*.js"
-    ],
-    "rules": {
-      "block-scoped-var": "warn",
-      "no-lonely-if": "warn",
-      "no-path-concat": "warn",
-      "no-prototype-builtins": "warn",
-      "no-redeclare": "warn",
-      "no-undef": "warn",
-      "no-useless-escape": "warn",
-      "unicorn/no-new-buffer": "warn"
-    },
-    "overrides": [
-      {
-        "files": "lib/processor.js",
-        "rules": {
-          "import/no-unresolved": "warn",
-          "unicorn/catch-error-name": "warn"
-        }
-      },
-      {
-        "files": "tests/server/core/input-filter.js",
-        "rules": {
-          "no-unused-vars": "warn"
-        }
-      },
-      {
-        "files": "tests/**/*.js",
-        "envs": [
-          "browser",
-          "jquery",
-          "mocha"
-        ]
-      }
-    ]
   }
 }
