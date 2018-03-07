@@ -1,7 +1,5 @@
 'use strict';
 
-var util = require('util');
-
 module.exports = initHelper;
 
 function initHelper(dust) {
@@ -28,7 +26,7 @@ function initHelper(dust) {
 				while (nestedKeys.length > 0 && item) {
 					item = item[nestedKeys.shift()];
 				}
-				if (item && (!util.isArray(item) || item.length > 0)) {
+				if (item && (!Array.isArray(item) || item.length > 0)) {
 					++count;
 				}
 			}

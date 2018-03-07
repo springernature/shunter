@@ -13,7 +13,7 @@ function initHelper(dust, renderer, config) {
 
 		try {
 			value = (params.date) ? context.resolve(params.date) : null;
-			date = (value) ? new Date(value.match(/^[0-9]+$/) ? parseInt(value, 10) : value) : new Date();
+			date = (value) ? new Date(value.match(/^\d+$/) ? parseInt(value, 10) : value) : new Date();
 			chunk.write(dateformat(date, params.format || 'yyyy-mm-dd'));
 		} catch (err) {
 			config.log.error(err.message);

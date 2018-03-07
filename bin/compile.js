@@ -38,8 +38,8 @@ var resourceModules;
 if (argv['resource-module']) {
 	resourceModules = (
 		Array.isArray(argv['resource-module']) ?
-		argv['resource-module'] :
-		[argv['resource-module']]
+			argv['resource-module'] :
+			[argv['resource-module']]
 	);
 	config.modules = resourceModules;
 }
