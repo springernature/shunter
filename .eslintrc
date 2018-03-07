@@ -1,5 +1,8 @@
 {
-	"extends": "@springernature/eslint-config",
+	"extends": [
+		"@springernature/eslint-config",
+		"@springernature/eslint-config/node"
+	],
 
 	"rules": {
 		"block-scoped-var": "warn",
