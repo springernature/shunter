@@ -13,7 +13,6 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
 [![Build status][shield-build]][info-build]
-[![Dependencies][shield-dependencies]][info-dependencies]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
 ## Key Features
