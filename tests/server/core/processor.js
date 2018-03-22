@@ -103,7 +103,7 @@ describe('Request processor', function () {
 			mockTimer = sinon.stub().returns(sinon.stub());
 		});
 		afterEach(function () {
-			renderer.render.reset();
+			renderer.render.resetHistory();
 		});
 
 		describe('with default configuration', function () {
@@ -428,7 +428,7 @@ describe('Request processor', function () {
 		});
 
 		afterEach(function () {
-			renderer.renderPartial.reset();
+			renderer.renderPartial.resetHistory();
 		});
 
 		it('Should allow the template to be specified in the url', function () {

@@ -56,7 +56,7 @@ describe('Logging to statsd', function () {
 	afterEach(function () {
 		mockery.deregisterAll();
 		mockery.disable();
-		mockConfig.log.error.reset();
+		mockConfig.log.error.resetHistory();
 	});
 
 	describe('Native methods', function () {

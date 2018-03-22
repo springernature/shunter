@@ -84,8 +84,8 @@ describe('Worker process running in production', function () {
 		process.exit.restore();
 	});
 	afterEach(function () {
-		process.exit.reset();
-		config.log.debug.reset();
+		process.exit.resetHistory();
+		config.log.debug.resetHistory();
 	});
 
 	it('Should listen for exit messages', function () {

@@ -33,8 +33,8 @@ describe('Template loading', function () {
 		callback = sinon.stub();
 	});
 	afterEach(function () {
-		mockConfig.log.warn.reset();
-		mockRenderer.compileOnDemand.reset();
+		mockConfig.log.warn.resetHistory();
+		mockRenderer.compileOnDemand.resetHistory();
 	});
 
 	it('Should log and gracefully handle missing templates', function () {
