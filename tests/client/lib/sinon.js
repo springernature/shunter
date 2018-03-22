@@ -1348,7 +1348,7 @@ if (!this.sinon && commonJSModule) {
             this.callIds = [];
             if (this.fakes) {
                 for (var i = 0; i < this.fakes.length; i++) {
-                    this.fakes[i].reset();
+                    this.fakes[i].resetHistory();
                 }
             }
         },
@@ -1368,7 +1368,7 @@ if (!this.sinon && commonJSModule) {
             delete proxy.create;
             sinon.extend(proxy, func);
 
-            proxy.reset();
+            proxy.resetHistory();
             proxy.prototype = func.prototype;
             proxy.displayName = name || "spy";
             proxy.toString = sinon.functionToString;

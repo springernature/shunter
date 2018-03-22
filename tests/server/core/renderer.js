@@ -86,7 +86,7 @@ describe('Renderer', function () {
 		mockery.deregisterAll();
 		mockery.disable();
 		mockConfig.env.isProduction.returns(true);
-		mockConfig.log.error.reset();
+		mockConfig.log.error.resetHistory();
 	});
 
 	describe('Asset handling', function () {
