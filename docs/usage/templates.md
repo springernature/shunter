@@ -331,6 +331,7 @@ example:
 ```html
 <form action="{@linkPath src="/search" /}" method="post">
 ```
+with mount-path `/mounty` it will produce `/mounty/search`
 
 
 ### The `and` Helper
