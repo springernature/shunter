@@ -35,7 +35,6 @@ describe('Templating error pages', function () {
 		mockery.registerMock('./content-type', contentType);
 		res = require('../mocks/response');
 
-		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('mincer', require('../mocks/mincer'));
 		mockery.registerMock('each-module', require('../mocks/each-module'));
 		mockery.registerMock('./renderer', rendererLib);
