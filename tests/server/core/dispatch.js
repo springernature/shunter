@@ -3,6 +3,7 @@
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
+var path = require('path');
 
 var moduleName = '../../../lib/dispatch';
 
@@ -28,7 +29,6 @@ describe('Dispatching response', function () {
 		req.url = '/hello';
 		res = require('../mocks/response');
 
-		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('mincer', require('../mocks/mincer'));
 		mockery.registerMock('each-module', require('../mocks/each-module'));
 
@@ -44,6 +44,7 @@ describe('Dispatching response', function () {
 			},
 			path: {
 				root: '/',
+				shunterRoot: path.join(path.dirname(__dirname), '../../'),
 				resources: '/resources',
 				publicResources: '/public/resources',
 				themes: '/themes',

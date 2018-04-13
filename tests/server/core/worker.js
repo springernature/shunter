@@ -63,7 +63,6 @@ describe('Worker process running in production', function () {
 			warnOnUnregistered: false,
 			warnOnReplace: false
 		});
-		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('connect', require('../mocks/connect'));
 		mockery.registerMock('body-parser', {json: sinon.stub().returns('JSON')});
 		mockery.registerMock('cookie-parser', sinon.stub().returns('COOKIE'));
@@ -226,7 +225,6 @@ describe('Worker process running outside of production', function () {
 			warnOnReplace: false
 		});
 
-		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('connect', require('../mocks/connect'));
 		mockery.registerMock('body-parser', {json: sinon.stub().returns('JSON')});
 		mockery.registerMock('cookie-parser', sinon.stub().returns('COOKIE'));

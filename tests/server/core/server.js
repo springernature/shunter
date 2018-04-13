@@ -3,6 +3,7 @@
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
+var path = require('path');
 
 describe('Clustering', function () {
 	var worker;
@@ -11,11 +12,13 @@ describe('Clustering', function () {
 	var fs;
 	var timers;
 	var config;
+	var pathJoinStub
 
 	beforeEach(function () {
 		config = {
 			path: {
-				root: '/'
+				root: '/',
+				shunterRoot: path.join(path.dirname(__dirname), '../../')
 			},
 			log: require('../mocks/log'),
 			middleware: [],
@@ -32,7 +35,6 @@ describe('Clustering', function () {
 			warnOnReplace: false
 		});
 		mockery.registerMock('cluster', require('../mocks/cluster'));
-		mockery.registerMock('path', require('../mocks/path'));
 		mockery.registerMock('fs', require('../mocks/fs'));
 		mockery.registerMock('os', require('../mocks/os'));
 		mockery.registerMock('./worker', worker);
@@ -45,6 +47,7 @@ describe('Clustering', function () {
 		server = require('../../../lib/server')(config);
 		sinon.stub(process, 'on');
 		sinon.stub(process, 'exit');
+		pathJoinStub =  sinon.stub(path, 'join');
 	});
 	afterEach(function () {
 		mockery.deregisterAll();
@@ -52,6 +55,7 @@ describe('Clustering', function () {
 		process.on.restore();
 		process.exit.restore();
 		timers.restore();
+		pathJoinStub.restore();
 	});
 
 	describe('Master', function () {
@@ -76,7 +80,7 @@ describe('Clustering', function () {
 
 		it('Should save the a pid file on start up', function () {
 			require('os').cpus.returns([1, 1, 1]);
-			require('path').join.returns('/shunter.pid');
+			pathJoinStub.returns('/shunter.pid');
 			server.start();
 			fs.writeFile.yield();
 			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid));
@@ -85,7 +89,7 @@ describe('Clustering', function () {
 
 		it('Should log an error if it was unable to write the pid file', function () {
 			require('os').cpus.returns([1, 1, 1]);
-			require('path').join.returns('/shunter.pid');
+			pathJoinStub.returns('/shunter.pid');
 			server.start();
 			fs.writeFile.yield({message: 'ERROR'});
 			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid));
@@ -94,7 +98,7 @@ describe('Clustering', function () {
 
 		it('Should save the current timestamp as json', function () {
 			require('os').cpus.returns([1, 1, 1]);
-			require('path').join.returns('/timestamp.json');
+			pathJoinStub.returns('/timestamp.json');
 			server.start();
 			assert.isTrue(fs.writeFileSync.calledWith('/timestamp.json', '{"value":10}'));
 		});
@@ -114,7 +118,7 @@ describe('Clustering', function () {
 
 		it('Should save the timestamp when SIGUSR2 is captured', function () {
 			require('os').cpus.returns([1, 1, 1]);
-			require('path').join.returns('/timestamp.json');
+			pathJoinStub.returns('/timestamp.json');
 			server.start();
 			process.on.withArgs('SIGUSR2').firstCall.yield();
 			assert.isTrue(fs.writeFileSync.calledWith('/timestamp.json', '{"value":10}'));
