@@ -250,7 +250,7 @@ describe('Renderer', function () {
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 
-			require('path').join.returnsArg(1);
+			require('path').join.returnsArg(2);
 			renderer.environment.findAsset.returns({
 				digestPath: 'test-env-md5.css'
 			});
@@ -264,7 +264,7 @@ describe('Renderer', function () {
 
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 
-			require('path').join.returnsArg(1);
+			require('path').join.returnsArg(2);
 
 			var asset = renderer.assetPath('test.css');
 			assert.strictEqual(asset, 'test-prod-md5.css');

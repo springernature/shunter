@@ -141,12 +141,12 @@ describe('Worker process running in production', function () {
 		assert.isTrue(connect().use.calledWith(processor().timestamp));
 	});
 
-	it('Should add a middleware to intercept responses from the backend', function () {
-		assert.isTrue(connect().use.calledWith(processor().intercept));
+	it('Should add a middleware to intercept responses from the backend on default mount path', function () {
+		assert.isTrue(connect().use.calledWith('/', processor().intercept));
 	});
 
-	it('Should add a middleware to hook up the http proxy', function () {
-		assert.isTrue(connect().use.calledWith(processor().proxy));
+	it('Should add a middleware to hook up the http proxy on default mount path', function () {
+		assert.isTrue(connect().use.calledWith('/', processor().proxy));
 	});
 
 	it('Should mount all additional middleware found in the config', function () {
@@ -281,3 +281,122 @@ describe('Worker process running outside of production', function () {
 		assert.isTrue(renderer().watchDustExtensions.calledOnce);
 	});
 });
+
+
+describe('Worker process running with a set mount-path', function () {
+	var benchmark = null;
+	var connect = null;
+	/* eslint-disable no-unused-vars */
+	var worker = null;
+	/* eslint-enable no-unused-vars */
+	var renderer = null;
+	var processor = null;
+	var config;
+
+	var PORT = 1337;
+	var MOUNTPATH = '/monty';
+
+	before(function () {
+		config = {
+			path: {
+				root: '/',
+				public: '/path/to/public',
+				tests: '/path/to/tests'
+			},
+			web: {
+				resources: '/resources',
+				public: '/public',
+				tests: '/tests'
+			},
+			argv: {
+				'max-child-processes': 1,
+				'mount-path': MOUNTPATH,
+				port: PORT
+			},
+			log: require('../mocks/log'),
+			middleware: [
+				['foo', function () {}],
+				[function () {}]
+			],
+			env: {
+				name: 'production',
+				isProduction: function(){return true},
+				isDevelopment: function(){return false}
+			}
+		};
+
+		renderer = require('../mocks/renderer');
+		processor = require('../mocks/processor');
+		benchmark = require('../mocks/benchmark');
+
+		sinon.spy(process, 'on');
+		sinon.stub(process, 'exit');
+
+		mockery.enable({
+			useCleanCache: true,
+			warnOnUnregistered: false,
+			warnOnReplace: false
+		});
+		mockery.registerMock('connect', require('../mocks/connect'));
+		mockery.registerMock('body-parser', {json: sinon.stub().returns('JSON')});
+		mockery.registerMock('cookie-parser', sinon.stub().returns('COOKIE'));
+		mockery.registerMock('serve-static', sinon.stub());
+		mockery.registerMock('qs-middleware', sinon.stub().returns('QUERY'));
+		mockery.registerMock('./renderer', renderer);
+		mockery.registerMock('./processor', processor);
+		mockery.registerMock('./benchmark', benchmark);
+
+		connect = require('connect');
+
+		worker = require('../../../lib/worker')(config);
+	});
+	after(function () {
+		mockery.deregisterAll();
+		mockery.disable();
+		process.on.restore();
+		process.exit.restore();
+	});
+	afterEach(function () {
+		process.exit.resetHistory();
+		config.log.debug.resetHistory();
+	});
+
+
+	it('Should add a middleware to intercept responses from the backend on mount path', function () {
+		assert.isTrue(connect().use.calledWith(MOUNTPATH, processor().intercept));
+	});
+
+	it('Should add a middleware to hook up the http proxy on mount path', function () {
+		assert.isTrue(connect().use.calledWith(MOUNTPATH, processor().proxy));
+	});
+
+	it('Should load the appropriate assets in production mode on mount path', function () {
+		assert.isTrue(connect().use.calledWith(MOUNTPATH + '/public'));
+		assert.isTrue(require('serve-static').calledWith('/path/to/public'));
+		assert.isTrue(renderer().assetServer.calledOnce);
+	});
+
+	it('Should mount all additional middleware found in the config', function () {
+		assert.isTrue(connect().use.calledWithExactly(config.middleware[0][0], config.middleware[0][1]));
+		assert.isTrue(connect().use.calledWithExactly(config.middleware[1][0]));
+	});
+
+	it('Should set up a ping end point', function () {
+		assert.isTrue(connect().use.calledWith('/ping', processor().ping));
+	});
+
+	it('Should set up an end point for the template api', function () {
+		assert.isTrue(connect().use.calledWith('/template', processor().api));
+	});
+
+	it('Should listen on the specified port', function () {
+		assert.isTrue(connect().listen.calledOnce);
+		assert.isTrue(connect().listen.calledWith(PORT));
+	});
+
+	it('Should log a message on start up', function () {
+		connect().listen.firstCall.yield();
+		assert.isTrue(config.log.debug.calledOnce);
+	});
+});
+
