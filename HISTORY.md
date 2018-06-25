@@ -1,6 +1,10 @@
 
 # History
 
+## 4.11.4 (2018-06-25)
+
+* Update `wd` and `saucelabs`
+
 ## 4.11.3 (2018-02-16)
 
 * Security policy updates
