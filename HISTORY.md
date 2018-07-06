@@ -1,6 +1,8 @@
 
 # History
 
+* Fix worker test stub behaviour that was causing child tests to fail
+
 ## 4.11.4 (2018-06-25)
 
 * Update `wd` and `saucelabs`

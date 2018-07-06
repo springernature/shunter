@@ -83,7 +83,7 @@ describe('Worker process running in production', function () {
 		process.exit.restore();
 	});
 	afterEach(function () {
-		process.exit.resetHistory();
+		process.exit.reset();
 		config.log.debug.resetHistory();
 	});
 
