@@ -1,9 +1,18 @@
 
 # History
 
+* Fix worker test stub behaviour that was causing child tests to fail
+
 ## 4.11.4 (2018-06-25)
 
 * Update `wd` and `saucelabs`
+* Mount path as config option (Thanks @samzilverberg)
+* remove some unnecessary usage of path mock in tests
+* Replace `sinon.reset()` with `resetHistory()`
+* Remove gemnasium badge from README
+* Remove `snyk test` from travis' test matrix
+* Upgrade sinon to 4.x. Fixes #253
+* Replace xo with eslint and the springernature cfg
 
 ## 4.11.3 (2018-02-16)
 
