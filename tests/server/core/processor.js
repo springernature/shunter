@@ -140,7 +140,7 @@ describe('Request processor', function () {
 				processor.intercept(req, res, callback);
 
 				res.writeHead();
-				res.write(new Buffer('{"foo":"bar"}'));
+				res.write(Buffer.from('{"foo":"bar"}'));
 				res.end();
 
 				assert.isTrue(renderer.render.calledOnce);
@@ -168,7 +168,7 @@ describe('Request processor', function () {
 				res.getHeader.withArgs('render-with').returns('shunter');
 				processor.intercept(req, res, sinon.stub());
 				res.writeHead();
-				res.write(new Buffer('{"foo":"bar"}'));
+				res.write(Buffer.from('{"foo":"bar"}'));
 				res.end();
 
 				assert.isTrue(renderer.render.calledOnce);
@@ -218,7 +218,7 @@ describe('Request processor', function () {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write(new Buffer('{"foo":"bar"}'));
+			res.write(Buffer.from('{"foo":"bar"}'));
 			res.end();
 
 			assert.equal(renderer.render.callCount, 0);
@@ -244,8 +244,8 @@ describe('Request processor', function () {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write(new Buffer('{"foo":'));
-			res.write(new Buffer('"bar"}'));
+			res.write(Buffer.from('{"foo":'));
+			res.write(Buffer.from('"bar"}'));
 			res.end();
 
 			assert.isTrue(renderer.render.calledOnce);
@@ -255,12 +255,12 @@ describe('Request processor', function () {
 		it('Should safely reconstruct multibyte characters that are split between writes', function () {
 			var value = 'abc⩽def';
 			var raw = '{"foo":"' + value + '"}';
-			var source = new Buffer(raw);
+			var source = Buffer.from(raw);
 			var length = Buffer.byteLength(raw);
 			var firstChunkLength = raw.indexOf('c') + 2; // Split in the middle of the ⩽ character
 			var secondChunkLength = length - firstChunkLength;
-			var firstChunk = new Buffer(firstChunkLength);
-			var secondChunk = new Buffer(secondChunkLength);
+			var firstChunk = Buffer.allocUnsafe(firstChunkLength);
+			var secondChunk = Buffer.allocUnsafe(secondChunkLength);
 			source.copy(firstChunk, 0, 0, firstChunkLength);
 			source.copy(secondChunk, 0, firstChunkLength);
 
@@ -307,7 +307,7 @@ describe('Request processor', function () {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write(new Buffer('{"foo":"bar"}'));
+			res.write(Buffer.from('{"foo":"bar"}'));
 			res.end();
 
 			renderer.render.firstCall.yield(null, 'Content');
@@ -338,7 +338,7 @@ describe('Request processor', function () {
 			processor.intercept(req, res, callback);
 
 			res.writeHead(401);
-			res.write(new Buffer('{"foo":"bar"}'));
+			res.write(Buffer.from('{"foo":"bar"}'));
 			res.end();
 
 			renderer.render.firstCall.yield(null, 'Content');
@@ -375,7 +375,7 @@ describe('Request processor', function () {
 			processor.intercept(req, res, callback);
 
 			res.writeHead();
-			res.write(new Buffer('{"foo":bar"}'));
+			res.write(Buffer.from('{"foo":bar"}'));
 			assert.doesNotThrow(function () {
 				res.end();
 			});
