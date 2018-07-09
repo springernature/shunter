@@ -1,7 +1,9 @@
 
 # History
 
-* Fix worker test stub behaviour that was causing child tests to fail
+## 4.11.5 (2018-07-09)
+
+* Fix worker test stub behaviour introduced in `4.11.4` that was causing child tests to fail
 
 ## 4.11.4 (2018-06-25)
 
