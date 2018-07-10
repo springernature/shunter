@@ -19,7 +19,6 @@
 
     // Assert that two values are equal
     proclaim.equal = function (actual, expected, msg) {
-        /* jshint eqeqeq: false */
         if (actual != expected) {
             fail(actual, expected, msg, '==');
         }
@@ -27,7 +26,6 @@
 
     // Assert that two values are not equal
     proclaim.notEqual = function (actual, expected, msg) {
-        /* jshint eqeqeq: false */
         if (actual == expected) {
             fail(actual, expected, msg, '!=');
         }
@@ -351,7 +349,6 @@
 
     // Utility for checking whether an object contains another object
     function includes (haystack, needle) {
-        /* jshint maxdepth: 3*/
         var i;
 
         // Array#indexOf, but ie...
@@ -398,8 +395,6 @@
 
     // Utility for deep equality testing of objects
     function objectsEqual (obj1, obj2) {
-        /* jshint eqeqeq: false */
-
         // Check for undefined or null
         if (isUndefinedOrNull(obj1) || isUndefinedOrNull(obj2)) {
             return false;
@@ -451,7 +446,6 @@
 
     // Utility for deep equality testing
     function isDeepEqual (actual, expected) {
-        /* jshint eqeqeq: false */
         if (actual === expected) {
             return true;
         }
