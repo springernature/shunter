@@ -1,6 +1,11 @@
 
 # History
 
+## 4.11.6 (2018-07-31)
+
+* Hikes `request` dependency to 2.87 to address security vulnerability
+* Update testing documentation
+* Remove unused jshint directives in tests
 * Remove deprecated Buffer() constructor
 
 ## 4.11.5 (2018-07-09)
