@@ -42,6 +42,14 @@ describe('Foo bar', function() {
 
 In the `helper.render` callback, the `$` parameter is a [Cheerio](https://github.com/cheeriojs/cheerio) instance which allows you to use jQuery-like functions to access the render output. The `output` parameter contains the full output as a string.
 
+If you need you can pass extra arguments to the `render` function:
+
+```js
+helper.render(template, req, res, data, callback);
+```
+
+This could be useful in cases where you want to test request objects. For example: custom headers or cookies.
+
 When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you'd include a partial
 
 ```js
