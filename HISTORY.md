@@ -1,6 +1,10 @@
 
 # History
 
+## 4.12.0 (2018-08-22)
+
+* Adds `i` and `q` flags to `shunter-serve` to mimic real paths when serving mock JSON data. Fixes #276 (thanks https://github.com/cazwazacz)
+
 ## 4.11.6 (2018-07-31)
 
 * Hikes `request` dependency to 2.87 to address security vulnerability
