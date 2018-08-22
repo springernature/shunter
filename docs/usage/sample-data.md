@@ -22,7 +22,7 @@ To use the `shunter-serve` command line tool, run the following:
 ./node_modules/.bin/shunter-serve
 ```
 
-you may specify the port on which `shunter-serve` should run by using the option `-p`, this should match the port specified in the Shunter routing configuration, set in the Shunter config file or at run-time with the `-o` option. For example to listen on port 9000, run the following:
+You may specify the port on which `shunter-serve` should run by using the option `-p`, this should match the port specified in the Shunter routing configuration, set in the Shunter config file or at run-time with the `-o` option. For example to listen on port 9000, run the following:
 
 ```
 ./node_modules/.bin/shunter-serve -p 9000
@@ -30,6 +30,13 @@ you may specify the port on which `shunter-serve` should run by using the option
 
 You may also set a number of milliseconds of latency for the response using the `-l` option. This can be useful for performance-related testing.
 
+Furthermore, you may use the options `-i` and `-q` to make `shunter-serve` mimic real paths. These options let you serve JSON from the index path and instruct `shunter-serve` to respect query parameters, respectively. To use them, run the following:
+
+```
+./node_modules/.bin/shunter-serve -i -q
+```
+
+As a result, visiting `localhost:5401` will return an `index.json` file placed in the aforementioned `data` directory and visiting `localhost:5401/search?q=test&count=10` will return `data/search/q_count.json`.
 
 ---
 

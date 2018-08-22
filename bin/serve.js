@@ -27,6 +27,18 @@ var args = yargs
 		type: 'number',
 		describe: 'Add milliseconds of latency to the request'
 	})
+	.options('i', {
+		alias: 'index',
+		default: false,
+		type: 'boolean',
+		describe: 'Serve static JSON at the index path'
+	})
+	.options('q', {
+		alias: 'query',
+		default: false,
+		type: 'boolean',
+		describe: 'Handle query parameters in request path'
+	})
 	.alias('h', 'help')
 	.help()
 	.argv;
@@ -46,7 +58,9 @@ var app = jserve({
 		info: console.log.bind(console)
 	},
 	middleware: [
+		interceptIndex,
 		query(),
+		handleQueryParameters,
 		addLatency,
 		serveRemoteJson
 	],
@@ -58,6 +72,24 @@ var app = jserve({
 
 // Start the JServe application
 app.start();
+
+// Middleware to serve JSON at the index route
+// eg. a request to / will return data/index.json
+function interceptIndex(request, response, next) {
+	if (args.index === true && request.path === '/') {
+		request.path = '/index.json';
+	}
+	return next();
+}
+
+// Middleware to handle query parameters in the request
+// eg. a request to /search?q=hello&count=10 will return data/search/q_count.json
+function handleQueryParameters(request, response, next) {
+	if (args.query === true && Object.keys(request.query).length > 0) {
+		request.path += '/' + Object.keys(request.query).join('_') + '.json';
+	}
+	return next();
+}
 
 // Middleware to add latency to a response
 function addLatency(request, response, next) {
