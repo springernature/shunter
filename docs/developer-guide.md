@@ -10,7 +10,7 @@ If you're looking for information on how to _use_ Shunter, please see the [API D
 - [Use of GitHub Issues](#issue-tracking)
 - [Writing Unit Tests](#testing)
 - [Static Analysis](#static-analysis)
-- [Versioning](#versioning)
+- [Versioning](#versioning-and-releases)
 
 
 Library Structure
