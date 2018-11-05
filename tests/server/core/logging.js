@@ -77,7 +77,7 @@ describe('Shunter logging config,', function () {
 	});
 
 	describe('With user-provided logging config provided via args,', function () {
-		var appJSLogConfig = new winston.Logger({
+		var appJSLogConfig = winston.createLogger({
 			transports: [
 				new (winston.transports.Console)({
 					colorize: false
