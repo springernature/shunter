@@ -11,7 +11,8 @@ var mockConfig = {
 	timer: sinon.stub().returns(sinon.stub()),
 	env: {
 		tier: sinon.stub(),
-		host: sinon.stub().returns('ci')
+		host: sinon.stub().returns('ci'),
+		isDevelopment: sinon.stub().returns(false)
 	},
 	argv: {}
 };
@@ -77,8 +78,18 @@ describe('Request processor', function () {
 			assert.equal(req.headers['X-Shunter-Deploy-Timestamp'], '1234567890');
 			assert.equal(req.url, '/foo');
 			assert.isTrue(next.calledOnce);
+		});
 
-			mockConfig.argv = {};
+		it('Should override the X-Shunter-Deploy-Timestamp with the current time in dev mode', function() {
+			mockConfig.env.isDevelopment.returns(true);
+			var processor = require(moduleName)(mockConfig, {});
+			var next = sinon.stub();
+
+			req.url = '/foo';
+			processor.timestamp(req, {}, next);
+			assert.notEqual(req.headers['X-Shunter-Deploy-Timestamp'], '1234567890');
+			assert.equal(req.url, '/foo');
+			assert.isTrue(next.calledOnce);
 		});
 
 		it('Should add a header X-Shunter with the Shunter version being used', function () {
