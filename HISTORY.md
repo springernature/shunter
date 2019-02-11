@@ -1,6 +1,10 @@
 
 # History
 
+## 4.13.0 (2019-02-11)
+
+* Populate `X-Shunter-Deploy-Timestamp` header with the current timestamp when running in development mode
+
 ## 4.12.0 (2018-08-22)
 
 * Adds `i` and `q` flags to `shunter-serve` to mimic real paths when serving mock JSON data. Fixes #276 (thanks https://github.com/cazwazacz)
