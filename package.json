@@ -78,7 +78,7 @@
     "serve-static": "~1.13.0",
     "statsd-client": "~0.2.0",
     "uglify-js": "~2.8.0",
-    "wd": "~1.10.0",
+    "wd": "~1.11.2",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
     "yargs": "~7.1.0"
