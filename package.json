@@ -51,7 +51,7 @@
   "dependencies": {
     "async": "~2.5.0",
     "body-parser": "~1.18.2",
-    "cheerio": "~0.22.0",
+    "cheerio": "~1.0.0-rc.3",
     "connect": "~3.6.0",
     "cookie-parser": "~1.4.0",
     "csswring": "~4.2.3",
