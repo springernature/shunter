@@ -10,7 +10,7 @@ deps:
 # Run all linters
 lint:
 	@echo "> Linting javascript"
-	@./node_modules/.bin/eslint **/*.js
+	@./node_modules/.bin/eslint '**/*.js'
 
 # Run all tests
 test: lcov-levels
