@@ -12,9 +12,6 @@ lint:
 	@echo "> Linting javascript"
 	@./node_modules/.bin/eslint **/*.js
 
-snyk:
-	@./node_modules/.bin/snyk test --org=springernature
-
 # Run all tests
 test: lcov-levels
 
