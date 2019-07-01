@@ -1,9 +1,9 @@
 'use strict';
 
+var path = require('path');
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
-var path = require('path');
 
 var mockConfig = {
 	modules: [
