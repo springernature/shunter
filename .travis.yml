@@ -2,25 +2,18 @@
 language: node_js
 matrix:
   include:
-    # Run lint only in Node.js 6.x
-    - node_js: '6'
+    # Run lint only in Node.js 10.x
+    - node_js: '10'
       env: LINT=true
-
-    # Run tests in Node.js 4.x
-    - node_js: '4'
-
-    # Run tests in Node.js 5.x
-    - node_js: '5'
-
-    # Run tests in Node.js 6.x
-    - node_js: '6'
 
     # Run tests in Node.js 8.x
     - node_js: '8'
 
-  allow_failures:
-    # Run tests in the latest version of Node.js
-    - node_js: 'node'
+    # Run tests in Node.js 10.x
+    - node_js: '10'
+
+    # Run tests in Node.js 12.x
+    - node_js: '12'
 
 # Build script
 script: ./build-script
