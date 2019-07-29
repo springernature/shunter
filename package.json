@@ -92,11 +92,11 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-unicorn": "^4.0.3",
-    "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
     "mocha-phantomjs-core": "~2.1.0",
     "mockery": "^2.0.0",
     "node-sass": "^4.5.3",
+    "nyc": "^14.1.1",
     "proclaim": "^3.0.0",
     "sinon": "^4.0.0"
   },
