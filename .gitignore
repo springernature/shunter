@@ -10,3 +10,4 @@ timestamp.json
 shunter-*.tgz
 .idea
 *.iml
+.nyc_output
