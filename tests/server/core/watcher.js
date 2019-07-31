@@ -60,6 +60,9 @@ describe('Watcher watchTree', function () {
 			wt = watchTree('foo', require('../mocks/log'));
 			emitSpy = sinon.spy(wt, 'emit');
 		});
+		afterEach(function () {
+			wt.close();
+		});
 		it('Should emit a fileCreated event when a file is created', function () {
 			wt.emit('added', 'foopath');
 			assert(emitSpy.calledWith('fileCreated', 'foopath'));
