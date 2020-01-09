@@ -6,9 +6,6 @@ matrix:
     - node_js: '10'
       env: LINT=true
 
-    # Run tests in Node.js 8.x
-    - node_js: '8'
-
     # Run tests in Node.js 10.x
     - node_js: '10'
 
