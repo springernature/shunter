@@ -1,22 +1,20 @@
-
-Testing
-=======
+# Testing
 
 When writing unit tests for Shunter-based apps, there will be certain fixtures that require help from Shunter, such as rendering a HTML partial from a Dust template with dummy JSON input, or writing compiled JavaScript into a test runner.
 
-[Testing Templates](#testing-templates) explains how to use Shunter's exported function `testhelper` that helps you set up and tear down HTML partials.
+[Testing Templates](#testing-templates) explains how to use Shunter's exported function `testhelper()` that helps you set up and tear down HTML partials.
 
 [Testing Client-Side JavaScript](testing-client-side-javascript) explains how to use the `shunter-test-client` script to run client-side unit tests from the command line.
 
-
-Testing Templates
------------------
+## Testing Templates
 
 As dust templates can contain logic, there will be scenarios where you want to test that your code behaves as expected.
 
 In your test spec, you need to load in the test helper from shunter, as you will need some of shunter's features to render the templates for testing.
 
-Other dependencies are up to you. We use [Mocha](https://mochajs.org/), but you can use whatever you want.
+Other dependencies are up to you. Shunter uses [Mocha](https://mochajs.org/) for testing, but you can use any other test runner.
+
+An example client test could be as follows:
 
 ```js
 var assert = require('assert');
@@ -38,19 +36,20 @@ describe('Foo bar', function() {
             done();
         });
     });
+});
 ```
 
 In the `helper.render` callback, the `$` parameter is a [Cheerio](https://github.com/cheeriojs/cheerio) instance which allows you to use jQuery-like functions to access the render output. The `output` parameter contains the full output as a string.
 
-If you need you can pass extra arguments to the `render` function:
+You can use the following syntax to pass extra arguments to the `render` function:
 
 ```js
 helper.render(template, req, res, data, callback);
 ```
 
-This could be useful in cases where you want to test request objects. For example: custom headers or cookies.
+This could be useful in cases where you want to test request objects, like checking for custom headers or cookies.
 
-When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you'd include a partial
+When testing templates that are in subfolders, be sure to pass in any subfolders in the same way that you would include a partial:
 
 ```js
 helper.render('mysubfolder___templatename', {
@@ -68,9 +67,7 @@ You can test individual templates by running mocha directly with the command:
 
 In addition to these tests we recommend using [Dustmite](https://github.com/nature/dustmite) to lint your dust files and ensure that they are all syntactically valid.
 
-
-Testing Client-Side JavaScript
-------------------------------
+## Testing Client-Side JavaScript
 
 Shunter provides a command-line script that will:
 
@@ -90,15 +87,15 @@ You can run your client-side tests with the command:
 ./node_modules/.bin/shunter-test-client
 ```
 
-### Optional Arguments ###
+### Optional arguments
 
-#### Test Just One Spec File ####
+#### Test just one spec file
 
 ```sh
 ./node_modules/.bin/shunter-test-client --spec file-spec
 ```
 
-#### Test In Browsers With Sauce Labs ####
+#### Test in browsers with Sauce Labs
 
 Requires Sauce Connect, see https://docs.saucelabs.com/reference/sauce-connect/
 Once Sauce Connect is installed, you need to run it with:
@@ -113,13 +110,13 @@ Then you can run the command:
 ./node_modules/.bin/shunter-test-client --browsers
 ```
 
-#### Add A Resource Module ####
+#### Add a resource module
+
 Add a resource module to the JavaScript under test (modules in your config automatically added)
 
 ```sh
 ./node_modules/.bin/shunter-test-client --resource-module foo
 ```
-
 
 ---
 
