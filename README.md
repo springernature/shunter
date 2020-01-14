@@ -57,7 +57,7 @@ If you're migrating between major versions of Shunter, we maintain a [migration 
 
 ## Contributing
 
-We'd love for you to contribute to Shunter. We maintain a [developer guide](docs/developer-guide.md) to help people get started with working on Shunter itself. It outlines the structure of the application and some of the development practices we uphold.
+We'd love for you to contribute to Shunter. We maintain a [guide to help developers](docs/developer-guide.md) get started with working on Shunter itself. It outlines the structure of the library and some of the development practices we uphold.
 
 We also label [issues that might be a good starting-point][starter-issues] for new developers to the project.
 
