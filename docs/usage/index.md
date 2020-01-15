@@ -49,4 +49,4 @@ API Documentation
 
 Next steps:
 
-- [Developer Guide](../developer-guide.md)
+- [Guide for Shunter developers](../developer-guide.md)

@@ -9,4 +9,4 @@ If you're looking for the full documentation, refer to the [API Documentation](u
 
 If you're looking for support end dates or migrating between major versions of Shunter, we maintain a [support guide](support.md) and a [migration guide](migration/index.md).
 
-If you're interested in contributing to Shunter, we also maintain a [developer guide](developer-guide.md).
+If you're interested in contributing to Shunter, we also maintain a [guide for developers](developer-guide.md).

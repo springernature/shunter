@@ -1,8 +1,6 @@
+# Guide for Shunter developers
 
-Shunter Developer Guide
-=======================
-
-This guide is here to help new developers get started with developing Shunter itself. It will outline the structure of the application and some of the development practices we uphold.
+This guide is here to help new developers get started with developing Shunter itself. It will outline the structure of the library and some of the development practices we uphold.
 
 If you're looking for information on how to _use_ Shunter, please see the [API Documentation](usage/index.md).
 
@@ -12,9 +10,7 @@ If you're looking for information on how to _use_ Shunter, please see the [API D
 - [Static Analysis](#static-analysis)
 - [Versioning](#versioning-and-releases)
 
-
-Library Structure
------------------
+## Library structure
 
 The main files that comprise Shunter live in the `lib` folder. Shunter has been broken up into several smaller modules which serve different purposes. We'll outline the basics here:
 
@@ -35,9 +31,7 @@ The main files that comprise Shunter live in the `lib` folder. Shunter has been 
 - [`watcher.js`](https://github.com/springernature/shunter/blob/master/lib/watcher.js) is a utility to watch a tree of files and reload them on change.
 - [`worker.js`](https://github.com/springernature/shunter/blob/master/lib/worker.js) creates a Connect app to handle requests with the Shunter middlewares added to the stack. Instances of this app are run in each process managed by `server.js`.
 
-
-Issue Tracking
---------------
+## Issue tracking
 
 We use [GitHub issues](https://github.com/springernature/shunter/issues) to log bugs and feature requests. This is a great place to look if you're interested in working on Shunter.
 
@@ -47,9 +41,7 @@ We use labels extensively to categorise issues, so you should be able to find so
 
 If you're logging a new bug or feature request, please be as descriptive as possible. Include steps to reproduce and a reduced test case if applicable.
 
-
-Testing
--------
+## Testing
 
 We maintain a fairly complete set of test suites for Shunter, and these get run on every pull-request and commit to master. It's useful to also run these locally when you're working on Shunter.
 
@@ -67,9 +59,7 @@ make ci
 
 If you're developing new features or refactoring, make sure that your code is covered by unit tests. The `tests` directory mirrors the directory structure of the main application so that it's clear where each test belongs.
 
-
-Static Analysis
----------------
+## Static analysis
 
 As well as unit testing, we also lint our JavaScript code with [JSHint](http://jshint.com/) and [JSCS](http://jscs.info/). This keeps everything consistent and readable.
 
@@ -79,9 +69,7 @@ To run the linters, you can use:
 make lint
 ```
 
-
-Versioning and releases
------------------------
+## Versioning and releases
 
 Most of the time, one of the core developers will decide when a release is ready to go out. You shouldn't take this upon yourself without discussing with the team.
 
