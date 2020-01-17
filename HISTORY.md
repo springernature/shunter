@@ -1,6 +1,10 @@
 
 # History
 
+## 4.13.1 (2020-01-17)
+
+* Fixes an issue where a missing `mocha-phantomjs-core` dependency may cause client-side tests to fail.
+
 ## 4.13.0 (2019-02-11)
 
 * Populate `X-Shunter-Deploy-Timestamp` header with the current timestamp when running in development mode
