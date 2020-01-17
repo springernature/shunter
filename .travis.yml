@@ -12,12 +12,6 @@ matrix:
     # Run tests in Node.js 12.x
     - node_js: '12'
 
-# Restrict builds on branches
-branches:
-  only:
-    - master
-    - /^\d+\.\d+\.\d+$/
-
 # Build script
 script: ./build-script
 
