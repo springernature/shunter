@@ -22,12 +22,6 @@ matrix:
     # Run tests in the latest version of Node.js
     - node_js: 'node'
 
-# Restrict builds on branches
-branches:
-  only:
-    - master
-    - /^\d+\.\d+\.\d+$/
-
 # Build script
 script: ./build-script
 
