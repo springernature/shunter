@@ -4,7 +4,7 @@ Modules and Inheritance
 
 Shunter can pull in common resources, filters, helpers and templates from one or more declared npm modules.  These modules are loaded in as dependencies via `package.json` and the application is made aware of them by configuration options set in `config/local.json`.
 
-Code loaded in through modules can be overridden by your application by having a file of the same name in your application.
+These dependencies can be overridden if there are files of the same name in your application.
 
 - [Set-up Steps](#set-up-steps)
 - [Config](#config)
