@@ -2,35 +2,33 @@
 Modules and Inheritance
 =======================
 
-At Springer Nature, we have a lot of code that we need to share between different applications.  To do that, we enabled Shunter to pull in common resources, filters, helpers and templates from one or more declared npm modules.  These modules are loaded in as dependencies via `package.json` and the application is made aware of them by configuration options set in `config/local.json`.
+Shunter can pull in common resources, filters, helpers and templates from one or more declared npm modules.  These modules are loaded in as dependencies via `package.json` and the application is made aware of them by configuration options set in `config/local.json`.
 
-In this way, shared code rollout can be controlled through versioning, which reduces the risk of regressions.
+Code loaded in through modules can be overridden by your application by having a file of the same name in your application.
 
-Code loaded in through modules can be overridden by your application simply by having a file of the same name in your application.
+- [Set-up Steps](#set-up-steps)
+- [Config](#config)
+- [Overriding shared code](#overriding-shared-code)
+- [Developing with your module](#developing-with-your-module)
+- [Testing your code](#testing-your-code)
 
 Set-up Steps
 ------------
 1. Set up your shared code with the same structures as you have for your main app, e.g. templates are put into a `view` folder, JavaScript goes into a `resources/js` folder, etc.
-1. In your application's `package.json`, add your sharing module to dependencies, e.g.
+2. In your application's `package.json`, add your sharing module to dependencies, e.g.
 ```js
 "dependencies": {
 	"shunter": "^1",
 	"my-shared-module": "~1.0"
 },
 ```
-1. Add the module name to `config/local.json`, e.g.
+3. Add the module name to `config/local.json`, e.g.
 ```json
 {
 	"modules": ["my-shared-module"]
 }
 ```
-1. Run `npm install` to add in the code
-
-Private Modules
----------------
-We are using a private repository for versioned node modules so that we can use version ranges in `package.json` ([Gemfury](https://gemfury.com/)).
-
-It isn't essential to use this - you can still use the other methods of setting your module location like GitHub urls.  However without a repository you are limited to pointing to one specific version.
+4. Run `npm install` to install your dependencies.
 
 Config
 ------
@@ -48,13 +46,13 @@ If you have both `my-shared-module/resources/css/forms.css` and `my-app/resource
 Developing with your module
 ---------------------------
 
-Use NPM to point to your locally checked-out module code with [npm link](https://docs.npmjs.com/cli/link)
+Use NPM to point to your locally checked-out module code with [npm link](https://docs.npmjs.com/cli/link).
 
 Testing your code
 ------------------------
 You can run tests on your code in the same way as you do for your application.
 
-The module's dev dependencies should include Shunter so that the rendering helper is available (see [Testing](testing.md))
+The module's dev dependencies should include Shunter so that the rendering helper is available (see [Testing](testing.md)).
 
 ---
 
