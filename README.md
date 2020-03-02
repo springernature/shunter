@@ -1,9 +1,8 @@
-
 # ![Shunter](docs/shunter-logo.png)
 
-Shunter is a [Node.js][node] application built to read JSON and translate it into HTML.
+Shunter is a [Node.js][node] module built to read JSON and translate it into HTML.
 
-It helps you create a loosely-coupled front end which can serve traffic from one or more back end applications - great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
+It helps you create a loosely-coupled front end application which can serve traffic from one or more back end applications — great for use in multi-language, multi-disciplinary teams or just to make your project more flexible and future-proofed.
 
 Shunter does not contain an API client, or any Controller logic (in the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) sense). Instead, Shunter simply proxies requests to a back end server, then:
 
@@ -16,21 +15,18 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
 ## Key Features
-- Enforces decoupling of templates from underlying applications
-- Enables multiple applications to use the same unified front end
-- Makes full site redesigns or swapping out back end applications a doddle
-- Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
-- Asset concatenation, minification, cache-busting, and other performance optimisations built-in
-- Outputs any type of content you like, e.g. HTML, RSS, RDF
-- Well-tested and supported, serving [Scientific American](http://www.scientificamerican.com) as well as [many](http://www.nature.com/npjscilearn/) [high-traffic](http://www.nature.com/srep) [sites](http://www.nature.com/search) across nature.com
 
+* Enforces decoupling of templates from underlying applications
+* Enables multiple applications to use the same unified front end
+* Makes full site redesigns or swapping out back end applications a doddle
+* Completely technology-agnostic; if your application outputs JSON, it can work with Shunter
+* Asset concatenation, minification, cache-busting, and other performance optimisations built-in
+* Outputs any type of content you like, e.g. HTML, RSS, RDF
+* Well-tested and supported, serving [Scientific American](https://www.scientificamerican.com) as well as many high-traffic sites across the Springer Nature portfolio.
 
 ## Getting Started
 
-If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter-based application.
-
-Once you're familiar with Shunter's basics you can refer to the [API Documentation](docs/usage/index.md) for a full breakdown about how to work with Shunter.
-
+You can find all the details about how to use Shunter in our [documentation](docs/index.md). If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter-based application.
 
 ## Requirements
 
@@ -38,13 +34,11 @@ Shunter requires [Node.js][node] 4.x–6.x. This should be easy to get running o
 
 One of Shunter's dependencies is a native addon module so it requires a working C compiler. Windows doesn't come with one by default so you may find the following links helpful:
 
-- [node-gyp on Windows][node-gyp-on-windows]
-- [node-gyp Visual Studio 2010 Setup][node-gyp-vs]
-- [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
+* [node-gyp on Windows][node-gyp-on-windows]
+* [node-gyp Visual Studio 2010 Setup][node-gyp-vs]
+* [contextify – Specified platform toolset (v110) is not installed or invalid][contextify]
 
-See the [Getting started documentation](docs/getting-started.md#prerequisites)
- for more information on Shunter's requirements.
-
+See the [Getting started documentation](docs/getting-started.md#prerequisites) for more information on Shunter's requirements.
 
 ## Support and Migration
 
@@ -54,20 +48,16 @@ If you'd like to know more about how we support our open source projects, includ
 
 If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
 
-
 ## Contributing
 
 We'd love for you to contribute to Shunter. We maintain a [guide to help developers](docs/developer-guide.md) get started with working on Shunter itself. It outlines the structure of the library and some of the development practices we uphold.
 
 We also label [issues that might be a good starting-point][starter-issues] for new developers to the project.
 
-
 ## License
 
 Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].  
 Copyright &copy; 2015, Springer Nature
-
-
 
 [contextify]: http://zxtech.wordpress.com/2013/02/20/contextify-specified-platform-toolset-v110-is-not-installed-or-invalid/
 [node]: https://nodejs.org/
@@ -75,7 +65,7 @@ Copyright &copy; 2015, Springer Nature
 [node-gyp-vs]: https://github.com/TooTallNate/node-gyp/wiki/Visual-Studio-2010-Setup
 [npm]: https://www.npmjs.com/
 [starter-issues]: https://github.com/springernature/shunter/labels/good-starter-issue
-[support]: https://github.com/springernature/frontend/blob/master/practices/open-source-support.md
+[support]: https://github.com/springernature/frontend-playbook/blob/master/practices/open-source-support.md
 
 [info-coverage]: https://coveralls.io/github/springernature/shunter
 [info-dependencies]: https://gemnasium.com/springernature/shunter

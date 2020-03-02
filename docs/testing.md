@@ -22,20 +22,20 @@ var rootdir = __dirname.substring(0, __dirname.indexOf('/tests/'));
 var helper = require('shunter').testhelper();
 
 describe('Foo bar', function() {
-    before(function() {
-        helper.setup(rootdir + '/view/template.dust', rootdir + '/view/subdir/template.dust');
-    });
-    after(helper.teardown);
+	before(function() {
+		helper.setup(rootdir + '/view/template.dust', rootdir + '/view/subdir/template.dust');
+	});
+	after(helper.teardown);
 
-    it('Should do something', function(done) {
-        helper.render('template', {
-            foo: 'bar',
-            lorem: 'ipsum'
-        }, function(error, $, output) {
-            assert.strictEqual($('[data-test="fooitem"]').length, 1);
-            done();
-        });
-    });
+	it('Should do something', function(done) {
+		helper.render('template', {
+			foo: 'bar',
+			lorem: 'ipsum'
+		}, function(error, $, output) {
+			assert.strictEqual($('[data-test="fooitem"]').length, 1);
+			done();
+		});
+	});
 });
 ```
 
@@ -53,15 +53,15 @@ When testing templates that are in subfolders, be sure to pass in any subfolders
 
 ```js
 helper.render('mysubfolder___templatename', {
-    foo: 'bar'
+	foo: 'bar'
 }, function(error, $, output) {
-    // etc etc
+	// etc etc
 });
 ```
 
 You can test individual templates by running mocha directly with the command:
 
-```sh
+```shell
 ./node_modules/mocha/bin/mocha -R spec -u bdd test/myfolders/mytemplate-spec.js
 ```
 
@@ -83,7 +83,7 @@ Before you can use the test runner, you'll need to [install PhantomJS](http://ph
 
 You can run your client-side tests with the command:
 
-```sh
+```shell
 ./node_modules/.bin/shunter-test-client
 ```
 
@@ -91,7 +91,7 @@ You can run your client-side tests with the command:
 
 #### Test just one spec file
 
-```sh
+```shell
 ./node_modules/.bin/shunter-test-client --spec file-spec
 ```
 
@@ -100,13 +100,13 @@ You can run your client-side tests with the command:
 Requires Sauce Connect, see https://docs.saucelabs.com/reference/sauce-connect/
 Once Sauce Connect is installed, you need to run it with:
 
-```sh
+```shell
 bin/sc -u YOUR_USERNAME -k YOUR_ACCESS_KEY
 ```
 
 Then you can run the command:
 
-```sh
+```shell
 ./node_modules/.bin/shunter-test-client --browsers
 ```
 
@@ -114,12 +114,6 @@ Then you can run the command:
 
 Add a resource module to the JavaScript under test (modules in your config automatically added)
 
-```sh
+```shell
 ./node_modules/.bin/shunter-test-client --resource-module foo
 ```
-
----
-
-Related:
-
-- [Full API Documentation](index.md)
