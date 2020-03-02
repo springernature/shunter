@@ -1,6 +1,6 @@
 # Contributing to Shunter
 
-This guide is here to help new developers get started to contribute with the development of Shunter itself. It will outline the structure of the library and some of the development practices we uphold.
+This guide is here to help new developers get started on contributing to the development of Shunter itself. It will outline the structure of the library and some of the development practices we uphold.
 
 If you're looking for information on how to _use_ Shunter, please see the [documentation](index.md).
 
