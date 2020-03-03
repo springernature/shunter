@@ -1,45 +1,41 @@
-
-Templates
-=========
+# Templates
 
 View templates in Shunter are written in [Dust](http://www.dustjs.com/) and live in the `view` folder by default.
 
-- [Specifying a Template](#specifying-a-template)
-- [Dust Basics](#dust-basics)
-  - [References](#references)
-  - [Conditionals](#conditionals)
-  - [Loops](#loops)
-- [Using Partials](#using-partials)
-- [Using Layouts](#using-layouts)
-  - [Layouts In JSON](#layouts-in-json)
-  - [Layouts With Dust Blocks](#layouts-with-dust-blocks)
-- [Built-In Dust Extensions](#built-in-dust-extensions)
-  - [The `assetPath` Helper](#the-assetpath-helper)
-  - [The `linkPath` Helper](#the-linkpath-helper)
-  - [The `and` Helper](#the-and-helper)
-  - [The `or` Helper](#the-or-helper)
-  - [The `dateFormat` Helper](#the-dateformat-helper)
-  - [The `numberFormat` Helper](#the-numberformat-helper)
-  - [The `lower` Filter](#the-lower-filter)
-  - [The `upper` Filter](#the-upper-filter)
-  - [The `title` Filter](#the-title-filter)
-  - [The `trim` Filter](#the-trim-filter)
-  - [The `amp` Filter](#the-amp-filter)
-  - [The `stripTags` Filter](#the-striptags-filter)
-  - [The `html` Filter](#the-html-filter)
-- [Writing Dust Extensions](#writing-dust-extensions)
+* [Specifying a Template](#specifying-a-template)
+* [Dust Basics](#dust-basics)
+  * [References](#references)
+  * [Conditionals](#conditionals)
+  * [Loops](#loops)
+* [Using Partials](#using-partials)
+* [Using Layouts](#using-layouts)
+  * [Layouts In JSON](#layouts-in-json)
+  * [Layouts With Dust Blocks](#layouts-with-dust-blocks)
+* [Built-In Dust Extensions](#built-in-dust-extensions)
+  * [The `assetPath` Helper](#the-assetpath-helper)
+  * [The `linkPath` Helper](#the-linkpath-helper)
+  * [The `and` Helper](#the-and-helper)
+  * [The `or` Helper](#the-or-helper)
+  * [The `dateFormat` Helper](#the-dateformat-helper)
+  * [The `numberFormat` Helper](#the-numberformat-helper)
+  * [The `lower` Filter](#the-lower-filter)
+  * [The `upper` Filter](#the-upper-filter)
+  * [The `title` Filter](#the-title-filter)
+  * [The `trim` Filter](#the-trim-filter)
+  * [The `amp` Filter](#the-amp-filter)
+  * [The `stripTags` Filter](#the-striptags-filter)
+  * [The `html` Filter](#the-html-filter)
+* [Writing Dust Extensions](#writing-dust-extensions)
 
-
-Specifying a Template
----------------------
+## Specifying a Template
 
 When a JSON response is received from the back end with the (configured trigger header)[configuration-reference.md#trigger-parameter] (default: `Content-Type: application/x-shunter+json`), Shunter will look for a `layout.template` property and attempt to render the matching Dust file. So with the following JSON:
 
 ```json
 {
-    "layout": {
-        "template": "foo"
-    }
+	"layout": {
+		"template": "foo"
+	}
 }
 ```
 
@@ -49,9 +45,9 @@ Templates cannot contain "/" characters in Shunter, instead if you need to refer
 
 ```json
 {
-    "layout": {
-        "template": "foo__bar"
-    }
+	"layout": {
+		"template": "foo__bar"
+	}
 }
 ```
 
@@ -59,9 +55,7 @@ Shunter will attempt to render the file `view/foo/bar.dust`.
 
 If a JSON response is received without the (configured trigger header)[configuration-reference.md#trigger-parameter] then Shunter will simply pass it through unmodified as it would any other resource.
 
-
-Dust Basics
------------
+## Dust Basics
 
 Dust has all of the features you'd expect from a good templating language. We'll cover some basics here, but you should read the [Dust documentation](http://www.dustjs.com/) for more information.
 
@@ -71,7 +65,7 @@ You can output properties from the back end JSON simply by surrounding the prope
 
 ```json
 {
-    "thing": "World"
+	"thing": "World"
 }
 ```
 
@@ -91,13 +85,13 @@ You can conditionally output HTML based on the values of JSON properties. So wit
 
 ```json
 {
-    "show_html": true
+	"show_html": true
 }
 ```
 
 ```html
 {?show_html}
-    <p>Hello World!</p>
+	<p>Hello World!</p>
 {/show_html}
 ```
 
@@ -113,19 +107,19 @@ You can loop over arrays in the JSON with Dust and generate output for each item
 
 ```json
 {
-    "list": [
-        "foo",
-        "bar",
-        "baz"
-    ]
+	"list": [
+		"foo",
+		"bar",
+		"baz"
+	]
 }
 ```
 
 ```html
 <ul>
-    {#list}
-        <li>{.}</li>
-    {/list}
+	{#list}
+		<li>{.}</li>
+	{/list}
 </ul>
 ```
 
@@ -133,17 +127,15 @@ Dust will render:
 
 ```html
 <ul>
-    <li>foo</li>
-    <li>bar</li>
-    <li>baz</li>
+	<li>foo</li>
+	<li>bar</li>
+	<li>baz</li>
 </ul>
 ```
 
 For more information on Dust, refer to the [Dust getting started documentation](http://www.dustjs.com/guides/getting-started/).
 
-
-Using Partials
---------------
+## Using Partials
 
 Partials in Dust allow you to insert other Dust files into your template to create a page. This encourages code reuse, and smaller more maintainable templates.
 
@@ -152,12 +144,12 @@ Partials are subject to the same naming rules as templates when they're referenc
 So with the following Dust templates:
 
 ```html
-<!-- view/foo/bar.dust -->
+<!-* view/foo/bar.dust -->
 Hello World!
 ```
 
 ```html
-<!-- view/foo.dust -->
+<!-* view/foo.dust -->
 <p>{>foo__bar/}</p>
 ```
 
@@ -171,7 +163,7 @@ Partials can also be referenced by using JSON properties. This is very powerful 
 
 ```json
 {
-    "foo": "bar"
+	"foo": "bar"
 }
 ```
 
@@ -183,9 +175,7 @@ The `view/bar.dust` partial will be rendered.
 
 For more information on partials in Dust partials, refer to the [Dust Partials documentation](http://www.dustjs.com/guides/partials/).
 
-
-Using Layouts
--------------
+## Using Layouts
 
 There are several ways to implement layouts in Shunter, either by allowing your JSON to configure them or by using Dust's built-in Blocks.
 
@@ -197,29 +187,29 @@ For example, given the following JSON and Dust templates:
 
 ```json
 {
-    "layout": {
-        "template": "layout",
-        "page_template": "home"
-    },
-    "title": "Hello World!"
+	"layout": {
+		"template": "layout",
+		"page_template": "home"
+	},
+	"title": "Hello World!"
 }
 ```
 
 ```html
-<!-- view/layout.dust -->
+<!-* view/layout.dust -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{title}</title>
+	<title>{title}</title>
 </head>
 <body>
-    {>"{layout.page_template}"/}
+	{>"{layout.page_template}"/}
 </body>
 </html>
 ```
 
 ```html
-<!-- view/home.dust -->
+<!-* view/home.dust -->
 <p>This is the home page!</p>
 ```
 
@@ -229,10 +219,10 @@ Dust will combine the templates and render:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hello World!</title>
+	<title>Hello World!</title>
 </head>
 <body>
-    <p>This is the home page!</p>
+	<p>This is the home page!</p>
 </body>
 </html>
 ```
@@ -247,32 +237,32 @@ For example, given the following JSON and Dust templates:
 
 ```json
 {
-    "layout": {
-        "template": "home"
-    },
-    "title": "Hello World!"
+	"layout": {
+		"template": "home"
+	},
+	"title": "Hello World!"
 }
 ```
 
 ```html
-<!-- view/layout.dust -->
+<!-* view/layout.dust -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{title}</title>
+	<title>{title}</title>
 </head>
 <body>
-    {+bodyContent/}
+	{+bodyContent/}
 </body>
 </html>
 ```
 
 ```html
-<!-- view/home.dust -->
+<!-* view/home.dust -->
 {>"layout"/}
 
 {<bodyContent}
-    <p>This is the home page!</p>
+	<p>This is the home page!</p>
 {/bodyContent}
 ```
 
@@ -282,17 +272,15 @@ Dust will combine the templates and render:
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Hello World!</title>
+	<title>Hello World!</title>
 </head>
 <body>
-    <p>This is the home page!</p>
+	<p>This is the home page!</p>
 </body>
 </html>
 ```
 
-
-Built-In Dust Extensions
-------------------------
+## Built-In Dust Extensions
 
 For when basic logic isn't enough, you can use helpers and filters to extend Dust. Although templates should ideally contain as little logic as possible, sometimes you can't get away from it.
 
@@ -349,8 +337,8 @@ example:
 ```html
 <form action="{@linkPath src="/search" /}" method="post">
 ```
-with mount-path `/mounty` it will produce `/mounty/search`
 
+with mount-path `/mounty` it will produce `/mounty/search`
 
 ### The `and` Helper
 
@@ -358,7 +346,7 @@ The `and` helper is used to check whether several properties are all truthy. It 
 
 ```html
 {@and keys="foo|bar"}
-    Output if `foo` and `bar` are both truthy
+	Output if `foo` and `bar` are both truthy
 {/and}
 ```
 
@@ -366,9 +354,9 @@ The `and` helper supports an `{:else}` block:
 
 ```html
 {@and keys="foo|bar"}
-    Output if `foo` and `bar` are both truthy
+	Output if `foo` and `bar` are both truthy
 {:else}
-    Output if either `foo` or `bar` are falsy
+	Output if either `foo` or `bar` are falsy
 {/and}
 ```
 
@@ -376,7 +364,7 @@ Also if the `not` parameter is `true`, the behaviour of the helper is inverted:
 
 ```html
 {@and keys="foo|bar" not=true}
-    Output if `foo` and `bar` are both falsy
+	Output if `foo` and `bar` are both falsy
 {/and}
 ```
 
@@ -386,7 +374,7 @@ The `or` helper is used to check whether one of the given properties are truthy.
 
 ```html
 {@or keys="foo|bar"}
-    Output if either `foo` or `bar` are truthy
+	Output if either `foo` or `bar` are truthy
 {/or}
 ```
 
@@ -394,9 +382,9 @@ The `or` helper supports an `{:else}` block:
 
 ```html
 {@or keys="foo|bar"}
-    Output if either `foo` or `bar` are truthy
+	Output if either `foo` or `bar` are truthy
 {:else}
-    Output if `foo` and `bar` are both falsy
+	Output if `foo` and `bar` are both falsy
 {/or}
 ```
 
@@ -404,7 +392,7 @@ Also if the `not` parameter is `true`, the `or` helper will render the block if 
 
 ```html
 {@or keys="foo|bar" not=true}
-    Output if either `foo` or `bar` are falsy
+	Output if either `foo` or `bar` are falsy
 {/or}
 ```
 
@@ -414,7 +402,7 @@ The `dateFormat` helper is used to format dates. It accepts two parameters: `dat
 
 ```html
 {@dateFormat date="2015-09-14" format="dd mmmm yyyy"/}
-<!-- Outputs: "14 September 2015" -->
+<!-* Outputs: "14 September 2015" -->
 ```
 
 ### The `numberFormat` Helper
@@ -423,7 +411,7 @@ The `numberFormat` helper is used to format numbers. It accepts a single paramet
 
 ```html
 {@numberFormat num="1000000"/}
-<!-- Outputs: "1,000,000" -->
+<!-* Outputs: "1,000,000" -->
 ```
 
 ### The `lower` Filter
@@ -432,7 +420,7 @@ The `lower` filter takes a property and lowercases the value. If `foo` is `Hello
 
 ```html
 {foo|lower}
-<!-- Outputs: "hello world" -->
+<!-* Outputs: "hello world" -->
 ```
 
 ### The `upper` Filter
@@ -441,7 +429,7 @@ The `upper` filter takes a property and uppercases the value. If `foo` is `Hello
 
 ```html
 {foo|upper}
-<!-- Outputs: "HELLO WORLD" -->
+<!-* Outputs: "HELLO WORLD" -->
 ```
 
 ### The `title` Filter
@@ -450,7 +438,7 @@ The `title` filter takes a property and titlecases the value. If `foo` is `hello
 
 ```html
 {foo|title}
-<!-- Outputs: "Hello World" -->
+<!-* Outputs: "Hello World" -->
 ```
 
 ### The `trim` Filter
@@ -459,7 +447,7 @@ The `trim` filter takes a property and strips leading and trailing whitespace fr
 
 ```html
 {foo|trim}
-<!-- Outputs: "hello world" -->
+<!-* Outputs: "hello world" -->
 ```
 
 ### The `amp` Filter
@@ -468,7 +456,7 @@ The `amp` filter replaces ampersands in a property with HTML entities, but ignor
 
 ```html
 {foo|amp}
-<!-- Outputs: "Hello World &amp; Everyone&hellip;" -->
+<!-* Outputs: "Hello World &amp; Everyone&hellip;" -->
 ```
 
 Note that the `&hellip;` has not been touched.
@@ -479,7 +467,7 @@ The `stripTags` filter strips HTML open/close tags from a string. If `foo` is `<
 
 ```html
 {foo|stripTags}
-<!-- Outputs: "Hello World" -->
+<!-* Outputs: "Hello World" -->
 ```
 
 ### The `html` Filter
@@ -488,19 +476,17 @@ The `html` filter encodes HTML special characters `<>&"'` as HTML entities. It w
 
 ```html
 {foo|html}
-<!-- Outputs: "Hello &#60;i&#62;World&#60;/i&#62; &amp; &#34;Everyone&#34;" -->
+<!-* Outputs: "Hello &#60;i&#62;World&#60;/i&#62; &amp; &#34;Everyone&#34;" -->
 ```
 
-
-Writing Dust Extensions
------------------------
+## Writing Dust Extensions
 
 It's also possible to write your own Dust helpers and filters to use in your Shunter application. Dust extensions live in the `dust` directory of your application and must export a single function:
 
 ```js
 module.exports = function(dust) {
-    // `dust.helpers` = an object to add helpers to
-    // `dust.filters` = an object to add filters to
+	// `dust.helpers` = an object to add helpers to
+	// `dust.filters` = an object to add filters to
 };
 ```
 
@@ -537,10 +523,3 @@ module.exports = function(dust, renderer, config) {
 ```
 
 Dust has excellent documentation on how to write both [helpers](http://www.dustjs.com/docs/helper-api/) and [filters](http://www.dustjs.com/docs/filter-api/). You should follow these guides if you want to learn how to write helpers that leverage parameters and blocks.
-
-
----
-
-Related:
-
-- [Full API Documentation](index.md)
