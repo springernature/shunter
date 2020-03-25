@@ -36,7 +36,6 @@ The path object defines the paths to some of the key directories used by Shunter
 
 ```js
 path: {
-	clientTests: path.join(appRoot, 'tests', 'client'),
 	dust: path.join(appRoot, 'dust'),
 	public: path.join(appRoot, 'public'),
 	publicResources: path.join(appRoot, 'public', 'resources'),

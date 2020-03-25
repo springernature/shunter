@@ -27,8 +27,6 @@ Welcome to the Shunter documentation. Shunter is a Node.js module built to read 
     * [Writing EJS Extensions](resources.md#writing-ejs-extensions)
     * [In Production](resources.md#production-differences)
   * [Testing](testing.md)
-    * [Templates](testing.md#testing-templates)
-    * [Client-Side JavaScript](testing.md#testing-client-side-javascript)
   * [Configuration Reference](configuration-reference.md)
     * [Web](configuration-reference.md#web-configuration)
     * [Path](configuration-reference.md#path-configuration)
