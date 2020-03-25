@@ -4,7 +4,7 @@ When writing unit tests for Shunter-based apps, there will be certain fixtures t
 
 [Testing Templates](#testing-templates) explains how to use Shunter's exported function `testhelper()` that helps you set up and tear down HTML partials.
 
-[Testing Client-Side JavaScript](testing-client-side-javascript) explains how to use the `shunter-test-client` script to run client-side unit tests from the command line.
+[Testing Client-Side JavaScript](#testing-client-side-javascript) explains how to use the `shunter-test-client` script to run client-side unit tests from the command line.
 
 ## Testing Templates
 
@@ -73,7 +73,7 @@ Shunter provides a command-line script that will:
 
 * build a test runner page for Mocha-PhantomJS that loads the JavaScript you need to test with Mincer, adds any test specification files found in the folder set in `config.path.clientTests` (by default, 'tests/client'), then sets up the mocha libraries for client-side testing. Dust templates stored in `config.path.templates` (by default: `/view`) will be compiled and exposed to the test runner page. They can be targeted using a combination of their location and name. A template `/view/foo/bar.dust` would be exposed to the test page as `foo__bar` and can be rendered by calling `dust.render('foo__bar', {}, function (err, rendered) {…})` as described in the [relevant chapter of the dust documentation](http://www.dustjs.com/guides/rendering/).
 * run your tests with console output detailing whether they passed or failed.
-* exit to the command line with an exit code of 0 for success and a positive integer for failure so that you can run on CI
+* exit to the command line with an exit code of 0 for success and a positive integer for failure so that you can run on CI.
 
 This means your code under test is compiled and loaded in the same way it would be when running the app in development mode.
 
@@ -112,7 +112,7 @@ Then you can run the command:
 
 #### Add a resource module
 
-Add a resource module to the JavaScript under test (modules in your config automatically added)
+Add a resource module to the JavaScript under test (modules in your config automatically added):
 
 ```shell
 ./node_modules/.bin/shunter-test-client --resource-module foo
