@@ -47,7 +47,6 @@ describe('Dispatching response', function () {
 				shunterRoot: path.join(path.dirname(__dirname), '../../'),
 				resources: '/resources',
 				publicResources: '/public/resources',
-				themes: '/themes',
 				templates: '/view',
 				dust: '/dust'
 			},

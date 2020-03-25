@@ -32,7 +32,7 @@ web: {
 
 ## Path Configuration
 
-The path object defines the paths to some of the key directories used by Shunter. This includes the application root path, paths to tests, themes and public resources:
+The path object defines the paths to some of the key directories used by Shunter. This includes the application root path, paths to tests, public resources, etc:
 
 ```js
 path: {
@@ -42,11 +42,8 @@ path: {
 	publicResources: path.join(appRoot, 'public', 'resources'),
 	resources: path.join(appRoot, 'resources'),
 	root: appRoot,
-	shunterResources: path.join(shunterRoot, 'resources'),
 	shunterRoot: shunterRoot,
-	templates: path.join(appRoot, 'view'),
-	tests: path.join(appRoot, 'tests'),
-	themes: path.join(shunterRoot, 'themes')
+	tests: path.join(appRoot, 'tests')
 }
 ```
 
@@ -252,10 +249,7 @@ The items above are the default configurations which may be over-ridden. You wil
 var app = shunter({
 	routes: require('./config/routes.json'),
 	statsd: require('./config/statsd.json'),
-	syslogAppName: 'my-shunter-app',
-	path: {
-		themes: __dirname
-	}
+	syslogAppName: 'my-shunter-app'
 });
 ```
 
