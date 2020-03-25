@@ -407,7 +407,7 @@ The `dateFormat` helper is used to format dates. It accepts two parameters: `dat
 
 ### The `numberFormat` Helper
 
-The `numberFormat` helper is used to format numbers. It accepts a single parameter (`num`) and outputs the given number with thousands seperators:
+The `numberFormat` helper is used to format numbers. It accepts a single parameter (`num`) and outputs the given number with thousands separators:
 
 ```html
 {@numberFormat num="1000000"/}
