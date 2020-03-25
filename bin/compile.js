@@ -136,7 +136,7 @@ var generate = function (callback) {
 		function (dir, fn) {
 			// Glob returns absolute path and we need to strip that out
 			var readGlobDir = function (p, cb) {
-				var pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path seperator even on windows
+				var pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path separator even on windows
 				glob(pth + '/**/*.*', function (er, files) {
 					if (er) {
 						return cb(er);
