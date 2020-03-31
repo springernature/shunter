@@ -69,13 +69,11 @@
     "jserve": "~2.0.3",
     "mincer": "~2.0.1",
     "mkdirp": "~0.5.1",
-    "mocha-phantomjs-core": "~2.1.0",
     "postcss": "~7.0.17",
     "promised-io": "~0.3.5",
     "qs": "~6.7.0",
     "qs-middleware": "~1.0.3",
     "request": "~2.88.0",
-    "saucelabs": "~2.3.0",
     "serve-static": "~1.14.1",
     "statsd-client": "~0.4.2",
     "uglify-js": "~3.6.0",
@@ -104,8 +102,7 @@
   "bin": {
     "shunter-build": "./bin/compile.js",
     "shunter-compile": "./bin/compile.js",
-    "shunter-serve": "./bin/serve.js",
-    "shunter-test-client": "./bin/test-client.js"
+    "shunter-serve": "./bin/serve.js"
   },
   "scripts": {
     "lint": "make lint",
