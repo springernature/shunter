@@ -3,11 +3,11 @@ var winston = require('winston');
 
 var format = winston.format;
 
-module.exports = function (config) {
+module.exports = function () {
 	return new (winston.transports.Console)({
 		format: format.combine(
 			format.colorize(),
-			format.timestamp(),
+			format.timestamp()
 		),
 		level: 'THIS_IS_FINE'
 	});

@@ -36,7 +36,7 @@ describe('Logging config,', function () {
 		return logger.transports.find(function (element) {
 			return element instanceof type;
 		});
-	};
+	}
 
 	// TODO we are not cleaning up properly between tests..!
 
@@ -93,12 +93,12 @@ describe('Logging config,', function () {
 	//  is created. This instance is stored in the config object.
 	describe('With user-provided logger instance,', function () {
 		var format = winston.format;
-		var userLoggerInstance = new winston.createLogger({
+		var userLoggerInstance = winston.createLogger({
 			transports: [
 				new (winston.transports.Console)({
 					format: format.combine(
 						format.colorize(),
-						format.timestamp(),
+						format.timestamp()
 					),
 					level: 'RUN_AROUND_SCREAMING'
 				})

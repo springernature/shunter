@@ -3,7 +3,7 @@ var winston = require('winston');
 
 var format = winston.format;
 
-const myFormat = format.printf(function (logformMessage) {
+var myFormat = format.printf(function (logformMessage) {
 	return `${logformMessage.timestamp} - ${logformMessage.level}: ${logformMessage.message}`;
 });
 
