@@ -61,7 +61,6 @@ structure: {
 	images: 'img',
 	logging: 'logging',
 	loggingTransports: 'transports',
-	loggingFilters: 'filters',
 	mincer: 'mincer',
 	resources: 'resources',
 	scripts: 'js',
@@ -79,7 +78,6 @@ structure: {
 * `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
 * `structure.logging` defines the directory used to hold any user transport or filter files.
 * `structure.loggingTransports` defines the directory used to hold any user transport files, inside the `structure.logging` dir.
-* `structure.loggingFilters` defines the directory used to hold any user filter files, inside the `structure.logging` dir.
 * `structure.resources` defines the name of the directory used to house front-end resources including CSS, JavaScript and images, the default value is 'resources'.
 * `structure.scripts` defines the directory used to hold JavaScript files.
 * `structure.styles` defines the name of the directory used to hold CSS files used in your Shunter application. The default value is 'css'.
@@ -99,22 +97,17 @@ log: new winston.Logger({
 		new (winston.transports.Console)({
 			colorize: true,
 			timestamp: true,
-			level: args.logging
+			level: args.logging // TODO this probably not true any more
 		})
 	]
 }),
 ```
 
-The log configuration can also be passed to shunter via transport and filter files in user-specified drectories (specified by `structure.logging`, `structure.loggingTransports` and  `structure.loggingFilters`, above).
+The log configuration can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above).
 
-Shunter's default logging transports can be found in `logging/transports` in the Shunter source. Shunter uses no filters by default, but here's a trivial example you may find useful:
+If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom Winston logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
 
-```js
-'use strict';
-module.exports = function(level, msg, meta) {
-	return 'filtered message: ' + msg;
-}
-```
+For reference, Shunter's default logging transports (currently `Console` and `Syslog`) can be found in `logging/transports` in the Shunter source.
 
 ## StatsD Configuration
 

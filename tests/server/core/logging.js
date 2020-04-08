@@ -25,7 +25,6 @@ describe('Shunter logging config,', function () {
 		},
 		structure: {
 			logging: 'logging',
-			loggingFilters: 'filters',
 			loggingTransports: 'transports'
 		},
 		syslogAppName: 'foo'
@@ -49,13 +48,6 @@ describe('Shunter logging config,', function () {
 			assert.isTrue(logger.transports.some(function (element) {
 				return element instanceof Syslog;
 			}));
-		});
-
-		it('Should not load any filters by default', function () {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			console.log(logger.filters)
-			assert.isObject(logger.filters);
-			assert.strictEqual(logger.filters.length, 0);
 		});
 	});
 
