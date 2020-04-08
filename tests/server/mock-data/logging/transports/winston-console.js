@@ -1,10 +1,14 @@
 'use strict';
 var winston = require('winston');
-// TODO this does not look much like a mock...
+
+var format = winston.format;
+
 module.exports = function (config) {
 	return new (winston.transports.Console)({
-		colorize: false,
-		timestamp: true,
-		level: config.argv.logging
+		format: format.combine(
+			format.colorize(),
+			format.timestamp(),
+		),
+		level: 'THIS_IS_FINE'
 	});
 };

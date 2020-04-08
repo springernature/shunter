@@ -30,34 +30,44 @@ describe('Shunter logging config,', function () {
 		syslogAppName: 'foo'
 	};
 
+	var systemUnderTest = require('../../../lib/logging');
+
+	function getTransport(logger, type) {
+		return logger.transports.find(function (element) {
+			return element instanceof type;
+		});
+	};
+
+	// TODO we are not cleaning up properly between tests..!
+
 	describe('With no logging config provided,', function () {
 		it('Should offer getLogger() in its API', function () {
-			var loggingInstance = require('../../../lib/logging')(defaultShunterConfig);
+			var loggingInstance = systemUnderTest(defaultShunterConfig);
 			assert.isFunction(loggingInstance.getLogger);
 		});
 
 		it('Should load the winston console transport', function () {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			assert.isTrue(logger.transports.some(function (element) {
-				return element instanceof winston.transports.Console;
-			}));
+			var logger = systemUnderTest(defaultShunterConfig).getLogger();
+			var thisTransport = getTransport(logger, winston.transports.Console);
+			assert.isTrue(thisTransport instanceof winston.transports.Console);
 		});
 
 		it('Should load the winston syslog transport', function () {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			assert.isTrue(logger.transports.some(function (element) {
-				return element instanceof Syslog;
-			}));
+			var logger = systemUnderTest(defaultShunterConfig).getLogger();
+			var thisTransport = getTransport(logger, Syslog);
+			assert.isTrue(thisTransport instanceof Syslog);
 		});
 	});
 
 	describe('With an argv log level for console transport provided,', function () {
 		it('Should respect a log level argv', function () {
-			var thisConfig = defaultShunterConfig;
-			thisConfig.argv.logging = 'someValue';
+			var originalValue = defaultShunterConfig.argv.logging;
+			defaultShunterConfig.argv.logging = 'someValue';
 
-			var logger = require('../../../lib/logging')(thisConfig).getLogger();
-			assert.strictEqual(logger.transports.console.level, 'someValue');
+			var logger = systemUnderTest(defaultShunterConfig).getLogger();
+			var thisTransport = getTransport(logger, winston.transports.Console);
+			assert.strictEqual(thisTransport.level, 'someValue');
+			defaultShunterConfig.argv.logging = originalValue;
 		});
 	});
 
@@ -65,76 +75,72 @@ describe('Shunter logging config,', function () {
 		it('Should not load syslog if argv.syslog is falsy', function () {
 			var thisConfig = defaultShunterConfig;
 			delete thisConfig.argv.syslog;
-			var logger = require('../../../lib/logging')(thisConfig).getLogger();
-			assert.isNotObject(logger.transports.syslog);
+			var logger = systemUnderTest(thisConfig).getLogger();
+			var thisTransport = getTransport(logger, Syslog);
+			assert.isNotObject(thisTransport);
 		});
 
 		it('Should not load syslog if syslogAppName is falsy', function () {
 			var thisConfig = defaultShunterConfig;
 			delete thisConfig.syslogAppName;
-			var logger = require('../../../lib/logging')(thisConfig).getLogger();
-			assert.isNotObject(logger.transports.syslog);
+			var logger = systemUnderTest(thisConfig).getLogger();
+			var thisTransport = getTransport(logger, Syslog);
+			assert.isNotObject(thisTransport);
 		});
 	});
 
-	describe('With user-provided logging config provided via args,', function () {
-		var appJSLogConfig = new winston.createLogger({
+	// A user can provide their own completely custom logger instance when the app
+	//  is created. This instance is stored in the config object.
+	describe('With user-provided logger instance,', function () {
+		var format = winston.format;
+		var appJSLogger = new winston.createLogger({
 			transports: [
 				new (winston.transports.Console)({
-					colorize: false
+					format: format.combine(
+						format.colorize(),
+						format.timestamp(),
+					),
+					level: 'BLAMMO'
 				})
-			],
-			filters: [
-				function (level, msg) {
-					return 'filtered: ' + msg;
-				}
 			]
 		});
 
-		it('First confirms the test colorize config option defaults to true', function () {
-			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			assert.isTrue(logger.transports.console.colorize);
+		it('First confirms the Console transport level is the default "info"', function () {
+			var logger = systemUnderTest(defaultShunterConfig).getLogger();
+			var thisTransport = getTransport(logger, winston.transports.Console);
+			assert.strictEqual(thisTransport.level, 'info');
 		});
 
-		it('Can override our default config via app.js/args to config.js', function () {
+		it('Can override Console transport level via dynamic logger instance', function () {
 			var thisConfig = defaultShunterConfig;
-			thisConfig.log = appJSLogConfig;
+			thisConfig.log = appJSLogger;
 
-			var parsedConfig = require('../../../lib/config')(thisConfig.env, thisConfig, {});
-			assert.isFalse(parsedConfig.log.transports.console.colorize);
-		});
-
-		it('Should respect filters passed via app.js/args to config.js', function () {
-			var thisConfig = defaultShunterConfig;
-			thisConfig.log = appJSLogConfig;
-
-			var parsedConfig = require('../../../lib/config')(thisConfig.env, thisConfig, {});
-			assert.isObject(parsedConfig.log.filters);
-			assert.strictEqual(parsedConfig.log.filters.length, 1);
-			assert.isTypeOf(parsedConfig.log.filters[0], 'function');
+			var validatedConfigObject = require('../../../lib/config')(thisConfig.env, thisConfig, {});
+			var thisTransport = getTransport(validatedConfigObject.log, winston.transports.Console);
+			assert.strictEqual(thisTransport.level, 'BLAMMO');
 		});
 	});
 
-	describe('With user-provided logging config provided via files,', function () {
-		var mockedLogger;
+	describe('With file-based user-provided logging transports,', function () {
+		var thisLogger;
 		beforeEach(function () {
 			var thisConfig = defaultShunterConfig;
 			thisConfig.path.root = './tests/server/mock-data';
-			mockedLogger = require('../../../lib/logging')(thisConfig).getLogger();
+			// there should be two transport files in that^ dir, and only one should be valid
+			thisLogger = systemUnderTest(thisConfig).getLogger();
 		});
 
 		it('Can override our default config via provided files', function () {
-			assert.isFalse(mockedLogger.transports.console.colorize);
+			var thisTransport = getTransport(thisLogger, winston.transports.Console);
+			assert.strictEqual(thisTransport.level, 'THIS_IS_FINE');
 		});
 
-		it('Should not use broken user transport files', function () {
-			assert.isNotObject(mockedLogger.transports.syslog);
+		it('Should not use user transport files that do not expose a function', function () {
+			// a basic check for mangled transport files
+			var thisTransport = getTransport(thisLogger, Syslog);
+			assert.isNotObject(thisTransport);
 			// One dropped transport out of two should leave one valid transport
-			assert.strictEqual(Object.keys(mockedLogger.transports).length, 1);
-		});
-
-		it('Should use user filter files', function () {
-			assert.strictEqual(mockedLogger.filters[0]('info', 'water'), 'filtered: water');
+			assert.strictEqual(Object.keys(thisLogger.transports).length, 1);
 		});
 	});
 });
