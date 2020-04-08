@@ -1,7 +1,11 @@
 'use strict';
 
+// to run just these tests:
+// ./node_modules/.bin/mocha  --opts ./tests/mocha.opts ./tests/server/core/logging.js
+
 var assert = require('proclaim');
 var winston = require('winston');
+var Syslog = require('winston-syslog').Syslog;
 
 describe('Shunter logging config,', function () {
 	var defaultShunterConfig = {
@@ -35,18 +39,21 @@ describe('Shunter logging config,', function () {
 
 		it('Should load the winston console transport', function () {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			console.log('logger.transports in test')
-			console.log(logger.transports)
-			assert.isObject(logger.transports.console);
+			assert.isTrue(logger.transports.some(function (element) {
+				return element instanceof winston.transports.Console;
+			}));
 		});
 
 		it('Should load the winston syslog transport', function () {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
-			assert.isObject(logger.transports.syslog);
+			assert.isTrue(logger.transports.some(function (element) {
+				return element instanceof Syslog;
+			}));
 		});
 
 		it('Should not load any filters by default', function () {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
+			console.log(logger.filters)
 			assert.isObject(logger.filters);
 			assert.strictEqual(logger.filters.length, 0);
 		});

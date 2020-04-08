@@ -7,7 +7,7 @@ module.exports = function (config) {
 
 	return new (require('winston-syslog').Syslog)({
 		localhost: config.env.host(),
-		app_name: config.syslogAppName, // eslint-disable-line camelcase
-		level: 'debug'
+		app_name: config.syslogAppName // eslint-disable-line camelcase
+		// TODO level removed, checkme
 	});
 };
