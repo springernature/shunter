@@ -78,8 +78,8 @@
     "statsd-client": "~0.4.2",
     "uglify-js": "~3.6.0",
     "wd": "~1.11.3",
-    "winston": "~2.4.4",
-    "winston-syslog": "~1.2.6",
+    "winston": "~3.2.1",
+    "winston-syslog": "~2.4.4",
     "yargs": "~7.1.0"
   },
   "devDependencies": {
