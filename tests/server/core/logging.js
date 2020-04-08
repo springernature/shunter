@@ -35,6 +35,8 @@ describe('Shunter logging config,', function () {
 
 		it('Should load the winston console transport', function () {
 			var logger = require('../../../lib/logging')(defaultShunterConfig).getLogger();
+			console.log('logger.transports in test')
+			console.log(logger.transports)
 			assert.isObject(logger.transports.console);
 		});
 
