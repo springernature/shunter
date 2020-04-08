@@ -7,7 +7,7 @@ var assert = require('proclaim');
 var winston = require('winston');
 var Syslog = require('winston-syslog').Syslog;
 
-describe('Shunter logging config,', function () {
+describe('Logging config,', function () {
 	var defaultShunterConfig = {
 		argv: {
 			syslog: true,
@@ -93,14 +93,14 @@ describe('Shunter logging config,', function () {
 	//  is created. This instance is stored in the config object.
 	describe('With user-provided logger instance,', function () {
 		var format = winston.format;
-		var appJSLogger = new winston.createLogger({
+		var userLoggerInstance = new winston.createLogger({
 			transports: [
 				new (winston.transports.Console)({
 					format: format.combine(
 						format.colorize(),
 						format.timestamp(),
 					),
-					level: 'BLAMMO'
+					level: 'RUN_AROUND_SCREAMING'
 				})
 			]
 		});
@@ -113,11 +113,11 @@ describe('Shunter logging config,', function () {
 
 		it('Can override Console transport level via dynamic logger instance', function () {
 			var thisConfig = defaultShunterConfig;
-			thisConfig.log = appJSLogger;
+			thisConfig.log = userLoggerInstance;
 
 			var validatedConfigObject = require('../../../lib/config')(thisConfig.env, thisConfig, {});
 			var thisTransport = getTransport(validatedConfigObject.log, winston.transports.Console);
-			assert.strictEqual(thisTransport.level, 'BLAMMO');
+			assert.strictEqual(thisTransport.level, 'RUN_AROUND_SCREAMING');
 		});
 	});
 
