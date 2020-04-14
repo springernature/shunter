@@ -8,7 +8,7 @@ var myFormat = format.printf(function (logformMessage) {
 });
 
 module.exports = function (config) {
-	return new (winston.transports.Console)({
+	return new winston.transports.Console({
 		format: winston.format.combine(
 			format.colorize(),
 			format.timestamp(),
