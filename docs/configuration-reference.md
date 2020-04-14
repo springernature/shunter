@@ -106,7 +106,7 @@ const app = shunter({
                 format: winston.format.combine(
                     winston.format.colorize(),
                     winston.format.timestamp(),
-                    myCustomLoggingFormat
+                    customLoggingFormat
                 )
             })
         ]
