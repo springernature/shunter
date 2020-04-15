@@ -114,7 +114,7 @@ const app = shunter({
 ...
 ```
 
-Custon `Winston` logging transports can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above). If you are doing anything non-trivial this is probably preferable to cluttering up your main application file.
+Custom `Winston` logging transports can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above). If you are doing anything non-trivial this is probably preferable to cluttering up your main application file.
 
 If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom `Winston` logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
 
