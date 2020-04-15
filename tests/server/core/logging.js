@@ -46,6 +46,26 @@ describe('Logging config,', function () {
 		it('Should offer getLogger() in its API', function () {
 			var loggingInstance = systemUnderTest(config);
 			assert.isFunction(loggingInstance.getLogger);
+			/*
+			console.log(winston.config.syslog.levels)
+			{ emerg: 0,
+				alert: 1,
+				crit: 2,
+				error: 3,
+				warning: 4,
+				notice: 5,
+				info: 6,
+				debug: 7 }
+
+			console.log(winston.config.npm.levels)
+			{ error: 0,
+				warn: 1,
+				info: 2,
+				http: 3,
+				verbose: 4,
+				debug: 5,
+				silly: 6 }
+				*/
 		});
 
 		it('Should load the winston console transport by default', function () {

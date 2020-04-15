@@ -89,9 +89,9 @@ structure: {
 
 `log` references a logging instance that Shunter should use for logging. By default Shunter uses [Winston](https://github.com/winstonjs/winston).
 
-You can specify the logging level to use (e.g. 'info' the default, or 'debug' if you'd like to see more) by using the `-l` [command line option](#command-line-options)
+You can specify the logging level to use (e.g. 'info' the default, or 'debug' if you'd like to see more) by using the `-l` [command line option](#command-line-options). This option does not apply to the `Syslog` transport, because all messages are always sent to `syslog`.
 
-Here's an example re-implementing the default `Winston` logger and `Console` transport in a main application file:
+Custom `Winston` logging transports can be passed to shunter when shunter is instantiated. Here's a (pointless) example re-implementing the default `Winston` logger and `Console` transport in a main application file:
 
 ```js
 const customLoggingFormat = winston.format.printf(function (logformMessage) {
@@ -114,9 +114,9 @@ const app = shunter({
 ...
 ```
 
-The log configuration can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above). If you are doing anything non-trivial this is probably preferable to cluttering up your main application file.
+Custon `Winston` logging transports can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above). If you are doing anything non-trivial this is probably preferable to cluttering up your main application file.
 
-If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom Winston logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
+If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom `Winston` logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
 
 For reference, Shunter's default logging transports (currently `Console` and `Syslog`) can be found in [`logging/transports`](../logging/transports/). TODO check link
 
