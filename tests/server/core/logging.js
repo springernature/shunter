@@ -19,7 +19,7 @@ describe('Logging config,', function () {
 		});
 	}
 
-    beforeEach(function () {
+	beforeEach(function () {
 		testConfig = {
 			argv: {
 				syslog: true,
@@ -41,7 +41,6 @@ describe('Logging config,', function () {
 			},
 			syslogAppName: 'foo'
 		};
-
 	});
 
 	describe('With default logging config,', function () {
@@ -59,15 +58,15 @@ describe('Logging config,', function () {
 				info: 6,
 				debug: 7 }
 
-			console.log(winston.config.npm.levels)
-			{ error: 0,
-				warn: 1,
-				info: 2,
-				http: 3,
-				verbose: 4,
-				debug: 5,
-				silly: 6 }
-				*/
+				console.log(winston.config.npm.levels)
+				{ error: 0,
+					warn: 1,
+					info: 2,
+					http: 3,
+					verbose: 4,
+					debug: 5,
+					silly: 6 }
+			*/
 		});
 
 		it('Should load the winston console transport by default', function () {
