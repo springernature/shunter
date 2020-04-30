@@ -9,6 +9,7 @@ module.exports = function (config) {
 
 	return new Syslog({
 		localhost: config.env.host(),
-		app_name: config.syslogAppName // eslint-disable-line camelcase
+		app_name: config.syslogAppName, // eslint-disable-line camelcase
+		level: 'debug' // will inherit from `winston-transport`
 	});
 };

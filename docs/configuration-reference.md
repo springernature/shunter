@@ -91,7 +91,11 @@ structure: {
 
 You can specify the logging level to use (e.g. 'info' the default, or 'debug' if you'd like to see more) by using the `-l` [command line option](#command-line-options). This option does not apply to the `Syslog` transport, because all messages are always sent to `syslog`.
 
-Custom `Winston` logging transports can be passed to shunter when shunter is instantiated. Here's a (pointless) example re-implementing the default `Winston` logger and `Console` transport in a main application file:
+Custom `Winston` logging transports can be passed to shunter when shunter is instantiated. 
+
+If you supply any custom logging transports, no default Shunter transports will be used.
+
+Here's a (pointless) example re-implementing the default `Winston` logger and `Console` transport in a main application file:
 
 ```js
 const customLoggingFormat = winston.format.printf(function (logformMessage) {
@@ -118,7 +122,7 @@ Custom `Winston` logging transports can also be passed to shunter via transport 
 
 If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom `Winston` logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
 
-For reference, Shunter's default logging transports (currently `Console` and `Syslog`) can be found in [`logging/transports`](../logging/transports/). TODO check link
+For reference, Shunter's default logging transports (currently `Console` and `Syslog`) can be found in `logging/transports`.
 
 ## StatsD Configuration
 

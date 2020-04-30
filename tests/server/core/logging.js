@@ -6,10 +6,12 @@
 var assert = require('proclaim');
 var winston = require('winston');
 var Syslog = require('winston-syslog').Syslog;
+var defaultConfig = require('../../../lib/config')('development', {}, {});
+Object.freeze(defaultConfig);
 
 describe('Logging config,', function () {
 	var systemUnderTest = require('../../../lib/logging');
-	var config;
+	var testConfig;
 
 	function getTransport(logger, type) {
 		return logger.transports.find(function (element) {
@@ -18,7 +20,7 @@ describe('Logging config,', function () {
 	}
 
     beforeEach(function () {
-		config = {
+		testConfig = {
 			argv: {
 				syslog: true,
 				logging: 'info'
@@ -42,9 +44,9 @@ describe('Logging config,', function () {
 
 	});
 
-	describe('With no logging config provided,', function () {
+	describe('With default logging config,', function () {
 		it('Should offer getLogger() in its API', function () {
-			var loggingInstance = systemUnderTest(config);
+			var loggingInstance = systemUnderTest(defaultConfig);
 			assert.isFunction(loggingInstance.getLogger);
 			/*
 			console.log(winston.config.syslog.levels)
@@ -69,39 +71,51 @@ describe('Logging config,', function () {
 		});
 
 		it('Should load the winston console transport by default', function () {
-			var logger = systemUnderTest(config).getLogger();
+			var logger = systemUnderTest(defaultConfig).getLogger();
 			var thisTransport = getTransport(logger, winston.transports.Console);
 			assert.isTrue(thisTransport instanceof winston.transports.Console);
 		});
 
-		it('Should load the winston syslog transport by default', function () {
-			var logger = systemUnderTest(config).getLogger();
+		it('Should not load the winston syslog transport by default', function () {
+			var logger = systemUnderTest(defaultConfig).getLogger();
 			var thisTransport = getTransport(logger, Syslog);
-			assert.isTrue(thisTransport instanceof Syslog);
+			assert.isNotObject(thisTransport);
 		});
 	});
 
 	describe('With an argv log level for console transport provided,', function () {
-		it('Should respect a log level argv', function () {
-			config.argv.logging = 'someValue';
-
-			var logger = systemUnderTest(config).getLogger();
+		it('Should respect the provided log level', function () {
+			testConfig.argv.logging = 'someValueUniqueToThisTest';
+			var logger = systemUnderTest(testConfig).getLogger();
 			var thisTransport = getTransport(logger, winston.transports.Console);
-			assert.strictEqual(thisTransport.level, 'someValue');
+			assert.strictEqual(thisTransport.level, 'someValueUniqueToThisTest');
 		});
 	});
 
-	describe('With syslog not required,', function () {
+	describe('With syslog,', function () {
+		it('Should load the winston syslog transport if requested', function () {
+			var logger = systemUnderTest(testConfig).getLogger();
+			var thisTransport = getTransport(logger, Syslog);
+			assert.isTrue(thisTransport instanceof Syslog);
+			console.log(thisTransport.level)
+		});
+
+		it('Should ensure the winston syslog level is "debug"', function () {
+			var logger = systemUnderTest(testConfig).getLogger();
+			var thisTransport = getTransport(logger, Syslog);
+			assert.strictEqual(thisTransport.level, 'debug');
+		});
+
 		it('Should not load syslog if !argv.syslog', function () {
-			delete config.argv.syslog;
-			var logger = systemUnderTest(config).getLogger();
+			delete testConfig.argv.syslog;
+			var logger = systemUnderTest(testConfig).getLogger();
 			var thisTransport = getTransport(logger, Syslog);
 			assert.isNotObject(thisTransport);
 		});
 
 		it('Should not load syslog if !syslogAppName', function () {
-			delete config.syslogAppName;
-			var logger = systemUnderTest(config).getLogger();
+			delete testConfig.syslogAppName;
+			var logger = systemUnderTest(testConfig).getLogger();
 			var thisTransport = getTransport(logger, Syslog);
 			assert.isNotObject(thisTransport);
 		});
@@ -124,13 +138,13 @@ describe('Logging config,', function () {
 		});
 
 		it('First confirms the Console transport level is the default "info"', function () {
-			var logger = systemUnderTest(config).getLogger();
+			var logger = systemUnderTest(testConfig).getLogger();
 			var thisTransport = getTransport(logger, winston.transports.Console);
 			assert.strictEqual(thisTransport.level, 'info');
 		});
 
 		it('Can override Console transport level via dynamic logger instance', function () {
-			var thisConfig = config;
+			var thisConfig = testConfig;
 			thisConfig.log = userLoggerInstance;
 
 			var validatedConfigObject = require('../../../lib/config')(thisConfig.env, thisConfig, {});
@@ -142,7 +156,7 @@ describe('Logging config,', function () {
 	describe('With file-based user-provided logging transports,', function () {
 		var thisLogger;
 		beforeEach(function () {
-			var thisConfig = config;
+			var thisConfig = testConfig;
 			thisConfig.path.root = './tests/server/mock-data';
 			// there should be two transport files in that^ dir, and only one should be valid
 			thisLogger = systemUnderTest(thisConfig).getLogger();
