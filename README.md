@@ -22,7 +22,7 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 
 ## Key Features
 
-* Allows the creation of templates loosely coupled to the underlying applications.
+* Allows the creation of templates loosely coupled to the underlying back end applications.
 * Enables multiple back end applications to use the same unified front end.
 * Makes full site redesigns or swapping out back end applications very easy.
 * Completely technology-agnostic; if your application outputs JSON, it can work with Shunter.
