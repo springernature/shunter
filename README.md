@@ -27,7 +27,7 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 * Makes full site redesigns or swapping out back end applications very easy.
 * Completely technology-agnostic; if your application outputs JSON, it can work with Shunter.
 * Asset concatenation, minification, cache-busting, and other performance optimisations built-in.
-* Can output any type of content you like, e.g. HTML, RSS, RDF.
+* Can output any type of content you like, e.g. HTML, RSS, RDF, etc.
 * Well-tested and supported, serving [Scientific American](https://www.scientificamerican.com) as well as many high-traffic sites across the Springer Nature portfolio.
 
 ## Getting Started
