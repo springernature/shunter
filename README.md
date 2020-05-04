@@ -36,7 +36,7 @@ You can find all the details about how to use Shunter in our [documentation](doc
 
 ## Requirements
 
-Shunter requires [Node.js][node] 4+ to run. You can find instructions for Windows, macOS and Linux below.
+Shunter requires [Node.js][node] 10+ to run. You can find instructions for Windows, macOS and Linux below.
 
 See the [Getting started documentation](docs/getting-started.md#prerequisites) for more information on Shunter's requirements.
 
@@ -109,6 +109,6 @@ Copyright &copy; 2015, Springer Nature
 [shield-coverage]: https://img.shields.io/coveralls/springernature/shunter.svg
 [shield-dependencies]: https://img.shields.io/gemnasium/springernature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
-[shield-node]: https://img.shields.io/badge/node.js%20support-4–6-brightgreen.svg
+[shield-node]: https://img.shields.io/badge/node.js%20support-10–14-brightgreen.svg
 [shield-npm]: https://img.shields.io/npm/v/shunter.svg
 [shield-build]: https://img.shields.io/travis/springernature/shunter/master.svg
