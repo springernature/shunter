@@ -2,15 +2,14 @@
 language: node_js
 matrix:
   include:
-    # Run lint only in Node.js 10.x
+    # Run only the linting in Node.js 10.x
     - node_js: '10'
       env: LINT=true
 
-    # Run tests in Node.js 10.x
+    # Run tests in all supported Node.js Stable/LTS (10, 12 and 14)
     - node_js: '10'
-
-    # Run tests in Node.js 12.x
     - node_js: '12'
+    - node_js: '14'
 
 # Build script
 script: ./build-script
