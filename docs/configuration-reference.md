@@ -61,7 +61,6 @@ structure: {
 	images: 'img',
 	logging: 'logging',
 	loggingTransports: 'transports',
-	loggingFilters: 'filters',
 	mincer: 'mincer',
 	resources: 'resources',
 	scripts: 'js',
@@ -79,7 +78,6 @@ structure: {
 * `structure.images` defines the directory used to hold image files used for presentation. This default value is 'img'.
 * `structure.logging` defines the directory used to hold any user transport or filter files.
 * `structure.loggingTransports` defines the directory used to hold any user transport files, inside the `structure.logging` dir.
-* `structure.loggingFilters` defines the directory used to hold any user filter files, inside the `structure.logging` dir.
 * `structure.resources` defines the name of the directory used to house front-end resources including CSS, JavaScript and images, the default value is 'resources'.
 * `structure.scripts` defines the directory used to hold JavaScript files.
 * `structure.styles` defines the name of the directory used to hold CSS files used in your Shunter application. The default value is 'css'.
@@ -89,32 +87,42 @@ structure: {
 
 ## Log Configuration
 
-The log object defines the tool that Shunter should use for logging. By default Shunter uses [Winston](https://github.com/winstonjs/winston).
+`log` references a logging instance that Shunter should use for logging. By default Shunter uses [Winston](https://github.com/winstonjs/winston).
 
-You can specify the logging level to use (e.g. 'info' the default, or 'debug' if you'd like to see more) by using the `-l` [command line option](#command-line-options)
+You can specify the logging level to use (e.g. 'info' the default, or 'debug' if you'd like to see more) by using the `-l` [command line option](#command-line-options). This option does not apply to the `Syslog` transport, because all messages are always sent to `syslog`.
 
-```js
-log: new winston.Logger({
-	transports: [
-		new (winston.transports.Console)({
-			colorize: true,
-			timestamp: true,
-			level: args.logging
-		})
-	]
-}),
-```
+Custom `Winston` logging transports can be passed to shunter when shunter is instantiated. 
 
-The log configuration can also be passed to shunter via transport and filter files in user-specified drectories (specified by `structure.logging`, `structure.loggingTransports` and  `structure.loggingFilters`, above).
+If you supply any custom logging transports, no default Shunter transports will be used.
 
-Shunter's default logging transports can be found in `logging/transports` in the Shunter source. Shunter uses no filters by default, but here's a trivial example you may find useful:
+Here's a (pointless) example re-implementing the default `Winston` logger and `Console` transport in a main application file:
 
 ```js
-'use strict';
-module.exports = function(level, msg, meta) {
-	return 'filtered message: ' + msg;
-}
+const customLoggingFormat = winston.format.printf(function (logformMessage) {
+	return `${logformMessage.timestamp} - ${logformMessage.level}: ${logformMessage.message}`;
+});
+
+const app = shunter({
+...
+    log: winston.createLogger({
+        transports: [
+            new winston.transports.Console ({
+                format: winston.format.combine(
+                    winston.format.colorize(),
+                    winston.format.timestamp(),
+                    customLoggingFormat
+                )
+            })
+        ]
+    })
+...
 ```
+
+Custom `Winston` logging transports can also be passed to shunter via transport files in user-specified drectories (specified by `structure.logging` and `structure.loggingTransports`, above). If you are doing anything non-trivial this is probably preferable to cluttering up your main application file.
+
+If you wish to filter out sensitive data from your logs, or otherwise modify the logging output, we recommend you use a custom `Winston` logging transport and refer to the [Winston v3 documentation on logger formatting and filtering](https://github.com/winstonjs/winston#filtering-info-objects).
+
+For reference, Shunter's default logging transports (currently `Console` and `Syslog`) can be found in `logging/transports`.
 
 ## StatsD Configuration
 
