@@ -7,6 +7,7 @@ var assert = require('proclaim');
 var winston = require('winston');
 var Syslog = require('winston-syslog').Syslog;
 var defaultConfig = require('../../../lib/config')('development', {}, {});
+
 Object.freeze(defaultConfig);
 
 describe('Logging config,', function () {
@@ -96,7 +97,6 @@ describe('Logging config,', function () {
 			var logger = systemUnderTest(testConfig).getLogger();
 			var thisTransport = getTransport(logger, Syslog);
 			assert.isTrue(thisTransport instanceof Syslog);
-			console.log(thisTransport.level)
 		});
 
 		it('Should ensure the winston syslog level is "debug"', function () {

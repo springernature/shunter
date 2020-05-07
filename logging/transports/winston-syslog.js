@@ -1,5 +1,4 @@
 'use strict';
-var winston = require('winston');
 var Syslog = require('winston-syslog').Syslog;
 
 module.exports = function (config) {
