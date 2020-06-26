@@ -82,7 +82,7 @@
     "wd": "~1.10.0",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
-    "yargs": "~7.1.0"
+    "yargs": "7.1.0"
   },
   "devDependencies": {
     "@springernature/eslint-config": "^1.0.0",
