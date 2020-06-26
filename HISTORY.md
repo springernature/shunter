@@ -1,6 +1,10 @@
 
 # History
 
+## 4.13.2 (2020-06-26)
+
+* Pins `yargs` to version 7.1.0 as version 7.1.1 contains a version of `yargs-parser` that causes startup errors.
+
 ## 4.13.1 (2020-01-17)
 
 * Fixes an issue where a missing `mocha-phantomjs-core` dependency may cause client-side tests to fail.
