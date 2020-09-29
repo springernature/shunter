@@ -11,7 +11,7 @@ matrix:
 
     # Run tests in Node.js 5.x
     - node_js: '5'
-      env: DOWNGRADE_NPM=true
+      env: UPGRADE_NPM=true
 
     # Run tests in Node.js 6.x
     - node_js: '6'
@@ -23,9 +23,9 @@ matrix:
     # Run tests in the latest version of Node.js
     - node_js: 'node'
 
-# Work around a bug on npm 3.9.0 that causes tests to fail with Node v5
+# Work around a bug on npm 3.x that causes tests to fail with Node v5
 before_install:
-  - if [ "$DOWNGRADE_NPM" ]; then npm install --global npm@3.8.9; fi
+  - if [ "$UPGRADE_NPM" ]; then npm install --global npm@latest; fi
 
 # Build script
 script: ./build-script
