@@ -1,6 +1,10 @@
 
 # History
 
+## 4.13.3 (2020-09-29)
+
+* Upgrade `http-proxy` to fix a security vulnerability
+
 ## 4.13.2 (2020-06-26)
 
 * Pins `yargs` to version 7.1.0 as version 7.1.1 contains a version of `yargs-parser` that causes startup errors.
