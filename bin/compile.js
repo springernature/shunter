@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var async = require('async');
-var glob = require('glob');
-var mkdirp = require('mkdirp');
-var uglify = require('uglify-js');
-var yargs = require('yargs');
+const fs = require('fs');
+const path = require('path');
+const async = require('async');
+const glob = require('glob');
+const mkdirp = require('mkdirp');
+const uglify = require('uglify-js');
+const yargs = require('yargs');
 
-var argv = yargs
+const argv = yargs
 	.options('x', {
 		alias: 'extra-js',
 		type: 'string'
@@ -26,15 +26,15 @@ var argv = yargs
 	})
 	.argv;
 
-var config = require('../lib/config')('production', null, {});
+const config = require('../lib/config')('production', null, {});
 
 // All files named main.js will be minified, extra files to minify can be specified here
-var EXTRA_MINIFY_PATHS = [];
+let EXTRA_MINIFY_PATHS = [];
 if (argv['extra-js']) {
 	EXTRA_MINIFY_PATHS = Array.isArray(argv['extra-js']) ? argv['extra-js'] : [argv['extra-js']];
 }
 
-var resourceModules;
+let resourceModules;
 if (argv['resource-module']) {
 	resourceModules = (
 		Array.isArray(argv['resource-module']) ?
@@ -44,10 +44,10 @@ if (argv['resource-module']) {
 	config.modules = resourceModules;
 }
 
-var renderer = require('../lib/renderer')(config);
+const renderer = require('../lib/renderer')(config);
 
-var environment = renderer.environment;
-var manifest = renderer.manifest;
+const environment = renderer.environment;
+const manifest = renderer.manifest;
 
 environment.cssCompressor = 'csswring';
 
@@ -57,22 +57,22 @@ process.on('uncaughtException', function (err) {
 	process.exit(128);
 });
 
-var compile = function (data, callback) {
-	var findAssets = function () {
-		var pattern = new RegExp('\.(' + [].slice.call(arguments, 0).join('|') + ')$');
+const compile = function (data, callback) {
+	const findAssets = function () {
+		const pattern = new RegExp('\.(' + [].slice.call(arguments, 0).join('|') + ')$');
 		return Object.keys(data.assets).filter(function (key) {
 			return key.match(pattern);
 		});
 	};
 
-	var deleteAsset = function (name) {
+	const deleteAsset = function (name) {
 		delete manifest.assets[name];
 		return null;
 	};
 
-	var stylesheets = findAssets('css').map(function (name) {
-		var asset = environment.findAsset(name);
-		var content = asset ? asset.toString() : null;
+	const stylesheets = findAssets('css').map(function (name) {
+		const asset = environment.findAsset(name);
+		const content = asset ? asset.toString() : null;
 
 		if (!content) {
 			return deleteAsset(name);
@@ -86,20 +86,20 @@ var compile = function (data, callback) {
 		return stylesheet !== null;
 	});
 
-	var jsToMinify = ['main'].concat(EXTRA_MINIFY_PATHS);
+	const jsToMinify = ['main'].concat(EXTRA_MINIFY_PATHS);
 
-	var javascripts = findAssets('js').filter(function (name) {
-		for (var i = 0; jsToMinify[i]; ++i) {
+	const javascripts = findAssets('js').filter(function (name) {
+		for (let i = 0; jsToMinify[i]; ++i) {
 			if (name.indexOf(jsToMinify[i]) !== -1) {
 				return true;
 			}
 		}
 		return false;
 	}).map(function (name) {
-		var asset = environment.findAsset(name);
-		var content = asset ? asset.toString() : null;
-		var start;
-		var end;
+		const asset = environment.findAsset(name);
+		let content = asset ? asset.toString() : null;
+		let start;
+		let end;
 
 		if (!content) {
 			return deleteAsset(name);
@@ -128,15 +128,15 @@ var compile = function (data, callback) {
 	});
 };
 
-var generate = function (callback) {
+const generate = function (callback) {
 	async.waterfall([
 		function (fn) {
 			mkdirp(config.path.publicResources, fn);
 		},
 		function (dir, fn) {
 			// Glob returns absolute path and we need to strip that out
-			var readGlobDir = function (p, cb) {
-				var pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path separator even on windows
+			const readGlobDir = function (p, cb) {
+				const pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path separator even on windows
 				glob(pth + '/**/*.*', function (er, files) {
 					if (er) {
 						return cb(er);
@@ -150,7 +150,7 @@ var generate = function (callback) {
 			async.concat(environment.paths, readGlobDir, fn);
 		},
 		function (files) {
-			var data = null;
+			let data = null;
 			try {
 				data = manifest.compile(files.filter(function (file) {
 					return /(?:\.([^.]+))?$/.exec(file) === 'scss';
@@ -163,7 +163,7 @@ var generate = function (callback) {
 			}
 		},
 		function (files) {
-			var data = null;
+			let data = null;
 			try {
 				data = manifest.compile(files.map(function (file) {
 					return file.replace(/\.ejs$/, '');

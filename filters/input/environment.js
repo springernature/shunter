@@ -1,14 +1,14 @@
 'use strict';
 
-var qs = require('qs');
+const qs = require('qs');
 
 module.exports = function (config, req, res, data, next) {
-	var cast = function (params) {
-		var output = {};
+	const cast = function (params) {
+		let output = {};
 
 		params = params || {};
 
-		var transform = function (value) {
+		const transform = function (value) {
 			var val = (typeof value === 'string') ? value.toLowerCase() : value;
 			if (val === 'true' || val === 'false') {
 				return val === 'true';

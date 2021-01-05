@@ -1,13 +1,13 @@
 'use strict';
 
-var dateformat = require('dateformat');
+const dateformat = require('dateformat');
 
 module.exports = initHelper;
 
 function initHelper(dust, renderer, config) {
 	dust.helpers.dateFormat = function (chunk, context, bodies, params) {
-		var date = null;
-		var value = null;
+		let date = null;
+		let value = null;
 
 		params = params || {};
 
