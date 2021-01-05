@@ -1,6 +1,10 @@
 
 # History
 
+## 4.13.4 (2021-01-05)
+
+* Add some extra logging for proxy errors
+
 ## 4.13.3 (2020-09-29)
 
 * Upgrade `http-proxy` to fix a security vulnerability
