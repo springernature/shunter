@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 'use strict';
 
-var path = require('path');
-var jserve = require('jserve');
-var query = require('qs-middleware');
-var request = require('request');
-var yargs = require('yargs');
+const path = require('path');
+const jserve = require('jserve');
+const query = require('qs-middleware');
+const request = require('request');
+const yargs = require('yargs');
 
 // Parse command-line arguments
-var args = yargs
+const args = yargs
 	.options('p', {
 		alias: 'port',
 		nargs: 1,
@@ -53,7 +53,7 @@ if (args.data && !/^[\/\~]/.test(args.data)) {
 
 // Create a JServe application
 // See https://github.com/rowanmanning/jserve
-var app = jserve({
+const app = jserve({
 	contentType: 'application/x-shunter+json',
 	log: {
 		debug: console.log.bind(console),
@@ -107,11 +107,11 @@ function serveRemoteJson(request, response, next) {
 	if (request.path !== '/remote') {
 		return next();
 	}
-	var options = {
+	const options = {
 		url: request.query.url,
 		headers: request.query.headers
 	};
-	var error;
+	let error;
 
 	if (!options.url || typeof options.url !== 'string') {
 		error = new Error('Invalid query parameter: url');
@@ -140,11 +140,11 @@ function serveRemoteJson(request, response, next) {
 
 // Load remote JSON
 function loadRemoteJson(options, done) {
-	var requestOptions = {
+	const requestOptions = {
 		url: options.url,
 		headers: options.headers
 	};
-	var error;
+	let error;
 
 	request(requestOptions, function (err, response, body) {
 		if (err) {
@@ -166,11 +166,13 @@ function loadRemoteJson(options, done) {
 
 // Parse a HTTP header string
 function parseHeaders(headerString) {
-	var headers = {};
-	var headersArray = headerString.split(/[\r\n]+/);
+	let headers = {};
+	const headersArray = headerString.split(/[\r\n]+/);
+
 	headersArray.forEach(function (headerString) {
-		var headerChunks = headerString.split(':');
+		const headerChunks = headerString.split(':');
 		headers[headerChunks.shift().trim()] = headerChunks.join(':').trim();
 	});
+
 	return headers;
 }

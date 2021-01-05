@@ -4,7 +4,7 @@ module.exports = initFilter;
 
 function initFilter(dust) {
 	dust.filters.html = function (value) {
-		var escapes = {
+		const escapes = {
 			'<': '&#60;',
 			'>': '&#62;',
 			'"': '&#34;',

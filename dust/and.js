@@ -11,15 +11,15 @@ function initHelper(dust) {
 	 */
 	dust.helpers.and = function (chunk, context, bodies, params) {
 		params = params || {};
-		var alternate = bodies.else;
-		var keys = context.resolve(params.keys);
-		var not = context.resolve(params.not);
+		const alternate = bodies.else;
+		const keys = context.resolve(params.keys);
+		const not = context.resolve(params.not);
 
-		var checkContext = function (arr) {
-			var count = 0;
-			var item;
-			var nestedKeys;
-			for (var i = 0; arr[i]; ++i) {
+		const checkContext = function (arr) {
+			let count = 0;
+			let item;
+			let nestedKeys;
+			for (let i = 0; arr[i]; ++i) {
 				nestedKeys = arr[i].split('.');
 				item = context.get(nestedKeys.shift());
 				// Handle finding nested properties like foo.bar
