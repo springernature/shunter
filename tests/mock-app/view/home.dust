@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{title}</title>
+<link rel="stylesheet" href="{@assetPath src="main.css"/}">
+</head>
+<body>
+    <h1>{title}</h1>
+    <p>Welcome to your first Shunter page!</p>
+    <script src="{@assetPath src="main.js"/}"></script>
+</body>
+</html>
+

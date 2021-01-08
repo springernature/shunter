@@ -98,7 +98,9 @@
     "node-sass": "^4.5.3",
     "proclaim": "^3.0.0",
     "sinon": "^4.0.0",
-    "snyk": "^1.43.0"
+    "snyk": "^1.43.0",
+    "superagent": "~6.1.0",
+    "supertest": "^6.0.1"
   },
   "main": "./lib/shunter.js",
   "bin": {
