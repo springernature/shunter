@@ -41,10 +41,14 @@ module.exports = {
 				backendChild: false
 			}
 
-			const backendChild = spawn('node', ['./bin/serve.js']);
+			const backendChild = spawn('node', ['../../bin/serve.js'], {
+				cwd: 'tests/mock-app/'
+			});
 			handleEventsForProcess(backendChild, 'backendChild', resolve, reject, processesUp);
 
-			const frontendChild = spawn('node', ['app', '-c', '1'], {
+			// start the FE with one worker process, and compile the templates on demand
+			//  to offset the short time between server startups and the first test HTTP req
+			const frontendChild = spawn('node', ['app', '-c', '1', '--compile-on-demand', 'true'], {
 				cwd: 'tests/mock-app/'
 			});
 			handleEventsForProcess(frontendChild, 'frontendChild', resolve, reject, processesUp);
