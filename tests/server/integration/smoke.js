@@ -1,15 +1,31 @@
 var request = require('supertest');
 var processManager = require('./processManager');
 
-var startServersPromise = processManager.startServers();
+var readyForTestPromise = processManager.readyForTest();
+readyForTestPromise
+	.then(() => {
+		var runTestsPromise = runTests();
+		runTestsPromise
+			.then(() => {
+				processManager.finish();
+			})
+			.catch(err => {
+				processManager.finish();
+			});
+	})
 
 
-startServersPromise.then( success => {
-	request = request('http://localhost:5400');
-	var waitTill = new Date(new Date().getTime() + 1000);while(waitTill > new Date()){}
-	request
+var runTests = function() {
+	return new Promise((resolve, reject) => {
+		request = request('http://localhost:5400');
+		request
 		.get('/home')
 		.then(res => {
 			console.log(res.text)
+		})
+		.catch(err => {
+			reject(err)
 		});
-});
+	});
+}
+
