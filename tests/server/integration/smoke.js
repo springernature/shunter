@@ -1,31 +1,32 @@
-var request = require('supertest');
-var processManager = require('./processManager');
+const request = require('supertest');
+const serversUnderTest = require('./lib/serversUnderTest');
 
-var readyForTestPromise = processManager.readyForTest();
-readyForTestPromise
+// wait for the servers, run the tests, then cleanup
+const serversReadyPromise = serversUnderTest.readyForTest();
+serversReadyPromise
 	.then(() => {
-		var runTestsPromise = runTests();
+		const runTestsPromise = runTests();
 		runTestsPromise
 			.then(() => {
-				processManager.finish();
+				serversUnderTest.finish();
 			})
 			.catch(err => {
-				processManager.finish();
+				serversUnderTest.finish();
 			});
 	})
 
 
-var runTests = function() {
+const runTests = function() {
 	return new Promise((resolve, reject) => {
-		request = request('http://localhost:5400');
-		request
-		.get('/home')
-		.then(res => {
-			console.log(res.text)
-		})
-		.catch(err => {
-			reject(err)
-		});
+		const testRequest = request('http://localhost:5400');
+		testRequest
+			.get('/home')
+			.then(res => {
+				console.log(res.text)
+			})
+			.catch(err => {
+				reject(err)
+			});
 	});
 }
 
