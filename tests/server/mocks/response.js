@@ -7,5 +7,6 @@ module.exports = {
 	write: sinon.stub(),
 	getHeader: sinon.stub(),
 	setHeader: sinon.stub(),
-	end: sinon.stub()
+	end: sinon.stub(),
+	hasHeader: sinon.stub(),
 };

@@ -1,6 +1,6 @@
 const request = require('supertest');
 const serversUnderTest = require('./lib/serversUnderTest');
-
+/*
 // wait for the servers, run the tests, then cleanup
 const serversReadyPromise = serversUnderTest.readyForTest();
 serversReadyPromise
@@ -30,3 +30,4 @@ const runTests = () => {
 			})
 	});
 }
+*/
