@@ -30,7 +30,6 @@ describe('Smoke', () => {
 				testRequest
 				.get('/home')
 				.then(res => {
-					console.log(res.text)
 					resolve(res.text);
 				})
 				.catch(err => {
@@ -41,7 +40,6 @@ describe('Smoke', () => {
 	}); // before
 
 	it('Should return hello world text in response', () => {
-		console.log(getHomeResponseBody)
-		assert.isTrue(getHomeResponseBody === 'ff');
+		assert.isTrue(getHomeResponseBody.includes('<h1>Hello World!</h1>'));
 	});
 });
