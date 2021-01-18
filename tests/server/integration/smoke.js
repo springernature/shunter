@@ -23,6 +23,7 @@ const runTests = () => {
 			.get('/home')
 			.then(res => {
 				console.log(res.text)
+				resolve();
 			})
 			.catch(err => {
 				reject(err)

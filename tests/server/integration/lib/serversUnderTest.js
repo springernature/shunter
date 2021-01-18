@@ -28,7 +28,7 @@ const startServers = () => {
 
 // handles events common for both server processes, on stderr stdout etc.
 const handleEventsForProcess = (process, resolve, reject) => {
-	console.log(`Spawned child pid: ${process.pid}`);
+	// console.log(`Spawned child pid: ${process.pid}`);
 	process.isUp = false;
 
 	// we cannot tell if a child process has finished spawing (no such event exists),
