@@ -1,5 +1,4 @@
 const request = require('supertest');
-const { Console } = require('winston/lib/winston/transports');
 const serversUnderTest = require('./lib/serversUnderTest');
 
 // wait for the servers, run the tests, then cleanup
@@ -16,7 +15,6 @@ serversReadyPromise
 				serversUnderTest.finish();
 			})
 	});
-
 
 const runTests = () => {
 	return new Promise((resolve, reject) => {

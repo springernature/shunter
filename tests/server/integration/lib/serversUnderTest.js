@@ -1,63 +1,68 @@
 'use strict';
 
-const exit = require('process').exit;
 const spawn = require('child_process').spawn;
 const request = require('supertest');
 
-let backendChild;
-let frontendChild;
+let processes = new Array();
+let allProcessesUp = false;
 
 // starts the fe and be servers
 // returns a Promise which resolves when both have output to their STDOUTs
 const startServers = () => {
 	return new Promise((resolve, reject) => {
-		// we need to resolve() when all processes are up, so share these refs between children
-		let processesUp = {
-			frontendChild: false,
-			backendChild: false
-		}
-
-		backendChild = spawn('node', ['../../bin/serve.js'], {
+		let backend = spawn('node', ['../../bin/serve.js'], {
 			cwd: 'tests/mock-app/'
 		});
-		handleEventsForProcess(backendChild, 'backendChild', resolve, reject, processesUp);
+		processes.push(backend);
+		handleEventsForProcess(backend, resolve, reject);
 
 		// start the FE with one worker process (-c 1), and compile the templates on demand
 		//  to minimise the time between server up and server able to handle reqs
-		frontendChild = spawn('node', ['app', '-c', '1', '--compile-on-demand', 'true'], {
+		let frontend = spawn('node', ['app', '-c', '1', '--compile-on-demand', 'true'], {
 			cwd: 'tests/mock-app/'
 		});
-		handleEventsForProcess(frontendChild, 'frontendChild', resolve, reject, processesUp);
-
+		processes.push(frontend);
+		handleEventsForProcess(frontend, resolve, reject);
 	});
 };
 
 // handles events common for both server processes, on stderr stdout etc.
-const handleEventsForProcess = (process, label, resolve, reject, processesUp) => {
-	const checkProcessUp = label => {
-		processesUp[label] = true;
-		if (processesUp.frontendChild && processesUp.backendChild) {
-			resolve();
-		}
-	};
+const handleEventsForProcess = (process, resolve, reject) => {
+	console.log(`Spawned child pid: ${process.pid}`);
+	process.isUp = false;
 
 	// we cannot tell if a child process has finished spawing (no such event exists),
 	//  so we have to wait for both of them to output something. And pray they aren't
 	//  changed to start silently (unlikely, but if so, the tests will hang).
 	process.stdout.on('data', (data) => {
-		if (!(processesUp.frontendChild && processesUp.backendChild)) {
-			checkProcessUp(label)
-		};
-		console.log(`${label} stdout: ${data}`);
+		console.log(`${process.pid} stdout: ${data}`);
+		if (allProcessesUp) {
+			return;
+		}
+
+		process.isUp = true;
+
+		/*
+		let pc = 0;
+		processes.forEach(process => {
+			console.log(`PROCESSS ${pc} isup ${process.isUp}`);
+			pc++
+		})
+		*/
+
+		if (processes.length > 1 && processes.every(process => process.isUp === true)){
+			allProcessesUp = true;
+			resolve();
+		}
 	});
 
 	process.stderr.on('data', data => {
-		console.log(`${label} stderr: ${data}`);
+		console.log(`${process.pid} stderr: ${data}`);
 		reject();
 	});
 
 	process.on('close', data => {
-		console.log(`${label} child process exited with code: ${data}`);
+		console.log(`${process.pid} child process exited with code: ${data}`);
 	});
 }
 
@@ -92,8 +97,7 @@ const serversResponding = () => {
 
 const cleanup = () => {
 	try {
-		backendChild.kill('SIGINT');
-		frontendChild.kill('SIGINT');
+		processes.forEach(process => process.kill('SIGINT'));
 	} catch (err) {
 		console.error(err);
 	}
