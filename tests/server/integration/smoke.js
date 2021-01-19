@@ -44,7 +44,6 @@ describe('Smoke', function () {
 	}); // before
 
 	it('Should return hello world text in response', function () {
-		console.log(`TEST=`+getHomeResponseBody)
 		assert.isTrue(getHomeResponseBody.includes('<h1>Hello World!</h1>'));
 	});
 });

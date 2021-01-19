@@ -16,7 +16,7 @@ module.exports = function (options) {
 				body.push(chunk);
 			});
 			res.on('end', function() {
-				res.text = body;
+				res.text = body.toString();
 				resolve(res);
 			});
 		});
