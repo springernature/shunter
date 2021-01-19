@@ -1,6 +1,11 @@
 
 # History
 
+## 4.13.4 (2021-01-19)
+
+* Fixes an issue with recent `http-proxy` update that could have broken proxying for some apps. See #339
+* Updates `engines` field in`package.json` to include node 8. We have been testing releases in node 8 for a few years.
+
 ## 4.13.3 (2020-09-29)
 
 * Upgrade `http-proxy` to fix a security vulnerability
