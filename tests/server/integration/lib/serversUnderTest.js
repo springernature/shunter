@@ -28,14 +28,12 @@ var startServers = function () {
 
 // handles events common for both server processes, on stderr stdout etc.
 var handleEventsForProcess = function (process, resolve, reject) {
-	// console.log(`Spawned child pid: ${process.pid}`);
 	process.__isUp = false;
 
 	// we cannot tell if a child process has finished spawing (no such event exists),
 	//  so we have to wait for both of them to output something. And pray they aren't
-	//  changed to start silently (unlikely, but if so, the tests will hang).
+	//  changed to start silently (unlikely, but if so, the tests will timeout).
 	process.stdout.on('data', function (data) {
-		// console.log(`${process.pid} stdout: ${data}`);
 		if (allProcessesUp) {
 			return;
 		}
@@ -83,6 +81,7 @@ var handleEventsForProcess = function (process, resolve, reject) {
 					tries++;
 					setTimeout(function() {
 						if (err.message.includes('ECONNREFUSED') && tries < maxTries) {
+							// server is still starting up
 							doPingLoop();
 						} else {
 							reject(err);
@@ -106,7 +105,7 @@ var handleEventsForProcess = function (process, resolve, reject) {
 
 	module.exports = {
 		// starts up the servers, and pings the FE server
-		//  returns a Promise that resolves once the FE pongs back, or crashes and burns
+		//  returns a Promise that resolves once the FE pongs back
 		readyForTest: function () {
 			return new Promise(function (resolve, reject) {
 				// sequential promises without async/await are not pretty

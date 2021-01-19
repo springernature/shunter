@@ -1,3 +1,5 @@
+'use strict';
+
 var shunter = require('../../');
 var app = shunter({
     path: {

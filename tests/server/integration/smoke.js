@@ -9,7 +9,7 @@ describe('Smoke', function () {
 	var getHomeResponseBody;
 
 	before(function (done) {
-		// wait for the servers, run the tests, then cleanup
+		// wait for the servers to spin up, then hit the home page
 		var serversReadyPromise = serversUnderTest.readyForTest();
 		serversReadyPromise
 		.then(function () {
@@ -26,6 +26,7 @@ describe('Smoke', function () {
 			})
 		});
 
+		// hit /home on the frontend server
 		var getHome = function () {
 			return new Promise(function(resolve, reject) {
 				var testRequestPromise = httpRequest({
@@ -43,6 +44,7 @@ describe('Smoke', function () {
 		}
 	}); // before
 
+	// start actual tests
 	it('Should return hello world text in response', function () {
 		assert.isTrue(getHomeResponseBody.includes('<h1>Hello World!</h1>'));
 	});
