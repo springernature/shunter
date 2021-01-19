@@ -53,10 +53,6 @@ var handleEventsForProcess = function (process, resolve, reject) {
 			console.log(`${process.pid} stderr: ${data}`);
 			reject();
 		});
-
-		process.on('close', function (data) {
-			// console.log(`${process.pid} child process exited with code: ${data}`);
-		});
 	};
 
 	// ping the FE server
