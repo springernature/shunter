@@ -1,0 +1,12 @@
+{
+    "layout": {
+        "template": "home"
+    },
+    "title": "Hello World!",
+    "list": [
+        "foo",
+        "bar",
+        "baz"
+    ]
+}
+
