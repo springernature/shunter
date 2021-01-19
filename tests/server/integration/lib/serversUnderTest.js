@@ -1,7 +1,7 @@
 'use strict';
 
 var spawn = require('child_process').spawn;
-var request = require('supertest');
+var httpRequest = require('./httpRequest');
 
 var processes = new Array();
 var allProcessesUp = false;
@@ -45,89 +45,93 @@ var handleEventsForProcess = function (process, resolve, reject) {
 		if (processes.length > 1 &&
 			processes.every(function (process) {
 				return process.__isUp === true
-		})){
-			allProcessesUp = true;
-			resolve();
-		}
-	});
+			})){
+				allProcessesUp = true;
+				resolve();
+			}
+		});
 
-	process.stderr.on('data', function (data) {
-		console.log(`${process.pid} stderr: ${data}`);
-		reject();
-	});
+		process.stderr.on('data', function (data) {
+			console.log(`${process.pid} stderr: ${data}`);
+			reject();
+		});
 
-	process.on('close', function (data) {
-		// console.log(`${process.pid} child process exited with code: ${data}`);
-	});
-}
+		process.on('close', function (data) {
+			// console.log(`${process.pid} child process exited with code: ${data}`);
+		});
+	};
 
-// ping the FE server
-// returns a Promise which resolves once it recieves a pong response
-//  or rejects on an unexpected error, or if maxTries exceeded
-var serversResponding = function () {
-	return new Promise(function (resolve, reject) {
-		var tries = 0;
-		var maxTries = 1000;
-		var thisRequest = request('http://localhost:5400');
-		var doPingLoop = function () {
-			thisRequest
-				.get('/ping')
+	// ping the FE server
+	// returns a Promise which resolves once it recieves a pong response
+	//  or rejects on an unexpected error, or if maxTries exceeded
+	var serversResponding = function () {
+		return new Promise(function (resolve, reject) {
+			var tries = 0;
+			var maxTries = 1000;
+			var doPingLoop = function () {
+				var thisRequestPromise = httpRequest({
+					port: 5400,
+					path: '/ping',
+				});
+				thisRequestPromise
 				.then(function (res) {
-					if (res.text === 'pong') {
+					if (res.text.includes('pong')) {
 						resolve(tries);
 					}
 				})
 				.catch(function (err) {
 					tries++;
-					if (err.message === 'ECONNREFUSED: Connection refused' && tries < maxTries) {
-						doPingLoop();
-					} else {
-						reject(err);
-					}
+					setTimeout(function() {
+						if (err.message.includes('ECONNREFUSED') && tries < maxTries) {
+							doPingLoop();
+						} else {
+							reject(err);
+						}
+					}, 100); // do not pound the CPU, it's busy
 				});
-		}
-		doPingLoop();
-	});
-};
-
-var cleanup = function () {
-	try {
-		processes.forEach(function (process) {
-			process.kill('SIGINT')
+			}
+			doPingLoop();
 		});
-	} catch (err) {
-		console.error(err);
-	}
-};
+	};
 
-module.exports = {
-	// starts up the servers, and pings the FE server
-	//  returns a Promise that resolves once the FE pongs back, or crashes and burns
-	readyForTest: function () {
-		return new Promise(function (resolve, reject) {
-			// sequential promises without async/await are not pretty
-			var startServersPromise = startServers();
-			startServersPromise
+	var cleanup = function () {
+		try {
+			processes.forEach(function (process) {
+				process.kill('SIGINT')
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	module.exports = {
+		// starts up the servers, and pings the FE server
+		//  returns a Promise that resolves once the FE pongs back, or crashes and burns
+		readyForTest: function () {
+			return new Promise(function (resolve, reject) {
+				// sequential promises without async/await are not pretty
+				var startServersPromise = startServers();
+				startServersPromise
 				.then(function () {
 					var serversRespondingPromise = serversResponding();
 					serversRespondingPromise
-						.then(function () {
-							resolve()
-						})
-						.catch(function (err) {
-							console.error(err)
-							reject(err);
-							cleanup(); // tear down the test suite if we cant run smoke tests
-						});
+					.then(function () {
+						resolve()
+					})
+					.catch(function (err) {
+						console.error(err)
+						reject(err);
+						cleanup(); // tear down the test suite if we cant run smoke tests
+					});
 				})
 				.catch(function (err) {
 					console.error(err)
 					reject(err);
 					cleanup();
 				});
-		})
-	},
-	finish: function () {
-		cleanup();
-	}
-};
+			})
+		},
+		finish: function () {
+			cleanup();
+		}
+	};

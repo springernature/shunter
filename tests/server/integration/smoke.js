@@ -1,8 +1,8 @@
 'use strict';
 
-var request = require('supertest');
 var assert = require('proclaim');
 
+var httpRequest = require('./lib/httpRequest');
 var serversUnderTest = require('./lib/serversUnderTest');
 
 describe('Smoke', function () {
@@ -18,7 +18,7 @@ describe('Smoke', function () {
 			.then(function (data) {
 				getHomeResponseBody = data;
 				serversUnderTest.finish();
-				done(); // var mocha know it can now run the suite
+				done(); // tell mocha it can now run the suite
 			})
 			.catch(function (err) {
 				console.error(err);
@@ -28,9 +28,11 @@ describe('Smoke', function () {
 
 		var getHome = function () {
 			return new Promise(function(resolve, reject) {
-				var testRequest = request('http://localhost:5400');
-				testRequest
-				.get('/home')
+				var testRequestPromise = httpRequest({
+					port: 5400,
+					path: '/home',
+				});
+				testRequestPromise
 				.then(function (res) {
 					resolve(res.text);
 				})
@@ -42,6 +44,7 @@ describe('Smoke', function () {
 	}); // before
 
 	it('Should return hello world text in response', function () {
+		console.log(`TEST=`+getHomeResponseBody)
 		assert.isTrue(getHomeResponseBody.includes('<h1>Hello World!</h1>'));
 	});
 });
