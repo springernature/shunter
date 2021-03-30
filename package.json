@@ -1,6 +1,6 @@
 {
   "name": "shunter",
-  "version": "4.13.4",
+  "version": "4.13.5",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [
@@ -82,7 +82,7 @@
     "wd": "~1.10.0",
     "winston": "~2.3.0",
     "winston-syslog": "~1.2.0",
-    "yargs": "7.1.0"
+    "yargs": "7.1.1"
   },
   "devDependencies": {
     "@springernature/eslint-config": "^1.0.0",

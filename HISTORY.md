@@ -1,6 +1,9 @@
 
 # History
 
+## 4.13.5 (2021-03-30)
+* Fixes an issue that would prevent apps from starting when using `yargs` 7.1.1+
+
 ## 4.13.4 (2021-01-19)
 
 * Fixes an issue with recent `http-proxy` update that could have broken proxying for some apps. See #339
