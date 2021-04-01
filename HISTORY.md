@@ -1,6 +1,9 @@
 
 # History
 
+## 4.13.6 (2021-03-31)
+* Update mincer to patch lodash vulnerability
+
 ## 4.13.5 (2021-03-30)
 * Fixes an issue that would prevent apps from starting when using `yargs` 7.1.1+
 

@@ -1,6 +1,6 @@
 {
   "name": "shunter",
-  "version": "4.13.5",
+  "version": "4.13.6",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [
@@ -67,7 +67,7 @@
     "hasbin": "~1.2.0",
     "http-proxy": "~1.18.1",
     "jserve": "~2.0.3",
-    "mincer": "~1.5.0",
+    "mincer": "2.1.0",
     "mkdirp": "~0.5.0",
     "mocha-phantomjs-core": "~2.1.0",
     "postcss": "~5.2.0",
