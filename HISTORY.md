@@ -1,6 +1,9 @@
 
 # History
 
+## 4.13.7 (2021-05-26)
+* Fixes a bug where headers returned by the backend would be dropped
+
 ## 4.13.6 (2021-03-31)
 * Update mincer to patch lodash vulnerability
 
