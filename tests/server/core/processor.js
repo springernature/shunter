@@ -134,6 +134,32 @@ describe('Request processor', function () {
 				assert.isTrue(res.__originalWriteHead.calledOnce);
 			});
 
+			it('Should pass through headers from the backend', function () {
+				var processor = require(moduleName)({
+					argv: {},
+					timer: mockTimer
+				}, {});
+				var callback = sinon.stub();
+
+				var req = {};
+				var headers = {
+					Location: 'https://www.nature.com'
+				};
+
+				processor.intercept(req, res, callback);
+
+				require('http-proxy').createProxyServer().on.yield({
+					statusCode: 303,
+					statusMessage: 'See Other',
+					headers: headers
+				}, null, res);
+
+				assert.isTrue(res.__originalWriteHead.calledOnce);
+				assert.equal(res.__originalWriteHead.firstCall.args[0], 303);
+				assert.equal(res.__originalWriteHead.firstCall.args[1], 'See Other');
+				assert.equal(res.__originalWriteHead.firstCall.args[2], headers);
+			});
+
 			it('Should intercept responses with an x-shunter+json mime type', function () {
 				var tier = sinon.stub();
 				var processor = require(moduleName)({
