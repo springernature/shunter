@@ -1540,30 +1540,6 @@ Mocha.prototype.loadFiles = function(fn){
 };
 
 /**
- * Enable growl support.
- *
- * @api private
- */
-
-Mocha.prototype._growl = function(runner, reporter) {
-  var notify = require('growl');
-
-  runner.on('end', function(){
-    var stats = reporter.stats;
-    if (stats.failures) {
-      var msg = stats.failures + ' of ' + runner.total + ' tests failed';
-      notify(msg, { name: 'mocha', title: 'Failed', image: image('error') });
-    } else {
-      notify(stats.passes + ' tests passed in ' + stats.duration + 'ms', {
-          name: 'mocha'
-        , title: 'Passed'
-        , image: image('ok')
-      });
-    }
-  });
-};
-
-/**
  * Add regexp to grep, if `re` is a string it is escaped.
  *
  * @param {RegExp|String} re
@@ -1612,18 +1588,6 @@ Mocha.prototype.ignoreLeaks = function(ignore){
 
 Mocha.prototype.checkLeaks = function(){
   this.options.ignoreLeaks = false;
-  return this;
-};
-
-/**
- * Enable growl support.
- *
- * @return {Mocha}
- * @api public
- */
-
-Mocha.prototype.growl = function(){
-  this.options.growl = true;
   return this;
 };
 
@@ -1726,7 +1690,6 @@ Mocha.prototype.run = function(fn){
   runner.asyncOnly = options.asyncOnly;
   if (options.grep) runner.grep(options.grep, options.invert);
   if (options.globals) runner.globals(options.globals);
-  if (options.growl) this._growl(runner, reporter);
   exports.reporters.Base.useColors = options.useColors;
   exports.reporters.Base.inlineDiffs = options.useInlineDiffs;
   return runner.run(fn);
