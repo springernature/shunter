@@ -3,13 +3,11 @@ language: node_js
 matrix:
   include:
     # Run only the linting in Node.js 10.x
-    - node_js: '10'
+    - node_js: '12'
       env: LINT=true
 
     # Run tests in all supported Node.js Stable/LTS (10, 12 and 14)
-    - node_js: '10'
     - node_js: '12'
-    - node_js: '14'
 
 # Build script
 script: ./build-script
