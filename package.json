@@ -1,6 +1,6 @@
 {
   "name": "shunter",
-  "version": "4.13.3",
+  "version": "4.13.4",
   "license": "LGPL-3.0",
   "description": "A Node.js application built to read JSON and translate it into HTML",
   "keywords": [
@@ -49,15 +49,15 @@
     "node": ">=10"
   },
   "dependencies": {
-    "async": "~3.1.0",
+    "async": "~3.2.2",
     "body-parser": "~1.19.0",
     "cheerio": "~1.0.0-rc.3",
     "connect": "~3.7.0",
     "cookie-parser": "~1.4.4",
     "csswring": "~7.0.0",
     "dateformat": "~3.0.3",
-    "dustjs-helpers": "~1.7.4",
-    "dustjs-linkedin": "~2.7.5",
+    "dustjs-helpers": "^1.6.3",
+    "dustjs-linkedin": "^2.6.1",
     "each-module": "~1.2.0",
     "ejs": "~2.5.9",
     "extend": "~3.0.2",
@@ -67,7 +67,7 @@
     "hasbin": "~1.2.3",
     "http-proxy": "~1.18.1",
     "jserve": "~2.0.3",
-    "mincer": "~2.0.1",
+    "mincer": "^2.1.0",
     "mkdirp": "~0.5.1",
     "postcss": "~7.0.17",
     "promised-io": "~0.3.5",
@@ -93,8 +93,8 @@
     "eslint-plugin-unicorn": "^4.0.3",
     "mocha": "^6.2.0",
     "mockery": "^2.1.0",
-    "node-sass": "^4.12.0",
-    "nyc": "^14.1.1",
+    "node-sass": "^4.14.0",
+    "nyc": "^15.1.0",
     "proclaim": "^3.6.0",
     "sinon": "^7.4.1"
   },

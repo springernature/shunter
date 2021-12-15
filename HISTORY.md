@@ -1,6 +1,16 @@
 
 # History
 
+## 4.13.4 (2021-12-15)
+
+* Upgrade the following dependencies to fix the security vulnerabilities:
+  * `async`
+  * `dustjs-helpers`
+  * `dustjs-linkedin`
+  * `mincer`
+  * `node-sass`
+  * `nyc`
+
 ## 4.13.3 (2020-09-29)
 
 * Upgrade `http-proxy` to fix a security vulnerability
