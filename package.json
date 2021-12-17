@@ -95,7 +95,7 @@
     "istanbul": "^0.4.0",
     "mocha": "^3.0.0",
     "mockery": "^2.0.0",
-    "node-sass": "^7.0.0",
+    "node-sass": "^4.5.3",
     "proclaim": "^3.0.0",
     "sinon": "^4.0.0",
     "snyk": "^1.43.0"
