@@ -4,9 +4,6 @@
 ## 4.13.8 (2021-12-17)
 
 * Upgrade the following dependencies to fix the security vulnerabilities:
-    * `cheerio`
-    * `dustjs-linkedin`
-    * `node-sass`
     * `wd`
 
 ## 4.13.7 (2021-05-26)
