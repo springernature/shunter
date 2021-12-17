@@ -1,6 +1,11 @@
 
 # History
 
+## 4.13.8 (2021-12-17)
+
+* Upgrade the following dependencies to fix the security vulnerabilities:
+    * `wd`
+
 ## 4.13.7 (2021-05-26)
 * Fixes a bug where headers returned by the backend would be dropped
 
