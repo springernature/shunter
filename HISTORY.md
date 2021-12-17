@@ -1,7 +1,7 @@
 
 # History
 
-## 4.13.4 (2021-12-17)
+## 4.13.8 (2021-12-17)
 
 * Upgrade the following dependencies to fix the security vulnerabilities:
     * `cheerio`
