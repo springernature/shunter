@@ -83,7 +83,7 @@ describe('Clustering', function () {
 			pathJoinStub.returns('/shunter.pid');
 			server.start();
 			fs.writeFile.yield();
-			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid));
+			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid.toString()));
 			assert.isTrue(config.log.debug.calledWith('Saved shunter.pid file for process ' + process.pid));
 		});
 
@@ -92,7 +92,7 @@ describe('Clustering', function () {
 			pathJoinStub.returns('/shunter.pid');
 			server.start();
 			fs.writeFile.yield({message: 'ERROR'});
-			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid));
+			assert.isTrue(fs.writeFile.calledWith('/shunter.pid', process.pid.toString()));
 			assert.isTrue(config.log.error.calledWith('Error saving shunter.pid file for process ' + process.pid + ' ERROR'));
 		});
 
