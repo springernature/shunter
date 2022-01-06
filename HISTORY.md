@@ -1,7 +1,11 @@
 
 # History
 
-## 4.13.8 (2022-01-06)
+## 4.13.9 (2022-01-06)
+* Removes `package-lock.json` committed in previous release
+* Changes `wd` range specifier
+
+## 4.13.8 (2021-12-17)
 * Update `wd` to fix a security vulnerability
 
 ## 4.13.7 (2021-05-26)
