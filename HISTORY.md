@@ -1,16 +1,18 @@
 
 # History
 
-## 4.13.8 (2021-12-17)
+## 4.13.9 (2022-01-06)
+* Removes `package-lock.json` committed in previous release
+* Changes `wd` range specifier
 
-* Upgrade the following dependencies to fix the security vulnerabilities:
-    * `wd`
+## 4.13.8 (2021-12-17)
+* Update `wd` to fix a security vulnerability
 
 ## 4.13.7 (2021-05-26)
 * Fixes a bug where headers returned by the backend would be dropped
 
 ## 4.13.6 (2021-03-31)
-* Update mincer to patch lodash vulnerability
+* Update `mincer` to patch `lodash` vulnerability
 
 ## 4.13.5 (2021-03-30)
 * Fixes an issue that would prevent apps from starting when using `yargs` 7.1.1+
