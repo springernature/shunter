@@ -1,5 +1,25 @@
-
 # History
+
+## 4.13.9 (2022-01-06)
+* Removes `package-lock.json` committed in previous release
+* Changes `wd` range specifier
+
+## 4.13.8 (2021-12-17)
+* Update `wd` to fix a security vulnerability
+
+## 4.13.7 (2021-05-26)
+* Fixes a bug where headers returned by the backend would be dropped
+
+## 4.13.6 (2021-03-31)
+* Update `mincer` to patch `lodash` vulnerability
+
+## 4.13.5 (2021-03-30)
+* Fixes an issue that would prevent apps from starting when using `yargs` 7.1.1+
+
+## 4.13.4 (2021-01-19)
+
+* Fixes an issue with recent `http-proxy` update that could have broken proxying for some apps. See #339
+* Updates `engines` field in`package.json` to include node 8. We have been testing releases in node 8 for a few years.
 
 ## 4.13.3 (2020-09-29)
 
