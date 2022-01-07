@@ -16,6 +16,10 @@ matrix:
     # Run tests in the latest version of Node.js
     - node_js: 'node'
 
+# Work around a bug on npm 3.x that causes tests to fail with Node v5
+before_install:
+  - if [ "$UPGRADE_NPM" ]; then npm install --global npm@4; fi
+
 # Build script
 script: ./build-script
 
