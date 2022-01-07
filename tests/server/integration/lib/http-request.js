@@ -12,10 +12,10 @@ module.exports = function (options) {
 				return reject(new Error('statusCode=' + res.statusCode));
 			}
 			var body = [];
-			res.on('data', function(chunk) {
+			res.on('data', function (chunk) {
 				body.push(chunk);
 			});
-			res.on('end', function() {
+			res.on('end', function () {
 				res.text = body.toString();
 				resolve(res);
 			});
