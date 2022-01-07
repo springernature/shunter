@@ -77,10 +77,10 @@
     "serve-static": "~1.14.1",
     "statsd-client": "~0.4.2",
     "uglify-js": "~3.6.0",
-    "wd": "~1.11.3",
+    "wd": "~1.14.0",
     "winston": "~3.2.1",
     "winston-syslog": "~2.4.4",
-    "yargs": "~7.1.0"
+    "yargs": "7.1.1"
   },
   "devDependencies": {
     "@springernature/eslint-config": "^2.1.0",
