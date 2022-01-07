@@ -5,7 +5,7 @@ set -eo pipefail
 if [ $LINT ]; then
 	npm run lint
 else
-	npm run test
+	npm run test-ci
 fi
 
 exit 0;

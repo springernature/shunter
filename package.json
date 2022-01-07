@@ -107,6 +107,7 @@
   },
   "scripts": {
     "lint": "make lint",
-    "test": "make test"
+    "test": "make test",
+    "test-ci": "make test-server"
   }
 }
