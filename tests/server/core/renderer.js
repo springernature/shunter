@@ -1,9 +1,9 @@
 'use strict';
 
+var path = require('path');
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
-var path = require('path');
 
 var mockConfig = {
 	modules: [
@@ -14,7 +14,6 @@ var mockConfig = {
 		shunterRoot: path.join(path.dirname(__dirname), '../../'),
 		resources: '/resources',
 		publicResources: '/public/resources',
-		themes: '/themes',
 		templates: '/view',
 		dust: '/dust'
 	},
@@ -89,6 +88,7 @@ describe('Renderer', function () {
 		mockery.disable();
 		mockConfig.env.isProduction.returns(true);
 		mockConfig.log.error.resetHistory();
+		mockConfig.structure.templates = 'view';
 	});
 
 	describe('Asset handling', function () {
@@ -177,23 +177,6 @@ describe('Renderer', function () {
 			assert.strictEqual(inputFilter().add.withArgs(filter).callCount, 2);
 		});
 
-		// It('Should configure the asset paths in the correct order', function() {
-		// 	require('fs').readdirSync.returns([]);
-		// 	require('fs').existsSync.returns(true);
-		// 	require('path').join.returnsArg(1);
-
-		// 	var renderer = require(RENDERER_MODULE)(mockConfig);
-		// 	assert.strictEqual(renderer.environment.appendPath.callCount, 8);
-		// 	assert.isTrue(renderer.environment.appendPath.firstCall.calledWith('fonts'));
-		// 	assert.isTrue(renderer.environment.appendPath.secondCall.calledWith('img'));
-		// 	assert.isTrue(renderer.environment.appendPath.thirdCall.calledWith('css'));
-		// 	assert.isTrue(renderer.environment.appendPath.lastCall.calledWith('js'));
-		// });
-
-		// Commenting out for now; we no longer deal with themes, but we may want to replicate
-		// similar tests when we rewrite the asset loading logic for the new application structure
-		//
-
 		it('Should append the asset paths for the host app, in the correct order (i.e. on odd iterations)', function () {
 			require('fs').existsSync.returns(true);
 			require('fs').mockStatReturn.isDirectory.returns(true);
@@ -205,19 +188,6 @@ describe('Renderer', function () {
 			assert.isTrue(renderer.environment.appendPath.thirdCall.calledWith('img'));
 			assert.isTrue(renderer.environment.appendPath.getCall(4).calledWith('css'));
 			assert.isTrue(renderer.environment.appendPath.getCall(6).calledWith('js'));
-		});
-
-		it('Should configure the asset paths for the modules after the host app ones, in the correct order (i.e. on even iterations)', function () {
-			require('fs').existsSync.returns(true);
-			require('fs').mockStatReturn.isDirectory.returns(true);
-			require('path').join.returnsArg(2);
-
-			var renderer = require(RENDERER_MODULE)(mockConfig);
-			assert.strictEqual(renderer.environment.appendPath.callCount, 8);
-			assert.isTrue(renderer.environment.appendPath.secondCall.calledWith('fonts'));
-			assert.isTrue(renderer.environment.appendPath.getCall(3).calledWith('img'));
-			assert.isTrue(renderer.environment.appendPath.getCall(5).calledWith('css'));
-			assert.isTrue(renderer.environment.appendPath.getCall(7).calledWith('js'));
 		});
 
 		it('Should not configure asset paths for files in a module that is not explicitly included', function () {
@@ -283,14 +253,28 @@ describe('Renderer', function () {
 	});
 
 	describe('Template compilation', function () {
-		it('Should watch the templates directories', function () {
+		it('Should watch the default templates directories', function () {
 			require('fs').readdirSync.returns([]);
 			require('path').join.returns('/module/view');
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 
 			renderer.watchTemplates();
 			assert.isTrue(watcher().watchTree.calledOnce);
-			assert.isTrue(watcher().watchTree.calledWith(['/view', '/module/view'], mockConfig.log));
+			assert.isTrue(watcher().watchTree.calledWith(['view', '/module/view'], mockConfig.log));
+			assert.isTrue(watcher().watchTree().on.calledWith('fileModified'));
+			assert.isTrue(watcher().watchTree().on.calledWith('fileCreated'));
+		});
+
+		it('Should watch the configured templates directories', function () {
+			require('fs').readdirSync.returns([]);
+			require('path').join.returns('/module/templates');
+			var alternativeMockConfig = mockConfig;
+			alternativeMockConfig.structure.templates = 'templates';
+			var renderer = require(RENDERER_MODULE)(alternativeMockConfig);
+
+			renderer.watchTemplates();
+			assert.isTrue(watcher().watchTree.calledOnce);
+			assert.isTrue(watcher().watchTree.calledWith(['templates', '/module/templates'], mockConfig.log));
 			assert.isTrue(watcher().watchTree().on.calledWith('fileModified'));
 			assert.isTrue(watcher().watchTree().on.calledWith('fileCreated'));
 		});
@@ -442,7 +426,7 @@ describe('Renderer', function () {
 			assert.strictEqual(renderer.dust.loadSource.callCount, 0);
 		});
 
-		it('Should select all dust files from a configured theme directory\'s subfolders', function () {
+		it('Should select all dust files from application\'s configured template directory\'s subfolders', function () {
 			require('fs').readdirSync.returns([]);
 			var renderer = require(RENDERER_MODULE)(mockConfig);
 			var gsync = require('glob').sync.returns(['filepath']);

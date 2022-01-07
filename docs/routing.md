@@ -1,11 +1,9 @@
+# Routing
 
-Routing
-=======
-
-- [Examples](#examples)
-- [Route Config Options](#route-config-options)
-- [Route Override](#route-override)
-- [Change Origin](#change-origin)
+* [Examples](#examples)
+* [Route Config Options](#route-config-options)
+* [Route Override](#route-override)
+* [Change Origin](#change-origin)
 
 When Shunter receives an incoming request it needs to know where the request should be proxied to. This is configured by setting a `routes` property when you create your shunter app, typically by requiring a config file:
 
@@ -16,12 +14,11 @@ var app = shunter({
 });
 ```
 
-Examples
---------
+## Examples
 
 The config is used to match the incoming hostname and request url and match it to a proxy target.
 
-```js
+```json
 {
 	"www.example.com": {
 		"/^\\/blog/": {
@@ -29,7 +26,7 @@ The config is used to match the incoming hostname and request url and match it t
 			"port": 80
 		},
 		"/^\\/demo/": {
-		    "host": "demo.example.com"
+			"host": "demo.example.com"
 		},
 		"/^\\/about/": {
 			"host": "about.example.com",
@@ -72,13 +69,11 @@ The table shows how different requests would be mapped using this config:
 | `test-www.example.com` | `/foo`                | `test-cms.example.com:8080/foo`                |
 | `foo.example.com`      | `/foo/bar`            | `127.0.0.1:5000/foo/bar`                       |
 
-
-Route Config Options
---------------------
+## Route Config Options
 
 By default if none of the regex patterns are matched Shunter will use the route under the `default` key. The name of the default key can be configured by providing the `route-config` option when you start your shunter app. So if you had the config:
 
-```js
+```json
 {
 	"www.example.com": {
 		"custom": {
@@ -95,42 +90,40 @@ By default if none of the regex patterns are matched Shunter will use the route 
 
 And ran your Shunter app with `--route-config=custom` requests would be routed to port 1337 instead of 5000.
 
-
-Route Override
--------------
+## Route Override
 
 Routing can be overridden entirely by setting the `route-override` option. Running your Shunter app with `--route-override=http://www.example.com:1337` would route all requests to that destination. You could also route to an IPv4: `--route-override=8.8.8.8:80`
 
-**n.b**: If you do not specify a protocol (`http` or `https`) when setting a route via `route-override` then it will default to `http`. Please also note that `https` is currently unsupported by Shunter.
-```
+If you do not specify a protocol (`http` or `https`) when setting a route via `route-override`, then it will default to `http`. Please also note that `https` is currently unsupported by Shunter.
+
+```shell
 --route-override=$BACKEND_URL
 ```
-| BACKEND_URL                   | Proxy Destination           |
-| :---------------------------- | :-------------------------- |
-| `http://www.example.com`      | `http://www.example.com`    |
-| `https://foo.example.com`     | `https://foo.example.com`   |
-| `www.example.com`             | `http://www.example.com`    |
-| `www.example.com:80`          | `http://www.example.com:80` |
-| `localhost`                   | `http://localhost`          |
-| `127.0.0.1:5000`              | `http://127.0.0.1:5000`     |
-| `8.8.8.8`                     | `http://8.8.8.8`            |
-| `https://8.8.8.8:80`          | `https://8.8.8.8:80`        |
 
+| BACKEND_URL               | Proxy Destination           |
+| :------------------------ | :-------------------------- |
+| `http://www.example.com`  | `http://www.example.com`    |
+| `https://foo.example.com` | `https://foo.example.com`   |
+| `www.example.com`         | `http://www.example.com`    |
+| `www.example.com:80`      | `http://www.example.com:80` |
+| `localhost`               | `http://localhost`          |
+| `127.0.0.1:5000`          | `http://127.0.0.1:5000`     |
+| `8.8.8.8`                 | `http://8.8.8.8`            |
+| `https://8.8.8.8:80`      | `https://8.8.8.8:80`        |
 
 You can use the `--origin-override` (`-g`) option in conjunction with the `route-override` option to set `changeOrigin: true` for the overriding route. See [Change Origin](#change-origin) for more details.
 
 This would be useful when deploying your Shunter app to a platform that makes use of environment variables. For example you could start up a Shunter app with:
-```
+
+```shell
 node app -p $PORT --route-override=$BACKEND_APP --origin-override
 ```
 
-
-Change Origin
--------------
+## Change Origin
 
 In addition to setting the host and port for the proxy target there is an additional `changeOrigin` option that can be used. When this is set to true (it defaults to false) Shunter will update the host header to match the destination server. So with the following config:
 
-```js
+```json
 {
 	"www.example.com": {
 		"default": {
@@ -143,9 +136,3 @@ In addition to setting the host and port for the proxy target there is an additi
 ```
 
 The application on cms.example.com would receive requests with a host header of `cms.example.com` instead of `www.example.com`. The original host header will be passed through to the backend in an `X-Orig-Host` header.
-
----
-
-Related:
-
-- [Full API Documentation](index.md)

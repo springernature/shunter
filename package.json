@@ -49,14 +49,14 @@
     "node": ">=4 <=8"
   },
   "dependencies": {
-    "async": "~2.5.0",
-    "body-parser": "~1.18.2",
-    "cheerio": "~0.22.0",
-    "connect": "~3.6.0",
-    "cookie-parser": "~1.4.0",
-    "csswring": "~4.2.3",
-    "dateformat": "~3.0.2",
-    "dustjs-helpers": "~1.7.0",
+    "async": "~3.1.0",
+    "body-parser": "~1.19.0",
+    "cheerio": "~1.0.0-rc.3",
+    "connect": "~3.7.0",
+    "cookie-parser": "~1.4.4",
+    "csswring": "~7.0.0",
+    "dateformat": "~3.0.3",
+    "dustjs-helpers": "~1.7.4",
     "dustjs-linkedin": "~2.7.5",
     "each-module": "~1.2.0",
     "ejs": "~2.5.7",
@@ -85,31 +85,29 @@
     "yargs": "7.1.1"
   },
   "devDependencies": {
-    "@springernature/eslint-config": "^1.0.0",
-    "eslint": "^4.18.2",
-    "eslint-plugin-import": "^2.9.0",
+    "@springernature/eslint-config": "^2.1.0",
+    "eslint": "^5.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
     "eslint-plugin-no-use-extend-native": "^0.3.12",
     "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-unicorn": "^4.0.2",
-    "istanbul": "^0.4.0",
-    "mocha": "^3.0.0",
-    "mockery": "^2.0.0",
-    "node-sass": "^4.5.3",
-    "proclaim": "^3.0.0",
-    "sinon": "^4.0.0",
-    "snyk": "^1.43.0"
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-unicorn": "^4.0.3",
+    "mocha": "^6.2.0",
+    "mockery": "^2.1.0",
+    "node-sass": "^4.12.0",
+    "nyc": "^14.1.1",
+    "proclaim": "^3.6.0",
+    "sinon": "^7.4.1"
   },
   "main": "./lib/shunter.js",
   "bin": {
     "shunter-build": "./bin/compile.js",
     "shunter-compile": "./bin/compile.js",
-    "shunter-serve": "./bin/serve.js",
-    "shunter-test-client": "./bin/test-client.js"
+    "shunter-serve": "./bin/serve.js"
   },
   "scripts": {
     "lint": "make lint",
-    "snyk": "make snyk",
     "test": "make test"
   }
 }

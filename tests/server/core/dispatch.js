@@ -1,9 +1,9 @@
 'use strict';
 
+var path = require('path');
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
-var path = require('path');
 
 var moduleName = '../../../lib/dispatch';
 
@@ -47,7 +47,6 @@ describe('Dispatching response', function () {
 				shunterRoot: path.join(path.dirname(__dirname), '../../'),
 				resources: '/resources',
 				publicResources: '/public/resources',
-				themes: '/themes',
 				templates: '/view',
 				dust: '/dust'
 			},

@@ -282,7 +282,6 @@ describe('Worker process running outside of production', function () {
 	});
 });
 
-
 describe('Worker process running with a set mount-path', function () {
 	var benchmark = null;
 	var connect = null;
@@ -320,8 +319,12 @@ describe('Worker process running with a set mount-path', function () {
 			],
 			env: {
 				name: 'production',
-				isProduction: function(){return true},
-				isDevelopment: function(){return false}
+				isProduction: function () {
+					return true;
+				},
+				isDevelopment: function () {
+					return false;
+				}
 			}
 		};
 
@@ -360,7 +363,6 @@ describe('Worker process running with a set mount-path', function () {
 		process.exit.resetHistory();
 		config.log.debug.resetHistory();
 	});
-
 
 	it('Should add a middleware to intercept responses from the backend on mount path', function () {
 		assert.isTrue(connect().use.calledWith(MOUNTPATH, processor().intercept));

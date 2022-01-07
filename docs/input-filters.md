@@ -1,6 +1,4 @@
-
-Input Filters
-=============
+# Input Filters
 
 Data processing belongs to the code that deals with the model, not the view. Almost all of the time, that equates to the application that sends data to Shunter.
 
@@ -12,8 +10,7 @@ Input filters are part of the shunter rendering process. They take the JSON data
 
 If you want to add input filters to your project they are defined in ``filters/input`` their corresponding tests live in the ``tests/server/filters/input`` folder.
 
-Defining An Input Filter
-------------------------
+## Defining An Input Filter
 
 At their most basic an input filter exports a function that accepts a single parameter containing the JSON for the request and returns the data with any modifications made.
 
@@ -54,9 +51,3 @@ module.exports = function(config, request, response, data, next) {
 	next(data);
 };
 ```
-
----
-
-Related:
-
-- [Full API Documentation](index.md)

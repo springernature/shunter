@@ -1,9 +1,9 @@
 'use strict';
 
+var path = require('path');
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
-var path = require('path');
 
 describe('Clustering', function () {
 	var worker;
@@ -12,7 +12,7 @@ describe('Clustering', function () {
 	var fs;
 	var timers;
 	var config;
-	var pathJoinStub
+	var pathJoinStub;
 
 	beforeEach(function () {
 		config = {
@@ -47,7 +47,7 @@ describe('Clustering', function () {
 		server = require('../../../lib/server')(config);
 		sinon.stub(process, 'on');
 		sinon.stub(process, 'exit');
-		pathJoinStub =  sinon.stub(path, 'join');
+		pathJoinStub = sinon.stub(path, 'join');
 	});
 	afterEach(function () {
 		mockery.deregisterAll();

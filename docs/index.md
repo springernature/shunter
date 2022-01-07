@@ -1,12 +1,50 @@
-
 # ![Shunter](shunter-logo.png)
 
-Welcome to the Shunter documentation. Shunter is a Node.js application built to read JSON and translate it into HTML.
+Welcome to the Shunter documentation. Shunter is a Node.js module built to read JSON and translate it into HTML.
 
-For new users, we recommend reading the [Getting Started Guide](getting-started.md), which will introduce Shunter and show you how to build a basic application.
+## Table of contents
 
-If you're looking for the full documentation, refer to the [API Documentation](usage/index.md).
-
-If you're looking for support end dates or migrating between major versions of Shunter, we maintain a [support guide](support.md) and a [migration guide](migration/index.md).
-
-If you're interested in contributing to Shunter, we also maintain a [developer guide](developer-guide.md).
+* [Getting Started Guide](getting-started.md)
+* Programming with Shunter
+  * [Modules and Inheritance](modules.md)
+  * [Sample Data](sample-data.md)
+  * [Input Filters](input-filters.md)
+  * [Output Filters](output-filters.md)
+  * [Templates](templates.md)
+    * [Specifying a Template](templates.md#specifying-a-template)
+    * [Dust Basics](templates.md#dust-basics)
+    * [Using Partials](templates.md#using-partials)
+    * [Using Layouts](templates.md#using-layouts)
+    * [Built-In Dust Extensions](templates.md#built-in-dust-extensions)
+    * [Writing Dust Extensions](templates.md#writing-dust-extensions)
+  * [Resources](resources.md)
+    * [Resource Basics](resources.md#resource-basics)
+    * [Writing CSS](resources.md#writing-css)
+    * [Writing JavaScript](resources.md#writing-javascript)
+    * [Adding Images](resources.md#adding-images)
+    * [Other Static Assets](resources.md#other-static-assets)
+    * [Built-In EJS Extensions](resources.md#built-in-ejs-extensions)
+    * [Writing EJS Extensions](resources.md#writing-ejs-extensions)
+    * [In Production](resources.md#production-differences)
+  * [Testing](testing.md)
+  * [Configuration Reference](configuration-reference.md)
+    * [Web](configuration-reference.md#web-configuration)
+    * [Path](configuration-reference.md#path-configuration)
+    * [Structure](configuration-reference.md#structure-configuration)
+    * [Log](configuration-reference.md#log-configuration)
+    * [StatsD](configuration-reference.md#statsd-configuration)
+    * [Timer](configuration-reference.md#timer-configuration)
+    * [Environment](configuration-reference.md#environment-configuration)
+    * [Templated Error Pages](configuration-reference.md#templated-error-page-configuration)
+    * [Custom Configurations](configuration-reference.md#adding-custom-configurations)
+    * [Configuring Modules](configuration-reference.md#configuring-modules)
+    * [Command Line Options](configuration-reference.md#command-line-options)
+    * [Accessing the Configuration at Run Time](configuration-reference.md#accessing-the-configuration-at-run-time)
+  * [Middleware](middleware.md)
+  * [Routing](routing.md)
+    * [Examples](routing.md#examples)
+    * [Route Config Options](routing.md#route-config-options)
+    * [Change Origin](routing.md#change-origin)
+  * [Web API](web-api.md)
+* [Migration guide](migration/index.md)
+* [Contributing to Shunter](contributing-to-shunter.md)

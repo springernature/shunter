@@ -80,7 +80,7 @@ describe('Request processor', function () {
 			assert.isTrue(next.calledOnce);
 		});
 
-		it('Should override the X-Shunter-Deploy-Timestamp with the current time in dev mode', function() {
+		it('Should override the X-Shunter-Deploy-Timestamp with the current time in dev mode', function () {
 			mockConfig.env.isDevelopment.returns(true);
 			var processor = require(moduleName)(mockConfig, {});
 			var next = sinon.stub();

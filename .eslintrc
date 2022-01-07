@@ -17,12 +17,6 @@
 
 	"overrides": [
 		{
-			"files": "bin/test-client.js",
-			"rules": {
-				"node/no-deprecated-api": "warn"
-			}
-		},
-		{
 			"files": "tests/server/core/input-filter.js",
 			"rules": {
 				"no-unused-vars": "warn"

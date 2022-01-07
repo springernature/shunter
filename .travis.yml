@@ -23,10 +23,6 @@ before_install:
 # Build script
 script: ./build-script
 
-# Updates the dashboard after a successful deployment
-after_success:
-  - if [ $SNYK ] && [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then snyk monitor --org=springernature; fi
-
 # Build notifications
 notifications:
   slack:

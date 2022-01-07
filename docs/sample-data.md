@@ -1,6 +1,4 @@
-
-Sample Data
-===========
+# Sample Data
 
 Shunter includes a tool to serve sample JSON data to which Shunter can proxy. This is helpful for mocking up and testing templates without a functioning back end in place.
 
@@ -18,13 +16,13 @@ module.exports = json;
 
 To use the `shunter-serve` command line tool, run the following:
 
-```
+```shell
 ./node_modules/.bin/shunter-serve
 ```
 
 You may specify the port on which `shunter-serve` should run by using the option `-p`, this should match the port specified in the Shunter routing configuration, set in the Shunter config file or at run-time with the `-o` option. For example to listen on port 9000, run the following:
 
-```
+```shell
 ./node_modules/.bin/shunter-serve -p 9000
 ```
 
@@ -32,14 +30,8 @@ You may also set a number of milliseconds of latency for the response using the 
 
 Furthermore, you may use the options `-i` and `-q` to make `shunter-serve` mimic real paths. These options let you serve JSON from the index path and instruct `shunter-serve` to respect query parameters, respectively. To use them, run the following:
 
-```
+```shell
 ./node_modules/.bin/shunter-serve -i -q
 ```
 
 As a result, visiting `localhost:5401` will return an `index.json` file placed in the aforementioned `data` directory and visiting `localhost:5401/search?q=test&count=10` will return `data/search/q_count.json`.
-
----
-
-Related:
-
-- [Full API Documentation](index.md)
