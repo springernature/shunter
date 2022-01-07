@@ -92,7 +92,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-unicorn": "^4.0.3",
-    "mocha": "^6.2.0",
+    "mocha": "^9.1.3",
     "mockery": "^2.1.0",
     "node-sass": "^4.12.0",
     "nyc": "^15.1.0",
