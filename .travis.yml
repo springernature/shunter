@@ -2,14 +2,23 @@
 language: node_js
 matrix:
   include:
-    # Run only the linting in Node.js 10.x
-    - node_js: '10'
+    - node_js: '6'
       env: LINT=true
-
-    # Run tests in all supported Node.js Stable/LTS (10, 12 and 14)
+    - node_js: '4'
+    - node_js: '5'
+      env: UPGRADE_NPM=true
+    - node_js: '6'
+    - node_js: '8'
     - node_js: '10'
     - node_js: '12'
-    - node_js: '14'
+
+  allow_failures:
+    # Run tests in the latest version of Node.js
+    - node_js: 'node'
+
+# Work around a bug on npm 3.x that causes tests to fail with Node v5
+before_install:
+  - if [ "$UPGRADE_NPM" ]; then npm install --global npm@4; fi
 
 # Build script
 script: ./build-script
