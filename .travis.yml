@@ -7,7 +7,6 @@ matrix:
     - node_js: '14'
     - node_js: '16'
     - node_js: '17'
-    - node_js: '18'
 
   allow_failures:
     # Run tests in the latest version of Node.js
