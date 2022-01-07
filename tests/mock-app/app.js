@@ -1,6 +1,6 @@
 'use strict';
 
-var shunter = require('../../');
+var shunter = require('../../'); // eslint-disable-line  unicorn/import-index
 
 var app = shunter({
 	path: {
