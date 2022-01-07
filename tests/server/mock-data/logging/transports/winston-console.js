@@ -1,10 +1,14 @@
 'use strict';
 var winston = require('winston');
 
-module.exports = function (config) {
+var format = winston.format;
+
+module.exports = function () {
 	return new (winston.transports.Console)({
-		colorize: false,
-		timestamp: true,
-		level: config.argv.logging
+		format: format.combine(
+			format.colorize(),
+			format.timestamp()
+		),
+		level: 'THIS_IS_FINE'
 	});
 };
