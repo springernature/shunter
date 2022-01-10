@@ -4,8 +4,8 @@
 var path = require('path');
 var jserve = require('jserve');
 var query = require('qs-middleware');
-var request = require('request');
 var yargs = require('yargs');
+var fetch = require('node-fetch');
 
 // Parse command-line arguments
 var args = yargs
@@ -47,7 +47,7 @@ var args = yargs
 	.argv;
 
 // Resolve the data directory against CWD if it's relative
-if (args.data && !/^[\/\~]/.test(args.data)) {
+if (args.data && !/^[/~]/.test(args.data)) {
 	args.data = path.resolve(process.cwd(), args.data);
 }
 
@@ -70,7 +70,7 @@ var app = jserve({
 	name: 'Shunter Serve',
 	path: args.data,
 	port: args.port,
-	templatesPath: __dirname + '/../view/jserve'
+	templatesPath: path.join(__dirname, '/../view/jserve')
 });
 
 // Start the JServe application
@@ -140,28 +140,26 @@ function serveRemoteJson(request, response, next) {
 
 // Load remote JSON
 function loadRemoteJson(options, done) {
-	var requestOptions = {
-		url: options.url,
-		headers: options.headers
-	};
-	var error;
-
-	request(requestOptions, function (err, response, body) {
-		if (err) {
-			return done(error);
-		}
-		if (response.statusCode < 200 || response.statusCode >= 300) {
-			error = new Error('Remote JSON responded with ' + response.statusCode + ' status');
+	function checkResponseStatus(response) {
+		if (!response.ok) { // .ok = response.status >= 200 && response.status < 300
+			var error = new Error('Remote JSON responded with ' + response.status + ' status');
 			error.status = response.statusCode;
 			return done(error);
 		}
-		try {
-			body = JSON.parse(body);
-		} catch (err) {
-			return done(err);
-		}
-		done(null, body);
-	});
+		return response;
+	}
+
+	fetch(options.url)
+		.then(checkResponseStatus)
+		.then(function (response) {
+			return response.json();
+		})
+		.then(function (response) {
+			done(null, response);
+		})
+		.catch(function (error) {
+			return done(error);
+		});
 }
 
 // Parse a HTTP header string
