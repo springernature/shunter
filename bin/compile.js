@@ -128,7 +128,7 @@ var compile = function (data, callback) {
 var generate = function (callback) {
 	async.waterfall([
 		function (fn) {
-			fs.mkdir(config.path.publicResources, { recursive: true }, fn);
+			fs.mkdir(config.path.publicResources, {recursive: true}, fn);
 		},
 		function (dir, fn) {
 			// Glob returns absolute path and we need to strip that out
