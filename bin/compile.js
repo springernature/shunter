@@ -105,9 +105,7 @@ var compile = function (data, callback) {
 			return deleteAsset(name);
 		}
 		start = new Date();
-		content = uglify.minify(content, {
-			fromString: true
-		}).code;
+		content = uglify.minify(content).code;
 		end = new Date();
 		// Note: suspect this part of the process is timing out on build, extra logging to test
 		console.log('Uglifying ' + name + ' took ' + (end - start) + 'ms');
