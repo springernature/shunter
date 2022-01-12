@@ -1,6 +1,7 @@
 node_modules
 package-lock.json
 public/resources
+tests/mock-app/public/
 min.js
 *.log
 *.pid

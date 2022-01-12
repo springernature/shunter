@@ -5,6 +5,9 @@ var assert = require('proclaim');
 var httpRequest = require('./lib/http-request');
 var serversUnderTest = require('./lib/servers-under-test');
 
+// To run just this test:
+// ./node_modules/.bin/mocha --config=./tests/.mocharc.json ./tests/server/integration
+
 describe('Smoke', function () {
 	var getHomeResponseBody;
 

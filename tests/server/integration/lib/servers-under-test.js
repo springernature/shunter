@@ -5,6 +5,9 @@ var httpRequest = require('./http-request');
 
 var processes = [];
 var allProcessesUp = false;
+// debugMode logs to console, and does not close servers after test run
+//  so you can check http://127.0.0.1:5400/home manually
+var debugMode = false;
 
 // handles events common for both server processes, on stderr stdout etc.
 var handleEventsForProcess = function (process, resolve, reject) {
@@ -13,8 +16,11 @@ var handleEventsForProcess = function (process, resolve, reject) {
 	// we cannot tell if a child process has finished spawing (no such event exists),
 	//  so we have to wait for both of them to output something. And pray they aren't
 	//  changed to start silently (unlikely, but if so, the tests will timeout).
-	process.stdout.on('data', function () {
+	process.stdout.on('data', function (data) {
 		if (allProcessesUp) {
+			if (debugMode) {
+				console.log(`${process.pid} stdout: ${data}`);
+			}
 			return;
 		}
 
@@ -45,10 +51,19 @@ var startServers = function () {
 		processes.push(backend);
 		handleEventsForProcess(backend, resolve, reject);
 
-		// start the FE with one worker process (-c 1), and compile the templates on demand
-		//  to minimise the time between server up and server able to handle reqs
-		var frontend = spawn('node', ['app', '-c', '1', '--compile-on-demand', 'true'], {
+		// run the build script, as if in a production env
+		var build = spawn('node', ['../../bin/compile.js'], {
 			cwd: 'tests/mock-app/'
+		});
+		handleEventsForProcess(build, resolve, reject);
+
+		// start the FE with one worker process (-c 1) in production mode, so it uses
+		//  the assets previously built by the build script
+		var thisEnv = process.env;
+		thisEnv.NODE_ENV = 'production';
+		var frontend = spawn('node', ['app', '-c', '1'], {
+			cwd: 'tests/mock-app/',
+			env: thisEnv
 		});
 		processes.push(frontend);
 		handleEventsForProcess(frontend, resolve, reject);
@@ -89,6 +104,10 @@ var serversResponding = function () {
 };
 
 var cleanup = function () {
+	if (debugMode) {
+		return;
+	}
+
 	try {
 		processes.forEach(function (process) {
 			process.kill('SIGINT');

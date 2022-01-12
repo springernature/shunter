@@ -1,2 +1,3 @@
 coverage
 tests/client/lib
+tests/mock-app/public/
