@@ -5,7 +5,6 @@ var fs = require('fs');
 var path = require('path');
 var async = require('async');
 var glob = require('glob');
-var mkdirp = require('mkdirp');
 var uglify = require('uglify-js');
 var yargs = require('yargs');
 
@@ -129,7 +128,7 @@ var compile = function (data, callback) {
 var generate = function (callback) {
 	async.waterfall([
 		function (fn) {
-			mkdirp(config.path.publicResources, fn);
+			fs.mkdir(config.path.publicResources, { recursive: true }, fn);
 		},
 		function (dir, fn) {
 			// Glob returns absolute path and we need to strip that out
