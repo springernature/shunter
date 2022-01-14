@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var spawn = require('child_process').spawn;
 var httpRequest = require('./http-request');
 
@@ -41,6 +42,32 @@ var handleEventsForProcess = function (process, resolve, reject) {
 	});
 };
 
+// starts the asset compilation process, run before the servers start.
+// returns a Promise which resolves when Uglification console logs its finished message
+var startCompilation = function () {
+	return new Promise(function (resolve, reject) {
+		// run asset compilation script (as if in a production env)
+		//  to make compiled assets available to tests
+		var build = spawn('node', ['../../bin/compile.js'], {
+			cwd: 'tests/mock-app/'
+		});
+
+		build.stdout.on('data', function (data) {
+			if (debugMode) {
+				console.log(`${process.pid} stdout: ${data}`);
+			}
+			if (data.includes('Uglifying main.js took')) {
+				resolve();
+			}
+		});
+
+		build.stderr.on('data', function (data) {
+			console.log(`${process.pid} stderr: ${data}`);
+			reject();
+		});
+	});
+};
+
 // starts the fe and be servers
 // returns a Promise which resolves when both have output to their STDOUTs
 var startServers = function () {
@@ -50,12 +77,6 @@ var startServers = function () {
 		});
 		processes.push(backend);
 		handleEventsForProcess(backend, resolve, reject);
-
-		// run the build script, as if in a production env
-		var build = spawn('node', ['../../bin/compile.js'], {
-			cwd: 'tests/mock-app/'
-		});
-		handleEventsForProcess(build, resolve, reject);
 
 		// start the FE with one worker process (-c 1) in production mode, so it uses
 		//  the assets previously built by the build script
@@ -69,6 +90,7 @@ var startServers = function () {
 		handleEventsForProcess(frontend, resolve, reject);
 	});
 };
+
 // ping the FE server
 // returns a Promise which resolves once it recieves a pong response
 //  or rejects on an unexpected error, or if maxTries exceeded
@@ -103,10 +125,16 @@ var serversResponding = function () {
 	});
 };
 
+var rmTestArtifacts = function () {
+	// clean up resources from compilation stage
+	fs.rmdirSync('./tests/mock-app/public/resources', {recursive: true});
+};
+
 var cleanup = function () {
 	if (debugMode) {
 		return;
 	}
+	rmTestArtifacts();
 
 	try {
 		processes.forEach(function (process) {
@@ -121,26 +149,19 @@ module.exports = {
 	// starts up the servers, and pings the FE server
 	//  returns a Promise that resolves once the FE pongs back
 	readyForTest: function () {
+		rmTestArtifacts();
+
 		return new Promise(function (resolve, reject) {
-			// sequential promises without async/await are not pretty
-			var startServersPromise = startServers();
-			startServersPromise
+			startCompilation()
+				.then(startServers)
+				.then(serversResponding)
 				.then(function () {
-					var serversRespondingPromise = serversResponding();
-					serversRespondingPromise
-						.then(function () {
-							resolve();
-						})
-						.catch(function (err) {
-							console.error(err);
-							reject(err);
-							cleanup(); // tear down the test suite if we cant run smoke tests
-						});
+					resolve();
 				})
 				.catch(function (err) {
 					console.error(err);
 					reject(err);
-					cleanup();
+					cleanup(); // tear down the test suite if we cant run smoke tests
 				});
 		});
 	},
