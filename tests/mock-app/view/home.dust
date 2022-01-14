@@ -2,12 +2,11 @@
 <html>
 <head>
     <title>{title}</title>
-<link rel="stylesheet" href="{@assetPath src="main.css"/}">
+	<link rel="stylesheet" href="{@assetPath src="main.css"/}">
 </head>
 <body>
     <h1>{title}</h1>
-    <p>Welcome to your first Shunter page!</p>
+    <div class="should-be-orange">If this background is orange, SASS is working.</div>
     <script src="{@assetPath src="main.js"/}"></script>
 </body>
 </html>
-
