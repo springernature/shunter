@@ -127,7 +127,14 @@ var serversResponding = function () {
 
 var rmTestArtifacts = function () {
 	// clean up resources from compilation stage
-	fs.rmdirSync('./tests/mock-app/public/resources', {recursive: true});
+	try {
+		// This will throw a DeprecationWarning in nodes 16+
+		fs.rmdirSync('./tests/mock-app/public/resources', {recursive: true});
+	} catch (error) {
+		if (error.code !== 'ENOENT') { // no such file or dir
+			console.error(error);
+		}
+	}
 };
 
 var cleanup = function () {
