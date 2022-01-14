@@ -10,14 +10,15 @@ var serversUnderTest = require('./lib/servers-under-test');
 
 describe('Smoke', function () {
 	var getHomeResponseBody;
+	var getCSSResponseBody;
 
 	before(function (done) {
-		// hit /home on the frontend server
-		var getHome = function () {
+		// GET on the frontend server
+		var getPath = function (path) {
 			return new Promise(function (resolve, reject) {
 				var testRequestPromise = httpRequest({
 					port: 5400,
-					path: '/home'
+					path: path
 				});
 				testRequestPromise
 					.then(function (res) {
@@ -33,12 +34,23 @@ describe('Smoke', function () {
 		var serversReadyPromise = serversUnderTest.readyForTest();
 		serversReadyPromise
 			.then(function () {
-				var getHomePromise = getHome();
+				var getHomePromise = getPath('/home');
 				getHomePromise
 					.then(function (data) {
 						getHomeResponseBody = data;
-						serversUnderTest.finish();
-						done(); // tell mocha it can now run the suite
+						var regexp =  /\/public\/resources\/main-.+\.css/;
+						var found = getHomeResponseBody.match(regexp)[0];
+						var getCSSPromise = getPath(found);
+						getCSSPromise
+							.then(function (data) {
+								getCSSResponseBody = data;
+								serversUnderTest.finish();
+								done(); // tell mocha it can now run the suite
+							})
+							.catch(function (err) {
+								console.error(err);
+								serversUnderTest.finish();
+							});
 					})
 					.catch(function (err) {
 						console.error(err);
@@ -50,5 +62,8 @@ describe('Smoke', function () {
 	// start actual tests
 	it('Should return hello world text in response', function () {
 		assert.isTrue(getHomeResponseBody.includes('<h1>Hello World!</h1>'));
+	});
+	it('Should return processed SASS in CSS file response', function () {
+		assert.isTrue(getCSSResponseBody.includes('.should-be-orange{background-color:#ffa500}'));
 	});
 });
