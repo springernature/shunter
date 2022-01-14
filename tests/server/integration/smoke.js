@@ -38,7 +38,7 @@ describe('Smoke', function () {
 				getHomePromise
 					.then(function (data) {
 						getHomeResponseBody = data;
-						var regexp =  /\/public\/resources\/main-.+\.css/;
+						var regexp = /\/public\/resources\/main-.+\.css/;
 						var found = getHomeResponseBody.match(regexp)[0];
 						var getCSSPromise = getPath(found);
 						getCSSPromise
