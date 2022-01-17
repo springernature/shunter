@@ -12,7 +12,9 @@
 		"no-redeclare": "warn",
 		"no-undef": "warn",
 		"no-useless-escape": "warn",
-		"unicorn/no-new-buffer": "warn"
+		"unicorn/no-new-buffer": "warn",
+		"unicorn/prevent-abbreviations": "off",
+		"unicorn/catch-error-name": "off"
 	},
 
 	"overrides": [

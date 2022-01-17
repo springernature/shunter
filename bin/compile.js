@@ -89,7 +89,7 @@ var compile = function (data, callback) {
 
 	var javascripts = findAssets('js').filter(function (name) {
 		for (var i = 0; jsToMinify[i]; ++i) {
-			if (name.indexOf(jsToMinify[i]) !== -1) {
+			if (name.includes(jsToMinify[i])) {
 				return true;
 			}
 		}

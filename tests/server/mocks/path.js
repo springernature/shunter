@@ -6,7 +6,7 @@ module.exports = {
 	join: sinon.stub(),
 	basename: function (str) {
 		var lastSlash = str.lastIndexOf('/');
-		var val = str.substring(lastSlash + 1);
+		var val = str.slice(lastSlash + 1);
 		val = val.replace('.dust', '');
 		return val;
 	},

@@ -65,7 +65,7 @@ module.exports = function (config) {
 				throw new Error('Invalid arguments for render test helper');
 			}
 
-			if (template.indexOf('{') !== -1) {
+			if (template.includes('{')) {
 				if (!renderer) {
 					this.setup();
 				}

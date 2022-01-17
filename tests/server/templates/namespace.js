@@ -4,7 +4,7 @@ var path = require('path');
 var assert = require('proclaim');
 var helper = require('../../helpers/template.js')();
 
-var rootDir = __dirname.substring(0, __dirname.indexOf('/tests/'));
+var rootDir = __dirname.slice(0, __dirname.indexOf('/tests/'));
 var templateDir = path.join(rootDir, 'view', 'tests');
 
 describe('Template overriding', function () {
