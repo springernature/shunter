@@ -33,7 +33,7 @@ describe('Request processor', function () {
 		mockery.registerMock('./statsd', require('../mocks/statsd'));
 		mockery.registerMock('./dispatch', require('../mocks/dispatch'));
 		mockery.registerMock('./router', require('../mocks/router'));
-		mockery.registerMock('http-proxy', require('../mocks/http-proxy'));
+		mockery.registerMock('http-proxy-node16', require('../mocks/http-proxy'));
 		mockery.registerMock('url', require('../mocks/url'));
 	});
 	afterEach(function () {
@@ -43,7 +43,7 @@ describe('Request processor', function () {
 
 	describe('Configuring the proxy', function () {
 		it('Should not enable `autoRewrite` and `protocolRewrite` by default', function () {
-			var proxy = require('http-proxy');
+			var proxy = require('http-proxy-node16');
 			require(moduleName)(mockConfig, {});
 			assert.isFalse(proxy.createProxyServer.firstCall.args[0].autoRewrite);
 			assert.isNull(proxy.createProxyServer.firstCall.args[0].protocolRewrite);
@@ -53,7 +53,7 @@ describe('Request processor', function () {
 			mockConfig.argv['rewrite-redirect'] = true;
 			mockConfig.argv['rewrite-protocol'] = 'http';
 
-			var proxy = require('http-proxy');
+			var proxy = require('http-proxy-node16');
 			require(moduleName)(mockConfig, {});
 			assert.isTrue(proxy.createProxyServer.firstCall.args[0].autoRewrite);
 			assert.strictEqual(proxy.createProxyServer.firstCall.args[0].protocolRewrite, 'http');
@@ -148,7 +148,7 @@ describe('Request processor', function () {
 
 				processor.intercept(req, res, callback);
 
-				require('http-proxy').createProxyServer().on.yield({
+				require('http-proxy-node16').createProxyServer().on.yield({
 					statusCode: 303,
 					statusMessage: 'See Other',
 					headers: headers
@@ -555,7 +555,7 @@ describe('Request processor', function () {
 				host: 'www.nature.com',
 				port: 1337
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -571,7 +571,7 @@ describe('Request processor', function () {
 			require('./router')().map.returns({
 				host: 'www.nature.com'
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -588,7 +588,7 @@ describe('Request processor', function () {
 				host: 'www.nature.com',
 				port: '80'
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -606,7 +606,7 @@ describe('Request processor', function () {
 				port: 80,
 				changeOrigin: true
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -628,7 +628,7 @@ describe('Request processor', function () {
 				port: 80,
 				changeOrigin: true
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 			processor.proxy(req, res);
 
 			assert.isTrue(stub.calledWith(req, res));
@@ -641,7 +641,7 @@ describe('Request processor', function () {
 			var stub = sinon.stub();
 
 			require('./router')().map.returns(false);
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -659,7 +659,7 @@ describe('Request processor', function () {
 				port: 80,
 				changeOrigin: true
 			});
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 
@@ -676,7 +676,7 @@ describe('Request processor', function () {
 
 			err.code = 'ECONNREFUSED';
 
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 			stub.firstCall.yield(err);
@@ -692,7 +692,7 @@ describe('Request processor', function () {
 			var stub = sinon.stub();
 			var err = new Error();
 
-			require('http-proxy').createProxyServer().web = stub;
+			require('http-proxy-node16').createProxyServer().web = stub;
 
 			processor.proxy(req, res);
 			stub.firstCall.yield(err);

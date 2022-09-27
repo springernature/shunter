@@ -46,7 +46,7 @@
   "homepage": "https://github.com/springernature/shunter",
   "bugs": "https://github.com/springernature/shunter/issues",
   "engines": {
-    "node": ">=12 <=16"
+    "node": ">=16"
   },
   "dependencies": {
     "async": "~3.1.0",
@@ -64,7 +64,7 @@
     "gaze": "~1.1.0",
     "glob": "~7.1.0",
     "hasbin": "~1.2.0",
-    "http-proxy": "~1.18.1",
+    "http-proxy-node16": "~1.0.0",
     "jserve": "~2.0.3",
     "mincer": "2.1.0",
     "mocha-phantomjs-core": "~2.1.0",
