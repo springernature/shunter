@@ -28,8 +28,14 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: npm ci
     - run: npm ci
+
+    - name: linting
     - if: ${{ matrix.LINT }}
       run: npm run lint
-    - if: ! ${{ matrix.LINT }}
+
+    - name: testing
+    - if: ${{ ! matrix.LINT }}
     - run: npm run test-ci
