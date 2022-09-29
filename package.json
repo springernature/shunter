@@ -103,8 +103,7 @@
     "shunter-serve": "./bin/serve.js"
   },
   "scripts": {
-    "lint": "make lint",
-    "test": "make test",
-    "test-ci": "make test-server"
+    "lint": "./node_modules/.bin/eslint '**/*.js'",
+    "test": "./node_modules/.bin/nyc ./node_modules/.bin/mocha --config=./tests/.mocharc.json ./tests/server"
   }
 }
