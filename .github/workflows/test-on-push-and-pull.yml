@@ -31,4 +31,4 @@ jobs:
     - run: npm i
     - if: ${{ matrix.LINT }}
       run: npm run lint
-    - run: npm run test
+    - run: npm run test-ci
