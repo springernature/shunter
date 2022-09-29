@@ -33,9 +33,9 @@ jobs:
     - run: npm ci
 
     - name: linting
-    - if: ${{ matrix.LINT }}
+      if: ${{ matrix.LINT }}
       run: npm run lint
 
     - name: testing
-    - if: ${{ ! matrix.LINT }}
-    - run: npm run test-ci
+      if: ${{ ! matrix.LINT }}
+      run: npm run test-ci
