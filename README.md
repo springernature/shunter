@@ -20,7 +20,7 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 [![Build status][shield-build]][info-build]
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
-## Key Features
+## Key features
 
 * Allows the creation of templates loosely coupled to the underlying back end applications.
 * Enables multiple back end applications to use the same unified front end.
@@ -30,7 +30,7 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 * Can output any type of content you like, e.g. HTML, RSS, RDF, etc.
 * Well-tested and supported, serving [Scientific American](https://www.scientificamerican.com) as well as many high-traffic sites across the Springer Nature portfolio.
 
-## Getting Started
+## Getting started
 
 You can find all the details about how to use Shunter in our [documentation](docs/index.md). If you're new to Shunter, we recommend reading the [Getting Started Guide](docs/getting-started.md). This will teach you the basics, and how to create your first Shunter-based application.
 
@@ -72,7 +72,7 @@ Depending on your flavour of Linux, you may also be able to use a package manage
 
 Alternatively, download pre-built packages from the [Node.js][node] website.
 
-## Support and Migration
+## Support and migration
 
 We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
 
