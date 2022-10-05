@@ -91,7 +91,8 @@ We also label [issues that might be a good starting-point][starter-issues] for n
 ## License
 
 Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].
-Copyright &copy; 2015, Springer Nature
+
+Copyright &copy; 2022, Springer Nature
 
 [brew]: http://mxcl.github.com/homebrew/
 [node]: https://nodejs.org/
