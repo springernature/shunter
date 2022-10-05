@@ -6,13 +6,13 @@ It helps you create a loosely-coupled front end application which can serve traf
 
 Shunter does not contain an API client, or any Controller logic (in the [MVC](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) sense). Instead, Shunter simply proxies requests to a back end server, then:
 
-1. If the back end wants Shunter to render the response, it returns the application state as JSON, served with a certain HTTP header. This initiates the templating process in Shunter.  
+1. If the back end wants Shunter to render the response, it returns the application state as JSON, served with a certain HTTP header. This initiates the templating process in Shunter.
 ![Diagram of Shunter intercepting a JSON backend reply](docs/img/shunter-json-intercept.png)
 
-2. If the back end wishes to serve the response, it omits the header and Shunter proxies the request back to the client.  
+2. If the back end wishes to serve the response, it omits the header and Shunter proxies the request back to the client.
 ![Diagram of Shunter proxying a backend reply](docs/img/shunter-backend-proxy.png)
 
-3. Shunter is also able to serve resources like CSS, JS, or images bundled with the templates as part of your application.  
+3. Shunter is also able to serve resources like CSS, JS, or images bundled with the templates as part of your application.
 ![Diagram of Shunter serving a bundled asset](docs/img/shunter-assets.png)
 
 [![NPM version][shield-npm]][info-npm]
@@ -90,7 +90,7 @@ We also label [issues that might be a good starting-point][starter-issues] for n
 
 ## License
 
-Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].  
+Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].
 Copyright &copy; 2015, Springer Nature
 
 [brew]: http://mxcl.github.com/homebrew/
@@ -98,7 +98,7 @@ Copyright &copy; 2015, Springer Nature
 [npm]: https://www.npmjs.com/
 [nvm]: https://github.com/nvm-sh/nvm
 [starter-issues]: https://github.com/springernature/shunter/labels/good-starter-issue
-[support]: https://github.com/springernature/frontend-playbook/blob/master/practices/open-source-support.md
+[support]: https://github.com/springernature/frontend-playbook/blob/main/practices/open-source-support.md
 
 [info-coverage]: https://coveralls.io/github/springernature/shunter
 [info-dependencies]: https://gemnasium.com/springernature/shunter
