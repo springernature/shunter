@@ -2,12 +2,12 @@
 
 process.env.TZ = 'UTC';
 
-module.exports = function (config) {
+module.exports = function (configArgument) {
 	var fs = require('fs');
 	var path = require('path');
 	var cheerio = require('cheerio');
 	var sinon = require('sinon');
-	var config = require('../../lib/config')('development', config || null, {});
+	var config = require('../../lib/config')('development', configArgument || null, {});
 
 	var renderer = null;
 	var assetPath = null;
