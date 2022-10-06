@@ -58,7 +58,7 @@ process.on('uncaughtException', function (err) {
 
 var compile = function (data, callback) {
 	var findAssets = function () {
-		var pattern = new RegExp('\.(' + [].slice.call(arguments, 0).join('|') + ')$');
+		var pattern = new RegExp('.(' + [].slice.call(arguments, 0).join('|') + ')$');
 		return Object.keys(data.assets).filter(function (key) {
 			return key.match(pattern);
 		});
@@ -133,7 +133,7 @@ var generate = function (callback) {
 		function (dir, fn) {
 			// Glob returns absolute path and we need to strip that out
 			var readGlobDir = function (p, cb) {
-				var pth = p.replace(/\\\?/g, '\/'); // Glob must use / as path separator even on windows
+				var pth = p.replace(/\\\?/g, '/'); // Glob must use / as path separator even on windows
 				glob(pth + '/**/*.*', function (er, files) {
 					if (er) {
 						return cb(er);
