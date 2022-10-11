@@ -1,15 +1,15 @@
-node_modules
-# package-lock.json
-public/resources
-tests/mock-app/public/
-min.js
+.DS_Store
+.idea
+.nyc_output
+*.iml
 *.log
 *.pid
 config/routes/*.json
 coverage/*
-timestamp.json
-.DS_Store
+min.js
+node_modules
+package-lock.json
+public/resources
 shunter-*.tgz
-.idea
-*.iml
-.nyc_output
+tests/mock-app/public/
+timestamp.json
