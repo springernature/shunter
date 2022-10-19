@@ -33,7 +33,7 @@ jobs:
         cache: 'npm'
 
     # this is a library, not an app, so ignore the package-lock
-    - run: npm install --package-lock false
+    - run: npm install --package-lock=false
     - if: ${{ matrix.LINT }}
       run: npm run lint
 
