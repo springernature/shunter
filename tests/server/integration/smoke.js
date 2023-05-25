@@ -12,7 +12,7 @@ describe('Smoke', function () {
 	var getHomeResponseBody;
 	var getCSSResponseBody;
 
-	before(function (done) {
+	before(function () {
 		// GET on the frontend server
 		var getPath = function (path) {
 			return new Promise(function (resolve, reject) {
@@ -32,32 +32,35 @@ describe('Smoke', function () {
 
 		// wait for the servers to spin up, then hit the home page
 		var serversReadyPromise = serversUnderTest.readyForTest();
-		serversReadyPromise
+		return serversReadyPromise
 			.then(function () {
 				var getHomePromise = getPath('/home');
-				getHomePromise
+				return getHomePromise
 					.then(function (data) {
 						getHomeResponseBody = data;
 						var regexp = /\/public\/resources\/main-.+\.css/;
 						var found = getHomeResponseBody.match(regexp)[0];
 						var getCSSPromise = getPath(found);
-						getCSSPromise
+						return getCSSPromise
 							.then(function (data) {
 								getCSSResponseBody = data;
-								serversUnderTest.finish();
-								done(); // tell mocha it can now run the suite
+								return serversUnderTest.finish();
 							})
 							.catch(function (err) {
 								console.error(err);
-								serversUnderTest.finish();
+								return serversUnderTest.finish();
 							});
 					})
 					.catch(function (err) {
 						console.error(err);
-						serversUnderTest.finish();
+						return serversUnderTest.finish();
 					});
 			});
 	}); // before
+
+	after(function () {
+		return serversUnderTest.finish();
+	});
 
 	// start actual tests
 	it('Should return hello world text in response', function () {

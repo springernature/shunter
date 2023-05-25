@@ -5,10 +5,15 @@ var spawn = require('child_process').spawn;
 var httpRequest = require('./http-request');
 
 var processes = [];
-var allProcessesUp = false;
 // debugMode logs to console, and does not close servers after test run
 //  so you can check http://127.0.0.1:5400/home manually
 var debugMode = false;
+
+function allProcessesUp() {
+	return processes.every(function (process) {
+		return process.__isUp === true;
+	});
+}
 
 // handles events common for both server processes, on stderr stdout etc.
 var handleEventsForProcess = function (process, resolve, reject) {
@@ -18,7 +23,7 @@ var handleEventsForProcess = function (process, resolve, reject) {
 	//  so we have to wait for both of them to output something. And pray they aren't
 	//  changed to start silently (unlikely, but if so, the tests will timeout).
 	process.stdout.on('data', function (data) {
-		if (allProcessesUp) {
+		if (allProcessesUp()) {
 			if (debugMode) {
 				console.log(`${process.pid} stdout: ${data}`);
 			}
@@ -27,11 +32,7 @@ var handleEventsForProcess = function (process, resolve, reject) {
 
 		process.__isUp = true;
 
-		if (processes.length > 1 &&
-			processes.every(function (process) {
-				return process.__isUp === true;
-			})) {
-			allProcessesUp = true;
+		if (processes.length > 1 && allProcessesUp()) {
 			resolve();
 		}
 	});
@@ -150,6 +151,8 @@ var cleanup = function () {
 	} catch (err) {
 		console.error(err);
 	}
+
+	processes = [];
 };
 
 module.exports = {
