@@ -4,6 +4,7 @@ var path = require('path');
 var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
+var newSpyResponse = require('../mocks/response');
 
 var moduleName = '../../../lib/dispatch';
 
@@ -27,7 +28,7 @@ describe('Dispatching response', function () {
 		mockery.registerMock('./output-filter', createFilter);
 		req = require('../mocks/request');
 		req.url = '/hello';
-		res = require('../mocks/response');
+		res = newSpyResponse();
 
 		mockery.registerMock('mincer', require('../mocks/mincer'));
 		mockery.registerMock('each-module', require('../mocks/each-module'));
