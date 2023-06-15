@@ -6,6 +6,8 @@ var mockery = require('mockery');
 
 var moduleName = '../../../lib/processor';
 
+var newSpyResponse = require('../mocks/response');
+
 var mockConfig = {
 	log: require('../mocks/log'),
 	timer: sinon.stub().returns(sinon.stub()),
@@ -110,7 +112,7 @@ describe('Request processor', function () {
 
 		beforeEach(function () {
 			renderer = require('../mocks/renderer')();
-			res = require('../mocks/response');
+			res = newSpyResponse();
 			mockTimer = sinon.stub().returns(sinon.stub());
 		});
 		afterEach(function () {
@@ -158,6 +160,46 @@ describe('Request processor', function () {
 				assert.equal(res.__originalWriteHead.firstCall.args[0], 303);
 				assert.equal(res.__originalWriteHead.firstCall.args[1], 'See Other');
 				assert.equal(res.__originalWriteHead.firstCall.args[2], headers);
+			});
+
+			it('Should not break after handling an error', function () {
+				var processor = require(moduleName)({
+					argv: {},
+					timer: mockTimer
+				}, {});
+				var callback = sinon.stub();
+
+				var req = {};
+				var headers = {
+					Location: 'https://www.nature.com'
+				};
+
+				processor.intercept(req, res, callback);
+
+				require('http-proxy').createProxyServer().on.yield({
+					statusCode: 404,
+					statusMessage: 'Not here',
+					headers: headers
+				}, null, res);
+
+				assert.isTrue(res.__originalWriteHead.calledOnce);
+				assert.equal(res.__originalWriteHead.firstCall.args[0], 404);
+
+				var req2 = {};
+				var res2 = newSpyResponse();
+
+				processor.intercept(req2, res2, callback);
+
+				require('http-proxy').createProxyServer().on.yield({
+					statusCode: 303,
+					statusMessage: 'See Other',
+					headers: headers
+				}, null, res2);
+
+				assert.isTrue(res2.__originalWriteHead.calledOnce);
+				assert.equal(res2.__originalWriteHead.firstCall.args[0], 303);
+				assert.equal(res2.__originalWriteHead.firstCall.args[1], 'See Other');
+				assert.equal(res2.__originalWriteHead.firstCall.args[2], headers);
 			});
 
 			it('Should intercept responses with an x-shunter+json mime type', function () {
@@ -444,7 +486,7 @@ describe('Request processor', function () {
 	describe('Ping', function () {
 		it('Should send a 200 OK response', function () {
 			var req = require('../mocks/request');
-			var res = require('../mocks/response');
+			var res = require('../mocks/response')();
 			var processor = require(moduleName)(mockConfig, {});
 
 			processor.ping(req, res);

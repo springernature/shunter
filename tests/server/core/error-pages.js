@@ -4,6 +4,8 @@ var assert = require('proclaim');
 var sinon = require('sinon');
 var mockery = require('mockery');
 
+var newSpyResponse = require('../mocks/response');
+
 var moduleName = '../../../lib/error-pages';
 
 describe('Templating error pages', function () {
@@ -33,7 +35,7 @@ describe('Templating error pages', function () {
 		req = require('../mocks/request');
 		req.url = '/hello';
 		mockery.registerMock('./content-type', contentType);
-		res = require('../mocks/response');
+		res = newSpyResponse();
 
 		mockery.registerMock('mincer', require('../mocks/mincer'));
 		mockery.registerMock('each-module', require('../mocks/each-module'));

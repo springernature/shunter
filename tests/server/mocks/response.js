@@ -2,10 +2,12 @@
 
 var sinon = require('sinon');
 
-module.exports = {
-	writeHead: sinon.stub(),
-	write: sinon.stub(),
-	getHeader: sinon.stub(),
-	setHeader: sinon.stub(),
-	end: sinon.stub()
+module.exports = function () {
+	return {
+		writeHead: sinon.stub(),
+		write: sinon.stub(),
+		getHeader: sinon.stub(),
+		setHeader: sinon.stub(),
+		end: sinon.stub()
+	};
 };
