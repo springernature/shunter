@@ -31,7 +31,7 @@ describe('error requests should not affect subsequent requests', function () {
 		};
 
 		// wait for the servers to spin up, then hit the home page
-		var serversReadyPromise = serversUnderTest.readyForTest()
+		var serversReadyPromise = serversUnderTest.readyForTest();
 
 		return serversReadyPromise
 			.then(function () {
@@ -51,7 +51,7 @@ describe('error requests should not affect subsequent requests', function () {
 								});
 						});
 					});
-			})
+			});
 	});
 
 	after(function () {
