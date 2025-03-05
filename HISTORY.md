@@ -1,5 +1,13 @@
 # History
 
+## 5.0.0 (2025-03-05)
+* No feature additions
+* Fixes a bug that could result in blank pages on proxied responses #363
+* Various dependency updates satisfying Node 12-16 compatibility
+* Migrates to GH Actions
+
+_5.0.0-rc1 ... 5.0.0-rc5 omitted from this document_
+
 ## 4.13.9 (2022-01-06)
 * Removes `package-lock.json` committed in previous release
 * Changes `wd` range specifier
