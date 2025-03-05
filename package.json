@@ -94,7 +94,7 @@
     "node-sass": "^7.0.3",
     "nyc": "^15.1.0",
     "proclaim": "^3.6.0",
-    "sinon": "^7.5.0"
+    "sinon": "^13.0.2"
   },
   "main": "./lib/shunter.js",
   "bin": {
