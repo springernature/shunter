@@ -65,7 +65,7 @@
     "glob": "7.2.3",
     "hasbin": "1.2.3",
     "http-proxy": "1.18.1",
-    "jserve": "3.0.0",
+    "jserve": "2.0.3",
     "mincer": "2.1.0",
     "mocha-phantomjs-core": "2.1.2",
     "node-fetch": "2.7.0",
@@ -94,7 +94,7 @@
     "node-sass": "^7.0.3",
     "nyc": "^15.1.0",
     "proclaim": "^3.6.0",
-    "sinon": "^13.0.2"
+    "sinon": "^9.2.4"
   },
   "main": "./lib/shunter.js",
   "bin": {
