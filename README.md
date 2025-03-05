@@ -35,11 +35,11 @@ You can find all the details about how to use Shunter in our [documentation](doc
 
 ## Requirements
 
-The lastest version of Shunter requires [Node.js][node] v12-16.
+The latest version of Shunter requires [Node.js][node] v12-16.
 
 See the [Getting started documentation](docs/getting-started.md#prerequisites) for more information on Shunter's requirements.
 
-Instructions for [installing Node.js](https://nodejs.org/en/download) are availble on their website.
+Instructions for [installing Node.js](https://nodejs.org/en/download) are available on their website.
 
 ## Support and migration
 
