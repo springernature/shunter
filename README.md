@@ -17,7 +17,7 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 
 [![NPM version][shield-npm]][info-npm]
 [![Node.js version support][shield-node]][info-node]
-[![Build status][shield-build]][info-build]
+![GH Actions build status badge](https://github.com/springernature/shunter/actions/workflows/test-on-push-and-pull.yml/badge.svg)
 [![LGPL-3.0 licensed][shield-license]][info-license]
 
 ## Key features
@@ -28,7 +28,6 @@ Shunter does not contain an API client, or any Controller logic (in the [MVC](ht
 * Completely technology-agnostic; if your application outputs JSON, it can work with Shunter.
 * Asset concatenation, minification, cache-busting, and other performance optimisations built-in.
 * Can output any type of content you like, e.g. HTML, RSS, RDF, etc.
-* Well-tested and supported, serving [Scientific American](https://www.scientificamerican.com) as well as many high-traffic sites across the Springer Nature portfolio.
 
 ## Getting started
 
@@ -36,51 +35,27 @@ You can find all the details about how to use Shunter in our [documentation](doc
 
 ## Requirements
 
-Shunter requires [Node.js][node] 10+ to run. You can find instructions for Windows, macOS and Linux below.
+The latest version of Shunter requires [Node.js][node] v12-16.
 
 See the [Getting started documentation](docs/getting-started.md#prerequisites) for more information on Shunter's requirements.
 
-### Windows
-
-On Windows 10, download a pre-built package from the [Node.js][node] website.
-
-### macOS
-
-To install [Node.js][node] you can use the [Node Version Manager (nvm) tool][nvm]:
-
-```sh
-nvm install node
-```
-
-Alternatively, you can install the required dependency using [Homebrew][brew]:
-
-```sh
-brew install node
-```
-
-You can also download pre-built packages from the [Node.js][node] website.
-
-### Linux
-
-To install [Node.js][node] you can use the [Node Version Manager (nvm) tool][nvm]:
-
-```sh
-nvm install node
-```
-
-Depending on your flavour of Linux, you may also be able to use a package manager to install the required dependency.
-
-Alternatively, download pre-built packages from the [Node.js][node] website.
+Instructions for [installing Node.js](https://nodejs.org/en/download) are available on their website.
 
 ## Support and migration
 
-We maintain a [support guide](docs/support.md) which documents the major versions and their support levels.
+Shunter supports various versions of Node.js:
 
-We aim to support old major versions of Shunter for 6 months after a new major version is released. This means that security issues and bugs will be fixed whenever feasible.
+| Major Version | Last Feature Release | Node Versions Supported |
+| :------------ | :------------------- | :--------------- |
+| 5             | N/A                  | >=12 <=16 |
+| 4             | 4.13                 | >=4 <=8 |
+| 3             | 3.8                  | >=0.10 <=5 |
 
-If you'd like to know more about how we support our open source projects, including the full release process, check out our [support practices document][support].
+_Versions 1 and 2 of Shunter were not public releases._
 
 If you're migrating between major versions of Shunter, we maintain a [migration guide](docs/migration/index.md) to help you.
+
+If you'd like to know more about how we support our open source projects, including the full release process, check out our [support practices document][support].
 
 ## Contributing
 
@@ -92,7 +67,7 @@ We also label [issues that might be a good starting-point][starter-issues] for n
 
 Shunter is licensed under the [Lesser General Public License (LGPL-3.0)][info-license].
 
-Copyright &copy; 2022, Springer Nature
+Copyright &copy; 2025, Springer Nature
 
 [brew]: http://mxcl.github.com/homebrew/
 [node]: https://nodejs.org/
@@ -106,10 +81,8 @@ Copyright &copy; 2022, Springer Nature
 [info-license]: LICENSE
 [info-node]: package.json
 [info-npm]: https://www.npmjs.com/package/shunter
-[info-build]: https://travis-ci.org/springernature/shunter
 [shield-coverage]: https://img.shields.io/coveralls/springernature/shunter.svg
 [shield-dependencies]: https://img.shields.io/gemnasium/springernature/shunter.svg
 [shield-license]: https://img.shields.io/badge/license-LGPL%203.0-blue.svg
 [shield-node]: https://img.shields.io/badge/node.js%20support-10–14-brightgreen.svg
 [shield-npm]: https://img.shields.io/npm/v/shunter.svg
-[shield-build]: https://img.shields.io/travis/springernature/shunter/master.svg
