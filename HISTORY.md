@@ -1,9 +1,11 @@
 # History
 
-## 6.0.0 (2025-04-30)
-* Updates `ejs` to 3.1.0 - this _may_ be a breaking change for some users, as it 
+## 6.0.0-rc1 (2025-04-30)
+* Updates `ejs` to 3.1.0 - this _may_ be a breaking change for some users, depending on your usage of those features. It 
 [removes support](https://github.com/mde/ejs/compare/v2.7.4...v3.0.2#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed) for
 `require.extensions` as it is [long deprecated in Node](https://nodejs.org/api/modules.html#requireextensions). It is also a security update.
+* Updates `postcss` to 7.0.38 from 5.2.17 ([Changelog](https://github.com/postcss/postcss/blob/main/CHANGELOG.md#60-marquis-orias)) - this _may_ be a breaking change for some users, depending on your usage of those features. It is used in the CSS compression process.
+
 
 ## 5.0.0 (2025-03-05)
 * No feature additions
