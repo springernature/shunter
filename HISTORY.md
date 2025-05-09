@@ -1,6 +1,6 @@
 # History
 
-## 6.0.0-rc1 (2025-04-30)
+## 6.0.0-rc1 (2025-XX-XX)
 * Updates `ejs` to 3.1.0 - this _may_ be a breaking change for some users, depending on your usage of those features. It 
 [removes support](https://github.com/mde/ejs/compare/v2.7.4...v3.0.2#diff-06572a96a58dc510037d5efa622f9bec8519bc1beab13c9f251e97e657a9d4ed) for
 `require.extensions` as it is [long deprecated in Node](https://nodejs.org/api/modules.html#requireextensions). It is also a security update.
